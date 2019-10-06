@@ -1,0 +1,26 @@
+.avatar {
+    height: 60px;
+    border-radius: 100%;
+    width: 60px;
+    margin: 5px;
+}
+
+.background {
+    height: 220px;
+    width: 100%;
+    padding: 0px 50px;
+    margin: 0px 0px 40px 0px;
+    background-size: cover;
+}
+
+.main_text {
+    width: fit-content;
+    color: black;
+    margin: 0px 5px;
+}
+
+.text {
+    width: fit-content;
+    color: grey;
+    margin: 0px 5px;
+}
