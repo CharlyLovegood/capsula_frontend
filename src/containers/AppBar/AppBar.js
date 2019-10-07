@@ -16,7 +16,7 @@ import { FormClose } from 'grommet-icons';
 import Burger from '@animated-burgers/burger-slip';
 import '@animated-burgers/burger-slip/dist/styles.css' 
 
-import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import UserAvatar from '../../components/UserProfile/UserAvatar';
 import PrivateLink from '../../components/PrivateLink/PrivateLink';
 
@@ -43,10 +43,24 @@ class AppBar extends Component {
         const { showSidebar } = this.state;
 
         return (
-            localStorage.getItem('user') ? 
+            localStorage.getItem('username') ? 
             (<ResponsiveContext.Consumer>
                 {size => (
                 <Box>
+                    <Box
+                        direction='row'
+                        align='center'
+                        baseline='center'
+                        justify='center'
+                        pad='0px'
+                        style={{ zIndex: '1' }}
+                        className={styles.logo_container}
+                    >   
+                        <Link to='/' style={{ textDecoration: 'none' }}>
+                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
+                        </Link>
+                    </Box>
+
                     <Box
                         tag='header'
                         direction='row'
@@ -55,13 +69,9 @@ class AppBar extends Component {
                         justify='between'
                         background='background'
                         pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
-                        style={{ zIndex: '1' }}
+                        
                     >
-                        <UserAvatar name={this.props.token}></UserAvatar>
-
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
-                        </Link>
+                        <UserAvatar name={localStorage.getItem('username')}></UserAvatar>
                         
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
@@ -114,11 +124,12 @@ class AppBar extends Component {
                                     justify='center'
                                 >
                                     <SearchBar></SearchBar>
-                                    <Button href='/books' margin='medium' plain label='My books'></Button>
-                                    <Button href='/history' margin='medium' plain label='History'></Button>
-                                    <Button href='/swap' margin='medium' plain label='Swap'></Button>
-                                    <Button href='/friends' margin='medium' plain label='Friends'></Button>
-                                    <Button href='/wishlist' margin='medium' plain label='Wishlist'></Button>
+                                    <PrivateLink to='/books' label='My books' />
+                                    <PrivateLink to='/history' label='History' />
+                                    <PrivateLink to='/swap' label='Swap' />
+                                    <PrivateLink to='/friends' label='Friends' />
+                                    <PrivateLink to='/wishlist' label='Wishlist' />
+                                    <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Layer>
                         )}
@@ -132,6 +143,20 @@ class AppBar extends Component {
                 {size => (
                 <Box>
                     <Box
+                        direction='row'
+                        align='center'
+                        baseline='center'
+                        justify='center'
+                        pad='0px'
+                        style={{ zIndex: '1' }}
+                        className={styles.logo_container}
+                    >   
+                        <Link to='/' style={{ textDecoration: 'none' }}>
+                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
+                        </Link>
+                    </Box>
+
+                    <Box
                         tag='header'
                         direction='row'
                         align='center'
@@ -139,16 +164,12 @@ class AppBar extends Component {
                         justify='between'
                         background='background'
                         pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
-                        style={{ zIndex: '1' }}
                     >
-                        <Box direction='row'>
-                            <Button href='/login' margin='medium' plain label='Log In'></Button>
-                            <Button href='/register' margin='medium' plain label='Register'></Button>
-                        </Box>
 
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
-                        </Link>
+                        <Box direction='row' align='center'>
+                            <PrivateLink to='/login' label='Log In'></PrivateLink>
+                            <PrivateLink to='/register' label='Register'></PrivateLink>
+                        </Box>
                         
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
@@ -215,4 +236,6 @@ const actionCreators = {
     logout: userActions.logout
 }
 
-export default connect(mapState, actionCreators)(AppBar);
+const connectedAppBar = connect(mapState, actionCreators)(AppBar);
+
+export { connectedAppBar as AppBar };

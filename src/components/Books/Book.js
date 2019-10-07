@@ -5,7 +5,6 @@ import { Box } from 'grommet';
 
 
 function Book(props) {
-    
     return (
         <Box animation={props.animation} margin={props.margin} >
             <Link to='/book_id=1'>

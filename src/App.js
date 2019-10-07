@@ -9,6 +9,7 @@ import { Switch, Route } from 'react-router-dom'
 import HomePage from './components/HomePage/HomePage'
 import BookPage from './components/Books/BookPage';
 import BookGalleryPage from './components/Books/BookGalleryPage';
+import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 
 
 import SwapPage from './components/Swap/SwapPage';
@@ -16,8 +17,8 @@ import SwapPage from './components/Swap/SwapPage';
 import UserPage from './containers/UserPage/UserPage';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
-import AppBar from './containers/AppBar/AppBar';
-import PrivateRoute from './components/PrivateRouter/PrivateRouter';
+import { AppBar } from './containers/AppBar';
+
 
 import { history } from './helpers';
 import { connect } from 'react-redux';

@@ -1,4 +1,10 @@
 .logo {
     text-decoration: none;
     color: black;
+    margin-top: 60px;
+    font-size: 28px;
+}
+
+.logo_container {
+    height: 0px;
 }

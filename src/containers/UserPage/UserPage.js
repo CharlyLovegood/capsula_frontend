@@ -33,7 +33,7 @@ class UserPage extends Component {
     }
 
     render() {
-        console.log(this.props.user.user);
+        const { user } = this.props;
         return (
             <Box direction='column' align='center' fill className={styles.profile}>
                 <Box  className={styles.background} align='center'>
@@ -43,8 +43,8 @@ class UserPage extends Component {
                         className={styles.big_avatar}
                     />
                 </Box>
-                <h3 className={styles.header1}>{this.props.user.username}</h3>
-                <p className={styles.header2}>{this.state.user.last_name} {this.state.user.first_name}</p>
+                <h3 className={styles.header1}>{user.username}</h3>
+                <p className={styles.header2}>{user.secondName} {this.state.user.firstName}</p>
                 <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id}></Book>} objectList={this.state.viewObjectsList} header='My Books'></Scroll>
                 <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id}></Book>} objectList={this.state.viewObjectsList} header='My Books'></Scroll>
             </Box>
@@ -53,7 +53,7 @@ class UserPage extends Component {
 }
 
 const mapState = state => ({
-    user: state.authentication
+    user: state.authentication.user
 })
 
 const actionCreators = {

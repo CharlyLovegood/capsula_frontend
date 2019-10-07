@@ -7,7 +7,7 @@ import { Button } from 'grommet';
 const PrivateLink = (props) => {
     return (
         <Link to={props.to}> 
-            <Button margin='medium' plain label={props.label} className={styles.link}/>
+            <Button margin='small' plain label={props.label} className={styles.link}/>
         </Link>
     );
 }

@@ -17,7 +17,6 @@ class Scroll extends Component {
 
     onArrowClick = (direction) => {
         if (direction === 'forward') {
-            console.log(direction);
             this.setState({viewObjectsList: [
                 {title: '', coverage: 'https://i.pinimg.com/564x/74/26/f8/7426f8bdf968010ad4daa520c2a1cfd7.jpg', id: 1 },
                 {title: '', coverage: 'https://i.pinimg.com/564x/74/26/f8/7426f8bdf968010ad4daa520c2a1cfd7.jpg', id: 2 },

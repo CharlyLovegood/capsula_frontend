@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { Button } from 'grommet';
 
 import styles from './LogIn.module.css';
 
@@ -19,20 +17,6 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../../store/actions';
 
-
-
-function Copyright() {
-    return (
-        <Typography variant='body2' color='textSecondary' align='center'>
-            {'Copyright © '}
-            <Link color='inherit' href='https://material-ui.com/'>
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 
 class LoginPage extends Component {
@@ -55,6 +39,8 @@ class LoginPage extends Component {
     }
 
     render() {
+        const {alert} = this.props;
+
         return (
             <Container component='main' maxWidth='xs'>
                 <CssBaseline />
@@ -65,6 +51,9 @@ class LoginPage extends Component {
                     <Typography component='h1' variant='h5'>
                         Sign in
                     </Typography>
+
+                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
+
                     <form className={styles.form} noValidate>
                         {!this.state.error ? (
                             <Box>
@@ -122,19 +111,15 @@ class LoginPage extends Component {
                                 />
                             </Box>
                             )}
-                        <FormControlLabel
-                            control={<Checkbox value='remember' color='primary' />}
-                            label='Remember me'
-                        />
                         <Button
-                            type='submit'
-                            fullWidth
+                            primary
                             variant='contained'
-                            color='primary'
+                            color='brand'
+                            fill='horizontal'
                             className={styles.submit}
+                            label='Sign In'
                             onClick={event => this.handleSubmit(event)}
                         >
-                            Sign In
                         </Button>
                         <Grid container>
                             <Grid item xs>
@@ -150,21 +135,18 @@ class LoginPage extends Component {
                         </Grid>
                     </form>
                 </div>
-                <Box mt={8}>
-                    <Copyright />
-                </Box>
             </Container>
         );
     }
 }
 
-function mapState(state) {
-    const { loggingIn } = state.authentication;
-    return { loggingIn };
-}
+const mapState = state => ({
+    loggingIn: state.authentication,
+    alert: state.alert
+})
 
 const actionCreators = {
-    login: userActions.login
+    login: userActions.login,
 };
 
 export default connect(mapState, actionCreators)(LoginPage);
