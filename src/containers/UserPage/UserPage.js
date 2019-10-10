@@ -12,6 +12,8 @@ class UserPage extends Component {
     state = { user: {}, viewObjectsList: [] };
 
     componentDidMount() {
+        this.props.getById(1);
+        
         const user = {
             'last_name': 'Ivanova',
             'first_name': 'Natalia',
@@ -36,12 +38,14 @@ class UserPage extends Component {
         const { user } = this.props;
         return (
             <Box direction='column' align='center' fill className={styles.profile}>
-                <Box  className={styles.background} align='center'>
-                    <img
-                        alt='Remy Sharp'
-                        src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
-                        className={styles.big_avatar}
-                    />
+                <Box background='brandGradient' className={styles.background} align='center'>
+                    <Box animation='slideUp'>
+                        <img 
+                            alt='Remy Sharp'
+                            src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
+                            className={styles.big_avatar}
+                        />
+                    </Box>
                 </Box>
                 <h3 className={styles.header1}>{user.username}</h3>
                 <p className={styles.header2}>{user.secondName} {this.state.user.firstName}</p>
@@ -53,11 +57,12 @@ class UserPage extends Component {
 }
 
 const mapState = state => ({
-    user: state.authentication.user
+    user: state.userpage
 })
 
 const actionCreators = {
-    logout: userActions.logout
+    logout: userActions.logout,
+    getById: userActions.getById
 }
 
 export default connect(mapState, actionCreators)(UserPage);

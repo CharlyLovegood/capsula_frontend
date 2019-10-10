@@ -1,7 +1,8 @@
 export const userService = {
     login,
     logout,
-    register
+    register,
+    getById
 };
 
 function login(username, password) {
@@ -10,7 +11,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch('http://localhost:8000/auth/login/', requestOptions)
+    return fetch('http://localhost:8000/auth/login', requestOptions)
         .then(handleResponse)
         .then(user => {
             localStorage.setItem('username', user.username);
@@ -26,13 +27,12 @@ function logout() {
     localStorage.removeItem('username');
     localStorage.removeItem('firstName');
     localStorage.removeItem('secondName');
-
+    
     const requestOptions = {
         method: 'GET',
         url: '/auth/logout/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     }
-
     
     return fetch('http://localhost:8000/auth/logout/', requestOptions)
         .then(handleResponse)
@@ -47,7 +47,6 @@ function logout() {
 
 
 function register(user) {
-    console.log(user);
     user = {
         'username': user.username,
         'password': user.password,
@@ -63,6 +62,17 @@ function register(user) {
 
     return fetch('http://localhost:8000/auth/registration/', requestOptions).then(handleResponse);
 }
+
+
+function getById(id) {
+    const requestOptions = {
+        method: 'GET'
+    };
+
+    return fetch(`http://localhost:8000/user/${id}`, requestOptions).then(handleResponse);
+}
+
+
 
 
 function handleResponse(response) {

@@ -34,7 +34,7 @@ class Scroll extends Component {
         return(
             <Box direction='column' align='center' className={styles.scroll_container}>
                 <h3 className={styles.header}>{this.props.header}</h3>
-                <Box background='light_contrast' direction='column' align='center'>
+                <Box direction='column' align='center'>
                     <ResponsiveContext.Consumer>
                     {size => 
                         <Box 

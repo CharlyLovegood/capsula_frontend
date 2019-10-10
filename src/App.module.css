@@ -3,3 +3,8 @@
     color: black;
     transform: translate(-25px, 0px);
 }
+
+.background {
+    background: #19081c;
+    z-index: -1;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './Gallery.module.css';
 
 import { Box } from 'grommet';
 
@@ -16,7 +17,7 @@ class Gallery extends Component {
 
     render(props) {
         return (
-            <Box direction='column' align='center'>
+            <Box direction='column' align='center' className={styles.gallery_box}>
                 <h2>{this.props.header}</h2>
                 <Box 
                     width='900px' 

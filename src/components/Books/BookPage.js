@@ -8,7 +8,7 @@ class BookPage extends Component {
     render() {
         return (
             <Box direction='column' align='center' fill>
-                <Box background='brand' className={styles.background} align='center'>
+                <Box background='brandGradient' className={styles.background} align='center'>
                     <Book animation='slideUp' coverage='https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg'></Book>
                 </Box>
                 

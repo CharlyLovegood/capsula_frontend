@@ -46,14 +46,14 @@ class AppBar extends Component {
             localStorage.getItem('username') ? 
             (<ResponsiveContext.Consumer>
                 {size => (
-                <Box>
+                <Box align='center'>
                     <Box
                         direction='row'
                         align='center'
                         baseline='center'
                         justify='center'
                         pad='0px'
-                        style={{ zIndex: '1' }}
+                        style={{ zIndex: '10' }}
                         className={styles.logo_container}
                     >   
                         <Link to='/' style={{ textDecoration: 'none' }}>
@@ -62,16 +62,16 @@ class AppBar extends Component {
                     </Box>
 
                     <Box
+                        width='900px'
                         tag='header'
                         direction='row'
                         align='center'
                         baseline='center'
                         justify='between'
-                        background='background'
+                        style={{ zIndex: '1' }}
                         pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
-                        
                     >
-                        <UserAvatar name={localStorage.getItem('username')}></UserAvatar>
+                        <UserAvatar color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
                         
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
@@ -87,18 +87,19 @@ class AppBar extends Component {
                                 <Box
                                     flex
                                     direction='row'
-                                    background='background'
                                     elevation='xsmall'
                                     align='center'
                                     justify='center'
                                     height='200px'
+                                    pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
                                 >
-                                    <SearchBar></SearchBar>
-                                    <PrivateLink to='/books' label='My books' />
-                                    <PrivateLink to='/history' label='History' />
-                                    <PrivateLink to='/swap' label='Swap' />
-                                    <PrivateLink to='/friends' label='Friends' />
-                                    <PrivateLink to='/wishlist' label='Wishlist' />
+                                    
+                                    <PrivateLink color='menuTextColor' to='/books' label='My books' />
+                                    <PrivateLink color='menuTextColor' to='/history' label='History' />
+                                    <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
+                                    <PrivateLink color='menuTextColor' to='/friends' label='Friends' />
+                                    <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
+                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                     <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Collapsible>
@@ -124,11 +125,12 @@ class AppBar extends Component {
                                     justify='center'
                                 >
                                     <SearchBar></SearchBar>
-                                    <PrivateLink to='/books' label='My books' />
-                                    <PrivateLink to='/history' label='History' />
-                                    <PrivateLink to='/swap' label='Swap' />
-                                    <PrivateLink to='/friends' label='Friends' />
-                                    <PrivateLink to='/wishlist' label='Wishlist' />
+                                    <PrivateLink color='menuTextColor' to='/books' label='My books' />
+                                    <PrivateLink color='menuTextColor' to='/history' label='History' />
+                                    <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
+                                    <PrivateLink color='menuTextColor' to='/friends' label='Friends' />
+                                    <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
+                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                     <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Layer>
@@ -157,6 +159,7 @@ class AppBar extends Component {
                     </Box>
 
                     <Box
+                        width='900px'
                         tag='header'
                         direction='row'
                         align='center'
@@ -167,8 +170,7 @@ class AppBar extends Component {
                     >
 
                         <Box direction='row' align='center'>
-                            <PrivateLink to='/login' label='Log In'></PrivateLink>
-                            <PrivateLink to='/register' label='Register'></PrivateLink>
+                            <PrivateLink color='menuTextColor' to='/login' label='Log In'></PrivateLink>
                         </Box>
                         
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>

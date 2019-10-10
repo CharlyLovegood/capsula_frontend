@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -14,6 +13,7 @@ import { Button } from 'grommet';
 import { connect } from 'react-redux';
 
 import { userActions } from '../../store/actions';
+import PrivateLink from '../../components/PrivateLink/PrivateLink';
 
 
 
@@ -69,7 +69,7 @@ class RegisterPage extends Component {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component='h1' variant='h5'>
-                    Sign up
+                    Register
                 </Typography>
 
                 {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
@@ -190,11 +190,7 @@ class RegisterPage extends Component {
                 </div>
 
                 <Grid container justify='flex-end'>
-                    <Grid item>
-                    <Link href='#' variant='body2'>
-                        Already have an account? Sign in
-                    </Link>
-                    </Grid>
+                    <PrivateLink color='textColor' to='/login' label='Already have an account? Log in' />
                 </Grid>
                 </form>
             </div>

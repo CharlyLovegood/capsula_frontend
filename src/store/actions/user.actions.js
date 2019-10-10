@@ -6,7 +6,8 @@ import { alertActions } from './';
 export const userActions = {
     login,
     logout,
-    register
+    register,
+    getById
 };
 
 function login(username, password) {
@@ -33,10 +34,11 @@ function login(username, password) {
 
 
 function logout() {
-    history.push('/');
     userService.logout();
+    history.push('/');
     return { type: userConstants.LOGOUT };
 }
+
 
 function register(user) {
     return dispatch => {
@@ -59,4 +61,21 @@ function register(user) {
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+
+function getById(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        userService.getById(id)
+            .then(
+                user => dispatch(success(user)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request(userId) { return { type: userConstants.USERPAGE_REQUEST, userId } }
+    function success(user) { return { type: userConstants.USERPAGE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.USERPAGE_FAILURE, error } }
 }

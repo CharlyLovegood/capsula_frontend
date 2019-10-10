@@ -7,12 +7,12 @@ export function search(state = initialState, action) {
         case searchConstants.SEARCH_REQUEST:
             return {
                 searching: true,
-                searchRequest: action.searchRequest
+                searchRequest: action
             };
         case searchConstants.SEARCH_SUCCESS:
             return {
                 found: true,
-                search: action.search
+                search: action
             };
         case searchConstants.SEARCH_FAILURE:
             return {};

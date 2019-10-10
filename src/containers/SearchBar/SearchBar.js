@@ -21,7 +21,6 @@ class SearchBar extends Component {
   
     onChange = event => this.setState({ value: event.target.value }, () => {
         const { value } = this.state;
-        console.log('f')
         if (!value.trim()) {
             this.setState({ suggestedList: [] });
         } else {

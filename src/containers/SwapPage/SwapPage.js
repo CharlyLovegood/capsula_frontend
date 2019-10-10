@@ -4,8 +4,8 @@ import {
     Tab,
     Tabs
 } from 'grommet';
-import Gallery from '../Gallery/Gallery';
-import BookCard from '../Books/BookCard';
+import Gallery from '../../components/Gallery/Gallery';
+import BookCard from '../../components/Books/BookCard';
 
 
 class SwapPage extends Component {

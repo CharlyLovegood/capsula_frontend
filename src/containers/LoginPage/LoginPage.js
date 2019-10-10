@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,7 +13,7 @@ import { Button } from 'grommet';
 import styles from './LogIn.module.css';
 
 import { connect } from 'react-redux';
-
+import PrivateLink from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
 
 
@@ -49,7 +48,7 @@ class LoginPage extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component='h1' variant='h5'>
-                        Sign in
+                        Log in
                     </Typography>
 
                     {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
@@ -112,6 +111,7 @@ class LoginPage extends Component {
                             </Box>
                             )}
                         <Button
+                            round='none'
                             primary
                             variant='contained'
                             color='brand'
@@ -122,16 +122,7 @@ class LoginPage extends Component {
                         >
                         </Button>
                         <Grid container>
-                            <Grid item xs>
-                                <Link href='#' variant='body2'>
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href='#' variant='body2'>
-                                    {'Don\'t have an account? Sign Up'}
-                                </Link>
-                            </Grid>
+                            <PrivateLink color='textColor' to='/register' label="Don't have an account? Register"></PrivateLink>
                         </Grid>
                     </form>
                 </div>

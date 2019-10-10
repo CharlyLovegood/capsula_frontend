@@ -9,9 +9,7 @@ class Banner extends Component {
                 width='100%'
             >
                 <Carousel fill  controls='selectors'>
-                    <Image fit='cover' src='https://cdn-images-1.medium.com/max/2400/1*l6is9AD4ciAM1d5482m8iw.jpeg' />
-                    <Image fit='cover' src='https://www.sftour1.com/wp-content/uploads/2018/08/golden-gate-fogged.jpg' />
-                    <Image fit='cover' src='https://media.licdn.com/dms/image/C4D1BAQE0VoWGQ9cqQg/company-background_10000/0?e=2159024400&v=beta&t=dpV3ZE_SAe5bvJGoD19Rcw0zXGJy0yHJCN_0z_nPwFo' />
+                    <Image fit='cover' src='http://www.lm-magazine.com/wp-content/uploads/2017/05/080.jpg?w=326&h=436' />
                 </Carousel>
             </Box>
         )
