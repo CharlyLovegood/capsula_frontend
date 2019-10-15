@@ -8,3 +8,14 @@
 .logo_container {
     height: 0px;
 }
+
+.right_side_button {
+    position: absolute;
+    height: 44px;
+    margin: 0px;
+    right: 18px;
+}
+
+.menu_container {
+    position: relative;
+}

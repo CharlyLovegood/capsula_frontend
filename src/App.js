@@ -7,19 +7,19 @@ import {
 import { Router, Switch, Route } from 'react-router-dom'
 
 import HomePage from './components/HomePage/HomePage'
-import BookPage from './components/Books/BookPage';
-import BookGalleryPage from './components/Books/BookGalleryPage';
+import BookPage from './containers/BookPage/BookPage';
+import LibraryPage from './containers/LibraryPage/LibraryPage';
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 
 
-import SwapPage from './components/Swap/SwapPage';
+import SwapPage from './containers/SwapPage/SwapPage';
 
 import UserPage from './containers/UserPage/UserPage';
 import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
-
+import SettingsPage from './containers/SettingsPage/SettingsPage';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
@@ -66,11 +66,12 @@ class App extends Component {
                     <Box flex align='center' justify='center'>
                         <Switch>
                             <PrivateRoute exact path='/' component={ HomePage }/>
-                            <PrivateRoute path='/profile_id=:id' component={ UserPage }/>
-                            <PrivateRoute path='/book_id=:id' component={ BookPage } />
-                            <PrivateRoute path='/books' component={ BookGalleryPage } />
+                            <PrivateRoute path='/user/:id' component={ UserPage }/>
+                            <PrivateRoute path='/book/:id' component={ BookPage } />
+                            <PrivateRoute path='/library' component={ LibraryPage } />
                             <PrivateRoute path='/swap' component={ SwapPage } />
                             <PrivateRoute path='/search' component={ SearchPage } />
+                            <PrivateRoute path='/settings' component={ SettingsPage } />
                             <Route exact path='/register' component={ RegisterPage } />
                             <Route exact path='/login' component={ LoginPage } />
                         </Switch>

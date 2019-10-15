@@ -11,7 +11,13 @@ class PopUpButton extends Component {
         super(props);
         this.state = { 
             bookName: '', 
-            author:'' };
+            author:'',
+            action: {
+                type: '',
+                isLoaded: false,
+                error: null
+            } 
+        };
     }
 
     handleAuthorChange(event) {
@@ -22,8 +28,36 @@ class PopUpButton extends Component {
         this.setState({bookName: event.target.value});
     }
 
-    handleSubmit() {
-        console.log('submit');
+    handleSubmit(event) {
+        const book = {
+            "title": this.state.bookName,
+            "authors": this.state.author,
+            "genre": 3
+        };
+          
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Authorization': 'Token ' + localStorage.token},
+            body: JSON.stringify(book)
+        };
+
+        return fetch('/library/book_items/', requestOptions)
+            .then(
+                response => {
+                    this.setState({action:{
+                        type: 'AddBook',
+                        isLoaded: true,
+                        error: null
+                    }})
+                    return response;
+                },
+                error => {
+                    this.setState({action:{
+                        type: 'AddBook',
+                        isLoaded: false,
+                        error: error
+                    }})
+                });
     }
 
     render(props) {
@@ -53,7 +87,6 @@ class PopUpButton extends Component {
                     label='Author'
                     name='author'
                     autoComplete='author'
-                    autoFocus
                     onChange={ event => this.handleAuthorChange(event) }>
                 </TextField>
                 <Box
@@ -65,7 +98,7 @@ class PopUpButton extends Component {
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
                     <Link to='/books'>
-                        <Button label='Yes' color='dark-3' onClick={this.handleSubmit}/>
+                        <Button label='Yes' color='dark-3' onClick={event =>this.handleSubmit(event)}/>
                     </Link>
                     <Button
                         label={

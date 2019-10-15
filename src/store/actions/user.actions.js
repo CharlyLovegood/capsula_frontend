@@ -35,7 +35,7 @@ function login(username, password) {
 
 function logout() {
     userService.logout();
-    history.push('/');
+    history.push('/login');
     return { type: userConstants.LOGOUT };
 }
 
@@ -70,8 +70,14 @@ function getById(id) {
 
         userService.getById(id)
             .then(
-                user => dispatch(success(user)),
-                error => dispatch(failure(error))
+                user => {
+                    dispatch(success(user.data));
+                    dispatch(alertActions.success('UserPage Load successful'));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
             );
     };
 

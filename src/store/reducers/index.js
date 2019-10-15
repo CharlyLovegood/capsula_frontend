@@ -5,6 +5,8 @@ import { registration } from './registration.reducer';
 import { alert } from './alert.reducer';
 import { search } from './search.reducer';
 import { userpage } from './userpage.reducer';
+import { library } from './library.reducer';
+import { book } from './book.reducer';
 
 
 const rootReducer = combineReducers({
@@ -12,7 +14,9 @@ const rootReducer = combineReducers({
     registration,
     alert,
     search,
-    userpage
+    userpage,
+    library,
+    book
 });
 
 export default rootReducer;

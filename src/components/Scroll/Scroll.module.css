@@ -12,3 +12,9 @@
     background-color: #c5c5c5;
     border-radius: 100%;
 }
+
+.arrow_hidden {
+    display: none;
+    background-color: #c5c5c5;
+    border-radius: 100%;
+}

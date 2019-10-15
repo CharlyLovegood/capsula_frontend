@@ -1,8 +1,81 @@
+import * as axios from "axios";
+
 export const swapService = {
-    getNotAnsweredSwap,
-    getNotInProcessSwap,
-    getOnHandsSwap,
-    getHistorySwap,
-    sendSwapRequest,
-    canselSwapRequest
+    getSwapProposals,
+    getSwapRequests,
+    getInProcessSwaps,
+    getOnHandsSwaps,
+    getHistorySwaps
 };
+
+
+
+function getSwapProposals() {
+    const requestOptions = {
+        method: 'GET',
+        url: '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return axios(requestOptions)
+        .then(swapList => {
+            return swapList;
+        }); 
+}
+
+
+function getSwapRequests() {
+    const requestOptions = {
+        method: 'GET',
+        url: '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return axios(requestOptions)
+        .then(swapList => {
+            return swapList;
+        }); 
+}
+
+
+function getInProcessSwaps() {
+    const requestOptions = {
+        method: 'GET',
+        url: '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return axios(requestOptions)
+        .then(swapList => {
+            return swapList;
+        }); 
+}
+
+
+function getOnHandsSwaps() {
+    const requestOptions = {
+        method: 'GET',
+        url: '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return axios(requestOptions)
+        .then(swapList => {
+            return swapList;
+        }); 
+}
+
+
+function getHistorySwaps() {
+    const requestOptions = {
+        method: 'GET',
+        url: '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return axios(requestOptions)
+        .then(swapList => {
+            return swapList;
+        }); 
+}
+

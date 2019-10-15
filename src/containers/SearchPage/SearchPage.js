@@ -24,9 +24,7 @@ class SearchPage extends Component {
             this.setState({ suggestedList: [] });
         } else {
             this.props.request(value);
-            console.log(this.props);
             if (this.props.search.search) {
-                console.log(this.props.search.search.searchResult);
                 setTimeout(() => this.setState({ suggestedList: this.props.search.search.searchResult }), 300);
             }
         }

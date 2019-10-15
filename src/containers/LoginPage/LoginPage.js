@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { Button } from 'grommet';
+import Button from '@material-ui/core/Button';
 
 import styles from './LogIn.module.css';
 
 import { connect } from 'react-redux';
 import PrivateLink from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
+
+
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 
 
@@ -24,7 +25,7 @@ class LoginPage extends Component {
         this.state = {
             username: '', 
             password: '',
-            error: false };
+            submitted: false };
     }
     
     handleSubmit(event) {
@@ -38,11 +39,11 @@ class LoginPage extends Component {
     }
 
     render() {
+        const { submitted } = this.state;
         const {alert} = this.props;
 
         return (
             <Container component='main' maxWidth='xs'>
-                <CssBaseline />
                 <div className={styles.paper}>
                     <Avatar className={styles.avatar}>
                         <LockOutlinedIcon />
@@ -53,78 +54,55 @@ class LoginPage extends Component {
 
                     {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
 
-                    <form className={styles.form} noValidate>
-                        {!this.state.error ? (
-                            <Box>
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='username'
-                                    label='User Name'
-                                    name='username'
-                                    autoComplete='username'
-                                    autoFocus
-                                    value={this.state.username}
-                                    onChange={ event => this.handleChange(event) }
-                                />
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    name='password'
-                                    label='Password'
-                                    type='password'
-                                    id='password'
-                                    autoComplete='current-password'
-                                    onChange={ event => this.handleChange(event) }
-                                />
-                            </Box>
-                            ): (
-                            <Box>
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    error
-                                    fullWidth
-                                    id='username'
-                                    label='User Name'
-                                    name='username'
-                                    autoComplete='username'
-                                    autoFocus
-                                    onChange={ event => this.handleChange(event) }
-                                />
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    error
-                                    fullWidth
-                                    name='password'
-                                    label='Password'
-                                    type='password'
-                                    id='password'
-                                    autoComplete='current-password'
-                                    onChange={ event => this.handleChange(event) }
-                                />
-                            </Box>
-                            )}
-                        <Button
-                            round='none'
-                            primary
-                            variant='contained'
-                            color='brand'
-                            fill='horizontal'
-                            className={styles.submit}
-                            label='Sign In'
-                            onClick={event => this.handleSubmit(event)}
-                        >
-                        </Button>
-                        <Grid container>
-                            <PrivateLink color='textColor' to='/register' label="Don't have an account? Register"></PrivateLink>
-                        </Grid>
-                    </form>
+                    <ValidatorForm
+                        ref="form"
+                        onSubmit={(event) => this.handleSubmit(event)}
+                        className={styles.form}
+                    >
+                        <Box>
+                            <TextValidator
+                                variant='outlined'
+                                margin='normal'
+                                required
+                                fullWidth
+                                id='username'
+                                label='User Name'
+                                name='username'
+                                autoComplete='username'
+                                autoFocus
+                                value={this.state.username}
+                                onChange={ event => this.handleChange(event) }
+                            />
+                            <TextValidator
+                                variant='outlined'
+                                margin='normal'
+                                required
+                                fullWidth
+                                name='password'
+                                label='Password'
+                                type='password'
+                                id='password'
+                                autoComplete='current-password'
+                                onChange={ event => this.handleChange(event) }
+                            />
+                        </Box>
+                            
+                        <div className={styles.submit}>
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                type="submit"
+                                disabled={submitted}
+                                fullWidth
+                            >
+                                Log In
+                            </Button>
+                        </div>
+                    </ValidatorForm>
+
+                    <Grid container justify='flex-end'>
+                        <PrivateLink color='textColor' to='/register' label="Don't have an account? Register"></PrivateLink>
+                    </Grid>
                 </div>
             </Container>
         );

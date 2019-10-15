@@ -5,64 +5,73 @@ import Book from '../../components/Books/Book'
 import Scroll from '../../components/Scroll/Scroll'
 import { connect } from 'react-redux';
 
-import { userActions } from '../../store/actions';
-
+import { userActions, libraryActions } from '../../store/actions';
+import ErrorPage from './../../components/Error/ErrorPage';
 
 class UserPage extends Component {
-    state = { user: {}, viewObjectsList: [] };
+    state = { userId: this.props.match.params.id, viewObjectsList: [] };
 
-    componentDidMount() {
-        this.props.getById(1);
-        
-        const user = {
-            'last_name': 'Ivanova',
-            'first_name': 'Natalia',
-            'email': 'ivanova.nv@phystech.edu',
-            'django_user': {
-                'username': 'CharlieLovegood'
-            }};
-        this.setState({ user: {
-            'last_name': user.last_name,
-            'first_name': user.first_name,
-            'username': user.django_user.username
-            }});
-        this.setState({ viewObjectsList: [
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 1 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 2 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 3 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 4 }
-        ] })
+    async componentDidMount() {
+        this.setState({userId: this.props.match.params.id})
+
+        this.props.getUser(this.state.userId);
+        this.props.getBookList(this.state.userId);
     }
 
     render() {
-        const { user } = this.props;
-        return (
-            <Box direction='column' align='center' fill className={styles.profile}>
-                <Box background='brandGradient' className={styles.background} align='center'>
-                    <Box animation='slideUp'>
-                        <img 
-                            alt='Remy Sharp'
-                            src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
-                            className={styles.big_avatar}
-                        />
+        let user= {};
+        let library= [];
+
+        if (this.props.user.userInfoRecieved) {
+            user = {
+                'lastName': this.props.user.user.last_name,
+                'firstName': this.props.user.user.first_name,
+                'username': this.props.user.user.django_user.username
+            };
+        }
+        if (this.props.library.userLibraryRecieved) {
+            library = this.props.library.userLibrary.data;
+        }
+
+
+        if (this.props.user.userInfoRecieved && this.props.library.userLibraryRecieved) {
+            return (
+                <Box direction='column' align='center' fill className={styles.profile}>
+                    <Box background='brandGradient' className={styles.background} align='center'>
+                        <Box animation='slideUp'>
+                            <img 
+                                alt='Remy Sharp'
+                                src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
+                                className={styles.big_avatar}
+                            />
+                        </Box>
                     </Box>
+                    <h3 className={styles.header1}>{user.username}</h3>
+                    <p className={styles.header2}>{user.lastName} {user.firstName}</p>
+                    <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
+                            objectList={library} 
+                            header='My Books'>
+                    </Scroll>
                 </Box>
-                <h3 className={styles.header1}>{user.username}</h3>
-                <p className={styles.header2}>{user.secondName} {this.state.user.firstName}</p>
-                <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id}></Book>} objectList={this.state.viewObjectsList} header='My Books'></Scroll>
-                <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id}></Book>} objectList={this.state.viewObjectsList} header='My Books'></Scroll>
-            </Box>
-        )
+            )
+        } else if (this.props.alert.type === 'alert-danger') {
+            return(<ErrorPage alert={this.props.alert}></ErrorPage>);
+        } else {
+            return (<Box></Box>)
+        }
     }
 }
 
 const mapState = state => ({
-    user: state.userpage
+    user: state.userpage,
+    library: state.library,
+    alert: state.alert
 })
 
 const actionCreators = {
     logout: userActions.logout,
-    getById: userActions.getById
+    getUser: userActions.getById,
+    getBookList: libraryActions.getBookListById
 }
 
 export default connect(mapState, actionCreators)(UserPage);

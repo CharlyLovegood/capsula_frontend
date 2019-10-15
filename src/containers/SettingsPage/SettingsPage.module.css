@@ -1,0 +1,10 @@
+.submit {
+    margin: 20px 0px 10px;
+}
+
+.paper {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

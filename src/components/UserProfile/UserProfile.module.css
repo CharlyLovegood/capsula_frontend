@@ -3,7 +3,6 @@
     border-radius: 100%;
     width: 40px;
 }
-
 .avatar_container {
     height: 40px;
     width: 40px;
@@ -13,4 +12,32 @@
 .name {
     margin: 0px;
     color: #000000
+}
+
+.big_avatar {
+    height: 200px;
+    border-radius: 100%;
+    width: 200px;
+    z-index: 2;
+}
+
+.big_avatar:hover {
+    height: 200px;
+    border-radius: 100%;
+    width: 200px;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.big_avatar_container {
+    position: relative;
+}
+
+.input {
+    display: none;
+}
+
+.camera {
+    margin-top: 40px;
+    position: absolute;
 }

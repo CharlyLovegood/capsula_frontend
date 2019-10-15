@@ -69,7 +69,7 @@ class AppBar extends Component {
                         baseline='center'
                         justify='between'
                         style={{ zIndex: '1' }}
-                        pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
+                        pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
                         <UserAvatar color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
                         
@@ -92,15 +92,16 @@ class AppBar extends Component {
                                     justify='center'
                                     height='200px'
                                     pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
+                                    width='900px'
+                                    className={styles.menu_container}
                                 >
-                                    
-                                    <PrivateLink color='menuTextColor' to='/books' label='My books' />
+                                    <PrivateLink color='menuTextColor' to='/library' label='My books' />
                                     <PrivateLink color='menuTextColor' to='/history' label='History' />
                                     <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
-                                    <PrivateLink color='menuTextColor' to='/friends' label='Friends' />
                                     <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
                                     <PrivateLink color='menuTextColor' to='/search' label='Search' />
-                                    <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
+                                    <PrivateLink color='menuTextColor' to='/settings' label='Settings' />
+                                    <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Collapsible>
                         ): (
@@ -125,10 +126,9 @@ class AppBar extends Component {
                                     justify='center'
                                 >
                                     <SearchBar></SearchBar>
-                                    <PrivateLink color='menuTextColor' to='/books' label='My books' />
+                                    <PrivateLink color='menuTextColor' to='/library' label='My books' />
                                     <PrivateLink color='menuTextColor' to='/history' label='History' />
                                     <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
-                                    <PrivateLink color='menuTextColor' to='/friends' label='Friends' />
                                     <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
                                     <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                     <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
@@ -143,7 +143,7 @@ class AppBar extends Component {
                 
             (<ResponsiveContext.Consumer>
                 {size => (
-                <Box>
+                <Box align='center'>
                     <Box
                         direction='row'
                         align='center'

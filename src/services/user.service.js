@@ -1,3 +1,5 @@
+import * as axios from "axios";
+
 export const userService = {
     login,
     logout,
@@ -5,17 +7,18 @@ export const userService = {
     getById
 };
 
+
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
         body: JSON.stringify({ username, password })
     };
 
-    return fetch('http://localhost:8000/auth/login', requestOptions)
+    return fetch('http://localhost:8000/auth/login/', requestOptions)
         .then(handleResponse)
         .then(user => {
-            localStorage.setItem('username', user.username);
-            localStorage.setItem('secondName', user.second_name);
+            localStorage.setItem('username', user.django_user.username);
+            localStorage.setItem('lastName', user.last_name);
             localStorage.setItem('firstName', user.first_name);
             localStorage.setItem('token', user.token);
             return user;
@@ -23,26 +26,20 @@ function login(username, password) {
 }
 
 function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('secondName');
-    
     const requestOptions = {
         method: 'GET',
         url: '/auth/logout/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     }
-    
-    return fetch('http://localhost:8000/auth/logout/', requestOptions)
-        .then(handleResponse)
+
+    return axios(requestOptions)
         .then(user => {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('firstName');
-            localStorage.removeItem('secondName');
+            localStorage.removeItem('lastName');
             return user;
-        });   
+        }); 
 }
 
 
@@ -64,18 +61,23 @@ function register(user) {
 }
 
 
+
 function getById(id) {
     const requestOptions = {
-        method: 'GET'
+        method: 'GET',
+        url: '/user/' + id + '/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
-    return fetch(`http://localhost:8000/user/${id}`, requestOptions).then(handleResponse);
+    return axios(requestOptions)
+        .then(user => {
+            return user;
+        }); 
 }
 
 
 
-
-function handleResponse(response) {
+export function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {

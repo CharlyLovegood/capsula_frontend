@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import styles from './RegisterPage.module.css';
-import { Button } from 'grommet';
+import Button from '@material-ui/core/Button';
 
+
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 import { connect } from 'react-redux';
 
@@ -23,24 +24,29 @@ class RegisterPage extends Component {
         this.state = { 
             user: {
                 firstname: '', 
-                secondname:'', 
+                lastname:'', 
                 username: '', 
                 email: '', 
                 password: '', 
-                passwordcopy: ''
+                repeatPassword: ''
             },
-            permission: true};
+            submitted: false};
     }
 
+    componentDidMount() {
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            const { user } = this.state;
+            if (value !== user.password) {
+                return false;
+            }
+            return true;
+        });
+    }
     
     handleSubmit(event) {
         event.preventDefault();
         const { user } = this.state;
-        if (user.password === user.passwordcopy) {
-            this.props.register(user);
-        } else {
-            this.setState({permission: false});
-        }
+        this.props.register(user);
     }
 
 
@@ -53,147 +59,131 @@ class RegisterPage extends Component {
                 [name]: value
             }
         });
-        this.setState({permission: true});
     }
 
 
     render() {
-        const { user, permission } = this.state;
+        const { user, submitted } = this.state;
         const { alert  } = this.props;
 
         return (
             <Container component='main' maxWidth='xs'>
-            <CssBaseline />
-            <div className={styles.paper}>
-                <Avatar className={styles.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component='h1' variant='h5'>
-                    Register
-                </Typography>
+                <div className={styles.paper}>
+                    <Avatar className={styles.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
 
-                {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
-                
-                <form className={styles.form}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField 
-                            autoComplete='fname'
-                            name='firstname'
-                            variant='outlined'
-                            required
-                            fullWidth
-                            id='firstname'
-                            label='First Name'
-                            autoFocus
-                            value={user.firstname}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            variant='outlined'
-                            required
-                            fullWidth
-                            id='lastName'
-                            label='Last Name'
-                            name='lastName'
-                            autoComplete='lname'
-                            value={user.lastName}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant='outlined'
-                            required
-                            fullWidth
-                            id='username'
-                            label='User Name'
-                            name='username'
-                            autoComplete='username'
-                            value={user.username}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant='outlined'
-                            required
-                            fullWidth
-                            id='email'
-                            label='Email Address'
-                            name='email'
-                            autoComplete='email'
-                            value={user.email}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    </Grid>            
-                    <Grid item xs={12}>
-                        <TextField
-                            variant='outlined'
-                            required
-                            fullWidth
-                            name='password'
-                            label='Password'
-                            type='password'
-                            id='password'
-                            autoComplete='current-password'
-                            value={user.password}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                    {permission ?
-                        <TextField
-                            color='red'
-                            variant='outlined'
-                            required
-                            fullWidth
-                            name='passwordcopy'
-                            label='Confirm Password'
-                            type='password'
-                            id='passwordcopy'
-                            autoComplete='passwordcopy'
-                            value={user.passwordcopy}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                        :
-                        <TextField
-                            color='red'
-                            variant='outlined'
-                            error='false'
-                            fullWidth
-                            helperText='Passwords do not match'
-                            name='passwordcopy'
-                            label='Confirm Password'
-                            type='password'
-                            id='passwordcopy'
-                            autoComplete='passwordcopy'
-                            value={user.passwordcopy}
-                            onChange={ event => this.handleChange(event) }
-                        />
-                    }
-                    </Grid>
-                </Grid>
-                <div className={styles.submit}>
-                    <Button
-                        type='submit'
-                        fill='horizontal'
-                        primary
-                        color='brand'
-                        label='Sign Up'
-                        onClick={event => this.handleSubmit(event)}
+                    <Typography component='h1' variant='h5' >
+                        Register
+                    </Typography>
+
+                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
+                    
+                    <ValidatorForm
+                        ref="form"
+                        onSubmit={(event) => this.handleSubmit(event)}
+                        className={styles.form}
                     >
-                        
-                    </Button>
-                </div>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField 
+                                    autoFocus
+                                    required
+                                    fullWidth
+                                    variant='outlined'
+                                    name='firstname'
+                                    id='firstname'
+                                    label='First Name'
+                                    value={user.firstname}
+                                    onChange={ event => this.handleChange(event) }
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    variant='outlined'
+                                    name='lastName'
+                                    id='lastName'
+                                    label='Last Name'
+                                    value={user.lastName}
+                                    onChange={ event => this.handleChange(event) }
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    variant='outlined'
+                                    name='username'
+                                    id='username'
+                                    label='User Name'
+                                    value={user.username}
+                                    onChange={ event => this.handleChange(event) }
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextValidator
+                                    required
+                                    fullWidth
+                                    variant='outlined'
+                                    name='email'
+                                    id='email'
+                                    label='Email Address'
+                                    value={user.email}
+                                    validators={['required', 'isEmail']}
+                                    errorMessages={['this field is required', 'email is not valid']}
+                                    onChange={event => this.handleChange(event)}
+                                />
+                            </Grid>            
+                            <Grid item xs={12}>
+                                <TextValidator
+                                    required
+                                    fullWidth
+                                    variant='outlined'
+                                    name='password'
+                                    id='password'
+                                    label='Password'
+                                    value={user.password}
+                                    type='password'
+                                    onChange={ event => this.handleChange(event) }
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextValidator
+                                    fullWidth
+                                    required
+                                    variant='outlined'
+                                    name='repeatPassword'
+                                    id='repeatPassword'
+                                    label='Repeat password'
+                                    value={user.repeatPassword}
+                                    type='password'
+                                    validators={['isPasswordMatch', 'required']}
+                                    errorMessages={['password mismatch', 'this field is required']}
+                                    onChange={ event => this.handleChange(event) }
+                                />
+                            </Grid>
+                            <div className={styles.submit}>
+                                <Button
+                                    fullWidth
+                                    color="primary"
+                                    variant="contained"
+                                    type="submit"
+                                    disabled={submitted}
+                                >
+                                    {(submitted && 'Your form is submitted!')
+                                        || (!submitted && 'Submit')
+                                    }
+                                </Button>
+                            </div>
+                        </Grid>
+                    </ValidatorForm>
 
-                <Grid container justify='flex-end'>
-                    <PrivateLink color='textColor' to='/login' label='Already have an account? Log in' />
-                </Grid>
-                </form>
-            </div>
+                    <Grid container justify='flex-end'>
+                        <PrivateLink color='textColor' to='/login' label='Already have an account? Log in' />
+                    </Grid>
+                </div>
             </Container>
         );
     }
