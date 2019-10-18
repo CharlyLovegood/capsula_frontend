@@ -14,7 +14,7 @@
 
 .book_cover {
     background-size: cover;
-    height: 220px;
+    height: 250px;
     width: 160px;
     object-fit: cover;
 }
@@ -24,6 +24,11 @@
     height: 150px;
     width: 100px;
     object-fit: cover;
+}
+
+.book_cover:hover {
+    filter: brightness(0.96);
+    transition: all 0.3s;
 }
 
 .book_title {
@@ -43,8 +48,14 @@
 }
 
 .text {
-    color: grey;
+    color: rgb(104, 104, 104);
     font-size: 16px;
+    margin: 5px;
+}
+
+.text_header {
+    color: rgb(56, 56, 56);
+    font-size: 24px;
     margin: 5px;
 }
 
@@ -69,4 +80,65 @@
 
 .container {
     margin: 0px 40px;
+}
+
+
+
+.back_side {
+    position: absolute;
+    height: 250px;
+    width: 160px;
+}
+
+
+
+
+
+
+
+
+.book_card {
+    height: 250px;
+    width: 160px;
+    perspective: 1000px;
+    margin: 10px;
+  }
+  
+  .book_card_inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .book_card:hover .book_card_inner {
+    transform: rotateY(180deg);
+  }
+  
+  .book_card_front, .book_card_back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .book_card_front {
+    color: black;
+  }
+  
+  .book_card_back {
+    transform: rotateY(180deg);
+  }
+
+  .book_cover_back {
+    position: absolute;
+    background-size: cover;
+    height: 250px;
+    width: 160px;
+    object-fit: cover;
+    z-index: -1;
+    opacity: .1;
+    filter: brightness(0.4);
+    opacity: 0.5;
 }

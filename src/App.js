@@ -45,6 +45,12 @@ const theme = {
             height: '20px',
         },
     },
+
+            button: {
+                border: {
+                  radius: "8px"
+                }
+            }
 };
 
 

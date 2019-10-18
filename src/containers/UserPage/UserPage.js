@@ -33,32 +33,33 @@ class UserPage extends Component {
             library = this.props.library.userLibrary.data;
         }
 
-
-        if (this.props.user.userInfoRecieved && this.props.library.userLibraryRecieved) {
-            return (
-                <Box direction='column' align='center' fill className={styles.profile}>
-                    <Box background='brandGradient' className={styles.background} align='center'>
-                        <Box animation='slideUp'>
-                            <img 
-                                alt='Remy Sharp'
-                                src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
-                                className={styles.big_avatar}
-                            />
-                        </Box>
+        return (
+            <Box direction='column' align='center' fill className={styles.profile}>
+                <Box background='brandGradient' className={styles.background} align='center'>
+                    <Box animation='slideUp'>
+                        <img 
+                            alt='Remy Sharp'
+                            src='https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'
+                            className={styles.big_avatar}
+                        />
                     </Box>
-                    <h3 className={styles.header1}>{user.username}</h3>
-                    <p className={styles.header2}>{user.lastName} {user.firstName}</p>
+                </Box>
+                <h3 className={styles.header1}>{user.username}</h3>
+                <p className={styles.header2}>{user.lastName} {user.firstName}</p>
+                {this.props.library.error &&
+                    <ErrorPage alert={this.props.alert}></ErrorPage>
+                }
+                {this.props.library.error &&
+                    <Box></Box>
+                }
+                {this.props.library.userLibraryRecieved &&
                     <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
                             objectList={library} 
                             header='My Books'>
                     </Scroll>
-                </Box>
-            )
-        } else if (this.props.alert.type === 'alert-danger') {
-            return(<ErrorPage alert={this.props.alert}></ErrorPage>);
-        } else {
-            return (<Box></Box>)
-        }
+                }
+            </Box>
+        )
     }
 }
 

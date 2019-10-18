@@ -68,11 +68,10 @@ class AppBar extends Component {
                         align='center'
                         baseline='center'
                         justify='between'
-                        style={{ zIndex: '1' }}
+                        style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
                         <UserAvatar color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
-                        
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}

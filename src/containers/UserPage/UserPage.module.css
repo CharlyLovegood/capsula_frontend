@@ -6,17 +6,17 @@
 }
 
 .big_avatar {
-    height: 200px;
+    height: 250px;
     border-radius: 100%;
-    width: 200px;
-    margin: 50px;
+    width: 250px;
+    margin: 30px;
+    object-fit: cover;
 }
 
 .background {
     height: 220px;
     width: 100%;
-    padding: 0px 50px;
-    margin: 0px 0px 40px 0px;
+    margin: 0px 0px 70px 0px;
     background-size: cover;
 }
 

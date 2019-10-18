@@ -2,6 +2,7 @@
     height: 40px;
     border-radius: 100%;
     width: 40px;
+    object-fit: cover;
 }
 .avatar_container {
     height: 40px;
@@ -19,6 +20,7 @@
     border-radius: 100%;
     width: 200px;
     z-index: 2;
+    object-fit: cover;
 }
 
 .big_avatar:hover {

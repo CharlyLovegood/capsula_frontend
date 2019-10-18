@@ -10,7 +10,7 @@ function Book(props) {
             <Link to={'/book/' + props.id} className={(props.size === 'small') ? styles.small_book : styles.book}>
                 <img 
                     alt='book coverage' 
-                    src={props.coverage ? props.coverage : 'https://i.pinimg.com/564x/b3/2a/95/b32a956e0c1f658a2b0b88c04b9b1fbd.jpg' } 
+                    src={props.coverage ? props.coverage : 'https://i.pinimg.com/564x/31/4a/28/314a2856c47596b485162f23aa3b297a.jpg' } 
                     className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}>
                 </img>
             </Link>

@@ -23,7 +23,7 @@ const PopUpButton = (props) => {
             </Box>
             {open && (
                 <Layer position='center' modal onClickOutside={onClose} onEsc={onClose}>
-                    { props.innerObject(onClose) }
+                    { props.innerObject(onClose, props.forceUpdate) }
                 </Layer>
             )}
         </Box>

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, Button } from 'grommet';
 import Book from './Book';
+import { Link } from '@material-ui/core';
+import styles from './Book.module.css';
+
 
 function BookCard(props) {
     let ButtonBlock = (<Button></Button>);
@@ -31,12 +34,13 @@ function BookCard(props) {
             align='center' 
             justify='between' 
             background='light_contrast' 
-            margin='15px'
+            margin={{'vertical': '10px', 'horizontal':'0px'}}
         >
             <Book size='small' title={props.title} coverage={props.coverage} key={props.id}></Book>
-            <Box flex='grow' direction='column' pad='15px'>
-                <h3>Book</h3>
-                <p>status</p>
+            <Box flex='grow' direction='column' pad='0px'>
+                <h3 className={styles.text_header}>{props.title}ff</h3>
+                <p className={styles.text}>Reqiested by: <Link to=''>ss{props.user}</Link></p>
+                <p className={styles.text}>Request was sent: {props.date}</p>
             </Box>
             <Box width='130px'>
                 {ButtonBlock}

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-
-import { Box, Button, Heading, Text } from 'grommet';
+import { Box, Button, Heading, Text, Select } from 'grommet';
 import TextField from '@material-ui/core/TextField';
-
 
 class PopUpButton extends Component {
     constructor(props) {
@@ -12,6 +10,7 @@ class PopUpButton extends Component {
         this.state = { 
             bookName: '', 
             author:'',
+            genre: '',
             action: {
                 type: '',
                 isLoaded: false,
@@ -49,6 +48,7 @@ class PopUpButton extends Component {
                         isLoaded: true,
                         error: null
                     }})
+                    this.props.onClose();
                     return response;
                 },
                 error => {
@@ -58,6 +58,12 @@ class PopUpButton extends Component {
                         error: error
                     }})
                 });
+        
+    }
+
+    setValue(genre) {
+        console.log(genre);
+        this.setState({genre: genre});
     }
 
     render(props) {
@@ -77,7 +83,7 @@ class PopUpButton extends Component {
                     autoComplete='bookname'
                     autoFocus
                     onChange={ event => this.handleBookNameChange(event) }>
-                </TextField>
+                </TextField>                
                 <TextField
                     variant='outlined'
                     margin='normal'
@@ -89,6 +95,9 @@ class PopUpButton extends Component {
                     autoComplete='author'
                     onChange={ event => this.handleAuthorChange(event) }>
                 </TextField>
+                <Select options={['popScience', 'Detective', 'Poetry']} value={this.state.genre} onChange={({ option }) => this.setValue(option)}>
+
+                </Select>
                 <Box
                     as='footer'
                     gap='small'
@@ -97,8 +106,8 @@ class PopUpButton extends Component {
                     justify='end'
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Link to='/books'>
-                        <Button label='Yes' color='dark-3' onClick={event =>this.handleSubmit(event)}/>
+                    <Link to='/library'>
+                        <Button label='Yes' color='dark-3' onClick={event => this.handleSubmit(event)}/>
                     </Link>
                     <Button
                         label={

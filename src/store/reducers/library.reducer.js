@@ -15,7 +15,9 @@ export function library(state=initialState, action) {
                 userLibrary: action.userLibrary
             }
         case libraryConstants.LIBRARY_FAILURE:
-            return {}
+            return {
+                error: action.error
+            }
         default:
             return state;
     }

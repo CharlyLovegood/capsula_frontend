@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box } from 'grommet';
+import { Box, Menu } from 'grommet';
+import { Add } from 'grommet-icons';
 import styles from './UserProfile.module.css';
 import { Link } from 'react-router-dom';
 
@@ -9,11 +10,19 @@ export default function UserAvatar(props) {
             <Link to='/user/1' className={styles.avatar_container}>
                 <img
                     alt='Remy Sharp'
-                    src='https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
+                    src='https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'
                     className={styles.small_avatar}
                 />
             </Link>
-            <h3 className={styles.name}>{props.name}</h3>
+            <Menu
+                dropProps={{ align: { top: "bottom", left: "left" } }}
+                label={props.name}
+                items={[
+                    { icon: <Add></Add> ,label: 'Action', onClick: () => {} },
+                    { label: "Abort", onClick: () => {} },
+                    { label: "Disabled", disabled: true }
+                ]}
+            />
         </Box>
     );
 }
