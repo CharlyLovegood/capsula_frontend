@@ -30,7 +30,10 @@ class Scroll extends Component {
             if (rem !== 0) {
                 let i;
                 for (i = 0; i < 4 - rem; i++) {
-                    this.props.objectList.push({title: '', coverage: 'https://i.pinimg.com/564x/26/c0/c9/26c0c9f3b8a69b66a1ae8fb5904925f8.jpg', id: 67*i })
+                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: 0},
+                    id: 0,
+                    image: 'https://i.pinimg.com/564x/26/c0/c9/26c0c9f3b8a69b66a1ae8fb5904925f8.jpg',
+                    status: 0})
                 }
             }
         }
@@ -69,6 +72,7 @@ class Scroll extends Component {
         console.log(begin);
     }
 
+
     render(props) {
         let size = this.state.width;
         if (size >= 740) {
@@ -91,8 +95,8 @@ class Scroll extends Component {
                                                 className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                                 </FormPrevious>
 
-                                {this.state.viewObjectsList.slice(0, 4).map(({title, coverage, id}) => {
-                                    return(this.props.object(title, coverage, id))
+                                {this.state.viewObjectsList.slice(0, 4).map((element) => {
+                                    return(this.props.object(element.book.title, element.image, element.book.id))
                                 })}
 
                                 <FormNext color='contrast' 
@@ -123,8 +127,8 @@ class Scroll extends Component {
                                             className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormPrevious>
 
-                            {this.state.viewObjectsList.slice(0, 3).map(({title, coverage, id}) => {
-                                return(this.props.object(title, coverage, id))
+                            {this.state.viewObjectsList.slice(0, 3).map((element) => {
+                                return(this.props.object(element.book.title, element.image, element.book.id))
                             })}
 
                             <FormNext color='contrast' 
@@ -153,8 +157,8 @@ class Scroll extends Component {
                                             className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormPrevious>
 
-                            {this.state.viewObjectsList.slice(0, 2).map(({title, coverage, id}) => {
-                                return(this.props.object(title, coverage, id))
+                            {this.state.viewObjectsList.slice(0, 2).map((element) => {
+                                return(this.props.object(element.book.title, element.image, element.book.id))
                             })}
 
                             <FormNext color='contrast' 

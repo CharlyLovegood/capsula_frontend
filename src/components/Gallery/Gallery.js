@@ -43,7 +43,7 @@ class Gallery extends Component {
                                 align='center'
                                 >
                                 {this.props.objectList.map((element) => {
-                                    return(this.props.object(element.book.title, element.image, element.book.id));
+                                    return(this.props.object(element.book.title, element.image, element.id, element.book.id));
                                 })}
                             </Box>
                     </Box>
@@ -116,12 +116,12 @@ class Gallery extends Component {
                         align='center'
                     >
                     {this.props.me === 'owner' ?
-                    this.props.objectList.map(({authors, book, date, genre, id, reader, status}) => {
-                        return(this.props.object(authors, book, date, genre, id, reader, status))
+                    this.props.objectList.map(({authors, book, date, genre, id, image, reader, status}) => {
+                        return(this.props.object(authors, book, date, genre, id, image, reader, status))
                     })
                     :
-                    this.props.objectList.map(({authors, book, date, genre, id, owner, status}) => {
-                        return(this.props.object(authors, book, date, genre, id, owner, status))
+                    this.props.objectList.map(({authors, book, date, genre, id, image, owner, status}) => {
+                        return(this.props.object(authors, book, date, genre, id, image, owner, status))
                     })}
                     </Box>
                 </Box>

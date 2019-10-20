@@ -21,11 +21,12 @@ class BookPage extends Component {
         if (this.props.book.book) {
             book = this.props.book.book.data
         }
+        
         return (
             this.props.book.bookRecieved ? (
             <Box direction='column' align='center' fill>
                 <Box background='brandGradient' className={styles.background} align='center'>
-                    <Book animation='slideUp' coverage='https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg'></Book>
+                    <Book animation='slideUp' coverage={book.book_items[0].image}></Book>
                 </Box>
                 
                 <Box direction='column' align='center' className={styles.container} width='auto'>
@@ -36,7 +37,7 @@ class BookPage extends Component {
                         <Button margin='15px 5px' primary label='Add to wishlist'></Button>
                         <Button margin='15px 5px' label='Add to my booklist'></Button>
                     </Box>
-                    <List bookId={this.state.id}></List>
+                    <List bookId={book.book_items[0].id}></List>
                 </Box>
             </Box>
             ) : <ErrorPage alert={this.props.alert}></ErrorPage>

@@ -41,7 +41,7 @@ class LibraryPage extends Component {
             <Box direction='column' align='center' width='800px'>
                 {library.userLibraryRecieved && 
                     <Gallery 
-                        object={(title, coverage, id) => <SmartBook handleDeleteBook={this.handleDeleteBook} margin='10px' title={title} coverage={coverage} key={id} id={id}></SmartBook>} 
+                        object={(title, coverage, id, idAbstract) => <SmartBook handleDeleteBook={this.handleDeleteBook} margin='10px' title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                         objectList={library.userLibrary}
                         header='My Books'
                         contentType='books'

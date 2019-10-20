@@ -27,7 +27,7 @@ const SmartBook = (props) => {
                     </img>
                     <Box gap='15px'>
                         <Button onClick={() => props.handleDeleteBook(props.id)} fill='horizontal' width='100px' label='Delete' icon={<Close color='accent-1'></Close>}/>
-                        <Link to={'/book/' + props.id} >
+                        <Link to={'/book/' + props.idAbstract} >
                             <Button fill='horizontal' icon={<More color='accent-1'></More>} label='Info'/>
                         </Link>
                     </Box>

@@ -72,7 +72,7 @@ class AppBar extends Component {
                         style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
-                        <UserAvatar color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
+                        <UserAvatar avatar={localStorage.getItem('avatar')} color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
@@ -101,7 +101,7 @@ class AppBar extends Component {
                                     <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
                                     <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                     <PrivateLink color='menuTextColor' to='/settings' label='Settings' />
-                                    <Link className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
+                                    <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Collapsible>
                         ): (

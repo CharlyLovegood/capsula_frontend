@@ -168,13 +168,14 @@ class SwapPage extends Component {
                                 <Tab title='Requests' >
                                     <Gallery
                                         me='reader'
-                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                                             margin='10px' 
                                                                                             title={book} 
                                                                                             key={id}
                                                                                             authors={authors}
                                                                                             date={date}
                                                                                             user={reader}
+                                                                                            coverage={image}
                                                                                             type='proposal'></BookCard>} 
                                         objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
                                     >
@@ -183,13 +184,14 @@ class SwapPage extends Component {
                                 <Tab title='In process'>
                                     <Gallery
                                         me='reader'
-                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                         handleRejectProposal={event => this.handleRejectProposal(event)} 
                                                                         margin='10px' 
                                                                         title={book} 
                                                                         key={id}
                                                                         authors={authors}
                                                                         date={date}
+                                                                        coverage={image}
                                                                         user={reader}
                                                                         type='proposal'></BookCard>} 
                                         objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
@@ -199,13 +201,14 @@ class SwapPage extends Component {
                                 <Tab title='On hands'>
                                     <Gallery
                                         me='reader'
-                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                         handleRejectProposal={event => this.handleRejectProposal(event)} 
                                                                         margin='10px' 
                                                                         title={book} 
                                                                         key={id}
                                                                         authors={authors}
                                                                         date={date}
+                                                                        coverage={image}
                                                                         user={reader}
                                                                         type='proposal'></BookCard>} 
                                         objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
@@ -221,12 +224,13 @@ class SwapPage extends Component {
                                 <Tab title='Requests' >
                                     <Gallery
                                         me='owner'
-                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                                             margin='10px' 
                                                                                             title={book} 
                                                                                             key={id}
                                                                                             authors={authors}
                                                                                             date={date}
+                                                                                            coverage={image}
                                                                                             user={owner}
                                                                                             type='proposal'></BookCard>} 
                                         objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
@@ -236,12 +240,13 @@ class SwapPage extends Component {
                                 <Tab title='In process'>
                                     <Gallery
                                         me='owner'
-                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                         handleRejectProposal={event => this.handleRejectProposal(event)} 
                                                                         margin='10px' 
                                                                         title={book} 
                                                                         key={id}
                                                                         authors={authors}
+                                                                        coverage={image}
                                                                         date={date}
                                                                         user={owner}
                                                                         type='proposal'></BookCard>} 
@@ -252,12 +257,13 @@ class SwapPage extends Component {
                                 <Tab title='On hands'>
                                     <Gallery
                                         me='owner'
-                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                        object={(authors, book, date, genre, id, image, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
                                                                         handleRejectProposal={event => this.handleRejectProposal(event)} 
                                                                         margin='10px' 
                                                                         title={book} 
                                                                         key={id}
                                                                         authors={authors}
+                                                                        coverage={image}
                                                                         date={date}
                                                                         user={owner}
                                                                         type='proposal'></BookCard>} 

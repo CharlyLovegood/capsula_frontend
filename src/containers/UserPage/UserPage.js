@@ -39,7 +39,7 @@ class UserPage extends Component {
                     <Box animation='slideUp'>
                         <img 
                             alt='Remy Sharp'
-                            src='https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'
+                            src={localStorage.getItem('avatar')}
                             className={styles.big_avatar}
                         />
                     </Box>
