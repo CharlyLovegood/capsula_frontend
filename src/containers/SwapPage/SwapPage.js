@@ -9,7 +9,7 @@ import BookCard from '../../components/Books/BookCard';
 import { connect } from 'react-redux';
 
 import { swapActions } from '../../store/actions';
-
+import { swapStatuses } from '../../helpers/constants';
 class SwapPage extends Component {
     constructor(props) {
         super(props);
@@ -26,12 +26,7 @@ class SwapPage extends Component {
 
     componentDidMount(props) {
         this.setState({index: this.props.index});
-        this.setState({ viewObjectsList: [
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 1 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 2 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 3 },
-            {title: '', coverage: 'https://i.pinimg.com/564x/cc/49/d1/cc49d1e66adac0c68d2458dbf052beec.jpg', id: 4 }
-        ] });
+        this.props.getSwapRequests();
     }
     
     handleRejectProposal(bookId) {
@@ -159,64 +154,120 @@ class SwapPage extends Component {
                 });
     }
 
-
     render() {
         const onActive = nextIndex => this.setState({index: nextIndex});
-
+        const {swap} = this.props;
         return (
             <Box direction='column' align='center' fill>
                 <Box direction='row' margin='5px' width='800px'>
-                    <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
-                        <Tab title='Proposals' >
-                            <Gallery
-                                object={(title, coverage, id) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
-                                                                            handleRejectProposal={event => this.handleRejectProposal(event)} 
-                                                                            margin='10px' 
-                                                                            title={title} 
-                                                                            coverage={coverage} 
-                                                                            key={id}
-                                                                            type='proposal'></BookCard>} 
-                                objectList={this.state.viewObjectsList}
-                            >
-                            </Gallery>
+                    {swap.requestsRecieved &&
+                    <Tabs>
+                        <Tab title='I am reading'>
+                            <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                                <Tab title='Requests' >
+                                    <Gallery
+                                        me='reader'
+                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                                            margin='10px' 
+                                                                                            title={book} 
+                                                                                            key={id}
+                                                                                            authors={authors}
+                                                                                            date={date}
+                                                                                            user={reader}
+                                                                                            type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                                <Tab title='In process'>
+                                    <Gallery
+                                        me='reader'
+                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                        handleRejectProposal={event => this.handleRejectProposal(event)} 
+                                                                        margin='10px' 
+                                                                        title={book} 
+                                                                        key={id}
+                                                                        authors={authors}
+                                                                        date={date}
+                                                                        user={reader}
+                                                                        type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                                <Tab title='On hands'>
+                                    <Gallery
+                                        me='reader'
+                                        object={(authors, book, date, genre, id, reader, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                        handleRejectProposal={event => this.handleRejectProposal(event)} 
+                                                                        margin='10px' 
+                                                                        title={book} 
+                                                                        key={id}
+                                                                        authors={authors}
+                                                                        date={date}
+                                                                        user={reader}
+                                                                        type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                            </Tabs>
                         </Tab>
-                        <Tab title='Requests' >
-                            <Gallery
-                                object={(title, coverage, id) => <BookCard handleCancelRequest={event => this.handleCancelRequest(event)} 
-                                                                            margin='10px' 
-                                                                            title={title} 
-                                                                            coverage={coverage} 
-                                                                            key={id}
-                                                                            type='request'></BookCard>} 
-                                objectList={this.state.viewObjectsList}
-                            >
-                            </Gallery>
-                        </Tab>
-                        <Tab title='In process'>
-                            <Gallery
-                                object={(title, coverage, id) => <BookCard handleBookDelivered={event => this.handleBookDelivered(event)} 
-                                                                            margin='10px' 
-                                                                            title={title} 
-                                                                            coverage={coverage} 
-                                                                            key={id}
-                                                                            type='inProcess'></BookCard>} 
-                                objectList={this.state.viewObjectsList}
-                            >
-                            </Gallery>
-                        </Tab>
-                        <Tab title='On hands'>
-                            <Gallery
-                                object={(title, coverage, id) => <BookCard handleFinishSwap={event => this.handleFinishSwap(event)} 
-                                                                            margin='10px' 
-                                                                            title={title} 
-                                                                            coverage={coverage} 
-                                                                            key={id}
-                                                                            type='onHands'></BookCard>} 
-                                objectList={this.state.viewObjectsList}
-                            >
-                            </Gallery>
+
+
+                        <Tab title='My books are red'>
+                            <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                                <Tab title='Requests' >
+                                    <Gallery
+                                        me='owner'
+                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                                            margin='10px' 
+                                                                                            title={book} 
+                                                                                            key={id}
+                                                                                            authors={authors}
+                                                                                            date={date}
+                                                                                            user={owner}
+                                                                                            type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                                <Tab title='In process'>
+                                    <Gallery
+                                        me='owner'
+                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                        handleRejectProposal={event => this.handleRejectProposal(event)} 
+                                                                        margin='10px' 
+                                                                        title={book} 
+                                                                        key={id}
+                                                                        authors={authors}
+                                                                        date={date}
+                                                                        user={owner}
+                                                                        type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                                <Tab title='On hands'>
+                                    <Gallery
+                                        me='owner'
+                                        object={(authors, book, date, genre, id, owner, status) => <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+                                                                        handleRejectProposal={event => this.handleRejectProposal(event)} 
+                                                                        margin='10px' 
+                                                                        title={book} 
+                                                                        key={id}
+                                                                        authors={authors}
+                                                                        date={date}
+                                                                        user={owner}
+                                                                        type='proposal'></BookCard>} 
+                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
+                                    >
+                                    </Gallery>
+                                </Tab>
+                            </Tabs>
                         </Tab>
                     </Tabs>
+                    }
                 </Box>
             </Box>
         )

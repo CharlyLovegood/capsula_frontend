@@ -43,7 +43,7 @@ class PopUpButton extends Component {
                     'Content-Type': 'application/json'},
             body: JSON.stringify(book)
         };
-        console.log(book);
+
         return fetch('/library/book_items/', requestOptions)
             .then(
                 response => {

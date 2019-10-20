@@ -12,11 +12,22 @@ export function library(state=initialState, action) {
         case libraryConstants.LIBRARY_SUCCESS:
             return {
                 userLibraryRecieved: true,
-                userLibrary: action.userLibrary
+                userLibrary: action.userLibrary.data
             }
         case libraryConstants.LIBRARY_FAILURE:
             return {
                 error: action.error
+            }
+        case libraryConstants.DELETE_BOOK_SUCCESS:
+            let userLibrary = state.userLibrary;
+            console.log(userLibrary)
+            userLibrary = userLibrary.filter(function(item) {
+                console.log(action.bookId)
+                return item.id !== action.bookId
+            })
+            return {
+                userLibrary: userLibrary,
+                userLibraryRecieved: true
             }
         default:
             return state;

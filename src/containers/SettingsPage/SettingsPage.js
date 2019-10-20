@@ -43,6 +43,30 @@ class SettingsPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state)
+        const user = {
+            'first_name': this.state.user.firstname, 
+            'last_name': this.props.user.lastName, 
+            'vk': this.props.user.vkId,
+            'location': this.props.user.domitary,
+            'image': this.state.user.avatar
+        };
+          
+        const requestOptions = {
+            method: 'PUT',
+            headers: {'Authorization': 'Token ' + localStorage.token,
+                    'Content-Type': 'application/json'},
+            body: JSON.stringify(user)
+        };
+
+        return fetch('/user/me/', requestOptions)
+            .then(
+                response => {
+                    console.log(response);
+                    return response;
+                },
+                error => {
+                    console.log(error);
+                });
     }
 
     handleImageChange(avatar) {
@@ -51,7 +75,7 @@ class SettingsPage extends Component {
                 ...user,
                 avatar: avatar
             }});
-            console.log(this.state)
+            console.log(this.state);
     }
 
     
@@ -61,7 +85,7 @@ class SettingsPage extends Component {
         return (
             <Container component='main' maxWidth='xs'>
                 <div className={styles.paper}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant='h6' gutterBottom>
                         Settings
                     </Typography>
 
@@ -97,24 +121,24 @@ class SettingsPage extends Component {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                id="domitary"
-                                name="domitary"
-                                label="Domitary"
+                                id='domitary'
+                                name='domitary'
+                                label='Domitary'
                                 fullWidth
-                                autoComplete="domitary"
-                                variant="outlined"
+                                autoComplete='domitary'
+                                variant='outlined'
                                 value={user.domitary}
                                 onChange={ event => this.handleChange(event) }
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                id="vkId"
-                                name="vkId"
-                                label="Vk ID"
+                                id='vkId'
+                                name='vkId'
+                                label='Vk ID'
                                 fullWidth
-                                autoComplete="vkId"
-                                variant="outlined"
+                                autoComplete='vkId'
+                                variant='outlined'
                                 value={user.vkId}
                                 onChange={ event => this.handleChange(event) }
                             />

@@ -7,6 +7,7 @@ import { search } from './search.reducer';
 import { userpage } from './userpage.reducer';
 import { library } from './library.reducer';
 import { book } from './book.reducer';
+import { swap } from './swap.reducer';
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     search,
     userpage,
     library,
-    book
+    book,
+    swap
 });
 
 export default rootReducer;

@@ -31,30 +31,30 @@ class LibraryPage extends Component {
 
     handleDeleteBook(id) {
         console.log(id);
-          
-        const requestOptions = {
-            method: 'DELETE',
-            headers: {'Authorization': 'Token ' + localStorage.token}
-        };
+        this.props.deleteBook(id);
+        // const requestOptions = {
+        //     method: 'DELETE',
+        //     headers: {'Authorization': 'Token ' + localStorage.token}
+        // };
 
-        return fetch(`/library/book_items/${id}/`, requestOptions)
-            .then(
-                response => {
-                    console.log(response);
-                    this.setState({action:{
-                        type: 'DeleteBook',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'DeleteBook',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+        // return fetch(`/library/book_items/${id}/`, requestOptions)
+        //     .then(
+        //         response => {
+        //             console.log(response);
+        //             this.setState({action:{
+        //                 type: 'DeleteBook',
+        //                 isLoaded: true,
+        //                 error: null
+        //             }})
+        //             return response;
+        //         },
+        //         error => {
+        //             this.setState({action:{
+        //                 type: 'DeleteBook',
+        //                 isLoaded: false,
+        //                 error: error
+        //             }})
+        //         });
     }
 
     render() {
@@ -65,7 +65,7 @@ class LibraryPage extends Component {
                 {library.userLibraryRecieved && 
                     <Gallery 
                         object={(title, coverage, id) => <SmartBook handleDeleteBook={this.handleDeleteBook} margin='10px' title={title} coverage={coverage} key={id} id={id}></SmartBook>} 
-                        objectList={library.userLibrary.data}
+                        objectList={library.userLibrary}
                         header='My Books'
                         contentType='books'
                     ></Gallery>}
@@ -82,7 +82,8 @@ const mapState = state => ({
 })
 
 const actionCreators = {
-    getLibrary: libraryActions.getBookListById
+    getLibrary: libraryActions.getBookListById,
+    deleteBook: libraryActions.deleteBookById
 }
 
 export default connect(mapState, actionCreators)(LibraryPage);

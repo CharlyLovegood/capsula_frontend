@@ -30,7 +30,7 @@ class UserPage extends Component {
             };
         }
         if (this.props.library.userLibraryRecieved) {
-            library = this.props.library.userLibrary.data;
+            library = this.props.library.userLibrary;
         }
 
         return (

@@ -17,7 +17,7 @@ function getSwapRequests() {
         swapService.getSwapRequests()
             .then(
                 swapList => { 
-                    dispatch(success(swapList));
+                    dispatch(success(swapList.data));
                 },
                 error => {
                     dispatch(failure(error));

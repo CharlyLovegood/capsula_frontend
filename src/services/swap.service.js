@@ -13,7 +13,7 @@ export const swapService = {
 function getSwapProposals() {
     const requestOptions = {
         method: 'GET',
-        url: '/',
+        url: '/library/swaps/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
@@ -27,7 +27,7 @@ function getSwapProposals() {
 function getSwapRequests() {
     const requestOptions = {
         method: 'GET',
-        url: '/',
+        url: '/library/swaps/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
@@ -41,7 +41,7 @@ function getSwapRequests() {
 function getInProcessSwaps() {
     const requestOptions = {
         method: 'GET',
-        url: '/',
+        url: '/library/swaps/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
@@ -55,7 +55,7 @@ function getInProcessSwaps() {
 function getOnHandsSwaps() {
     const requestOptions = {
         method: 'GET',
-        url: '/',
+        url: '/library/swaps/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
@@ -69,7 +69,7 @@ function getOnHandsSwaps() {
 function getHistorySwaps() {
     const requestOptions = {
         method: 'GET',
-        url: '/',
+        url: '/library/swaps/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 

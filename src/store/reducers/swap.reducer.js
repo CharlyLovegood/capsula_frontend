@@ -12,7 +12,7 @@ export function swap(state=initialState, action) {
         case swapConstants.GET_REQUESTS_SUCCESS:
             return {
                 requestsRecieved: true,
-                requestsList: action.requestsList
+                requestsList: action.swapList
             }
         case swapConstants.GET_REQUESTS_FAILURE:
             return {}

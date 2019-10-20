@@ -115,8 +115,13 @@ class Gallery extends Component {
                         justify='start' 
                         align='center'
                     >
-                    {this.props.objectList.map(({title, coverage, id}) => {
-                        return(this.props.object(title, coverage, id))
+                    {this.props.me === 'owner' ?
+                    this.props.objectList.map(({authors, book, date, genre, id, reader, status}) => {
+                        return(this.props.object(authors, book, date, genre, id, reader, status))
+                    })
+                    :
+                    this.props.objectList.map(({authors, book, date, genre, id, owner, status}) => {
+                        return(this.props.object(authors, book, date, genre, id, owner, status))
                     })}
                     </Box>
                 </Box>

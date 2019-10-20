@@ -28,6 +28,8 @@ function BookCard(props) {
             break;
     }
 
+    console.log(props)
+
     return (
         <Box fill 
             direction='row' 
@@ -38,8 +40,8 @@ function BookCard(props) {
         >
             <Book size='small' title={props.title} coverage={props.coverage} key={props.id}></Book>
             <Box flex='grow' direction='column' pad='0px'>
-                <h3 className={styles.text_header}>{props.title}ff</h3>
-                <p className={styles.text}>Reqiested by: <Link to=''>ss{props.user}</Link></p>
+                <h3 className={styles.text_header}>{props.title}</h3>
+                <p className={styles.text}>Reqiested by: <Link to=''>{props.user}</Link></p>
                 <p className={styles.text}>Request was sent: {props.date}</p>
             </Box>
             <Box width='130px'>

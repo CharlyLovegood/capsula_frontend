@@ -27,7 +27,19 @@ class LoginPage extends Component {
             password: '',
             submitted: false };
     }
+
+    // componentDidMount() {
+    //     const requestOptions = {
+    //         method: 'GET',
+    //         url: '/auth/login/'
+    //     }
     
+    //     return axios(requestOptions)
+    //         .then(user => {
+    //             return user;
+    //         }); 
+    // }
+
     handleSubmit(event) {
         event.preventDefault();
         this.props.login(this.state.username, this.state.password);
