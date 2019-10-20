@@ -14,7 +14,6 @@ function getBookListById(userId) {
 
     return axios(requestOptions)
         .then(bookList => {
-            console.log(bookList);
             return bookList;
         }); 
 }

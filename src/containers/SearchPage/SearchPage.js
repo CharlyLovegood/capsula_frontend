@@ -25,7 +25,7 @@ class SearchPage extends Component {
         } else {
             this.props.request(value);
             if (this.props.search.search) {
-                setTimeout(() => this.setState({ suggestedList: this.props.search.search.searchResult }), 300);
+                setTimeout(() => this.setState({ suggestedList: this.props.search.search.searchResult.data }), 300);
             }
         }
     });
@@ -36,10 +36,10 @@ class SearchPage extends Component {
         const { value, suggestedList } = this.state;
             return suggestedList
             .filter(
-                ({ name }) => name.toLowerCase().indexOf(value.toLowerCase()) >= 0
+                ({ title }) => title.toLowerCase().indexOf(value.toLowerCase()) >= 0
             )
-            .map(({ name, imageUrl }) => (
-                <SearchElement name={name} imageUrl={imageUrl}></SearchElement>
+            .map(({ title }) => (
+                <SearchElement name={title}></SearchElement>
             ));
         
     };

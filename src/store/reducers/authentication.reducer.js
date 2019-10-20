@@ -3,13 +3,17 @@ import { userConstants } from '../constants';
 let username = localStorage.getItem('username');
 let firstName = localStorage.getItem('firstName');
 let lastName = localStorage.getItem('lastName');
+let avatar = localStorage.getItem('avatar');
+let id = localStorage.getItem('id');
 
 const initialState = username ? { 
     loggedIn: true, 
     user: {
         username,
         firstName,
-        lastName
+        lastName,
+        avatar,
+        id
     } 
 } : {};
 

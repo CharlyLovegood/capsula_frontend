@@ -27,7 +27,29 @@ class LoginPage extends Component {
             submitted: false };
     }
 
-    componentDidMount() {
+    // componentDidMount() {
+    //     const requestOptions = {
+    //         method: 'GET',
+    //         url: '/auth/login/'
+    //     }
+    
+    //     return axios(requestOptions)
+    //         .then(resolve => {
+    //             console.log(resolve);
+    //             const user = resolve.data
+    //             localStorage.setItem('username', user.django_user.username);
+    //             localStorage.setItem('lastName', user.last_name);
+    //             localStorage.setItem('firstName', user.first_name);
+    //             localStorage.setItem('token', user.token);
+    //             localStorage.setItem('id', user.id);
+    //             localStorage.setItem('avatar', user.image);
+    //         }); 
+    // }
+
+    handleOauth(event) {
+        event.preventDefault();
+        console.log(event)
+        
         const requestOptions = {
             method: 'GET',
             url: '/auth/login/'
@@ -44,9 +66,8 @@ class LoginPage extends Component {
                 localStorage.setItem('id', user.id);
                 localStorage.setItem('avatar', user.image);
             }); 
-        
-    }
 
+    }
     handleSubmit(event) {
         event.preventDefault();
         this.props.login(this.state.username, this.state.password);
@@ -106,7 +127,7 @@ class LoginPage extends Component {
                             />
                         </Box>
                             
-                        <a href='http://127.0.0.1:8000/auth/login/vk-oauth2/' className={styles.vk}>
+                        <a href='http://127.0.0.1:8000/auth/login/vk-oauth2/' onClick={(event) => this.handleOauth(event)} className={styles.vk}>
                             vk
                         </a>
 

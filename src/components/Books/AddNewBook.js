@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Heading, Text, Select } from 'grommet';
 import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
+import {genresArray, genres} from './../../helpers'
 
-class PopUpButton extends Component {
+class AddNewBook extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -33,41 +34,16 @@ class PopUpButton extends Component {
         const book = {
             "title": this.state.bookName,
             "authors": this.state.author,
-            "genre": 3,
+            "genre": this.state.genre,
             'image': this.state.image
         };
           
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Authorization': 'Token ' + localStorage.token,
-                    'Content-Type': 'application/json'},
-            body: JSON.stringify(book)
-        };
-
-        return fetch('/library/book_items/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'AddBook',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    this.props.onClose();
-                    console.log(response);
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'AddBook',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
-        
+        this.props.handleAddNewBook(book);
+        this.props.onClose();
     }
 
     setValue(genre) {
-        this.setState({genre: genre});
+        this.setState({genre: genres[genre]});
     }
 
     handleImageChange(image) {
@@ -104,9 +80,9 @@ class PopUpButton extends Component {
                     autoComplete='author'
                     onChange={ event => this.handleAuthorChange(event) }>
                 </TextField>
-                <Select options={['popScience', 'Detective', 'Poetry']} value={this.state.genre} onChange={({ option }) => this.setValue(option)}>
-
-                </Select>
+                <Box fill>
+                    <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
+                </Box>
                 <Box
                     as='footer'
                     gap='small'
@@ -134,4 +110,4 @@ class PopUpButton extends Component {
     }
 };
 
-export default PopUpButton;
+export default AddNewBook;

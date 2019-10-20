@@ -13,7 +13,7 @@ function login(username, password) {
         method: 'POST',
         body: JSON.stringify({ username, password })
     };
-    console.log('here')
+
     return fetch('http://localhost:8000/auth/login/', requestOptions)
         .then(handleResponse)
         .then(user => {

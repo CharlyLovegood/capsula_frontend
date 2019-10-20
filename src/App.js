@@ -4,14 +4,13 @@ import {
     Grommet,
 } from 'grommet';
 
-import { Router, Switch } from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom'
 
 import HomePage from './components/HomePage/HomePage'
 import BookPage from './containers/BookPage/BookPage';
 import LibraryPage from './containers/LibraryPage/LibraryPage';
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 import AuthRoute from './components/PrivateRouter/AuthRouter';
-
 
 import SwapPage from './containers/SwapPage/SwapPage';
 
@@ -72,7 +71,7 @@ class App extends Component {
                     <AppBar></AppBar>
                     <Box flex align='center' justify='center'>
                         <Switch>
-                            <PrivateRoute exact path='/' component={ HomePage }/>
+                            <Route exact path='/' component={ HomePage }/>
                             <PrivateRoute path='/user/:id' component={ UserPage }/>
                             <PrivateRoute path='/book/:id' component={ BookPage } />
                             <PrivateRoute path='/library' component={ LibraryPage } />

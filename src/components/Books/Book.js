@@ -14,9 +14,6 @@ function Book(props) {
                     className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}>
                 </img>
             </Link>
-            <h4 className={styles.book_title}>
-                {props.title}
-            </h4>
         </Box>
     )
 }

@@ -30,7 +30,22 @@ class AppBar extends Component {
         super(props);
         this.state = {
             showSidebar: false,
+            user: {
+                avatar: '',
+                username: '',
+                id: ''
+            }
         };
+    }
+
+    componentDidMount() {
+        if (this.props.user.loggedIn) {
+            this.setState({user: {
+                avatar: this.props.user.user.avatar,
+                username: this.props.user.user.username,
+                id: this.props.user.user.id
+            }})
+        }
     }
 
     handleLogOut(event) {
@@ -42,9 +57,9 @@ class AppBar extends Component {
 
     render() {
         const { showSidebar } = this.state;
-
-        return (
-            localStorage.getItem('username') ? 
+        let { user } = this.state;
+        return (    
+            this.props.user.loggedIn === true ? 
             (<ResponsiveContext.Consumer>
                 {size => (
                 <Box align='center'>
@@ -72,7 +87,7 @@ class AppBar extends Component {
                         style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
-                        <UserAvatar avatar={localStorage.getItem('avatar')} color='menuTextColor' name={localStorage.getItem('username')}></UserAvatar>
+                        <UserAvatar key={user.id} id={user.id} avatar={user.avatar} color='menuTextColor' name={user.username}></UserAvatar>
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
@@ -173,14 +188,19 @@ class AppBar extends Component {
                             <PrivateLink color='menuTextColor' to='/login' label='Log In'></PrivateLink>
                         </Box>
                         
+{/* 
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
                                 isOpen = {this.state.showSidebar}
                             />
-                        </Box>
-                    </Box>
+                        </Box> 
+*/}
 
+
+
+                    </Box>
+{/* 
                     <Box flex direction='column' overflow={{ horizontal: 'hidden' }}>
                         {(!showSidebar || size !== 'small') ? (
                             <Collapsible direction='vertical' open={showSidebar}>
@@ -193,7 +213,7 @@ class AppBar extends Component {
                                     justify='center'
                                     height='200px'
                                 >
-                                    <SearchBar></SearchBar>
+                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                 </Box>
                             </Collapsible>
                         ): (
@@ -217,11 +237,12 @@ class AppBar extends Component {
                                     align='center'
                                     justify='center'
                                 >
-                                    <SearchBar></SearchBar>
+                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                 </Box>
                             </Layer>
                         )}
-                    </Box>
+                    </Box> 
+*/}
                 </Box>)}
             </ResponsiveContext.Consumer>)
         );
@@ -230,7 +251,7 @@ class AppBar extends Component {
 
 
 function mapState(state) {
-    const { user } = state.authentication;
+    const user = state.authentication;
     return { user };
 }
 

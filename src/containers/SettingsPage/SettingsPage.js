@@ -21,7 +21,7 @@ class SettingsPage extends Component {
                 lastname: this.props.user.lastName, 
                 vkId: '',
                 domitary: '',
-                avatar: 'https://cdn.dribbble.com/users/1253590/screenshots/7221280/media/03e0c431c9196bdb0d32bbe5b030918c.png'
+                avatar: this.props.user.avatar
             },
             permission: true
         }
@@ -81,7 +81,6 @@ class SettingsPage extends Component {
     
     render() {
         const { user } = this.state;
-
         return (
             <Container component='main' maxWidth='xs'>
                 <div className={styles.paper}>
@@ -89,7 +88,10 @@ class SettingsPage extends Component {
                         Settings
                     </Typography>
 
-                    <UserAvatar img={user.avatar} returnImage={(avatar) => this.handleImageChange(avatar)} handleImageUpload={event => this.handleImageUpload(event)}></UserAvatar>
+                    <UserAvatar img={user.avatar} 
+                                returnImage={(avatar) => this.handleImageChange(avatar)} 
+                                handleImageUpload={event => this.handleImageUpload(event)}>
+                    </UserAvatar>
                     
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>

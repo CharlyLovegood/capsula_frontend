@@ -37,7 +37,7 @@ class BookPage extends Component {
                         <Button margin='15px 5px' primary label='Add to wishlist'></Button>
                         <Button margin='15px 5px' label='Add to my booklist'></Button>
                     </Box>
-                    <List bookId={book.book_items[0].id}></List>
+                    <List objectList={book.book_items} bookId={book.book_items[0].id}></List>
                 </Box>
             </Box>
             ) : <ErrorPage alert={this.props.alert}></ErrorPage>

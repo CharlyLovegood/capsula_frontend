@@ -30,8 +30,8 @@ class Scroll extends Component {
             if (rem !== 0) {
                 let i;
                 for (i = 0; i < 4 - rem; i++) {
-                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: 0},
-                    id: 0,
+                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*35},
+                    id: i*45,
                     image: 'https://i.pinimg.com/564x/26/c0/c9/26c0c9f3b8a69b66a1ae8fb5904925f8.jpg',
                     status: 0})
                 }

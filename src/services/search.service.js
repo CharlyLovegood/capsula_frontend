@@ -1,28 +1,18 @@
+import * as axios from "axios";
+
+
 export const searchService = {
     request
 };
 
-function request(searchRequest) {
+function request() {
     const requestOptions = {
-        method: 'POST',
-        body: JSON.stringify({searchRequest})
+        method: 'GET',
+        url: '/library/books/',
+        headers: {'Authorization': 'Token ' + localStorage.token}
     };
-
-    return fetch('http://localhost:8000/auth/login/', requestOptions)
-        .then(handleResponse)
-        .then(searchResult => {
-            return searchResult;
-        });
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
+    return axios(requestOptions)
+        .then(bookList => {
+            return bookList;
+        }); 
 }

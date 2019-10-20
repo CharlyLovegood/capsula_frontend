@@ -1,12 +1,10 @@
 import { libraryService } from '../../services';
-import { bookService } from '../../services';
 // import { history } from '../../helpers';
 import { libraryConstants } from '../constants';
 import { alertActions } from './';
 
 export const libraryActions = {
-    getBookListById,
-    deleteBookById
+    getBookListById
 };
 
 function getBookListById(userId) {
@@ -31,23 +29,3 @@ function getBookListById(userId) {
 }
 
 
-function deleteBookById(bookId) {
-    return dispatch => {
-        dispatch(request({ bookId }));
-
-        bookService.deleteBook(bookId)
-            .then(
-                response => { 
-                    dispatch(success(bookId));
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                }
-            );
-    };
-
-    function request(bookId) { return { type: libraryConstants.DELETE_BOOK_REQUEST, bookId } }
-    function success(bookId) { return { type: libraryConstants.DELETE_BOOK_SUCCESS, bookId } }
-    function failure(error) { return { type: libraryConstants.DELETE_BOOK_FAILURE, error } }
-}

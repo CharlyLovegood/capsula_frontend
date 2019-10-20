@@ -2,7 +2,8 @@ import * as axios from "axios";
 
 export const bookService = {
     getBook,
-    deleteBook
+    deleteBook,
+    addBook
 };
 
 function getBook(id) {
@@ -18,14 +19,28 @@ function getBook(id) {
 }
 
 function deleteBook(id) {
-    console.log(id);
-      
     const requestOptions = {
         method: 'DELETE',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
     return fetch(`/library/book_items/${id}/`, requestOptions)
+        .then(
+            response => {
+                console.log(response);
+                return response;
+            });
+}
+
+function addBook(book) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Authorization': 'Token ' + localStorage.token,
+                'Content-Type': 'application/json'},
+        body: JSON.stringify(book)
+    };
+
+    return fetch('/library/book_items/', requestOptions)
         .then(
             response => {
                 console.log(response);

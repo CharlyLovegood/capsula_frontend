@@ -9,7 +9,7 @@ class Banner extends Component {
                 width='900px'
             >
                 <Carousel fill  controls='selectors'>
-                    <Image fit='cover' src='http://www.lm-magazine.com/wp-content/uploads/2017/05/080.jpg?w=326&h=436' />
+                    <Image style={{transform: 'rotate(90)'}} fit='cover' src='https://cdn.dribbble.com/users/2030268/screenshots/5922259/img_4x.jpg' />
                 </Carousel>
             </Box>
         )
