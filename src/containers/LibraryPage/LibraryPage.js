@@ -32,29 +32,6 @@ class LibraryPage extends Component {
     handleDeleteBook(id) {
         console.log(id);
         this.props.deleteBook(id);
-        // const requestOptions = {
-        //     method: 'DELETE',
-        //     headers: {'Authorization': 'Token ' + localStorage.token}
-        // };
-
-        // return fetch(`/library/book_items/${id}/`, requestOptions)
-        //     .then(
-        //         response => {
-        //             console.log(response);
-        //             this.setState({action:{
-        //                 type: 'DeleteBook',
-        //                 isLoaded: true,
-        //                 error: null
-        //             }})
-        //             return response;
-        //         },
-        //         error => {
-        //             this.setState({action:{
-        //                 type: 'DeleteBook',
-        //                 isLoaded: false,
-        //                 error: error
-        //             }})
-        //         });
     }
 
     render() {

@@ -42,8 +42,8 @@ class Gallery extends Component {
                                 justify='start' 
                                 align='center'
                                 >
-                                {this.props.objectList.map(({title, coverage, id}) => {
-                                    return(this.props.object(title, coverage, id))
+                                {this.props.objectList.map((element) => {
+                                    return(this.props.object(element.book.title, element.image, element.book.id));
                                 })}
                             </Box>
                     </Box>
@@ -60,8 +60,8 @@ class Gallery extends Component {
                             justify='start' 
                             align='center'
                         >
-                        {this.props.objectList.map(({title, coverage, id}) => {
-                            return(this.props.object(title, coverage, id))
+                        {this.props.objectList.map((element) => {
+                            return(this.props.object(element.book.title, element.image, element.id));
                         })}
                         </Box>
                     </Box>
@@ -78,8 +78,8 @@ class Gallery extends Component {
                             justify='start' 
                             align='center'
                         >
-                        {this.props.objectList.map(({title, coverage, id}) => {
-                            return(this.props.object(title, coverage, id))
+                        {this.props.objectList.map((element) => {
+                            return(this.props.object(element.book.title, element.image, element.id));
                         })}
                         </Box>
                     </Box>

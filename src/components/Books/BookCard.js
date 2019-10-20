@@ -28,7 +28,6 @@ function BookCard(props) {
             break;
     }
 
-    console.log(props)
 
     return (
         <Box fill 

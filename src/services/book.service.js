@@ -8,7 +8,7 @@ export const bookService = {
 function getBook(id) {
     const requestOptions = {
         method: 'GET',
-        url: '/library/book_items/' + id + '/',
+        url: '/library/books/' + id + '/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)

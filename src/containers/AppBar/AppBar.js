@@ -37,6 +37,7 @@ class AppBar extends Component {
         event.preventDefault();
         this.setState({ showSidebar: !this.state.showSidebar });
         this.props.logout();
+        
     }
 
     render() {
@@ -100,7 +101,7 @@ class AppBar extends Component {
                                     <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
                                     <PrivateLink color='menuTextColor' to='/search' label='Search' />
                                     <PrivateLink color='menuTextColor' to='/settings' label='Settings' />
-                                    <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
+                                    <Link className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
                                 </Box>
                             </Collapsible>
                         ): (

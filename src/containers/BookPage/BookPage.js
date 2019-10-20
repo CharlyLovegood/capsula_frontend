@@ -16,8 +16,6 @@ class BookPage extends Component {
         this.props.getBook(this.state.id);
     }
 
-
-
     render() {
         let book = {};
         if (this.props.book.book) {

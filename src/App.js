@@ -4,7 +4,7 @@ import {
     Grommet,
 } from 'grommet';
 
-import { Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch } from 'react-router-dom'
 
 import HomePage from './components/HomePage/HomePage'
 import BookPage from './containers/BookPage/BookPage';
