@@ -25,3 +25,8 @@
 .error {
   color: red;
 }
+
+.vk {
+  text-decoration: none;
+  background-color: aquamarine;
+}

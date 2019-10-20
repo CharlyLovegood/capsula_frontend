@@ -14,10 +14,8 @@ import { connect } from 'react-redux';
 import PrivateLink from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
 
-
+import * as axios from "axios";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
-
 
 class LoginPage extends Component {
     constructor(props) {
@@ -25,20 +23,29 @@ class LoginPage extends Component {
         this.state = {
             username: '', 
             password: '',
+            redirect: false,
             submitted: false };
     }
 
-    // componentDidMount() {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         url: '/auth/login/'
-    //     }
+    componentDidMount() {
+        const requestOptions = {
+            method: 'GET',
+            url: '/auth/login/'
+        }
     
-    //     return axios(requestOptions)
-    //         .then(user => {
-    //             return user;
-    //         }); 
-    // }
+        return axios(requestOptions)
+            .then(resolve => {
+                console.log(resolve);
+                const user = resolve.data
+                localStorage.setItem('username', user.django_user.username);
+                localStorage.setItem('lastName', user.last_name);
+                localStorage.setItem('firstName', user.first_name);
+                localStorage.setItem('token', user.token);
+                localStorage.setItem('id', user.id);
+                localStorage.setItem('avatar', user.image);
+            }); 
+        
+    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -99,6 +106,10 @@ class LoginPage extends Component {
                             />
                         </Box>
                             
+                        <a href='http://127.0.0.1:8000/auth/login/vk-oauth2/' className={styles.vk}>
+                            vk
+                        </a>
+
                         <div className={styles.submit}>
                             <Button
                                 color="primary"
@@ -111,7 +122,6 @@ class LoginPage extends Component {
                             </Button>
                         </div>
                     </ValidatorForm>
-
                     <Grid container justify='flex-end'>
                         <PrivateLink color='textColor' to='/register' label="Don't have an account? Register"></PrivateLink>
                     </Grid>

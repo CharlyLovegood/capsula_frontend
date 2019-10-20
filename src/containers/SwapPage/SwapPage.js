@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 import { swapActions } from '../../store/actions';
 import { swapStatuses } from '../../helpers/constants';
+
 class SwapPage extends Component {
     constructor(props) {
         super(props);

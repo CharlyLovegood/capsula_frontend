@@ -21,7 +21,7 @@ function ListElement(props) {
                 <h3 className={styles.main_text}>Natalia</h3>
                 <p className={styles.text}>0,3 km from you</p>
             </Box>
-            <PopUpButton innerObject={onclose => <SwapAgreement onClose={onclose}></SwapAgreement>} label='Swap' icon={<Transaction></Transaction>}></PopUpButton>
+            <PopUpButton innerObject={onclose => <SwapAgreement bookId={props.bookId} onClose={onclose}></SwapAgreement>} label='Swap' icon={<Transaction></Transaction>}></PopUpButton>
         </Box>
     )
 }

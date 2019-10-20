@@ -10,6 +10,7 @@ import HomePage from './components/HomePage/HomePage'
 import BookPage from './containers/BookPage/BookPage';
 import LibraryPage from './containers/LibraryPage/LibraryPage';
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
+import AuthRoute from './components/PrivateRouter/AuthRouter';
 
 
 import SwapPage from './containers/SwapPage/SwapPage';
@@ -78,8 +79,8 @@ class App extends Component {
                             <PrivateRoute path='/swap' component={ SwapPage } />
                             <PrivateRoute path='/search' component={ SearchPage } />
                             <PrivateRoute path='/settings' component={ SettingsPage } />
-                            <Route exact path='/register' component={ RegisterPage } />
-                            <Route exact path='/login' component={ LoginPage } />
+                            <AuthRoute exact path='/register' component={ RegisterPage } />
+                            <AuthRoute exact path='/login' component={ LoginPage } />
                         </Switch>
                     </Box>
                 </Router>

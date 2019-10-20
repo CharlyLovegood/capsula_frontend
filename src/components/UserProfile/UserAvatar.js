@@ -10,7 +10,7 @@ export default function UserAvatar(props) {
             <Link to='/user/1' className={styles.avatar_container}>
                 <img
                     alt='Remy Sharp'
-                    src='https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'
+                    src={props.avatar ? props.avatar : 'https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'}
                     className={styles.small_avatar}
                 />
             </Link>

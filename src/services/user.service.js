@@ -13,7 +13,7 @@ function login(username, password) {
         method: 'POST',
         body: JSON.stringify({ username, password })
     };
-
+    console.log('here')
     return fetch('http://localhost:8000/auth/login/', requestOptions)
         .then(handleResponse)
         .then(user => {
@@ -23,6 +23,7 @@ function login(username, password) {
             localStorage.setItem('firstName', user.first_name);
             localStorage.setItem('token', user.token);
             localStorage.setItem('id', user.id);
+            localStorage.setItem('avatar', user.image);
             return user;
         });
 }
@@ -39,7 +40,9 @@ function logout() {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('firstName');
+            localStorage.removeItem('avatar');
             localStorage.removeItem('lastName');
+            localStorage.removeItem('id');
             return user;
         }); 
 }

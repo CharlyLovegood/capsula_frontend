@@ -16,6 +16,8 @@ class BookPage extends Component {
         this.props.getBook(this.state.id);
     }
 
+
+
     render() {
         let book = {};
         if (this.props.book.book) {
@@ -36,7 +38,7 @@ class BookPage extends Component {
                         <Button margin='15px 5px' primary label='Add to wishlist'></Button>
                         <Button margin='15px 5px' label='Add to my booklist'></Button>
                     </Box>
-                    <List></List>
+                    <List bookId={this.state.id}></List>
                 </Box>
             </Box>
             ) : <ErrorPage alert={this.props.alert}></ErrorPage>
