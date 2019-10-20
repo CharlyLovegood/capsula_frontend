@@ -17,10 +17,12 @@ function login(username, password) {
     return fetch('http://localhost:8000/auth/login/', requestOptions)
         .then(handleResponse)
         .then(user => {
+            console.log(user);
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
             localStorage.setItem('firstName', user.first_name);
             localStorage.setItem('token', user.token);
+            localStorage.setItem('id', user.id);
             return user;
         });
 }

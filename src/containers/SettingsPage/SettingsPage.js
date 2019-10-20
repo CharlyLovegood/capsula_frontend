@@ -4,10 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import { Button } from 'grommet';
-import UserAvatar from './../../components/UserProfile/SettingsAvatar';
 import styles from './SettingsPage.module.css';
 import { userActions } from '../../store/actions';
 import { connect } from 'react-redux';
+
+import UserAvatar from './../../components/ImageUpload/ImageUpload';
+
+
 
 class SettingsPage extends Component {
     constructor(props) {
@@ -39,49 +42,18 @@ class SettingsPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state)
     }
 
-
-    readFile(file) {
-        let fileReader = new FileReader();
-
-        return new Promise((resolve, reject) => {
-                fileReader.onload = e => {
-                        let dataURI = e.target.result;
-                        resolve(dataURI);
-                }
-                fileReader.onerror = () => reject('Ошибка чтения файла');
-                fileReader.readAsDataURL(file); 
-        })
-    }; 
-
-    fileUpload(event) {
-        return new Promise((resolve, reject) => {
-            event.preventDefault();
-            let reader = new FileReader();
-            let file = event.target.files[0];
-            reader.readAsDataURL(file);
-            let extension = file.name.split('.').pop().toLowerCase();
-            if (extension === 'png' || extension === 'jpg' || extension === 'jpeg') {
-                this.readFile(file).then( function(result) {
-                    resolve(result); 
-                });
-            }
-            else {
-                resolve(file.name);
-            }
-        })
-    };
-
-    handleImageUpload(event) {
-        this.fileUpload(event).then((result) => { 
+    handleImageChange(avatar) {
             const { user } = this.state;
             this.setState({user: {
                 ...user,
-                avatar: result
+                avatar: avatar
             }});
-        });
+            console.log(this.state)
     }
+
     
     render() {
         const { user } = this.state;
@@ -93,7 +65,7 @@ class SettingsPage extends Component {
                         Settings
                     </Typography>
 
-                    <UserAvatar img={user.avatar} handleImageUpload={event => this.handleImageUpload(event)}></UserAvatar>
+                    <UserAvatar img={user.avatar} returnImage={(avatar) => this.handleImageChange(avatar)} handleImageUpload={event => this.handleImageUpload(event)}></UserAvatar>
                     
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>

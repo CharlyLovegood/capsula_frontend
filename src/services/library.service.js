@@ -8,7 +8,7 @@ export const libraryService = {
 function getBookListById(userId) {
     const requestOptions = {
         method: 'GET',
-        url: '/library/books/',
+        url: '/library/book_items/',
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 

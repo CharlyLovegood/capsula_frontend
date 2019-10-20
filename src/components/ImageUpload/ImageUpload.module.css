@@ -1,0 +1,43 @@
+.avatar {
+    height: 200px;
+    border-radius: 100%;
+    width: 200px;
+    z-index: 2;
+    object-fit: cover;
+}
+
+.avatar:hover {
+    height: 200px;
+    border-radius: 100%;
+    width: 200px;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.avatar_container {
+    position: relative;
+}
+
+.camera {
+    margin-top: 40px;
+    position: absolute;
+}
+
+.input {
+    display: none;
+}
+
+
+.avatar_square {
+    height: 250px;
+    width: 200px;
+    z-index: 2;
+    object-fit: cover;
+}
+
+.avatar_square:hover {
+    height: 250px;
+    width: 200px;
+    opacity: 0.4;
+    z-index: 0;
+}

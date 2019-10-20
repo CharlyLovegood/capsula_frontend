@@ -40,6 +40,7 @@ class LibraryPage extends Component {
         return fetch(`/library/book_items/${id}/`, requestOptions)
             .then(
                 response => {
+                    console.log(response);
                     this.setState({action:{
                         type: 'DeleteBook',
                         isLoaded: true,
