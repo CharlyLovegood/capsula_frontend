@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
 import {genresArray, genres} from './../../helpers'
 
+import { remote_url } from './../../helpers';
+
 class AddNewBook extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +15,7 @@ class AddNewBook extends Component {
             bookName: '', 
             author:'',
             genre: '',
-            image: 'http://www.lm-magazine.com/wp-content/uploads/2017/05/080.jpg?w=326&h=436',
+            image: remote_url.images.add_new_book_default,
             action: {
                 type: '',
                 isLoaded: false,

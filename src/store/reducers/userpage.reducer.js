@@ -15,7 +15,10 @@ export function userpage(state = initialState, action) {
                 user: action.user
             };
         case userConstants.USERPAGE_FAILURE:
-            return {};
+            return {
+                userInfoRecieved: false,
+                error: action.error
+            };
         default:
             return state;
     }

@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { back_url } from './../helpers';
 
 
 export const searchService = {
@@ -8,7 +9,7 @@ export const searchService = {
 function request() {
     const requestOptions = {
         method: 'GET',
-        url: '/library/books/',
+        url: back_url.library.get_all_books,
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)

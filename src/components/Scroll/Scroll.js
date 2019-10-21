@@ -4,6 +4,8 @@ import styles from './Scroll.module.css';
 import { Box, ResponsiveContext } from 'grommet';
 import { FormNext, FormPrevious } from 'grommet-icons';
 
+import { remote_url } from './../../helpers';
+
 class Scroll extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +34,7 @@ class Scroll extends Component {
                 for (i = 0; i < 4 - rem; i++) {
                     this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*35},
                     id: i*45,
-                    image: 'https://i.pinimg.com/564x/26/c0/c9/26c0c9f3b8a69b66a1ae8fb5904925f8.jpg',
+                    image: remote_url.images.scroll_additional_book,
                     status: 0})
                 }
             }

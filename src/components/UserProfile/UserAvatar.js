@@ -3,6 +3,8 @@ import { Box, Menu } from 'grommet';
 import { Add } from 'grommet-icons';
 import styles from './UserProfile.module.css';
 import { Link } from 'react-router-dom';
+import { remote_url } from './../../helpers';
+
 
 export default function UserAvatar(props) {
     return (
@@ -10,7 +12,7 @@ export default function UserAvatar(props) {
             <Link to={'/user/' + props.id} className={styles.avatar_container}>
                 <img
                     alt='Remy Sharp'
-                    src={props.avatar ? props.avatar : 'https://i.pinimg.com/564x/08/1f/b1/081fb1c4f463c09c0191d27ebdeb3c2e.jpg'}
+                    src={props.avatar ? props.avatar : remote_url.images.user_default}
                     className={styles.small_avatar}
                 />
             </Link>

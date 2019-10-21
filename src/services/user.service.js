@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { back_url } from './../helpers';
 
 export const userService = {
     login,
@@ -14,7 +15,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch('http://localhost:8000/auth/login/', requestOptions)
+    return fetch(back_url.authentication.login, requestOptions)
         .then(handleResponse)
         .then(user => {
             console.log(user);
@@ -32,7 +33,7 @@ function login(username, password) {
 function logout() {
     const requestOptions = {
         method: 'GET',
-        url: '/auth/logout/',
+        url: back_url.authentication.logout,
         headers: {'Authorization': 'Token ' + localStorage.token}
     }
 
@@ -64,7 +65,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch('http://localhost:8000/auth/registration/', requestOptions).then(handleResponse);
+    return fetch(back_url.authentication.registration, requestOptions).then(handleResponse);
 }
 
 
@@ -72,7 +73,7 @@ function register(user) {
 function getById(id) {
     const requestOptions = {
         method: 'GET',
-        url: '/user/' + id + '/',
+        url: back_url.user.get_user_by_id(id),
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
@@ -86,13 +87,9 @@ function getById(id) {
 
 export function handleResponse(response) {
     return response.text().then(text => {
+        console.log(response)
         const data = text && JSON.parse(text);
         if (!response.ok) {
-            if (response.status === 401) {
-                logout();
-                //location.reload(true);
-            }
-
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }

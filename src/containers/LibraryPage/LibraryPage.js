@@ -21,11 +21,11 @@ class LibraryPage extends Component {
         }
     }
     componentDidMount() {
-        this.props.getLibrary();
+        this.props.getLibrary(this.props.user.id);
     }
 
     getLibrary() {
-        this.props.getLibrary();
+        this.props.getLibrary(this.props.user.id);
     }
 
     render() {
@@ -42,7 +42,7 @@ class LibraryPage extends Component {
                     ></Gallery>
                 }
                 <Box margin='20px'>
-                    <PopUpButton forceUpdate={() => this.getLibrary()} 
+                    <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
                         innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
                         label='Add Book' 
                         icon={<Add></Add>}>
@@ -53,6 +53,7 @@ class LibraryPage extends Component {
     }
 }
 const mapState = state => ({
+    user: state.authentication.user,
     alert: state.alert,
     library: state.library,
 })

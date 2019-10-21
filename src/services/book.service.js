@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { back_url } from './../helpers';
 
 export const bookService = {
     getBook,
@@ -9,7 +10,7 @@ export const bookService = {
 function getBook(id) {
     const requestOptions = {
         method: 'GET',
-        url: '/library/books/' + id + '/',
+        url: back_url.books.get_book(id),
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)
@@ -24,7 +25,7 @@ function deleteBook(id) {
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
 
-    return fetch(`/library/book_items/${id}/`, requestOptions)
+    return fetch(back_url.books.delete_book(id), requestOptions)
         .then(
             response => {
                 console.log(response);
@@ -40,7 +41,7 @@ function addBook(book) {
         body: JSON.stringify(book)
     };
 
-    return fetch('/library/book_items/', requestOptions)
+    return fetch(back_url.books.add_book, requestOptions)
         .then(
             response => {
                 console.log(response);

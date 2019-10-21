@@ -13,7 +13,7 @@ export function library(state=initialState, action) {
         case libraryConstants.LIBRARY_SUCCESS:
             return {
                 userLibraryRecieved: true,
-                userLibrary: action.userLibrary.data
+                userLibrary: action.userLibrary.data.data
             }
         case libraryConstants.LIBRARY_FAILURE:
             return {

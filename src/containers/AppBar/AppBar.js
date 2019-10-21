@@ -30,6 +30,7 @@ class AppBar extends Component {
         super(props);
         this.state = {
             showSidebar: false,
+            showMenu: false
         };
     }
 
@@ -171,14 +172,14 @@ class AppBar extends Component {
                             <PrivateLink color='menuTextColor' to='/login' label='Log In'></PrivateLink>
                         </Box>
                         
-{/* 
-                        <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
+
+                        {this.state.showMenu && <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
                                 isOpen = {this.state.showSidebar}
                             />
-                        </Box> 
-*/}
+                        </Box>} 
+
 
 
 

@@ -9,15 +9,17 @@ import { userActions, libraryActions } from '../../store/actions';
 import ErrorPage from './../../components/Error/ErrorPage';
 
 class UserPage extends Component {
-    state = { userId: this.props.match.params.id, viewObjectsList: [] };
-
-    async componentDidMount() {
-        this.setState({userId: this.props.match.params.id})
-
-        this.props.getUser(this.state.userId);
-        this.props.getBookList(this.state.userId);
+    componentDidMount() {
+        this.props.getUser(this.props.match.params.id);
+        this.props.getBookList(this.props.match.params.id);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.props.getUser(this.props.match.params.id);
+            this.props.getBookList(this.props.match.params.id);
+        }
+    }
     render() {
         let user= {};
         let library= [];
@@ -26,7 +28,8 @@ class UserPage extends Component {
             user = {
                 'lastName': this.props.user.user.last_name,
                 'firstName': this.props.user.user.first_name,
-                'username': this.props.user.user.django_user.username
+                'username': this.props.user.user.django_user.username,
+                'avatar': this.props.user.user.image
             };
         }
         if (this.props.library.userLibraryRecieved) {
@@ -35,28 +38,36 @@ class UserPage extends Component {
 
         return (
             <Box direction='column' align='center' fill className={styles.profile}>
-                <Box background='brandGradient' className={styles.background} align='center'>
-                    <Box animation='slideUp'>
-                        <img 
-                            alt='Remy Sharp'
-                            src={localStorage.getItem('avatar')}
-                            className={styles.big_avatar}
-                        />
+                {this.props.user.userInfoRecieved &&
+                    <Box direction='column' align='center' fill className={styles.profile}>
+                        <Box background='brandGradient' className={styles.background} align='center'>
+                            <Box animation='slideUp'>
+                                <img 
+                                    alt='Remy Sharp'
+                                    src={localStorage.getItem('avatar')}
+                                    className={styles.big_avatar}
+                                />
+                            </Box>
+                        </Box>
+                        <h3 className={styles.header1}>{user.username}</h3>
+                        <p className={styles.header2}>{user.lastName} {user.firstName}</p>
+                        {this.props.library.error &&
+                            <ErrorPage alert={this.props.alert}></ErrorPage>
+                        }
+                        {this.props.library.error &&
+                            <Box></Box>
+                        }
+                        {this.props.library.userLibraryRecieved &&
+                            <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
+                                    objectList={library} 
+                                    header='My Books'>
+                            </Scroll>
+                        }
                     </Box>
-                </Box>
-                <h3 className={styles.header1}>{user.username}</h3>
-                <p className={styles.header2}>{user.lastName} {user.firstName}</p>
-                {this.props.library.error &&
+                }
+
+                {this.props.user.error &&
                     <ErrorPage alert={this.props.alert}></ErrorPage>
-                }
-                {this.props.library.error &&
-                    <Box></Box>
-                }
-                {this.props.library.userLibraryRecieved &&
-                    <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
-                            objectList={library} 
-                            header='My Books'>
-                    </Scroll>
                 }
             </Box>
         )

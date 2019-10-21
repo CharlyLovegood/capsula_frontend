@@ -10,21 +10,21 @@ function BookCard(props) {
     switch (props.type) {
         case 'proposal':
             ButtonBlock = (<Box width='130px' direction='column' gap='5px'>
-                                <Button margin='5px' color='brand' fill='vertical' label='Accept' onClick={props.handleAcceptProposal}></Button>
-                                <Button margin='5px' color='dark-3' fill='vertical' label='Reject' onClick={props.handleRejectProposal}></Button>
+                                <Button margin='5px' color='brand' fill='vertical' label='Accept' onClick={() => props.handleAccept(props.id)}></Button>
+                                <Button margin='5px' color='dark-3' fill='vertical' label='Reject' onClick={() => props.handleReject(props.id)}></Button>
                             </Box>);
             break;
         case 'request':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Cancel' onClick={props.handleCancelRequest}></Button>);
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Cancel' onClick={() => props.handleCancel(props.id)}></Button>);
             break;
         case 'inProcess':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Delivered' onClick={props.handleBookDelivered}></Button>);
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Delivered' onClick={() => props.handleBookDelivered(props.id)}></Button>);
             break;
         case 'onHands':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Finish' onClick={props.handleFinishSwap}></Button>); 
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Finish' onClick={() => props.handleFinishSwap(props.id)}></Button>); 
             break;
         default:
-            ButtonBlock = (<Button></Button>);
+            ButtonBlock = (<Box></Box>);
             break;
     }
 

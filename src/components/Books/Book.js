@@ -3,6 +3,8 @@ import styles from './Book.module.css';
 import { Link } from 'react-router-dom';
 import { Box } from 'grommet';
 
+import { remote_url } from './../../helpers';
+
 
 function Book(props) {
     return (
@@ -10,7 +12,7 @@ function Book(props) {
             <Link to={'/book/' + props.id} className={(props.size === 'small') ? styles.small_book : styles.book}>
                 <img 
                     alt='book coverage' 
-                    src={props.coverage ? props.coverage : 'https://i.pinimg.com/564x/31/4a/28/314a2856c47596b485162f23aa3b297a.jpg' } 
+                    src={props.coverage ? props.coverage :  remote_url.images.default_book} 
                     className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}>
                 </img>
             </Link>

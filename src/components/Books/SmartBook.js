@@ -5,6 +5,8 @@ import { Box } from 'grommet';
 import { Close, More } from 'grommet-icons';
 import { Button } from 'grommet';
 
+import { remote_url } from './../../helpers';
+
 const SmartBook = (props) => {
     return (
         <Box className={styles.book_card}>
@@ -12,14 +14,14 @@ const SmartBook = (props) => {
                 <Box className={styles.book_card_front}>
                     <img 
                         alt='book coverage' 
-                        src={props.coverage ? props.coverage : 'https://i.pinimg.com/564x/31/4a/28/314a2856c47596b485162f23aa3b297a.jpg' } 
+                        src={props.coverage ? props.coverage : remote_url.images.default_book } 
                         className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}>
                     </img>
                 </Box>
                 <Box background='brand' pad='10px' align='center' justify='around' className={styles.book_card_back}>
                     <img 
                         alt='book coverage' 
-                        src={props.coverage ? props.coverage : 'https://i.pinimg.com/564x/31/4a/28/314a2856c47596b485162f23aa3b297a.jpg' } 
+                        src={props.coverage ? props.coverage : remote_url.images.default_book } 
                         className={styles.book_cover_back}>
                     </img>
                     <h4 className={styles.book_title}>

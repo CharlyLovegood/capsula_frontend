@@ -29,137 +29,34 @@ class SwapPage extends Component {
         this.setState({index: this.props.index});
         this.props.getSwap();
     }
-
-
     
-    handleRejectProposal(bookId) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(bookId)
-        };
-    
-        return fetch('http://localhost:8000/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'RejectProposal',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'RejectProposal',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+    handleReject(id) {
+        this.props.changeSwapStatus(id, swapStatuses.REJECTED);
     }
 
-    handleAcceptProposal(bookId) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(bookId)
-        };
-    
-        return fetch('http://localhost:8000/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'AcceptProposal',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'AcceptProposal',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+    handleAccept(id) {
+        this.props.changeSwapStatus(id, swapStatuses.ACCEPTED);
     }
 
-    handleCancelRequest(bookId) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(bookId)
-        };
-    
-        return fetch('http://localhost:8000/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'CancelRequest',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'CancelRequest',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+    handleCancel(id) {
+        this.props.changeSwapStatus(id, swapStatuses.REJECTED);
     }
 
-    handleBookDelivered(bookId) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(bookId)
-        };
-    
-        return fetch('http://localhost:8000/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'BookDelivered',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'BookDelivered',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+    handleBookDelivered(id) {
+        this.props.changeSwapStatus(id, swapStatuses.READING);
     }
     
-    handleFinishSwap(bookId) {
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(bookId)
-        };
-    
-        return fetch('http://localhost:8000/', requestOptions)
-            .then(
-                response => {
-                    this.setState({action:{
-                        type: 'FinishSwap',
-                        isLoaded: true,
-                        error: null
-                    }})
-                    return response;
-                },
-                error => {
-                    this.setState({action:{
-                        type: 'FinishSwap',
-                        isLoaded: false,
-                        error: error
-                    }})
-                });
+    handleFinishSwap(id) {
+        this.props.changeSwapStatus(id, swapStatuses.RETURNED);
     }
 
-    objectCallBack = (authors, book, date, genre, id, image, reader, status) => {
+    objectCallBack = (authors, book, date, genre, id, image, reader, status, type) => {
         return (
-            <BookCard handleAcceptProposal={event => this.handleAcceptProposal(event)} 
+            <BookCard handleReject={id => this.handleReject(id)}
+                handleAccept={id => this.handleAccept(id)}
+                handleCancel={id => this.handleCancel(id)}
+                handleBookDelivered={id => this.handleBookDelivered(id)}
+                handleFinishSwap={id => this.handleFinishSwap(id)}        
                 margin='10px' 
                 title={book} 
                 key={id}
@@ -167,7 +64,8 @@ class SwapPage extends Component {
                 date={date}
                 user={reader}
                 coverage={image}
-                type='proposal'></BookCard>
+                id={id}
+                type={type}></BookCard>
         )
     }
 
@@ -177,31 +75,34 @@ class SwapPage extends Component {
         return (
             <Box direction='column' align='center' fill>
                 <Box direction='row' margin='5px' width='800px'>
-                    {swap.requestsRecieved &&
+                    {swap.swapsRecieved &&
                     <Tabs>
                         <Tab title='I am reading'>
                             <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                                 <Tab title='Requests' >
                                     <Gallery
+                                        type='request'
                                         me='reader'
                                         object={this.objectCallBack} 
-                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
                                     >
                                     </Gallery>
                                 </Tab>
                                 <Tab title='In process'>
                                     <Gallery
                                         me='reader'
+                                        type='inProcess'
                                         object={this.objectCallBack} 
-                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
                                     >
                                     </Gallery>
                                 </Tab>
                                 <Tab title='On hands'>
                                     <Gallery
                                         me='reader'
+                                        
                                         object={this.objectCallBack}
-                                        objectList={swap.requestsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
+                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
                                     >
                                     </Gallery>
                                 </Tab>
@@ -214,24 +115,27 @@ class SwapPage extends Component {
                                 <Tab title='Requests' >
                                     <Gallery
                                         me='owner'
+                                        type='proposal'
                                         object={this.objectCallBack} 
-                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
                                     >
                                     </Gallery>
                                 </Tab>
                                 <Tab title='In process'>
                                     <Gallery
                                         me='owner'
+                                        type='inProcess'
                                         object={this.objectCallBack}
-                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
                                     >
                                     </Gallery>
                                 </Tab>
                                 <Tab title='On hands'>
                                     <Gallery
                                         me='owner'
+                                        type='onHands'
                                         object={this.objectCallBack} 
-                                        objectList={swap.requestsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
+                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
                                     >
                                     </Gallery>
                                 </Tab>
@@ -251,7 +155,8 @@ const mapState = state => ({
 })
 
 const actionCreators = {
-    getSwap: swapActions.getSwap
+    getSwap: swapActions.getSwap,
+    changeSwapStatus: swapActions.changeSwapStatus
 }
 
 export default connect(mapState, actionCreators)(SwapPage);
