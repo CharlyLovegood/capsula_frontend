@@ -30,34 +30,17 @@ class AppBar extends Component {
         super(props);
         this.state = {
             showSidebar: false,
-            user: {
-                avatar: '',
-                username: '',
-                id: ''
-            }
         };
-    }
-
-    componentDidMount() {
-        if (this.props.user.loggedIn) {
-            this.setState({user: {
-                avatar: this.props.user.user.avatar,
-                username: this.props.user.user.username,
-                id: this.props.user.user.id
-            }})
-        }
     }
 
     handleLogOut(event) {
         event.preventDefault();
         this.setState({ showSidebar: !this.state.showSidebar });
         this.props.logout();
-        
     }
 
     render() {
-        const { showSidebar } = this.state;
-        let { user } = this.state;
+        let showSidebar = this.state.showSidebar;
         return (    
             this.props.user.loggedIn === true ? 
             (<ResponsiveContext.Consumer>
@@ -87,7 +70,7 @@ class AppBar extends Component {
                         style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
-                        <UserAvatar key={user.id} id={user.id} avatar={user.avatar} color='menuTextColor' name={user.username}></UserAvatar>
+                        <UserAvatar key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}

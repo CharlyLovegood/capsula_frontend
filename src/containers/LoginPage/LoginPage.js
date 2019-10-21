@@ -49,7 +49,7 @@ class LoginPage extends Component {
     handleOauth(event) {
         event.preventDefault();
         console.log(event)
-        
+
         const requestOptions = {
             method: 'GET',
             url: '/auth/login/'
@@ -65,9 +65,12 @@ class LoginPage extends Component {
                 localStorage.setItem('token', user.token);
                 localStorage.setItem('id', user.id);
                 localStorage.setItem('avatar', user.image);
+                localStorage.setItem('avatar', user.location);
             }); 
 
     }
+
+    
     handleSubmit(event) {
         event.preventDefault();
         this.props.login(this.state.username, this.state.password);

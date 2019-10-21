@@ -3,8 +3,9 @@ import { userConstants } from '../constants';
 let username = localStorage.getItem('username');
 let firstName = localStorage.getItem('firstName');
 let lastName = localStorage.getItem('lastName');
-let avatar = localStorage.getItem('avatar');
+let avatar = localStorage.getItem('avatar') === 'null' ? null : localStorage.getItem('avatar');
 let id = localStorage.getItem('id');
+let location = localStorage.getItem('location');
 
 const initialState = username ? { 
     loggedIn: true, 
@@ -13,9 +14,21 @@ const initialState = username ? {
         firstName,
         lastName,
         avatar,
+        location,
         id
     } 
-} : {};
+} : {
+    loggedIn: false, 
+    user: {
+        username: '',
+        firstName: '',
+        lastName: '',
+        avatar: '',
+        location: '',
+        id: ''
+    } 
+};
+
 
 export function authentication(state = initialState, action) {
     switch (action.type) {
@@ -27,12 +40,37 @@ export function authentication(state = initialState, action) {
         case userConstants.LOGIN_SUCCESS:
             return {
                 loggedIn: true,
-                user: action.user
+                user: {    
+                    username: action.user.django_user.username,
+                    firstName: action.user.first_name,
+                    lastName: action.user.last_name,
+                    avatar: action.user.image,
+                    location: action.user.location,
+                    id: action.user.id
+                } 
             };
         case userConstants.LOGIN_FAILURE:
-            return {};
+            return ({
+                loggedIn: false, 
+                user: {
+                    username: '',
+                    firstName: '',
+                    lastName: '',
+                    avatar: '',
+                    location: '',
+                    id: ''
+                }});
         case userConstants.LOGOUT:
-            return {};
+            return ({
+                loggedIn: false, 
+                user: {
+                    username: '',
+                    firstName: '',
+                    lastName: '',
+                    avatar: '',
+                    location: '',
+                    id: ''
+                }});
         default:
             return state;
     }

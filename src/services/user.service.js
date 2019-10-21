@@ -24,6 +24,7 @@ function login(username, password) {
             localStorage.setItem('token', user.token);
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.image);
+            localStorage.setItem('location', user.location);
             return user;
         });
 }
@@ -42,6 +43,7 @@ function logout() {
             localStorage.removeItem('firstName');
             localStorage.removeItem('avatar');
             localStorage.removeItem('lastName');
+            localStorage.removeItem('location', user.location);
             localStorage.removeItem('id');
             return user;
         }); 

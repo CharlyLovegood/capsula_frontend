@@ -15,18 +15,18 @@ import UserAvatar from './../../components/ImageUpload/ImageUpload';
 class SettingsPage extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.user)
         this.state = { 
             user: {
                 firstname: this.props.user.firstName, 
                 lastname: this.props.user.lastName, 
                 vkId: '',
-                domitary: '',
+                domitary: this.props.user.location,
                 avatar: this.props.user.avatar
             },
             permission: true
         }
     }
-
 
     handleChange(event) {
         const { name, value } = event.target;
