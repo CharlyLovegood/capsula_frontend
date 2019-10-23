@@ -7,31 +7,61 @@ import { connect } from 'react-redux';
 
 import { userActions, libraryActions } from '../../store/actions';
 import ErrorPage from './../../components/Error/ErrorPage';
+import { remote_url } from '../../helpers';
 
 class UserPage extends Component {
+    state = {
+        user: {
+            'lastName': '',
+            'firstName': '',
+            'username': '',
+            'avatar': ''
+        }
+    }
+    
+    setUser() {
+        return ({
+            'lastName': this.props.user.user.last_name,
+            'firstName': this.props.user.user.first_name,
+            'username': this.props.user.user.django_user.username,
+            'avatar': this.props.user.user.avatar ? this.props.user.user.avatar : remote_url.images.user_default
+        });
+    }
+
     componentDidMount() {
         this.props.getUser(this.props.match.params.id);
         this.props.getBookList(this.props.match.params.id);
+        console.log(this.props.user)
+        if (this.props.user.userInfoRecieved) {
+            const user = this.setUser()
+            this.setState({user: user})
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props.user);
+        console.log(prevProps);
+        if (prevProps.user.userInfoRecieved !== this.props.user.userInfoRecieved) {
+            if (this.props.user.userInfoRecieved) {
+                this.setState({user: this.setUser()})
+            }
+        }
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.props.getUser(this.props.match.params.id);
             this.props.getBookList(this.props.match.params.id);
+            if (this.props.user.userInfoRecieved) {
+                this.setState({user: this.setUser()})
+            }
         }
     }
-    render() {
-        let user= {};
-        let library= [];
 
-        if (this.props.user.userInfoRecieved) {
-            user = {
-                'lastName': this.props.user.user.last_name,
-                'firstName': this.props.user.user.first_name,
-                'username': this.props.user.user.django_user.username,
-                'avatar': this.props.user.user.image
-            };
-        }
+
+
+    render() {
+        let {user} = this.state;
+        let library= [];
+        console.log(user)
+
         if (this.props.library.userLibraryRecieved) {
             library = this.props.library.userLibrary;
         }
@@ -44,8 +74,9 @@ class UserPage extends Component {
                             <Box animation='slideUp'>
                                 <img 
                                     alt='Remy Sharp'
-                                    src={localStorage.getItem('avatar')}
+                                    src={user.avatar}
                                     className={styles.big_avatar}
+                                    onError={()=>{this.setState({user: {...user, avatar: remote_url.images.user_default}})}}
                                 />
                             </Box>
                         </Box>

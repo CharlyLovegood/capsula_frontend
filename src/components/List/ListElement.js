@@ -10,10 +10,10 @@ import SwapAgreement from '../Books/SwapAgreement';
 function ListElement(props) {
     return (
         <Box direction='row' justify='between' align='center' width='500px'>
-            <Link to='/profile_id=1'>
+            <Link to={`/user/${props.owner.id}`}>
                 <img
                     alt='Remy Sharp'
-                    src={props.image}
+                    src={props.owner.avatar}
                     className={styles.avatar}
                 />
             </Link>

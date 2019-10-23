@@ -35,7 +35,7 @@ class LibraryPage extends Component {
             <Box direction='column' align='center' width='800px'>
                 {library.userLibraryRecieved && 
                     <Gallery 
-                        object={(title, coverage, id, idAbstract) => <SmartBook handleDeleteBook={this.props.deleteBook} margin='10px' title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
+                        object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                         objectList={library.userLibrary}
                         header='My Books'
                         contentType='books'
@@ -52,6 +52,7 @@ class LibraryPage extends Component {
         )
     }
 }
+
 const mapState = state => ({
     user: state.authentication.user,
     alert: state.alert,

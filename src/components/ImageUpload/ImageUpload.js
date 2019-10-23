@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Box } from 'grommet';
 import styles from './ImageUpload.module.css';
 import {Camera} from 'grommet-icons';
+import { remote_url } from '../../helpers';
 
 
 
@@ -63,6 +64,7 @@ export default class ImageUpload extends Component {
                             alt='Avatar'
                             src={this.state.image}
                             className={this.props.shape ? styles.avatar_square : styles.avatar }
+                            onError={()=>{this.setState({image: remote_url.images.user_default})}}
                         />
                     </Box>
                 </label>

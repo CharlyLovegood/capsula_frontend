@@ -5,7 +5,7 @@ export const remote_url = {
         error: 'https://cdn.dribbble.com/users/1322726/screenshots/5695684/dribbble-3.gif',
         add_new_book_default: 'http://www.lm-magazine.com/wp-content/uploads/2017/05/080.jpg?w=326&h=436',
         default_book: 'https://i.pinimg.com/564x/31/4a/28/314a2856c47596b485162f23aa3b297a.jpg',
-        banner: 'https://cdn.dribbble.com/users/2030268/screenshots/5922259/img_4x.jpg'
+        banner: 'https://cdn.dribbble.com/users/2100947/screenshots/4342118/attachments/988968/readbook_website.png'
     }
 }
 

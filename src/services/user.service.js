@@ -12,7 +12,8 @@ export const userService = {
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
+        headers: {'Content-Type': 'application/json'}
     };
 
     return fetch(back_url.authentication.login, requestOptions)

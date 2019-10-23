@@ -7,13 +7,17 @@ import { remote_url } from './../../helpers';
 
 
 function Book(props) {
+    const defaultCoverage = remote_url.images.default_book;
+    const [bookCoverage, setBookCoverage] = React.useState(props.coverage ? props.coverage :  defaultCoverage);
+
     return (
         <Box animation={props.animation} margin={props.margin} className={(props.size === 'small') ? styles.small_book : styles.book}>
             <Link to={'/book/' + props.id} className={(props.size === 'small') ? styles.small_book : styles.book}>
                 <img 
                     alt='book coverage' 
-                    src={props.coverage ? props.coverage :  remote_url.images.default_book} 
-                    className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}>
+                    src={bookCoverage} 
+                    className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}
+                    onError={()=>{setBookCoverage(defaultCoverage)}}>
                 </img>
             </Link>
         </Box>

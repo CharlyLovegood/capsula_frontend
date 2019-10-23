@@ -7,13 +7,18 @@ import { remote_url } from './../../helpers';
 
 
 export default function UserAvatar(props) {
+    const defaultAvatar = remote_url.images.user_default;
+
+    const [avatar, setAvatar] = React.useState(props.avatar ? props.avatar : defaultAvatar);
+
     return (
         <Box direction='row' width='auto' align='center'>
             <Link to={'/user/' + props.id} className={styles.avatar_container}>
                 <img
-                    alt='Remy Sharp'
-                    src={props.avatar ? props.avatar : remote_url.images.user_default}
+                    alt='Avatar'
+                    src={avatar}
                     className={styles.small_avatar}
+                    onError={()=>{setAvatar(defaultAvatar)}}
                 />
             </Link>
             <Menu

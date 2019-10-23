@@ -15,7 +15,6 @@ import UserAvatar from './../../components/ImageUpload/ImageUpload';
 class SettingsPage extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.user)
         this.state = { 
             user: {
                 firstname: this.props.user.firstName, 
@@ -42,7 +41,6 @@ class SettingsPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state)
         const user = {
             'first_name': this.state.user.firstname, 
             'last_name': this.props.user.lastName, 
@@ -75,7 +73,6 @@ class SettingsPage extends Component {
                 ...user,
                 avatar: avatar
             }});
-            console.log(this.state);
     }
 
     

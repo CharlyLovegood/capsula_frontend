@@ -22,7 +22,6 @@ export function library(state=initialState, action) {
         case bookConstants.DELETE_BOOK_SUCCESS:
             userLibrary = state.userLibrary;
             userLibrary = userLibrary.filter(function(item) {
-                console.log(action.bookId)
                 return item.id !== action.bookId
             })
             return {
@@ -31,18 +30,16 @@ export function library(state=initialState, action) {
             }
         case bookConstants.ADD_BOOK_SUCCESS:
             userLibrary = state.userLibrary;
-            console.log(action)
             const book = {
                 'book': {
                     "title": action.book.title,
                     "authors": action.book.authors,
-                    "genre": 3
+                    "genre": action.book.genre
                 },
                 'image': action.book.image,
                 id: 311,
             };
             userLibrary.push(book)
-            console.log(userLibrary);
             return {
                 userLibrary: userLibrary,
                 userLibraryRecieved: true

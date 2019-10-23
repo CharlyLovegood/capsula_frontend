@@ -17,11 +17,6 @@ class SwapPage extends Component {
         this.state = { 
             index: 0, 
             viewObjectsList: [],
-            action: {
-                type: '',
-                isLoaded: false,
-                error: null
-            }
         };
     }
 
@@ -38,10 +33,6 @@ class SwapPage extends Component {
         this.props.changeSwapStatus(id, swapStatuses.ACCEPTED);
     }
 
-    handleCancel(id) {
-        this.props.changeSwapStatus(id, swapStatuses.REJECTED);
-    }
-
     handleBookDelivered(id) {
         this.props.changeSwapStatus(id, swapStatuses.READING);
     }
@@ -54,7 +45,6 @@ class SwapPage extends Component {
         return (
             <BookCard handleReject={id => this.handleReject(id)}
                 handleAccept={id => this.handleAccept(id)}
-                handleCancel={id => this.handleCancel(id)}
                 handleBookDelivered={id => this.handleBookDelivered(id)}
                 handleFinishSwap={id => this.handleFinishSwap(id)}        
                 margin='10px' 

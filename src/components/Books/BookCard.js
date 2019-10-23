@@ -15,7 +15,7 @@ function BookCard(props) {
                             </Box>);
             break;
         case 'request':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Cancel' onClick={() => props.handleCancel(props.id)}></Button>);
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Cancel' onClick={() => props.handleReject(props.id)}></Button>);
             break;
         case 'inProcess':
             ButtonBlock = (<Button margin='5px' fill='vertical' label='Delivered' onClick={() => props.handleBookDelivered(props.id)}></Button>);

@@ -20,6 +20,7 @@ import RegisterPage from './containers/RegisterPage/RegisterPage';
 import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
+import HistoryPage from './containers/HistoryPage/HistoryPage';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
@@ -44,13 +45,17 @@ const theme = {
             size: '16px',
             height: '20px',
         },
-    },
-
-            button: {
-                border: {
-                  radius: "8px"
-                }
+        button: {
+            border: {
+                radius: "8px"
             }
+        },
+        control: {
+            border: {
+                radius: "8px"
+            }
+        }
+    },
 };
 
 
@@ -77,6 +82,7 @@ class App extends Component {
                             <PrivateRoute path='/library' component={ LibraryPage } />
                             <PrivateRoute path='/swap' component={ SwapPage } />
                             <PrivateRoute path='/search' component={ SearchPage } />
+                            <PrivateRoute path='/history' component={ HistoryPage } />
                             <PrivateRoute path='/settings' component={ SettingsPage } />
                             <AuthRoute exact path='/register' component={ RegisterPage } />
                             <AuthRoute exact path='/login' component={ LoginPage } />

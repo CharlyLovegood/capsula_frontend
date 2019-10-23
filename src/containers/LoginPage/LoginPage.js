@@ -27,49 +27,36 @@ class LoginPage extends Component {
             submitted: false };
     }
 
-    // componentDidMount() {
-    //     const requestOptions = {
-    //         method: 'GET',
-    //         url: '/auth/login/'
-    //     }
-    
-    //     return axios(requestOptions)
-    //         .then(resolve => {
-    //             console.log(resolve);
-    //             const user = resolve.data
-    //             localStorage.setItem('username', user.django_user.username);
-    //             localStorage.setItem('lastName', user.last_name);
-    //             localStorage.setItem('firstName', user.first_name);
-    //             localStorage.setItem('token', user.token);
-    //             localStorage.setItem('id', user.id);
-    //             localStorage.setItem('avatar', user.image);
-    //         }); 
-    // }
-
-    handleOauth(event) {
-        event.preventDefault();
-        console.log(event)
-
+    componentDidMount(){
         const requestOptions = {
             method: 'GET',
             url: '/auth/login/'
-        }
-    
+        };
+
         return axios(requestOptions)
             .then(resolve => {
                 console.log(resolve);
-                const user = resolve.data
-                localStorage.setItem('username', user.django_user.username);
-                localStorage.setItem('lastName', user.last_name);
-                localStorage.setItem('firstName', user.first_name);
-                localStorage.setItem('token', user.token);
-                localStorage.setItem('id', user.id);
-                localStorage.setItem('avatar', user.image);
-                localStorage.setItem('avatar', user.location);
-            }); 
-
+                if (resolve.status === 200) {
+                    const user = resolve.data;
+                    localStorage.setItem('username', user.django_user.username);
+                    localStorage.setItem('lastName', user.last_name);
+                    localStorage.setItem('firstName', user.first_name);
+                    localStorage.setItem('token', user.token);
+                    localStorage.setItem('id', user.id);
+                    localStorage.setItem('avatar', user.image);
+                    localStorage.setItem('location', user.location);
+                    document.location.href = 'http://127.0.0.1:3000/';
+                }
+                if (resolve.status === 204) {
+                }
+            })
+            .catch(error => console.log(error));
     }
 
+    handleOauth(event) {
+        console.log(event);
+        document.location.href = 'http://127.0.0.1:8000/auth/login/vk-oauth2/';
+    }
     
     handleSubmit(event) {
         event.preventDefault();
@@ -102,7 +89,7 @@ class LoginPage extends Component {
                         onSubmit={(event) => this.handleSubmit(event)}
                         className={styles.form}
                     >
-                        <Box>
+                        <Box alignContent='center'>
                             <TextValidator
                                 variant='outlined'
                                 margin='normal'
@@ -129,12 +116,10 @@ class LoginPage extends Component {
                                 onChange={ event => this.handleChange(event) }
                             />
                         </Box>
-                            
-                        <a href='http://127.0.0.1:8000/auth/login/vk-oauth2/' onClick={(event) => this.handleOauth(event)} className={styles.vk}>
-                            vk
-                        </a>
 
+                        
                         <div className={styles.submit}>
+                        <img onClick={(event) => this.handleOauth(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
                             <Button
                                 color="primary"
                                 variant="contained"

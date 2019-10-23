@@ -58,6 +58,7 @@ function addBook(book) {
         bookService.addBook(book)
             .then(
                 response => { 
+                    console.log(response)
                     dispatch(success(book));
                 },
                 error => {

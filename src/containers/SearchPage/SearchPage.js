@@ -2,12 +2,14 @@ import React, { createRef, Component } from 'react';
 import { Search } from 'grommet-icons';
 import { 
     Box, 
-    TextInput 
+    TextInput
 } from 'grommet';
 import { connect } from 'react-redux';
 
 import { searchActions } from '../../store/actions';
 import SearchElement from '../../components/Search/SearchElement';
+import Filter from '../../components/Filter/Filter';
+
 
 class SearchPage extends Component {
     state = { value: '', suggestedList: [] };
@@ -48,31 +50,34 @@ class SearchPage extends Component {
         const { value } = this.state;
 
         return (
-            <Box direction='column' align='center' width='400px'>
-                <Box
-                    background='background'
-                    ref={this.boxRef}
-                    fill
-                    direction='row'
-                    align='center'
-                    pad={{ horizontal: 'small', vertical: 'xsmall' }}
-                    margin={{ horizontal: 'small', vertical: 'xsmall' }}
-                    round='small'
-                    border={{
-                        side: 'all',
-                        color: 'border'
-                    }}
-                >
-                    <Search color='brand' />
-                    <TextInput
-                        type='search'
-                        dropTarget={this.boxRef.current}
-                        plain
-                        value={value}
-                        onChange={this.onChange}
-                        onSelect={this.onSelect}
-                        placeholder='Enter your name...'
-                    />
+            <Box direction='column' align='center' width='720px'>
+                <Box fill direction='row' align='center'>
+                    <Box
+                        background='background'
+                        ref={this.boxRef}
+                        direction='row'
+                        align='center'
+                        fill
+                        pad={{ horizontal: 'small', vertical: 'xsmall' }}
+                        margin={{ horizontal: 'small', vertical: 'xsmall' }}
+                        round='8px'
+                        border={{
+                            side: 'all',
+                            color: 'border'
+                        }}
+                    >
+                        <Search color='brand' />
+                        <TextInput
+                            type='search'
+                            dropTarget={this.boxRef.current}
+                            plain
+                            value={value}
+                            onChange={this.onChange}
+                            onSelect={this.onSelect}
+                            placeholder='Enter your name...'
+                        />
+                    </Box>
+                    <Filter></Filter>
                 </Box>
                 <Box>
                     {this.renderSearchResult()}

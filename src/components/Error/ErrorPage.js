@@ -4,9 +4,7 @@ import { remote_url } from './../../helpers';
 
 
 class ErrorPage extends Component {
-
     render() {
-
         return (
             <Box 
                 direction='column'                          
