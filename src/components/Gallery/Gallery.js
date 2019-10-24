@@ -29,8 +29,12 @@ class Gallery extends Component {
                             justify='start' 
                             align='center'
                             >
-                            {this.props.objectList.map((element) => {
+                            {this.props.contentType === 'books' && this.props.objectList.map((element) => {
                                 return(this.props.object(element.book.title, element.image, element.book.genre, element.book.authors, element.id, element.book.id));
+                            })}
+
+                            {this.props.contentType === 'swaps' && this.props.objectList.map(({authors, book, date, genre, id, image, reader, status}) => {
+                                return(this.props.object(authors, book, date, genre, id, image, reader, status, this.props.type))
                             })}
                         </Box>
                     </Box>

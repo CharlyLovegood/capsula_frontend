@@ -94,7 +94,7 @@ class AppBar extends Component {
                                     width='900px'
                                     className={styles.menu_container}
                                 >
-                                    <PrivateLink color='menuTextColor' to='/library' label='My books' />
+                                    <PrivateLink color='menuTextColor' to={`user/${this.props.user.user.id}/library`} label='My books' />
                                     <PrivateLink color='menuTextColor' to='/history' label='History' />
                                     <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
                                     <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />

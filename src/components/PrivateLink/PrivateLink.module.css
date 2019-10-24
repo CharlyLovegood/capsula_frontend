@@ -1,7 +1,36 @@
-.link:hover {
+.link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px;
+    position: relative;
+    color: #3a3a3a;
+}
+
+.link:after { 
+    color: #7d4cdb;
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #7d4cdb;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.link:hover{ 
     color: #7d4cdb;
 }
 
-.link {
-    color: #3a3a3a;
+.link:hover:after { 
+    color: #7d4cdb;
+    width: 100%; 
+    left: 0; 
+}
+
+.box{ 
+    display: table-cell; 
+    position: relative; 
 }

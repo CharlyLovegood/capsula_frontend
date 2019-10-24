@@ -5,6 +5,8 @@ import { Box, ResponsiveContext } from 'grommet';
 import { FormNext, FormPrevious } from 'grommet-icons';
 
 import { remote_url } from './../../helpers';
+import SizeComponent from '../SizeComponent/SizeComponent';
+import { Link } from 'react-router-dom';
 
 class Scroll extends Component {
     constructor(props) {
@@ -14,19 +16,16 @@ class Scroll extends Component {
             len: this.props.objectList.length, 
             currentNum: 0, 
             showArrows: false,
-            width: window.innerWidth,
-            sizes: {
-                big: 720,
-                medium: 540,
-                small: 360,
-                xsmall: 160
-        }};
-        this.updateDimensions = this.updateDimensions.bind(this);
+        };
+    }
+
+    calculateNum(size) {
+        if (size >= 720) return 4
+        else if (size >= 540) return 3
+        else return 2
     }
 
     componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions);
-
         if (this.state.len !== 0) {
             const rem = this.state.len % 4;
             if (rem !== 0) {
@@ -49,12 +48,6 @@ class Scroll extends Component {
     }
 
 
-    updateDimensions() {
-        this.setState({
-            width: window.innerWidth
-        });
-    }
-
 
     onArrowClick = (direction) => {
         let begin = 0;
@@ -71,107 +64,46 @@ class Scroll extends Component {
             this.setState({viewObjectsList: this.props.objectList.slice(begin, begin + 4)});
         }
         this.setState({currentNum: begin});
-        console.log(begin);
     }
 
 
-    render(props) {
-        let size = this.state.width;
-        if (size >= 740) {
-            return(
+    render() {
+        return ( 
+            <SizeComponent>
+                {size => (
                 <Box direction='column' align='center' className={styles.scroll_container}>
+                    <Link to={`/user/${this.props.id}/library/`}>
+                        {this.props.header}
+                    </Link>
                     <h3 className={styles.header}>{this.props.header}</h3>
                     <Box direction='column' align='center'>
-                        <ResponsiveContext.Consumer>
-                        {size => 
-                            <Box 
-                                flex 
-                                pad='10px' 
-                                direction='row' 
-                                justify='around' 
-                                gap='small' 
-                                align='center'
-                                >
-                                <FormPrevious color='contrast' 
-                                                onClick={() => this.onArrowClick('back')} 
-                                                className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                                </FormPrevious>
-
-                                {this.state.viewObjectsList.slice(0, 4).map((element) => {
-                                    return(this.props.object(element.book.title, element.image, element.book.id))
-                                })}
-
-                                <FormNext color='contrast' 
-                                            onClick={() => this.onArrowClick('forward')} 
-                                            className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                                </FormNext>
-                            </Box>
-                        }
-                        </ResponsiveContext.Consumer>
-                    </Box>
-                </Box>
-            );
-        } else if (size >= 540) {
-            return(
-                <Box pad='none' direction='column' align='center' className={styles.scroll_container}>
-                    <h3 className={styles.header}>{this.props.header}</h3>
-                    <Box pad='none' direction='column' align='center'>
                         <Box 
                             flex 
+                            pad='10px' 
                             direction='row' 
                             justify='around' 
                             gap='small' 
                             align='center'
-                            pad='none'
                             >
                             <FormPrevious color='contrast' 
-                                            onClick={() => this.onArrowClick('back')} 
-                                            className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
+                                onClick={() => this.onArrowClick('back')} 
+                                className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormPrevious>
 
-                            {this.state.viewObjectsList.slice(0, 3).map((element) => {
+                            {this.state.viewObjectsList.slice(0, this.calculateNum(size)).map((element) => {
                                 return(this.props.object(element.book.title, element.image, element.book.id))
                             })}
 
                             <FormNext color='contrast' 
-                                        onClick={() => this.onArrowClick('forward')} 
-                                        className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
+                                onClick={() => this.onArrowClick('forward')} 
+                                className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormNext>
                         </Box>
                     </Box>
                 </Box>
-            );
-        } else {
-            return(
-                <Box pad='none' direction='column' align='center' className={styles.scroll_container}>
-                    <h3 className={styles.header}>{this.props.header}</h3>
-                    <Box pad='none' direction='column' align='center'>
-                        <Box 
-                            flex 
-                            direction='row' 
-                            justify='around' 
-                            gap='small' 
-                            align='center'
-                            pad='none'
-                            >
-                            <FormPrevious color='contrast' 
-                                            onClick={() => this.onArrowClick('back')} 
-                                            className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                            </FormPrevious>
-
-                            {this.state.viewObjectsList.slice(0, 2).map((element) => {
-                                return(this.props.object(element.book.title, element.image, element.book.id))
-                            })}
-
-                            <FormNext color='contrast' 
-                                        onClick={() => this.onArrowClick('forward')} 
-                                        className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                            </FormNext>
-                        </Box>
-                    </Box>
-                </Box>
-            );
-        }
+                )}
+            </SizeComponent>
+        )
     }
 }
 

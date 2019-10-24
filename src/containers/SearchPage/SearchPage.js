@@ -74,12 +74,12 @@ class SearchPage extends Component {
                             value={value}
                             onChange={this.onChange}
                             onSelect={this.onSelect}
-                            placeholder='Enter your name...'
+                            placeholder='Enter book...'
                         />
                     </Box>
                     <Filter></Filter>
                 </Box>
-                <Box>
+                <Box fill>
                     {this.renderSearchResult()}
                 </Box>
             </Box>

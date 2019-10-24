@@ -55,3 +55,8 @@ export const genresArray = [
     'RELIGION',
     'PEREODIC'
 ]
+
+
+export const Errors = {
+    404: 'https://cdn.dribbble.com/users/1322726/screenshots/5695684/dribbble-3.gif'
+}

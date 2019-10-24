@@ -15,7 +15,8 @@ class UserPage extends Component {
             'lastName': '',
             'firstName': '',
             'username': '',
-            'avatar': ''
+            'avatar': '',
+            'id': this.props.match.params.id
         }
     }
     
@@ -24,14 +25,14 @@ class UserPage extends Component {
             'lastName': this.props.user.user.last_name,
             'firstName': this.props.user.user.first_name,
             'username': this.props.user.user.django_user.username,
-            'avatar': this.props.user.user.avatar ? this.props.user.user.avatar : remote_url.images.user_default
+            'avatar': this.props.user.user.avatar ? this.props.user.user.avatar : remote_url.images.user_default,
+            'id': this.props.match.params.id
         });
     }
 
     componentDidMount() {
         this.props.getUser(this.props.match.params.id);
         this.props.getBookList(this.props.match.params.id);
-        console.log(this.props.user)
         if (this.props.user.userInfoRecieved) {
             const user = this.setUser()
             this.setState({user: user})
@@ -39,8 +40,6 @@ class UserPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.user);
-        console.log(prevProps);
         if (prevProps.user.userInfoRecieved !== this.props.user.userInfoRecieved) {
             if (this.props.user.userInfoRecieved) {
                 this.setState({user: this.setUser()})
@@ -60,7 +59,6 @@ class UserPage extends Component {
     render() {
         let {user} = this.state;
         let library= [];
-        console.log(user)
 
         if (this.props.library.userLibraryRecieved) {
             library = this.props.library.userLibrary;
@@ -90,8 +88,9 @@ class UserPage extends Component {
                         }
                         {this.props.library.userLibraryRecieved &&
                             <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
-                                    objectList={library} 
-                                    header='My Books'>
+                                objectList={library} 
+                                header='My Books'
+                                id={user.id}>
                             </Scroll>
                         }
                     </Box>

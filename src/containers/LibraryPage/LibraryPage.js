@@ -7,6 +7,7 @@ import PopUpButton from '../../components/Button/PopUpButton';
 import AddNewBook from '../../components/Books/AddNewBook';
 import { libraryActions, bookActions } from '../../store/actions';
 import { connect } from 'react-redux';
+import Book from '../../components/Books/Book';
 
 
 class LibraryPage extends Component {
@@ -17,25 +18,44 @@ class LibraryPage extends Component {
                 type: '',
                 isLoaded: false,
                 error: null
-            } 
+            },
+            owner: this.props.user.id === this.props.match.params.id
         }
     }
+
     componentDidMount() {
-        this.props.getLibrary(this.props.user.id);
+        this.getLibrary();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.match.params.id !== prevProps.match.params.id) {
+            this.getLibrary();
+        }
     }
 
     getLibrary() {
-        this.props.getLibrary(this.props.user.id);
+        if (this.props.match.params.id) {
+            this.props.getLibrary(this.props.match.params.id);
+        } else {
+            this.props.getLibrary(this.props.user.id);
+        }
     }
 
     render() {
         const {library} = this.props;
-
         return (
             <Box direction='column' align='center' width='800px'>
-                {library.userLibraryRecieved && 
+                {library.userLibraryRecieved && this.state.owner &&
                     <Gallery 
                         object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
+                        objectList={library.userLibrary}
+                        header='My Books'
+                        contentType='books'
+                    ></Gallery>
+                }
+                {library.userLibraryRecieved && !this.state.owner &&
+                    <Gallery 
+                        object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
                         objectList={library.userLibrary}
                         header='My Books'
                         contentType='books'

@@ -56,6 +56,13 @@ const theme = {
             }
         }
     },
+    heading: {
+        font: {
+            family: 'Clarkson',
+            size: '26px',
+            height: '20px',
+        },
+    }
 };
 
 
@@ -77,8 +84,9 @@ class App extends Component {
                     <Box flex align='center' justify='center'>
                         <Switch>
                             <Route exact path='/' component={ HomePage }/>
-                            <PrivateRoute path='/user/:id' component={ UserPage }/>
+                            <PrivateRoute exact path='/user/:id' component={ UserPage }/>
                             <PrivateRoute path='/book/:id' component={ BookPage } />
+                            <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
                             <PrivateRoute path='/library' component={ LibraryPage } />
                             <PrivateRoute path='/swap' component={ SwapPage } />
                             <PrivateRoute path='/search' component={ SearchPage } />

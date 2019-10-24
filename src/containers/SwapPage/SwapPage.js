@@ -71,6 +71,7 @@ class SwapPage extends Component {
                             <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                                 <Tab title='Requests' >
                                     <Gallery
+                                        contentType='swaps'
                                         type='request'
                                         me='reader'
                                         object={this.objectCallBack} 
@@ -80,6 +81,7 @@ class SwapPage extends Component {
                                 </Tab>
                                 <Tab title='In process'>
                                     <Gallery
+                                        contentType='swaps'
                                         me='reader'
                                         type='inProcess'
                                         object={this.objectCallBack} 
@@ -89,8 +91,9 @@ class SwapPage extends Component {
                                 </Tab>
                                 <Tab title='On hands'>
                                     <Gallery
+                                        contentType='swaps'
                                         me='reader'
-                                        
+                                        type='onHands'
                                         object={this.objectCallBack}
                                         objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
                                     >
@@ -104,6 +107,7 @@ class SwapPage extends Component {
                             <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                                 <Tab title='Requests' >
                                     <Gallery
+                                    contentType='swaps'
                                         me='owner'
                                         type='proposal'
                                         object={this.objectCallBack} 
@@ -113,6 +117,7 @@ class SwapPage extends Component {
                                 </Tab>
                                 <Tab title='In process'>
                                     <Gallery
+                                        contentType='swaps'
                                         me='owner'
                                         type='inProcess'
                                         object={this.objectCallBack}
@@ -122,6 +127,7 @@ class SwapPage extends Component {
                                 </Tab>
                                 <Tab title='On hands'>
                                     <Gallery
+                                        contentType='swaps'
                                         me='owner'
                                         type='onHands'
                                         object={this.objectCallBack} 
