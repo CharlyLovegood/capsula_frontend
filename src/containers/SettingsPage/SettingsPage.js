@@ -99,7 +99,7 @@ class SettingsPage extends Component {
                                 required
                                 fullWidth
                                 id='firstname'
-                                label='First Name'
+                                label='Имя'
                                 autoFocus
                                 value={user.firstname}
                                 onChange={ event => this.handleChange(event) }
@@ -111,7 +111,7 @@ class SettingsPage extends Component {
                                 required
                                 fullWidth
                                 id='lastname'
-                                label='Last Name'
+                                label='Фамилия'
                                 name='lastname'
                                 autoComplete='lname'
                                 value={user.lastname}
@@ -122,7 +122,7 @@ class SettingsPage extends Component {
                             <TextField
                                 id='domitary'
                                 name='domitary'
-                                label='Domitary'
+                                label='Общежитие'
                                 fullWidth
                                 autoComplete='domitary'
                                 variant='outlined'
@@ -147,10 +147,9 @@ class SettingsPage extends Component {
                             fill='horizontal'
                             primary
                             color='brand'
-                            label='Apply Changes'
+                            label='Сохранить'
                             onClick={event => this.handleSubmit(event)}
                             margin='12px'
-                            required
                         >
                         </Button>
                     </Grid>

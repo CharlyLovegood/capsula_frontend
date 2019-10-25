@@ -41,7 +41,7 @@ class SwapPage extends Component {
         this.props.changeSwapStatus(id, swapStatuses.RETURNED);
     }
 
-    objectCallBack = (authors, book, date, genre, id, image, reader, status, type) => {
+    objectCallBack = (authors, book, date, genre, id, image, reader, owner, status, type) => {
         return (
             <BookCard handleReject={id => this.handleReject(id)}
                 handleAccept={id => this.handleAccept(id)}
@@ -52,9 +52,10 @@ class SwapPage extends Component {
                 key={id}
                 authors={authors}
                 date={date}
-                user={reader}
+                reader={reader}
                 coverage={image}
                 id={id}
+                owner={owner}
                 type={type}></BookCard>
         )
     }
@@ -67,9 +68,9 @@ class SwapPage extends Component {
                 <Box direction='row' margin='5px' width='800px'>
                     {swap.swapsRecieved &&
                     <Tabs>
-                        <Tab title='I am reading'>
+                        <Tab title='Читаю'>
                             <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
-                                <Tab title='Requests' >
+                                <Tab title='Заявки' >
                                     <Gallery
                                         contentType='swaps'
                                         type='request'
@@ -79,7 +80,7 @@ class SwapPage extends Component {
                                     >
                                     </Gallery>
                                 </Tab>
-                                <Tab title='In process'>
+                                <Tab title='В процессе'>
                                     <Gallery
                                         contentType='swaps'
                                         me='reader'
@@ -89,7 +90,7 @@ class SwapPage extends Component {
                                     >
                                     </Gallery>
                                 </Tab>
-                                <Tab title='On hands'>
+                                <Tab title='На руках'>
                                     <Gallery
                                         contentType='swaps'
                                         me='reader'
@@ -103,9 +104,9 @@ class SwapPage extends Component {
                         </Tab>
 
 
-                        <Tab title='My books are red'>
+                        <Tab title='Читают у меня'>
                             <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
-                                <Tab title='Requests' >
+                                <Tab title='Заявки' >
                                     <Gallery
                                     contentType='swaps'
                                         me='owner'
@@ -115,7 +116,7 @@ class SwapPage extends Component {
                                     >
                                     </Gallery>
                                 </Tab>
-                                <Tab title='In process'>
+                                <Tab title='В процессе'>
                                     <Gallery
                                         contentType='swaps'
                                         me='owner'
@@ -125,7 +126,7 @@ class SwapPage extends Component {
                                     >
                                     </Gallery>
                                 </Tab>
-                                <Tab title='On hands'>
+                                <Tab title='На руках'>
                                     <Gallery
                                         contentType='swaps'
                                         me='owner'

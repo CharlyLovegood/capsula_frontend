@@ -89,7 +89,7 @@ class UserPage extends Component {
                         {this.props.library.userLibraryRecieved &&
                             <Scroll object={(title, coverage, id) => <Book title={title} coverage={coverage} key={id} id={id}></Book>} 
                                 objectList={library} 
-                                header='My Books'
+                                header='Мои книги'
                                 id={user.id}>
                             </Scroll>
                         }

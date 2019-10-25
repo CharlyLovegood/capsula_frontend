@@ -2,14 +2,17 @@ import React from 'react';
 import { Box } from 'grommet';
 
 import {Select, Text } from 'grommet';
-import {genresArray} from './../../helpers'
+import {genresArray, genres} from './../../helpers'
 
 
-function Filter() {
+function Filter(props) {
     const [option, setOption] = React.useState();
 
     return (
-            <Select options={genresArray} onChange={({ option }) => setOption(option)} valueLabel={
+            <Select options={genresArray} onChange={({ option }) => {
+                setOption(option);
+                props.updateGenre(genres[option]);
+            }} valueLabel={
                 <Box width='180px'
                     margin='6px'
                     height='41px'

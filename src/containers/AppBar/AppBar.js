@@ -71,7 +71,7 @@ class AppBar extends Component {
                         style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
-                        <UserAvatar key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
+                        <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
                         <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                             <Burger
                                 onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
@@ -94,13 +94,13 @@ class AppBar extends Component {
                                     width='900px'
                                     className={styles.menu_container}
                                 >
-                                    <PrivateLink color='menuTextColor' to={`user/${this.props.user.user.id}/library`} label='My books' />
-                                    <PrivateLink color='menuTextColor' to='/history' label='History' />
-                                    <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
-                                    <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
-                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
-                                    <PrivateLink color='menuTextColor' to='/settings' label='Settings' />
-                                    <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
+                                    <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
+                                    <PrivateLink color='menuTextColor' to='/history' label='История' />
+                                    <PrivateLink color='menuTextColor' to='/swap' label='Обмены' />
+                                    {/* <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' /> */}
+                                    <PrivateLink color='menuTextColor' to='/search' label='Поиск' />
+                                    {/* <PrivateLink color='menuTextColor' to='/settings' label='Settings' /> */}
+                                    {/* <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' /> */}
                                 </Box>
                             </Collapsible>
                         ): (

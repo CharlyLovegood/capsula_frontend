@@ -19,7 +19,7 @@ class LibraryPage extends Component {
                 isLoaded: false,
                 error: null
             },
-            owner: this.props.user.id === this.props.match.params.id
+            owner: Number(this.props.user.id) === Number(this.props.match.params.id)
         }
     }
 
@@ -29,27 +29,25 @@ class LibraryPage extends Component {
 
     componentDidUpdate(prevProps) {
         if(this.props.match.params.id !== prevProps.match.params.id) {
+            this.setState({owner: Number(this.props.user.id) === Number(this.props.match.params.id)});
             this.getLibrary();
         }
     }
 
     getLibrary() {
-        if (this.props.match.params.id) {
-            this.props.getLibrary(this.props.match.params.id);
-        } else {
-            this.props.getLibrary(this.props.user.id);
-        }
+        this.props.getLibrary(this.props.match.params.id);
     }
 
     render() {
         const {library} = this.props;
+
         return (
             <Box direction='column' align='center' width='800px'>
                 {library.userLibraryRecieved && this.state.owner &&
                     <Gallery 
                         object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                         objectList={library.userLibrary}
-                        header='My Books'
+                        header='Мои книги'
                         contentType='books'
                     ></Gallery>
                 }
@@ -57,14 +55,14 @@ class LibraryPage extends Component {
                     <Gallery 
                         object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
                         objectList={library.userLibrary}
-                        header='My Books'
+                        header='Мои книги'
                         contentType='books'
                     ></Gallery>
                 }
                 <Box margin='20px'>
                     <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
                         innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
-                        label='Add Book' 
+                        label='Добавить книгу' 
                         icon={<Add></Add>}>
                     </PopUpButton>
                 </Box>
@@ -82,6 +80,7 @@ const mapState = state => ({
 const actionCreators = {
     getLibrary: libraryActions.getBookListById,
     deleteBook: bookActions.deleteBookById,
+    editBook: bookActions.editBook,
     addBook: bookActions.addBook
 }
 

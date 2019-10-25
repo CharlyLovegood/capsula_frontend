@@ -7,10 +7,9 @@ import { Box } from 'grommet';
 
 class List extends Component {
     render() {
-        console.log(this.props.objectList)
         return (
             <Box flex direction='column' justify='center' align='center'>
-                <h3 className={styles.main_text}>Near you</h3>
+                <h3 className={styles.main_text}>Рядом с вами</h3>
 
                 {this.props.objectList.map((object) => {
                     return(<ListElement {...object}></ListElement>);

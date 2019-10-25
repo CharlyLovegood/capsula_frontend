@@ -28,6 +28,8 @@ class AddNewBook extends Component {
             "title": this.state.bookName,
             "authors": this.state.author,
             "genre": this.state.genre_code,
+            "status": "",
+            "isbn": "",
             'image': this.state.image
         };
           

@@ -28,9 +28,9 @@ class SwapAgreement extends Component {
         return (
             <Box pad='medium' gap='small' width='medium'>
                 <Heading level={3} margin='none'>
-                    Confirm
+                    Подтверждение
                 </Heading>
-                <Text>Are you sure you want to swap?</Text>
+                <Text>Вы уверены, что хотите отправить заявку на обмен?</Text>
                 <Box
                     as='footer'
                     gap='small'
@@ -40,12 +40,12 @@ class SwapAgreement extends Component {
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
                     <Link to='/swap'>
-                        <Button onClick={() => this.swapRequest()} label='Yes' color='dark-3' />
+                        <Button onClick={() => this.swapRequest()} label='Да' color='dark-3' />
                     </Link>
                     <Button
                         label={
                             <Text color='white'>
-                                <strong>No</strong>
+                                <strong>Нет</strong>
                             </Text>
                         }
                         onClick={this.props.onClose}

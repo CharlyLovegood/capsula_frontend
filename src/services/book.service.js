@@ -4,7 +4,8 @@ import { back_url } from './../helpers';
 export const bookService = {
     getBook,
     deleteBook,
-    addBook
+    addBook,
+    editBook
 };
 
 function getBook(id) {
@@ -32,6 +33,27 @@ function deleteBook(id) {
                 return response;
             });
 }
+
+function editBook(book) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {'Authorization': 'Token ' + localStorage.token,
+                'Content-Type': 'application/json'},
+        body: JSON.stringify(book)
+    };
+
+    return fetch(`/library/book_items/${book.id}`, requestOptions)
+        .then(
+            response => {
+                console.log(response);
+                return response;
+            },
+            error => {
+                console.log(error);
+            });
+}
+
+
 
 function addBook(book) {
     const requestOptions = {

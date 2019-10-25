@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './SearchElement.module.css'
 import { Box, Image, Text } from 'grommet';
+import { Link } from 'react-router-dom';
 
 function SearchElement(props) {
     return (
@@ -16,9 +17,11 @@ function SearchElement(props) {
                 src={props.imageUrl}
                 style={{ borderRadius: '100%' }}
             />
-            <Text>
-                <strong>{props.name}</strong>
-            </Text>
+            <Link className={styles.link} to={`/book/${props.id}`}>
+                <Text>
+                    <strong>{props.name}</strong>
+                </Text>
+            </Link>
         </Box>
     )
 }

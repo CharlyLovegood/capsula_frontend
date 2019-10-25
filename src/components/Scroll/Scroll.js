@@ -31,8 +31,8 @@ class Scroll extends Component {
             if (rem !== 0) {
                 let i;
                 for (i = 0; i < 4 - rem; i++) {
-                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*35},
-                    id: i*45,
+                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*(-35)},
+                    id: i*(-45),
                     image: remote_url.images.scroll_additional_book,
                     status: 0})
                 }
@@ -72,10 +72,9 @@ class Scroll extends Component {
             <SizeComponent>
                 {size => (
                 <Box direction='column' align='center' className={styles.scroll_container}>
-                    <Link to={`/user/${this.props.id}/library/`}>
+                    <Link className={styles.header} to={`/user/${this.props.id}/library/`}>
                         {this.props.header}
                     </Link>
-                    <h3 className={styles.header}>{this.props.header}</h3>
                     <Box direction='column' align='center'>
                         <Box 
                             flex 

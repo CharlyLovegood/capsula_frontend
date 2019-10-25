@@ -10,24 +10,23 @@ function BookCard(props) {
     switch (props.type) {
         case 'proposal':
             ButtonBlock = (<Box width='130px' direction='column' gap='5px'>
-                                <Button margin='5px' color='brand' fill='vertical' label='Accept' onClick={() => props.handleAccept(props.id)}></Button>
-                                <Button margin='5px' color='dark-3' fill='vertical' label='Reject' onClick={() => props.handleReject(props.id)}></Button>
+                                <Button margin='5px' color='brand' fill='vertical' label='Принять' onClick={() => props.handleAccept(props.id)}></Button>
+                                <Button margin='5px' color='dark-3' fill='vertical' label='Отклонить' onClick={() => props.handleReject(props.id)}></Button>
                             </Box>);
             break;
         case 'request':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Cancel' onClick={() => props.handleReject(props.id)}></Button>);
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Отменить' onClick={() => props.handleReject(props.id)}></Button>);
             break;
         case 'inProcess':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Delivered' onClick={() => props.handleBookDelivered(props.id)}></Button>);
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Получено' onClick={() => props.handleBookDelivered(props.id)}></Button>);
             break;
         case 'onHands':
-            ButtonBlock = (<Button margin='5px' fill='vertical' label='Finish' onClick={() => props.handleFinishSwap(props.id)}></Button>); 
+            ButtonBlock = (<Button margin='5px' fill='vertical' label='Возвращено' onClick={() => props.handleFinishSwap(props.id)}></Button>); 
             break;
         default:
             ButtonBlock = (<Box></Box>);
             break;
     }
-
 
     return (
         <Box fill 
@@ -40,10 +39,15 @@ function BookCard(props) {
             <Book size='small' title={props.title} coverage={props.coverage} key={props.id}></Book>
             <Box flex='grow' direction='column' pad='0px'>
                 <h3 className={styles.text_header}>{props.title}</h3>
-                <p className={styles.text}>Reqiested by: <Link to=''>{props.user}</Link></p>
-                <p className={styles.text}>Request was sent: {props.date}</p>
+                {props.owner &&
+                    <p className={styles.text}>Владелец: <Link to=''>{props.owner}</Link></p>
+                }
+                {props.reader &&
+                    <p className={styles.text}>Запрос отправлен: <Link to=''>{props.reader}</Link></p>
+                }
+                <p className={styles.text}>Дата: {props.date}</p>
             </Box>
-            <Box width='130px'>
+            <Box width='162px'>
                 {ButtonBlock}
             </Box>
         </Box>

@@ -79,10 +79,10 @@ class LoginPage extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component='h1' variant='h5'>
-                        Log in
+                        Вход
                     </Typography>
 
-                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
+                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>}
 
                     <ValidatorForm
                         ref="form"
@@ -96,7 +96,7 @@ class LoginPage extends Component {
                                 required
                                 fullWidth
                                 id='username'
-                                label='User Name'
+                                label='Имя пользователя'
                                 name='username'
                                 autoComplete='username'
                                 autoFocus
@@ -109,7 +109,7 @@ class LoginPage extends Component {
                                 required
                                 fullWidth
                                 name='password'
-                                label='Password'
+                                label='Пароль'
                                 type='password'
                                 id='password'
                                 autoComplete='current-password'
@@ -127,12 +127,12 @@ class LoginPage extends Component {
                                 disabled={submitted}
                                 fullWidth
                             >
-                                Log In
+                                Войти
                             </Button>
                         </div>
                     </ValidatorForm>
                     <Grid container justify='flex-end'>
-                        <PrivateLink color='textColor' to='/register' label="Don't have an account? Register"></PrivateLink>
+                        <PrivateLink color='textColor' to='/register' label="Зарегистрироваться"></PrivateLink>
                     </Grid>
                 </div>
             </Container>

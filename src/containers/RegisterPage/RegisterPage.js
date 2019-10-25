@@ -74,7 +74,7 @@ class RegisterPage extends Component {
                     </Avatar>
 
                     <Typography component='h1' variant='h5' >
-                        Register
+                        Регистрация
                     </Typography>
 
                     {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
@@ -93,7 +93,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='firstname'
                                     id='firstname'
-                                    label='First Name'
+                                    label='Имя'
                                     value={user.firstname}
                                     onChange={ event => this.handleChange(event) }
                                 />
@@ -105,7 +105,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='lastName'
                                     id='lastName'
-                                    label='Last Name'
+                                    label='Фамилия'
                                     value={user.lastName}
                                     onChange={ event => this.handleChange(event) }
                                 />
@@ -117,7 +117,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='username'
                                     id='username'
-                                    label='User Name'
+                                    label='Имя пользователя'
                                     value={user.username}
                                     onChange={ event => this.handleChange(event) }
                                 />
@@ -129,7 +129,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='email'
                                     id='email'
-                                    label='Email Address'
+                                    label='Email'
                                     value={user.email}
                                     validators={['required', 'isEmail']}
                                     errorMessages={['this field is required', 'email is not valid']}
@@ -143,7 +143,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='password'
                                     id='password'
-                                    label='Password'
+                                    label='Пароль'
                                     value={user.password}
                                     type='password'
                                     onChange={ event => this.handleChange(event) }
@@ -156,7 +156,7 @@ class RegisterPage extends Component {
                                     variant='outlined'
                                     name='repeatPassword'
                                     id='repeatPassword'
-                                    label='Repeat password'
+                                    label='Подтверждение пароля'
                                     value={user.repeatPassword}
                                     type='password'
                                     validators={['isPasswordMatch', 'required']}
@@ -173,7 +173,7 @@ class RegisterPage extends Component {
                                     disabled={submitted}
                                 >
                                     {(submitted && 'Your form is submitted!')
-                                        || (!submitted && 'Submit')
+                                        || (!submitted && 'Зарегистрироваться')
                                     }
                                 </Button>
                             </div>
@@ -181,7 +181,7 @@ class RegisterPage extends Component {
                     </ValidatorForm>
 
                     <Grid container justify='flex-end'>
-                        <PrivateLink color='textColor' to='/login' label='Already have an account? Log in' />
+                        <PrivateLink color='textColor' to='/login' label='Войти' />
                     </Grid>
                 </div>
             </Container>

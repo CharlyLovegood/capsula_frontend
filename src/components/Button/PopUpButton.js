@@ -19,6 +19,7 @@ const PopUpButton = (props) => {
                         </Text>
                     }
                     onClick={onOpen}
+                    fill='horizontal'
                 />
             </Box>
             {open && (

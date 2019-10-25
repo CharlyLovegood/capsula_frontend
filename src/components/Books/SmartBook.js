@@ -3,7 +3,7 @@ import styles from './Book.module.css';
 import { Link } from 'react-router-dom';
 import { Box } from 'grommet';
 import { Close, More, Edit } from 'grommet-icons';
-import { Button } from 'grommet';
+import { Button, Text } from 'grommet';
 
 import { remote_url } from './../../helpers';
 import PopUpButton from './../Button/PopUpButton';
@@ -15,7 +15,7 @@ const SmartBook = (props) => {
     const [bookCoverage, setBookCoverage] = React.useState(props.coverage ? props.coverage : defaultCoverage);
 
     return (
-        <Box className={styles.book_card}>
+        <Box width='160px' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
                 <Box className={styles.book_card_front}>
                     <img 
@@ -25,7 +25,7 @@ const SmartBook = (props) => {
                         onError={() => {setBookCoverage(defaultCoverage)}}>
                     </img>
                 </Box>
-                <Box background='brand' pad='10px' align='center' justify='around' className={styles.book_card_back}>
+                <Box background='brand' pad={{horizontal: '5px', vertical: '20px'}} align='center' justify='end' className={styles.book_card_back}>
                     <img 
                         alt='book coverage' 
                         src={bookCoverage} 
@@ -38,15 +38,23 @@ const SmartBook = (props) => {
                     <Box gap='15px'>
                         <PopUpButton fill='horizontal' forceUpdate={null}
                             innerObject={(onclose, forceUpdate) => <EditBook genre={props.genre} author={props.author} title={props.title} coverage={bookCoverage} id={props.id} editBook={(book) => props.handleEditBook(book)} onClose={onclose} forceUpdate={forceUpdate} />} 
-                            label='Edit' 
+                            label='Изменить' 
                             icon={<Edit color='accent-1'></Edit>}>
                         </PopUpButton>
+
                         <Link to={'/book/' + props.idAbstract} >
-                            <Button fill='horizontal' icon={<More color='accent-1'></More>} label='Info'/>
+                            <Box  align='center' justify='center'>
+                                <Button fill='horizontal' icon={<More color='accent-1'></More>} label={
+                                    <Text>
+                                        <strong>Подробнее</strong>
+                                    </Text>
+                                }/>
+                            </Box>
                         </Link>
+
                         <PopUpButton forceUpdate={null}
                             innerObject={(onclose, forceUpdate) => <ConfirmDeleteBook id={props.id} deleteBook={(book) => props.handleDeleteBook(book)} onClose={onclose} forceUpdate={forceUpdate}></ConfirmDeleteBook>} 
-                            label='Delete' 
+                            label='Удалить' 
                             icon={<Close color='accent-1'></Close>}>
                         </PopUpButton>
                     </Box>

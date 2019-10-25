@@ -21,11 +21,11 @@ import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
 import HistoryPage from './containers/HistoryPage/HistoryPage';
+import OAuthPage from './containers/OAuthPage/OAuthPage';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
 import { alertActions } from './store/actions';
-
 
 
 
@@ -92,6 +92,7 @@ class App extends Component {
                             <PrivateRoute path='/search' component={ SearchPage } />
                             <PrivateRoute path='/history' component={ HistoryPage } />
                             <PrivateRoute path='/settings' component={ SettingsPage } />
+                            <PrivateRoute path='/greetings' component={ OAuthPage } />
                             <AuthRoute exact path='/register' component={ RegisterPage } />
                             <AuthRoute exact path='/login' component={ LoginPage } />
                         </Switch>

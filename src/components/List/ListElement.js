@@ -19,9 +19,11 @@ function ListElement(props) {
             </Link>
             <Box direction='column' width='100%'> 
                 <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
-                <p className={styles.text}>0,3 km from you</p>
+                <p className={styles.text}></p>
             </Box>
-            <PopUpButton innerObject={onclose => <SwapAgreement bookId={props.id} onClose={onclose}></SwapAgreement>} label='Swap' icon={<Transaction></Transaction>}></PopUpButton>
+            <Box width='180px'>
+                <PopUpButton  fill='horizontal' innerObject={onclose => <SwapAgreement bookId={props.id} onClose={onclose}></SwapAgreement>} label='Обмен' icon={<Transaction></Transaction>}></PopUpButton>
+            </Box>
         </Box>
     )
 }

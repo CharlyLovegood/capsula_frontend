@@ -133,7 +133,9 @@
 
   .book_cover_back {
     position: absolute;
+    top: 0px;
     background-size: cover;
+    object-fit: cover;
     height: 250px;
     width: 160px;
     object-fit: cover;
