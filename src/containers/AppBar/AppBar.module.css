@@ -1,12 +1,13 @@
 .logo {
     text-decoration: none;
     color: black;
-    margin-top: 60px;
     font-size: 28px;
 }
 
 .logo_container {
-    height: 0px;
+    /* height: 0px; */
+    position: absolute;
+    margin-top: 15px;
 }
 
 .right_side_button {
@@ -18,4 +19,9 @@
 
 .menu_container {
     position: relative;
+}
+
+.header {
+    position: relative;
+    margin-bottom: 10px;
 }

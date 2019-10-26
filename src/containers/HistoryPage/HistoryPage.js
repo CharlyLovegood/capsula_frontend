@@ -34,17 +34,29 @@ class HistoryPage extends Component {
 
     render() {
         const {swap} = this.props;
+        console.log(swap)
         return (
             <Box direction='column' align='center' fill>
                 <Box direction='column' margin='5px' width='800px'>
                     {swap.swapsRecieved &&
+                    <Box>
+                        <Gallery
+                            type='request'
+                            contentType='swaps'
+                            me='reader'
+                            object={this.objectCallBack} 
+                            objectList={swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})}
+                        >
+                        </Gallery>
                         <Gallery
                             type='request'
                             me='reader'
+                            contentType='swaps'
                             object={this.objectCallBack} 
-                            objectList={swap.swapsList.owner.filter(function(item){ return (item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)})}
+                            objectList={swap.swapsList.reader.filter(function(item){ return (item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)})}
                         >
                         </Gallery>
+                    </Box>
                     }
                 </Box>
             </Box>

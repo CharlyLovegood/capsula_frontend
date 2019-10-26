@@ -33,7 +33,7 @@ class AddNewBook extends Component {
             'image': this.state.image
         };
           
-        this.props.handleEditBook(book);
+        this.props.editBook(book, this.props.id);
         this.props.onClose();
     }
 
@@ -89,7 +89,7 @@ class AddNewBook extends Component {
                     justify='end'
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Link to='/library'>
+                    <Link to='#'>
                         <Button label='Yes' color='dark-3' onClick={event => this.handleSubmit(event)}/>
                     </Link>
                     <Button

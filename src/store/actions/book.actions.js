@@ -5,7 +5,8 @@ import { alertActions } from './';
 export const bookActions = {
     getBook,
     deleteBookById,
-    addBook
+    addBook,
+    editBook
 };
 
 
@@ -71,4 +72,26 @@ function addBook(book) {
     function request(book) { return { type: bookConstants.ADD_BOOK_REQUEST, book } }
     function success(book) { return { type: bookConstants.ADD_BOOK_SUCCESS, book } }
     function failure(error) { return { type: bookConstants.ADD_BOOK_FAILURE, error } }
+}
+
+
+function editBook(book, bookId) {
+    return dispatch => {
+        dispatch(request({ book }));
+        console.log(book, bookId)
+        bookService.editBook(book, bookId)
+            .then(
+                response => { 
+                    dispatch(success(book));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(book) { return { type: bookConstants.EDIT_BOOK_REQUEST, book } }
+    function success(book) { return { type: bookConstants.EDIT_BOOK_SUCCESS, book } }
+    function failure(error) { return { type: bookConstants.EDIT_BOOK_FAILURE, error } }
 }

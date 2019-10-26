@@ -36,7 +36,7 @@ class SearchPage extends Component {
 
     renderSearchResult = () => {
         const { value, suggestedList } = this.state;
-        return suggestedList.filter(({ title, genre }) => {
+        const res = suggestedList.filter(({ title, genre }) => {
             if (this.state.genre !== ''){
                 return  (title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && genre === this.state.genre)
             } else {
@@ -47,6 +47,11 @@ class SearchPage extends Component {
         .map(({ title, id }) => (
             <SearchElement id={id} key={id} name={title}></SearchElement>
         ));
+        if (res.length === 0 && value !== '') {
+            return [<SearchElement id={'no res'} key={'no res'} name={'Nothing was found :('}></SearchElement>]
+        } else {
+            return res;
+        }
         
     };
   

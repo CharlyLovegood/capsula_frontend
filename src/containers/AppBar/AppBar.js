@@ -46,7 +46,7 @@ class AppBar extends Component {
             this.props.user.loggedIn === true ? 
             (<ResponsiveContext.Consumer>
                 {size => (
-                <Box align='center'>
+                <Box align='center' className={styles.header} >
                     <Box
                         direction='row'
                         align='center'
@@ -56,9 +56,10 @@ class AppBar extends Component {
                         style={{ zIndex: '10' }}
                         className={styles.logo_container}
                     >   
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
-                        </Link>
+                        <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
+                        <PrivateLink color='menuTextColor' to='/history' label='История' />
+                        <PrivateLink color='menuTextColor' to='/swap' label='Обмены' />
+                        <PrivateLink color='menuTextColor' to='/search' label='Поиск' />
                     </Box>
 
                     <Box
@@ -71,69 +72,12 @@ class AppBar extends Component {
                         style={{ zIndex: '1'}}
                         pad={{ horizontal: '-10px', vertical: 'xsmall' }}
                     >
-                        <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
-                        <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
-                            <Burger
-                                onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
-                                isOpen = {this.state.showSidebar}
-                            />
+                        <Link to='/' style={{ textDecoration: 'none' }}>
+                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
+                        </Link>
+                        <Box margin={{ vertical: 'xsmall' }}>
+                            <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
                         </Box>
-                    </Box>
-
-                    <Box flex direction='column' overflow={{ horizontal: 'hidden' }}>
-                        {(!showSidebar || size !== 'small') ? (
-                            <Collapsible direction='vertical' open={showSidebar}>
-                                <Box
-                                    flex
-                                    direction='row'
-                                    elevation='xsmall'
-                                    align='center'
-                                    justify='center'
-                                    height='200px'
-                                    pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
-                                    width='900px'
-                                    className={styles.menu_container}
-                                >
-                                    <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
-                                    <PrivateLink color='menuTextColor' to='/history' label='История' />
-                                    <PrivateLink color='menuTextColor' to='/swap' label='Обмены' />
-                                    {/* <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' /> */}
-                                    <PrivateLink color='menuTextColor' to='/search' label='Поиск' />
-                                    {/* <PrivateLink color='menuTextColor' to='/settings' label='Settings' /> */}
-                                    {/* <Button className={styles.right_side_button} onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' /> */}
-                                </Box>
-                            </Collapsible>
-                        ): (
-                            <Layer>
-                                <Box
-                                    background='background'
-                                    tag='header'
-                                    justify='end'
-                                    align='center'
-                                    direction='row'
-                                >
-                                    <Button
-                                        icon={<FormClose />}
-                                        onClick={() => this.setState({ showSidebar: false })}
-                                    />
-
-                                </Box>
-                                <Box
-                                    fill
-                                    background='background'
-                                    align='center'
-                                    justify='center'
-                                >
-                                    <SearchBar></SearchBar>
-                                    <PrivateLink color='menuTextColor' to='/library' label='My books' />
-                                    <PrivateLink color='menuTextColor' to='/history' label='History' />
-                                    <PrivateLink color='menuTextColor' to='/swap' label='Swap' />
-                                    <PrivateLink color='menuTextColor' to='/wishlist' label='Wishlist' />
-                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
-                                    <Button onClick={event => this.handleLogOut(event)} margin='medium' plain label='Log Out' />
-                                </Box>
-                            </Layer>
-                        )}
                     </Box>
                 </Box>)}
             </ResponsiveContext.Consumer>)
