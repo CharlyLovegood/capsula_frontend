@@ -21,6 +21,7 @@ export function library(state=initialState, action) {
             }
         case bookConstants.DELETE_BOOK_SUCCESS:
             userLibrary = state.userLibrary;
+            console.log(userLibrary)
             userLibrary = userLibrary.filter(function(item) {
                 return item.id !== action.bookId
             })

@@ -29,7 +29,7 @@ class ConfirmDeleteBook extends Component {
                     justify='end'
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Link to='/library'>
+                    <Link to='#'>
                         <Button label='Yes' color='dark-3' onClick={() => this.handleSubmit()}/>
                     </Link>
                     <Button
