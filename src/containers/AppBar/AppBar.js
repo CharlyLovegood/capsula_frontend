@@ -82,11 +82,11 @@ class AppBar extends Component {
                             pad='0px'
                             style={{ zIndex: '10' }}
                         >   
-                            <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
-                            <PrivateLink color='menuTextColor' to='/history' label='История' />
-                            <PrivateLink color='menuTextColor' to='/reader' label='Читатель' />
-                            <PrivateLink color='menuTextColor' to='/owner' label='Владелец' />
-                            <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
+                            <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги' />
+                            <PrivateLink color='menuTextColor' to='/history' label='История' key='История' />
+                            <PrivateLink color='menuTextColor' to='/reader' label='Читатель' key='Читатель' />
+                            <PrivateLink color='menuTextColor' to='/owner' label='Владелец' key='Владелец' />
+                            <PrivateLink color='menuTextColor' to='/rules' label='Правила' key='Правила' />
                         </Box>
                     </Box>
                 </Box>
@@ -136,12 +136,12 @@ class AppBar extends Component {
                                 align='center'
                                 justify='center'
                             >
-                                <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
-                                <PrivateLink color='menuTextColor' to='/history' label='История' />
-                                <PrivateLink color='menuTextColor' to='/reader' label='Читатель' />
-                                <PrivateLink color='menuTextColor' to='/owner' label='Владелец' />
-                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
-                                <PrivateLink color='menuTextColor' onClick={event => this.handleLogOut(event)} label='Выйти' />
+                                <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
+                                <PrivateLink color='menuTextColor' to='/history' label='История' key='История'/>
+                                <PrivateLink color='menuTextColor' to='/reader' label='Читатель' key='Читатель'/>
+                                <PrivateLink color='menuTextColor' to='/owner' label='Владелец' key='Владелец'/>
+                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
+                                <PrivateLink color='menuTextColor' to='#' onClick={event => this.handleLogOut(event)} label='Выйти' key='Выйти'/>
                             </Box>
                         </Layer>
                         }

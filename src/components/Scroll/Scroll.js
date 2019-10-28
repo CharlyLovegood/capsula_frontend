@@ -24,8 +24,8 @@ class Scroll extends Component {
 
     calculateWidth(size) {
         if (size >= 800) return 'xlarge'
-        else if (size >= 620) return '620px'
-        else if (size >= 400) return '430px'
+        else if (size >= 600) return '600px'
+        else if (size >= 400) return '400px'
         else if (size >= 200) return 'small'
         else return 'xlarge'
     }
@@ -35,7 +35,7 @@ class Scroll extends Component {
         if (size >= 800) {
             inRow = 4;
         }
-        else if (size >= 620) {
+        else if (size >= 600) {
             inRow = 3;
         }
         else if (size >= 400) {

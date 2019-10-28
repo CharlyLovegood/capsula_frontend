@@ -17,6 +17,7 @@ class Gallery extends Component {
     }
 
     render() {
+        console.log(this.props.objectList.length == 0)
         return (
             <SizeComponent>
                 {size => (
@@ -38,6 +39,9 @@ class Gallery extends Component {
                             {this.props.contentType === 'swaps' && this.props.objectList.map(({authors, book, date, genre, id, image, reader, owner, status}) => {
                                 return(this.props.object(authors, book, date, genre, id, image, reader, owner, status, this.props.type))
                             })}
+                            {this.props.objectList.length === 0 &&
+                                <Box fill align='center' color='black'>{this.props.message}</Box>
+                            }
                         </Box>
                     </Box>
                 )}

@@ -3,7 +3,6 @@
     display: inline-block;
     padding: 5px;
     position: relative;
-    color: #7a7171;
     text-transform: uppercase;
 }
 
@@ -34,4 +33,11 @@
 .box{ 
     display: table-cell; 
     position: relative; 
+    color: #7a7171;
+}
+
+.active {
+    color: #7d4cdb;
+    color: black;
+
 }

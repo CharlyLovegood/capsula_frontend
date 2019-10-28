@@ -19,6 +19,7 @@ function Book(props) {
             <Box background={`url(${bookCoverage})`} 
                 width='book-width' 
                 height='book-height'
+                margin={props.margin}
                 animation={props.animation}>
             </Box>
         </Link>

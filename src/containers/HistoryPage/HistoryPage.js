@@ -37,6 +37,7 @@ class HistoryPage extends Component {
                     {swap.swapsRecieved &&
                     <Box align='center'>
                         <Gallery
+                            message='Здесь будет отображаться история ваших заявок и обменов'
                             contentType='swaps'
                             me='owner'
                             object={this.objectCallBack} 

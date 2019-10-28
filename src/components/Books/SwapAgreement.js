@@ -30,6 +30,14 @@ class SwapAgreement extends Component {
                     Подтверждение
                 </Heading>
                 <Text>Вы уверены, что хотите отправить заявку на обмен?</Text>
+                <Text>
+                    После этого владелец книги получит вашу заявку. 
+                    Если он решит принять ее, заявка перейдет из раздела "Заявки" в "В процессе" (вкладка Читатель), где вам станут доступны контакты владельца.
+                    Если же владелец отклонит заявку, она перейдет во вкладку "История".
+                </Text>
+                <Text>
+                    Более подробно о правилах сервиса вы можете узнать во вкладке Правила
+                </Text>
                 <Box
                     as='footer'
                     gap='small'
@@ -38,7 +46,7 @@ class SwapAgreement extends Component {
                     justify='end'
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Link to='/swap'>
+                    <Link to='/reader'>
                         <Button onClick={() => this.swapRequest()} label='Да' color='dark-3' />
                     </Link>
                     <Button

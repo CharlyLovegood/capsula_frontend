@@ -15,12 +15,13 @@ function Element(props) {
                 background='white'
                 pad='20px'
                 elevation='small'
-                border={{ color: 'brandDark', size: 'small' }}
+                border={{ color: 'brandDark', size: 'xsmall' }}
                 round='5px'
             >
                 <Box margin='20px'>
                     {props.icon}
                 </Box>
+                <hr align="center" width='100%' size="1" color="#46135d" />
                 <Text textAlign='center' weight='bold' color='brandDark'>{props.text}</Text>
             </Box>}
         </SizeComponent>

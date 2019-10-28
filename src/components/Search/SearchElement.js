@@ -19,24 +19,25 @@ function SearchElement(props) {
         </Box>)
     } else {
         return (
-            <Box
-                direction='row'
-                align='center'
-                gap='small'
-                pad='small'
-                className={styles.container}
-            >
-                <Image
-                    width='70px'
-                    src={props.image}
-                />
-                <Box direction='column'>
-                    <Link className={styles.link} to={`/book/${props.id}`}>
+            <Link className={styles.link} to={`/book/${props.id}`}>
+                <Box
+                    direction='row'
+                    align='center'
+                    gap='small'
+                    pad='small'
+                    className={styles.container}
+                >
+                    <Image
+                        width='70px'
+                        src={props.image}
+                    />
+                    <Box direction='column'>
+                        
                         <strong>{props.name}</strong>
-                    </Link>
-                    <strong>Автор: {props.author}</strong>
+                        <strong>Автор: {props.author}</strong>
+                    </Box>
                 </Box>
-            </Box>
+            </Link>
         )
     }
 }

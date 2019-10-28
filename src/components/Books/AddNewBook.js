@@ -51,18 +51,19 @@ class AddNewBook extends Component {
 
     render() {
         return (
-            <Box pad='medium' gap='small' width='medium' align='center'>
+            <Box pad='medium' gap='small' width='medium' align='center' fill>
                 <Heading level={3} margin='none'>
-                    Confirm
+                    Добавить книгу
                 </Heading>
                 <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
+                <Text>Обложка</Text>
                 <TextField
                     variant='outlined'
                     margin='normal'
                     required
                     fullWidth
                     id='bookname'
-                    label='Book Name'
+                    label='Название книги'
                     name='bookname'
                     autoComplete='bookname'
                     autoFocus
@@ -74,12 +75,12 @@ class AddNewBook extends Component {
                     required
                     fullWidth
                     id='author'
-                    label='Author'
+                    label='Автор (Фамилия И.О.)'
                     name='author'
                     autoComplete='author'
                     onChange={ event => this.handleAuthorChange(event) }>
                 </TextField>
-                <Box fill>
+                <Box fill='horizontal'>
                     <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
                 </Box>
                 <Box
@@ -91,12 +92,12 @@ class AddNewBook extends Component {
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
                     <Link to='#'>
-                        <Button label='Yes' color='dark-3' onClick={event => this.handleSubmit(event)}/>
+                        <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
                     </Link>
                     <Button
                         label={
                             <Text color='white'>
-                                <strong>No</strong>
+                                <strong>Нет</strong>
                             </Text>
                         }
                         onClick={this.props.onClose}
