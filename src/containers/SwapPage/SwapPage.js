@@ -48,7 +48,7 @@ class SwapPage extends Component {
                 handleBookDelivered={id => this.handleBookDelivered(id)}
                 handleFinishSwap={id => this.handleFinishSwap(id)}        
                 margin='10px' 
-                title={book} 
+                book={book} 
                 key={id}
                 authors={authors}
                 date={date}
@@ -60,85 +60,81 @@ class SwapPage extends Component {
         )
     }
 
+    
     render() {
         const onActive = nextIndex => this.setState({index: nextIndex});
         const {swap} = this.props;
         return (
-            <Box direction='column' align='center' fill>
-                <Box direction='row' margin='5px' width='800px'>
-                    {swap.swapsRecieved &&
-                    <Tabs>
-                        <Tab title='Читаю'>
-                            <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
-                                <Tab title='Заявки' >
-                                    <Gallery
-                                        contentType='swaps'
-                                        type='request'
-                                        me='reader'
-                                        object={this.objectCallBack} 
-                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                                <Tab title='В процессе'>
-                                    <Gallery
-                                        contentType='swaps'
-                                        me='reader'
-                                        type='inProcess'
-                                        object={this.objectCallBack} 
-                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                                <Tab title='На руках'>
-                                    <Gallery
-                                        contentType='swaps'
-                                        me='reader'
-                                        type='onHands'
-                                        object={this.objectCallBack}
-                                        objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                            </Tabs>
-                        </Tab>
+            <Box direction='column' align='center' fill pad='10px'>
+                <Box direction='column' width='xlarge' align='center'>
 
-
-                        <Tab title='Читают у меня'>
-                            <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
-                                <Tab title='Заявки' >
-                                    <Gallery
+                    {swap.swapsRecieved && this.props.match.path === '/reader' &&
+                        <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                            <Tab title='Заявки' >
+                                <Gallery
                                     contentType='swaps'
-                                        me='owner'
-                                        type='proposal'
-                                        object={this.objectCallBack} 
-                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                                <Tab title='В процессе'>
-                                    <Gallery
-                                        contentType='swaps'
-                                        me='owner'
-                                        type='inProcess'
-                                        object={this.objectCallBack}
-                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                                <Tab title='На руках'>
-                                    <Gallery
-                                        contentType='swaps'
-                                        me='owner'
-                                        type='onHands'
-                                        object={this.objectCallBack} 
-                                        objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
-                                    >
-                                    </Gallery>
-                                </Tab>
-                            </Tabs>
-                        </Tab>
-                    </Tabs>
+                                    type='request'
+                                    me='reader'
+                                    object={this.objectCallBack} 
+                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                >
+                                </Gallery>
+                            </Tab>
+                            <Tab title='В процессе'>
+                                <Gallery
+                                    contentType='swaps'
+                                    me='reader'
+                                    type='inProcess'
+                                    object={this.objectCallBack} 
+                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                >
+                                </Gallery>
+                            </Tab>
+                            <Tab title='На руках'>
+                                <Gallery
+                                    contentType='swaps'
+                                    me='reader'
+                                    type='onHands'
+                                    object={this.objectCallBack}
+                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
+                                >
+                                </Gallery>
+                            </Tab>
+                        </Tabs>
+                    }
+                    {swap.swapsRecieved && this.props.match.path === '/owner' &&
+                        <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                            <Tab title='Заявки' >
+                                <Gallery
+                                contentType='swaps'
+                                    me='owner'
+                                    type='proposal'
+                                    object={this.objectCallBack} 
+                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                >
+                                </Gallery>
+                            </Tab>
+                            <Tab title='В процессе'>
+                                <Gallery
+                                    contentType='swaps'
+                                    me='owner'
+                                    type='inProcess'
+                                    object={this.objectCallBack}
+                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                >
+                                </Gallery>
+                            </Tab>
+                            <Tab title='На руках'>
+                                <Gallery
+                                    contentType='swaps'
+                                    me='owner'
+                                    type='onHands'
+                                    object={this.objectCallBack} 
+                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
+                                >
+                                </Gallery>
+                            </Tab>
+                        </Tabs>
                     }
                 </Box>
             </Box>

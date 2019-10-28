@@ -1,21 +1,71 @@
-import { Carousel, Image, Box } from 'grommet';
+import { Box, Heading, Button, Text } from 'grommet';
 import React, { Component } from 'react';
 import { remote_url } from './../../helpers';
 import style from './Banner.module.css';
+import {Link} from 'react-router-dom';
 
 class Banner extends Component {
     render() {
+        if (this.props.size === 'small') {
+            return(
+            <Box fill direction='column' align='center'>
+                <Box className={style.box} height='500px' width='100%'>
+                </Box>
+                
+                <Box pad='10px' margin={{horizontal:'20px', vertical: '-20px'}} background='white' align='center' className={style.title_box}>
+                    <Heading size='40px' color='black' margin={{horizontal:'0px', vertical: '0px'}} textAlign='center' alignSelf='center' level='1'>Открывай для себя новые миры, делись своими</Heading>
+                    {!this.props.user.loggedIn &&
+                        <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
+                            <Box fill>
+                                <Link color='textColor' to='/register'>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                </Link>
+                            </Box>
+                            <Box fill>
+                                <Link color='textColor' to='/login'>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'>Войти</Text>}></Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    }
+                </Box>
+            </Box>
+            )
+        }
         return (
             <Box
-                height='600px'
-                width='900px'
+                pad='10px'
+                height='480px'
+                width='xlarge'
+                className={style.container}
+                direction='row'
+                justify='between'
+                align='start'
+                
             >
+                <Box width='50%' direction='column'>
+                    <Heading size='50px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Открывай для себя новые миры, делись своими!</Heading>
+                    
+                    {!this.props.user.loggedIn &&
+                        <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
+                            <Box fill>
+                                <Link color='textColor' to='/register'>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                </Link>
+                            </Box>
+                            <Box fill>
+                                <Link color='textColor' to='/login'>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'>Войти</Text>}></Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    }
+                </Box>
+                <Box elevation='small' height='100%' width='400px' className={style.box}></Box>
+
                 {/* <Box className={style.container}>
                     <img src={remote_url.images.banner} className={style.banner}></img>
                 </Box> */}
-                <Carousel fill  controls='selectors'>
-                    <Image style={{transform: 'rotate(90)'}} fit='cover' src={remote_url.images.banner} />
-                </Carousel> 
             </Box>
         )
     }

@@ -3,7 +3,8 @@
     display: inline-block;
     padding: 5px;
     position: relative;
-    color: #3a3a3a;
+    color: #7a7171;
+    text-transform: uppercase;
 }
 
 .link:after { 

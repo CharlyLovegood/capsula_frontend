@@ -8,13 +8,9 @@ import {
     Button,
     Collapsible,
     Heading,
-    Layer,
-    ResponsiveContext
+    Layer
 } from 'grommet';
-import { FormClose } from 'grommet-icons';
-
-import Burger from '@animated-burgers/burger-slip';
-import '@animated-burgers/burger-slip/dist/styles.css' 
+import { Search, Menu, FormClose } from 'grommet-icons';
 
 import SearchBar from '../SearchBar/SearchBar';
 import UserAvatar from '../../components/UserProfile/UserAvatar';
@@ -22,6 +18,7 @@ import PrivateLink from '../../components/PrivateLink/PrivateLink';
 
 import styles from './AppBar.module.css';
 import { Link } from 'react-router-dom';
+import SizeComponent from '../../components/SizeComponent/SizeComponent';
 
 
 
@@ -43,136 +40,180 @@ class AppBar extends Component {
     render() {
         let showSidebar = this.state.showSidebar;
         return (    
-            this.props.user.loggedIn === true ? 
-            (<ResponsiveContext.Consumer>
+            this.props.user.loggedIn === true ?
+            
+            (<SizeComponent>
                 {size => (
+                size >= 600 ?
                 <Box align='center' className={styles.header} >
-                    <Box
-                        direction='row'
-                        align='center'
-                        baseline='center'
-                        justify='center'
-                        pad='0px'
-                        style={{ zIndex: '10' }}
-                        className={styles.logo_container}
-                    >   
-                        <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
-                        <PrivateLink color='menuTextColor' to='/history' label='История' />
-                        <PrivateLink color='menuTextColor' to='/swap' label='Обмены' />
-                        <PrivateLink color='menuTextColor' to='/search' label='Поиск' />
-                    </Box>
+                    <Box>
+                        <Box
+                            width='xlarge'
+                            tag='header'
+                            direction='row'
+                            align='center'
+                            baseline='center'
+                            style={{ zIndex: '1'}}
+                            pad={{ horizontal: '17px'}}
+                        >
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                            </Link>
 
-                    <Box
-                        width='900px'
-                        tag='header'
-                        direction='row'
-                        align='center'
-                        baseline='center'
-                        justify='between'
-                        style={{ zIndex: '1'}}
-                        pad={{ horizontal: '-10px', vertical: 'xsmall' }}
-                    >
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
-                        </Link>
-                        <Box margin={{ vertical: 'xsmall' }}>
-                            <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
+                            <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
+                                <Box>
+                                    <Button icon={<Search></Search>} onClick={() => this.setState({showSidebar: !this.state.showSidebar})}></Button>
+                                </Box>
+                                <Collapsible direction="horizontal" open={showSidebar}>
+                                    <SearchBar close={()=> this.setState({showSidebar: !this.state.showSidebar})}></SearchBar>
+                                </Collapsible>
+                            </Box>
+
+                            <Box margin={{ vertical: 'xsmall' }}>
+                                <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
+                            </Box>
+                        </Box>
+
+                        <Box
+                            direction='row'
+                            align='start'
+                            baseline='center'
+                            justify='start'
+                            pad='0px'
+                            style={{ zIndex: '10' }}
+                        >   
+                            <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
+                            <PrivateLink color='menuTextColor' to='/history' label='История' />
+                            <PrivateLink color='menuTextColor' to='/reader' label='Читатель' />
+                            <PrivateLink color='menuTextColor' to='/owner' label='Владелец' />
+                            <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
                         </Box>
                     </Box>
-                </Box>)}
-            </ResponsiveContext.Consumer>)
+                </Box>
+                :
+                <Box align='center' className={styles.header} >
+                    <Box>
+                        <Box
+                            width='xlarge'
+                            tag='header'
+                            direction='row'
+                            align='center'
+                            baseline='center'
+                            style={{ zIndex: '1'}}
+                            pad={{ horizontal: '17px'}}
+                        >
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                            </Link>
+
+                            <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
+                                <Box>
+                                    <Link to='/search'>
+                                        <Button icon={<Search></Search>}></Button>
+                                    </Link>
+                                </Box>
+                                <Button icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>
+                            </Box>
+                        </Box>
+
+                        {this.state.showMenu &&
+                        <Layer onClick={() => this.setState({showMenu: !this.state.showMenu})}>
+                            <Box
+                                background='background'
+                                tag='header'
+                                justify='end'
+                                align='center'
+                                direction='row'
+                            >
+                                <Button
+                                    icon={<FormClose />}
+                                    onClick={() => this.setState({ showMenu: false })}
+                                />
+                            </Box>
+                            <Box
+                                fill
+                                background='background'
+                                align='center'
+                                justify='center'
+                            >
+                                <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' />
+                                <PrivateLink color='menuTextColor' to='/history' label='История' />
+                                <PrivateLink color='menuTextColor' to='/reader' label='Читатель' />
+                                <PrivateLink color='menuTextColor' to='/owner' label='Владелец' />
+                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
+                                <PrivateLink color='menuTextColor' onClick={event => this.handleLogOut(event)} label='Выйти' />
+                            </Box>
+                        </Layer>
+                        }
+                    </Box>
+                </Box>
+                )}
+            </SizeComponent>)
 
             :
                 
-            (<ResponsiveContext.Consumer>
-                {size => (
-                <Box align='center'>
-                    <Box
-                        direction='row'
-                        align='center'
-                        baseline='center'
-                        justify='center'
-                        pad='0px'
-                        style={{ zIndex: '1' }}
-                        className={styles.logo_container}
-                    >   
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Heading className={styles.logo} level='3' margin='none' alignSelf='center'>Capsula</Heading>
-                        </Link>
-                    </Box>
+            (<SizeComponent>
+            {size => (
+                size >= 600 ?
+                <Box align='center' className={styles.header} >
+                    <Box>
+                        <Box
+                            width='xlarge'
+                            tag='header'
+                            direction='row'
+                            align='center'
+                            baseline='center'
+                            style={{ zIndex: '1'}}
+                            pad={{ horizontal: '17px'}}
+                        >
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                            </Link>
+                            
+                            <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
+                                <Box>
+                                    <Button icon={<Search></Search>} onClick={() => this.setState({showSidebar: !this.state.showSidebar})}></Button>
+                                </Box>
+                                <Collapsible direction="horizontal" open={showSidebar}>
+                                    <SearchBar close={()=> this.setState({showSidebar: !this.state.showSidebar})}></SearchBar>
+                                </Collapsible>
 
-                    <Box
-                        width='900px'
-                        tag='header'
-                        direction='row'
-                        align='center'
-                        baseline='center'
-                        justify='between'
-                        background='background'
-                        pad={{ left: 'small', right: 'small', vertical: 'xsmall' }}
-                    >
-
-                        <Box direction='row' align='center'>
-                            <PrivateLink color='menuTextColor' to='/login' label='Log In'></PrivateLink>
+                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
+                                <PrivateLink color='menuTextColor' to='/login' label='Войти'></PrivateLink>
+                            </Box>
                         </Box>
-                        
-
-                        {this.state.showMenu && <Box margin={{ horizontal: 'small', vertical: 'xsmall' }}>
-                            <Burger
-                                onClick={() => this.setState({ showSidebar: !this.state.showSidebar })}
-                                isOpen = {this.state.showSidebar}
-                            />
-                        </Box>} 
-
-
-
-
                     </Box>
-{/* 
-                    <Box flex direction='column' overflow={{ horizontal: 'hidden' }}>
-                        {(!showSidebar || size !== 'small') ? (
-                            <Collapsible direction='vertical' open={showSidebar}>
-                                <Box
-                                    flex
-                                    direction='row'
-                                    background='background'
-                                    elevation='xsmall'
-                                    align='center'
-                                    justify='center'
-                                    height='200px'
-                                >
-                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
+                </Box>
+                :
+                <Box align='center' className={styles.header} >
+                    <Box>
+                        <Box
+                            width='xlarge'
+                            tag='header'
+                            direction='row'
+                            align='center'
+                            baseline='center'
+                            style={{ zIndex: '1'}}
+                            pad={{ horizontal: '17px'}}
+                        >
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                            </Link>
+                            
+                            <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
+                                <Box>
+                                    <Link to='/search'>
+                                        <Button icon={<Search></Search>}></Button>
+                                    </Link>
                                 </Box>
-                            </Collapsible>
-                        ): (
-                            <Layer>
-                                <Box
-                                    background='background'
-                                    tag='header'
-                                    justify='end'
-                                    align='center'
-                                    direction='row'
-                                >
-                                    <Button
-                                        icon={<FormClose />}
-                                        onClick={() => this.setState({ showSidebar: false })}
-                                    />
-
-                                </Box>
-                                <Box
-                                    fill
-                                    background='background'
-                                    align='center'
-                                    justify='center'
-                                >
-                                    <PrivateLink color='menuTextColor' to='/search' label='Search' />
-                                </Box>
-                            </Layer>
-                        )}
-                    </Box> 
-*/}
-                </Box>)}
-            </ResponsiveContext.Consumer>)
+                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
+                                <PrivateLink color='menuTextColor' to='/login' label='Войти'></PrivateLink>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+                )}
+            </SizeComponent>)
         );
     }
 }

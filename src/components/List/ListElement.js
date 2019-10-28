@@ -9,7 +9,7 @@ import SwapAgreement from '../Books/SwapAgreement';
 
 function ListElement(props) {
     return (
-        <Box direction='row' justify='between' align='center' width='500px'>
+        <Box direction='row' justify='between' align='center' fill pad='20px'>
             <Link to={`/user/${props.owner.id}`}>
                 <img
                     alt='Remy Sharp'
@@ -21,8 +21,8 @@ function ListElement(props) {
                 <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
                 <p className={styles.text}></p>
             </Box>
-            <Box width='180px'>
-                <PopUpButton  fill='horizontal' innerObject={onclose => <SwapAgreement bookId={props.id} onClose={onclose}></SwapAgreement>} label='Обмен' icon={<Transaction></Transaction>}></PopUpButton>
+            <Box width='260px'>
+                <PopUpButton  fill='horizontal' innerObject={onclose => <SwapAgreement bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Transaction></Transaction>}></PopUpButton>
             </Box>
         </Box>
     )

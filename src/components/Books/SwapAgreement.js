@@ -9,7 +9,6 @@ class SwapAgreement extends Component {
         const book = {
             "book_id": this.props.bookId
         };
-        console.log(this.props.bookId)
 
         const requestOptions = {
             method: 'POST',

@@ -71,6 +71,16 @@ export function authentication(state = initialState, action) {
                     location: '',
                     id: ''
                 }});
+        case userConstants.EDIT_SUCCESS:
+            return ({
+                loggedIn: true, 
+                user: {
+                    ...state.user,
+                    firstName: action.user.first_name,
+                    lastName: action.user.last_name,
+                    avatar: action.user.image,
+                    location: action.user.location
+                }});
         default:
             return state;
     }

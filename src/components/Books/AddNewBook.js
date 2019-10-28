@@ -14,7 +14,7 @@ class AddNewBook extends Component {
         this.state = { 
             bookName: '', 
             author:'',
-            genre: '',
+            genre: 'Жанр',
             genre_code: 0,
             image: remote_url.images.add_new_book_default,
         };
@@ -30,9 +30,9 @@ class AddNewBook extends Component {
 
     handleSubmit() {
         const book = {
-            "title": this.state.bookName,
-            "authors": this.state.author,
-            "genre": this.state.genre_code,
+            'title': this.state.bookName,
+            'authors': this.state.author,
+            'genre': this.state.genre_code,
             'image': this.state.image
         };
           

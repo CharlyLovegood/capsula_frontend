@@ -42,7 +42,7 @@ class LibraryPage extends Component {
         const {library} = this.props;
 
         return (
-            <Box direction='column' align='center' width='800px'>
+            <Box direction='column' align='center' width='xlarge'>
                 {library.userLibraryRecieved && this.state.owner &&
                     <Gallery 
                         object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleEditBook={this.props.editBook} handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
@@ -63,6 +63,7 @@ class LibraryPage extends Component {
                     <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
                         innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
                         label='Добавить книгу' 
+                        primary
                         icon={<Add></Add>}>
                     </PopUpButton>
                 </Box>

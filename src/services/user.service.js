@@ -5,7 +5,8 @@ export const userService = {
     login,
     logout,
     register,
-    getById
+    getById,
+    editUser
 };
 
 
@@ -19,7 +20,6 @@ function login(username, password) {
     return fetch(back_url.authentication.login, requestOptions)
         .then(handleResponse)
         .then(user => {
-            console.log(user);
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
             localStorage.setItem('firstName', user.first_name);
@@ -82,6 +82,31 @@ function getById(id) {
         .then(user => {
             return user;
         }); 
+}
+
+
+function editUser(user) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: {'Authorization': 'Token ' + localStorage.token,
+                'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    };
+
+    return fetch('/user/me/', requestOptions)
+        .then(
+            response => {
+                if (response.status === 200) {
+                    localStorage.setItem('lastName', user.last_name);
+                    localStorage.setItem('firstName', user.first_name);
+                    localStorage.setItem('avatar', user.image);
+                    localStorage.setItem('location', user.location);
+                }
+                return user;
+            },
+            error => {
+                console.log(error);
+            });
 }
 
 

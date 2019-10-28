@@ -17,8 +17,8 @@ class SearchPage extends Component {
     boxRef = createRef();
   
     componentDidMount() {
-        this.forceUpdate();
         this.props.request();
+        this.forceUpdate();
     }
   
     onChange = event => this.setState({ value: event.target.value }, () => {
@@ -36,16 +36,16 @@ class SearchPage extends Component {
 
     renderSearchResult = () => {
         const { value, suggestedList } = this.state;
-        const res = suggestedList.filter(({ title, genre }) => {
+        const res = suggestedList.filter((el) => {
             if (this.state.genre !== ''){
-                return  (title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && genre === this.state.genre)
+                return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
             } else {
-                return  (title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
 
             }
         })
-        .map(({ title, id }) => (
-            <SearchElement id={id} key={id} name={title}></SearchElement>
+        .map((el) => (
+            <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
         ));
         if (res.length === 0 && value !== '') {
             return [<SearchElement id={'no res'} key={'no res'} name={'Nothing was found :('}></SearchElement>]

@@ -35,7 +35,6 @@ class LoginPage extends Component {
 
         return axios(requestOptions)
             .then(resolve => {
-                console.log(resolve);
                 if (resolve.status === 200) {
                     const user = resolve.data;
                     localStorage.setItem('username', user.django_user.username);
@@ -54,7 +53,6 @@ class LoginPage extends Component {
     }
 
     handleOauth(event) {
-        console.log(event);
         document.location.href = 'http://127.0.0.1:8000/auth/login/vk-oauth2/';
     }
     
@@ -119,7 +117,7 @@ class LoginPage extends Component {
 
                         
                         <div className={styles.submit}>
-                        <img onClick={(event) => this.handleOauth(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
+                        <img alt='vk' onClick={(event) => this.handleOauth(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
                             <Button
                                 color="primary"
                                 variant="contained"

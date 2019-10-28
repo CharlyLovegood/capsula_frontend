@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import styles from './Scroll.module.css';
 
-import { Box, ResponsiveContext } from 'grommet';
+import { Box } from 'grommet';
 import { FormNext, FormPrevious } from 'grommet-icons';
 
 import { remote_url } from './../../helpers';
 import SizeComponent from '../SizeComponent/SizeComponent';
 import { Link } from 'react-router-dom';
+
+
 
 class Scroll extends Component {
     constructor(props) {
@@ -16,21 +18,47 @@ class Scroll extends Component {
             len: this.props.objectList.length, 
             currentNum: 0, 
             showArrows: false,
+            inRow: 4
         };
     }
 
-    calculateNum(size) {
-        if (size >= 720) return 4
-        else if (size >= 540) return 3
-        else return 2
+    calculateWidth(size) {
+        if (size >= 800) return 'xlarge'
+        else if (size >= 620) return '620px'
+        else if (size >= 400) return '430px'
+        else if (size >= 200) return 'small'
+        else return 'xlarge'
     }
 
+    calculateNum(size) {
+        let inRow = 0;
+        if (size >= 800) {
+            inRow = 4;
+        }
+        else if (size >= 620) {
+            inRow = 3;
+        }
+        else if (size >= 400) {
+            inRow =  2;
+        }
+        else {
+            inRow =  1;
+        }
+
+        if (inRow !== this.state.inRow) {
+            this.setState({inRow: inRow});
+        }
+        return inRow;
+    }
+
+
     componentDidMount() {
-        if (this.state.len !== 0) {
-            const rem = this.state.len % 4;
+        const {inRow, len} = this.state;
+        if (len !== 0) {
+            const rem = len % inRow;
             if (rem !== 0) {
                 let i;
-                for (i = 0; i < 4 - rem; i++) {
+                for (i = 0; i < inRow - rem; i++) {
                     this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*(-35)},
                     id: i*(-45),
                     image: remote_url.images.scroll_additional_book,
@@ -39,29 +67,30 @@ class Scroll extends Component {
             }
         }
 
-        if (this.state.len > 4) {
+        if (len > inRow) {
             this.setState({showArrows: true});
         }
 
-        this.setState({viewObjectsList: this.props.objectList.slice(0,4)});
+        this.setState({viewObjectsList: this.props.objectList.slice(0, inRow)});
         this.setState({len: this.props.objectList.length});
     }
 
 
 
     onArrowClick = (direction) => {
+        const {inRow, len, currentNum} = this.state;
         let begin = 0;
         if (direction === 'forward') {
             this.setState({currentNum: begin});
-            begin = (this.state.currentNum + 4) % this.state.len;
-            this.setState({viewObjectsList: this.props.objectList.slice(begin, begin + 4)});
+            begin = (currentNum + inRow) % len;
+            this.setState({viewObjectsList: this.props.objectList.slice(begin, begin + inRow)});
         } else {
-            if (this.state.currentNum - 4 < 0) {
-                begin = this.state.len + (this.state.currentNum - 4);
+            if (currentNum - inRow < 0) {
+                begin = len + (currentNum - inRow);
             } else {
-                begin = this.state.currentNum - 4;
+                begin = currentNum - inRow;
             }
-            this.setState({viewObjectsList: this.props.objectList.slice(begin, begin + 4)});
+            this.setState({viewObjectsList: this.props.objectList.slice(begin, begin + inRow)});
         }
         this.setState({currentNum: begin});
     }
@@ -71,18 +100,17 @@ class Scroll extends Component {
         return ( 
             <SizeComponent>
                 {size => (
-                <Box direction='column' align='center' className={styles.scroll_container}>
+                <Box direction='column' align='center' width='xlarge'>
                     <Link className={styles.header} to={`/user/${this.props.id}/library/`}>
                         {this.props.header}
                     </Link>
                     <Box direction='column' align='center'>
                         <Box 
                             flex 
-                            pad='10px' 
                             direction='row' 
                             justify='around' 
-                            gap='small' 
                             align='center'
+                            width={this.calculateWidth(size)}
                             >
                             <FormPrevious color='contrast' 
                                 onClick={() => this.onArrowClick('back')} 

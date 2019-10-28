@@ -29,10 +29,11 @@ function deleteBook(id) {
     return fetch(back_url.books.delete_book(id), requestOptions)
         .then(
             response => {
-                console.log(response);
                 return response;
             });
 }
+
+
 
 function editBook(book, bookId) {
     const requestOptions = {
@@ -45,7 +46,6 @@ function editBook(book, bookId) {
     return fetch(`/library/book_items/${bookId}/`, requestOptions)
         .then(
             response => {
-                console.log(response);
                 return response;
             },
             error => {
@@ -66,7 +66,6 @@ function addBook(book) {
     return fetch(back_url.books.add_book, requestOptions)
         .then(
             response => {
-                console.log(response);
-                return response;
-            });
+                return response.json();
+            })
 }

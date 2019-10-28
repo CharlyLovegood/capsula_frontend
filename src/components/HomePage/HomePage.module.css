@@ -7,3 +7,27 @@
     margin-top: -60px;
     z-index: 0;
 }
+
+.icon_reading_book {
+    background: url('./reading-book.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon_book_shelf {
+    background: url('./bookshelf.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon_search {
+    background: url('./search.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.icon_send {
+    background: url('./resume.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import { Button } from 'grommet';
+import { Button, Box } from 'grommet';
 import styles from './SettingsPage.module.css';
 import { userActions } from '../../store/actions';
 import { connect } from 'react-redux';
@@ -23,7 +23,9 @@ class SettingsPage extends Component {
                 domitary: this.props.user.location,
                 avatar: this.props.user.avatar
             },
-            permission: true
+            permission: true,
+            message: '',
+            error: false
         }
     }
 
@@ -41,30 +43,15 @@ class SettingsPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
         const user = {
             'first_name': this.state.user.firstname, 
-            'last_name': this.props.user.lastName, 
-            'vk': this.props.user.vkId,
-            'location': this.props.user.domitary,
+            'last_name': this.state.user.lastname, 
+            'vk': this.state.user.vkId,
+            'location': this.state.user.domitary,
             'image': this.state.user.avatar
         };
-          
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Authorization': 'Token ' + localStorage.token,
-                    'Content-Type': 'application/json'},
-            body: JSON.stringify(user)
-        };
-
-        return fetch('/user/me/', requestOptions)
-            .then(
-                response => {
-                    console.log(response);
-                    return response;
-                },
-                error => {
-                    console.log(error);
-                });
+        this.props.editUser(user);
     }
 
     handleImageChange(avatar) {
@@ -85,6 +72,19 @@ class SettingsPage extends Component {
                         Settings
                     </Typography>
 
+                    {(this.state.message !== '' && this.state.error) &&
+                        <Box pad='10px' border={{ color: 'status-ok', size: 'small' }}>
+                            {this.state.message}
+                        </Box>
+                    }
+
+
+                    {(this.state.message !== '' && !this.state.error) &&
+                        <Box pad='10px' border={{ color: 'status-critical', size: 'small' }}>
+                            {this.state.message}
+                        </Box>
+                    }
+                    
                     <UserAvatar img={user.avatar} 
                                 returnImage={(avatar) => this.handleImageChange(avatar)} 
                                 handleImageUpload={event => this.handleImageUpload(event)}>
@@ -160,11 +160,13 @@ class SettingsPage extends Component {
 }
 
 const mapState = state => ({
-    user: state.authentication.user
+    user: state.authentication.user,
+    alert: state.alert
 })
 
 const actionCreators = {
-    getUser: userActions.getById
+    getUser: userActions.getById,
+    editUser: userActions.editUser
 }
 
 export default connect(mapState, actionCreators)(SettingsPage);

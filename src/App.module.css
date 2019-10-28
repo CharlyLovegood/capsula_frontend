@@ -8,3 +8,7 @@
     background: #19081c;
     z-index: -1;
 }
+
+a {
+    text-decoration: none;
+}

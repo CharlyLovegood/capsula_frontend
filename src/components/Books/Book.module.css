@@ -7,15 +7,15 @@
 
 .small_book {
     background-size: cover;
-    height: 150px;
-    width: 100px;
+    height: 270px;
+    width: 180px;
     position: relative;
 }
 
 .book_cover {
     background-size: cover;
-    height: 250px;
-    width: 160px;
+    height: 270px;
+    width: 180px;
     object-fit: cover;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .background {
-    height: 220px;
+    height: 270px;
     width: 100%;
     padding: 20px 50px;
     margin: 0px 0px 40px 0px;
@@ -73,7 +73,6 @@
 }
 
 .backgrounda {
-    height: 220px;
     width: 100%;
     position: absolute;
 }
@@ -86,8 +85,6 @@
 
 .back_side {
     position: absolute;
-    height: 250px;
-    width: 160px;
 }
 
 
@@ -98,10 +95,7 @@
 
 
 .book_card {
-    height: 250px;
-    width: 160px;
     perspective: 1000px;
-    margin: 10px;
   }
   
   .book_card_inner {
@@ -136,8 +130,8 @@
     top: 0px;
     background-size: cover;
     object-fit: cover;
-    height: 250px;
-    width: 160px;
+    height: 270px;
+    width: 180px;
     object-fit: cover;
     z-index: -1;
     opacity: .1;

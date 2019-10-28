@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 function SearchElement(props) {
     if (props.id === 'no res') {
-        return(        <Box
+        return(        
+        <Box
             direction='row'
             align='center'
             gap='small'
@@ -26,15 +27,15 @@ function SearchElement(props) {
                 className={styles.container}
             >
                 <Image
-                    width='48px'
-                    src={props.imageUrl}
-                    style={{ borderRadius: '100%' }}
+                    width='70px'
+                    src={props.image}
                 />
-                <Link className={styles.link} to={`/book/${props.id}`}>
-                    <Text>
+                <Box direction='column'>
+                    <Link className={styles.link} to={`/book/${props.id}`}>
                         <strong>{props.name}</strong>
-                    </Text>
-                </Link>
+                    </Link>
+                    <strong>Автор: {props.author}</strong>
+                </Box>
             </Box>
         )
     }

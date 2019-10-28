@@ -14,18 +14,15 @@ class HistoryPage extends Component {
         this.props.getSwap();
     }
 
-    objectCallBack = (authors, book, date, genre, id, image, reader, status, type) => {
+    objectCallBack = (authors, book, date, genre, id, image, reader, owner, status, type) => {
         return (
-            <BookCard handleReject={id => this.handleReject(id)}
-                handleAccept={id => this.handleAccept(id)}
-                handleBookDelivered={id => this.handleBookDelivered(id)}
-                handleFinishSwap={id => this.handleFinishSwap(id)}        
+            <BookCard       
                 margin='10px' 
-                title={book} 
+                book={book} 
                 key={id}
                 authors={authors}
                 date={date}
-                user={reader}
+                user={reader || owner}
                 coverage={image}
                 id={id}
                 type={type}></BookCard>
@@ -34,22 +31,19 @@ class HistoryPage extends Component {
 
     render() {
         const {swap} = this.props;
-        console.log(swap)
         return (
             <Box direction='column' align='center' fill>
-                <Box direction='column' margin='5px' width='800px'>
+                <Box direction='column' width='xlarge'>
                     {swap.swapsRecieved &&
-                    <Box>
+                    <Box align='center'>
                         <Gallery
-                            type='request'
                             contentType='swaps'
-                            me='reader'
+                            me='owner'
                             object={this.objectCallBack} 
                             objectList={swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})}
                         >
                         </Gallery>
                         <Gallery
-                            type='request'
                             me='reader'
                             contentType='swaps'
                             object={this.objectCallBack} 

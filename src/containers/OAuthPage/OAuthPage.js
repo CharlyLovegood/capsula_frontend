@@ -32,7 +32,6 @@ class OAuthPage extends Component {
 
         return axios(requestOptions)
             .then(resolve => {
-                console.log(resolve);
                 if (resolve.status === 200) {
                     const user = resolve.data;
                     localStorage.setItem('username', user.django_user.username);

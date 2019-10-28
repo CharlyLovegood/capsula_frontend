@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Menu } from 'grommet';
+import { Box, Menu, Text } from 'grommet';
 import { UserSettings, Logout } from 'grommet-icons';
 import styles from './UserProfile.module.css';
 import { Link } from 'react-router-dom';
@@ -22,12 +22,14 @@ export default function UserAvatar(props) {
                 />
             </Link>
             <Menu
-                dropProps={{ align: { top: "bottom", left: "left" } }}
-                label={props.name}
-                plain
+                pad='0px'
+                dropProps={{ align: { top: "bottom", right: "right" } }}
+                label={<Text size='16px'>{props.name}</Text>}
+                pad='0px'
+                elevation='none'
                 items={[
-                    { icon: <Box pad="5px"><UserSettings/></Box> ,label:  <Box pad="5px" alignSelf="center">Настройки</Box>, href:'/settings', onClick: () => {} },
-                    { icon: <Box pad="5px"><Logout/></Box>, label: <Box pad="5px" alignSelf="center">Выйти</Box>, onClick: props.logout }
+                    { icon: <Box pad="10px"><UserSettings/></Box> ,label:  <Box pad="10px" alignSelf="center">Настройки</Box>, href:'/settings', onClick: () => {} },
+                    { icon: <Box pad="10px"><Logout/></Box>, label: <Box pad="10px" alignSelf="center">Выйти</Box>, onClick: props.logout }
                 ]}
             />
         </Box>

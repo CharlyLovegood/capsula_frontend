@@ -6,8 +6,7 @@ import {genresArray, genres} from './../../helpers'
 
 
 function Filter(props) {
-    const [option, setOption] = React.useState();
-
+    const [option, setOption] = React.useState('Жанр');
     return (
             <Select options={genresArray} onChange={({ option }) => {
                 setOption(option);

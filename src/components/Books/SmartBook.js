@@ -15,15 +15,9 @@ const SmartBook = (props) => {
     const [bookCoverage, setBookCoverage] = React.useState(props.coverage ? props.coverage : defaultCoverage);
 
     return (
-        <Box width='160px' className={styles.book_card}>
+        <Box margin='10px' width='book-width' height='book-height' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
-                <Box className={styles.book_card_front}>
-                    <img 
-                        alt='book coverage' 
-                        src={bookCoverage} 
-                        className={(props.size === 'small') ? styles.small_book_cover : styles.book_cover}
-                        onError={() => {setBookCoverage(defaultCoverage)}}>
-                    </img>
+                <Box background={`url(${bookCoverage})`} className={styles.book_card_front}>
                 </Box>
                 <Box background='brand' pad={{horizontal: '5px', vertical: '20px'}} align='center' justify='end' className={styles.book_card_back}>
                     <img 

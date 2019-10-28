@@ -7,7 +7,8 @@ export const userActions = {
     login,
     logout,
     register,
-    getById
+    getById,
+    editUser
 };
 
 function login(username, password) {
@@ -84,4 +85,27 @@ function getById(id) {
     function request(userId) { return { type: userConstants.USERPAGE_REQUEST, userId } }
     function success(user) { return { type: userConstants.USERPAGE_SUCCESS, user } }
     function failure(error) { return { type: userConstants.USERPAGE_FAILURE, error } }
+}
+
+
+function editUser(user) {
+    return dispatch => {
+        dispatch(request(user));
+
+        userService.editUser(user)
+            .then(
+                user => {
+                    dispatch(success(user));
+                    dispatch(alertActions.success('User edit success'));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.EDIT_REQUEST, user } }
+    function success(user) { return { type: userConstants.EDIT_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.EDIT_FAILURE, error } }
 }

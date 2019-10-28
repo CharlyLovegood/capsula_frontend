@@ -26,8 +26,8 @@ class AddNewBook extends Component {
     handleSubmit() {
         const book = {
             "title": this.state.bookName,
-            "authors": this.state.author,
             "genre": this.state.genre_code,
+            "authors": this.state.author,
             "status": "",
             "isbn": "",
             'image': this.state.image

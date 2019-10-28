@@ -52,6 +52,7 @@ function deleteBookById(bookId) {
     function failure(error) { return { type: bookConstants.DELETE_BOOK_FAILURE, error } }
 }
 
+
 function addBook(book) {
     return dispatch => {
         dispatch(request({ book }));
@@ -59,8 +60,7 @@ function addBook(book) {
         bookService.addBook(book)
             .then(
                 response => { 
-                    console.log(response)
-                    dispatch(success(book));
+                    dispatch(success(book, response.book.id, response.id));
                 },
                 error => {
                     dispatch(failure(error));
@@ -70,7 +70,7 @@ function addBook(book) {
     };
 
     function request(book) { return { type: bookConstants.ADD_BOOK_REQUEST, book } }
-    function success(book) { return { type: bookConstants.ADD_BOOK_SUCCESS, book } }
+    function success(book, abstractId, id) { return { type: bookConstants.ADD_BOOK_SUCCESS, book, id, abstractId } }
     function failure(error) { return { type: bookConstants.ADD_BOOK_FAILURE, error } }
 }
 
@@ -78,7 +78,6 @@ function addBook(book) {
 function editBook(book, bookId) {
     return dispatch => {
         dispatch(request({ book }));
-        console.log(book, bookId)
         bookService.editBook(book, bookId)
             .then(
                 response => { 

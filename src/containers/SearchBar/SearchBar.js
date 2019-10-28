@@ -1,22 +1,24 @@
 import React, { createRef, Component } from 'react';
-import { Search } from 'grommet-icons';
 import { 
     Box, 
-    Image, 
     Text, 
-    TextInput 
+    TextInput
 } from 'grommet';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
+import style from './SearchBar.module.css';
 import { searchActions } from '../../store/actions';
+import SearchElement from '../../components/Search/SearchElement';
+
 
 class SearchBar extends Component {
-    state = { value: '', suggestionOpen: false, suggestedList: [] };
+    state = { value: '', suggestedList: []};
 
     boxRef = createRef();
   
     componentDidMount() {
         this.forceUpdate();
+        this.props.request();
     }
   
     onChange = event => this.setState({ value: event.target.value }, () => {
@@ -24,58 +26,93 @@ class SearchBar extends Component {
         if (!value.trim()) {
             this.setState({ suggestedList: [] });
         } else {
-            this.props.request(value);
-            setTimeout(() => this.setState({ suggestedList: [] }), 300);
+            if (this.props.search.search) {
+                this.setState({ suggestedList: this.props.search.search.searchResult.data });
+            }
         }
     });
-  
+
     onSelect = event => this.setState({ value: event.suggestion.value });
-  
+
     renderSuggestions = () => {
         const { value, suggestedList } = this.state;
-  
-        return suggestedList
-            .filter(
-                ({ name }) => name.toLowerCase().indexOf(value.toLowerCase()) >= 0
-            )
-            .map(({ name, imageUrl }, index, list) => ({
-                label: (
-                    <Box
-                        direction='row'
-                        align='center'
-                        gap='small'
-                        border={index < list.length - 1 ? 'bottom' : undefined}
-                        pad='small'
-                    >
-                        <Image
-                                width='48px'
-                                src={imageUrl}
-                                style={{ borderRadius: '100%' }}
-                        />
-                        <Text>
-                                <strong>{name}</strong>
-                        </Text>
-                    </Box>
+
+
+        const res = suggestedList.filter((el) => el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
+        .map((el) => ({
+            label: (
+                <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
+            ),
+            value: ''
+            }
+        ));
+        if (res.length === 0 && value !== '') {
+            return [{                
+            label: (
+                <Box
+                    direction='row'
+                    align='center'
+                    pad='20px'
+                >
+                    <Text>
+                        Nothing was found :(
+                    </Text>
+                </Box>
+            ),
+            value: ''}, 
+            {label: (
+                    <Link className={style.link} to='/search' >
+                        <Box
+                            direction='row'
+                            align='center'
+                            pad='20px'
+                            onClick={() => {
+                                this.props.close();
+                            }}
+                        >
+                                <Text>Подробнее..</Text>
+                        </Box>
+                    </Link>
                 ),
-                value: name
-            }));
+            value: ''
+            }]
+        } else {
+            res.push({
+                label: (
+                    <Link className={style.link} to='/search' >
+                        <Box
+                            direction='row'
+                            align='center'
+                            pad='20px'
+                            onClick={() => {
+                                this.props.close();
+                            }}
+                        >
+                                <Text>Подробнее..</Text>
+                        </Box>
+                    </Link>
+                ),
+                value: ''
+                })
+            return res;
+        }
+        
     };
+  
   
     render() {
         const { suggestionOpen, value } = this.state;
+
         return (
             <Box
                 background='background'
                 ref={this.boxRef}
-                width='40%'
+                fill
                 direction='row'
                 align='center'
-                pad={{ horizontal: 'small', vertical: 'xsmall' }}
-                margin={{ horizontal: 'small', vertical: 'xsmall' }}
-                round='small'
-                elevation={suggestionOpen ? 'medium' : undefined}
+                margin={{ horizontal: 'xsmall', vertical: 'xsmall' }}
                 border={{
-                    side: 'all',
+                    side: 'bottom',
                     color: suggestionOpen ? 'transparent' : 'border'
                 }}
                 style={
@@ -87,7 +124,6 @@ class SearchBar extends Component {
                     : undefined
                 }
             >
-                <Search color='brand' />
                 <TextInput
                     type='search'
                     dropTarget={this.boxRef.current}
@@ -96,7 +132,7 @@ class SearchBar extends Component {
                     onChange={this.onChange}
                     onSelect={this.onSelect}
                     suggestions={this.renderSuggestions()}
-                    placeholder='Enter your name...'
+                    placeholder='Искать...'
                     onSuggestionsOpen={() => this.setState({ suggestionOpen: true })}
                     onSuggestionsClose={() =>
                     this.setState({ suggestionOpen: false })

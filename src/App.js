@@ -21,7 +21,6 @@ import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
 import HistoryPage from './containers/HistoryPage/HistoryPage';
-import OAuthPage from './containers/OAuthPage/OAuthPage';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
@@ -35,7 +34,8 @@ const theme = {
             textColor: '#868686',
             menuTextColor: '#000000',
             brandGradient: 'linear-gradient(90deg, rgba(125,76,219,1) 0%, rgba(112,56,219,1) 100%)',
-            brand: '#7d4cdb',
+            brand: '#8929a4',
+            brandDark: '#63376f',
             background: '#ffffff',
             contrast: '#000000',
             light_contrast: '#f9f9f9',
@@ -47,18 +47,30 @@ const theme = {
         },
         button: {
             border: {
-                radius: "8px"
+                radius: '8px'
             }
         },
         control: {
             border: {
-                radius: "8px"
+                radius: '8px'
             }
+        },
+        size: {
+            'xxsmall': '48px',
+            'xsmall': '96px',
+            'book-height': '270px',
+            'book-width': '180px',
+            'small': '200px',
+            'medium': '400px',
+            'large': '600px',
+            'xlarge': '800px',
+            'xxlarge': '1536px',
+            'full': '100%'
         }
     },
     heading: {
         font: {
-            family: 'Clarkson',
+            family: 'Roboto',
             size: '26px',
             height: '20px',
         },
@@ -83,16 +95,15 @@ class App extends Component {
                     <AppBar></AppBar>
                     <Box flex align='center' justify='center'>
                         <Switch>
-                            <Route exact path='/' component={ HomePage }/>
+                            <Route exact path='/' component={ HomePage } />
                             <PrivateRoute exact path='/user/:id' component={ UserPage }/>
                             <PrivateRoute path='/book/:id' component={ BookPage } />
                             <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
-                            <PrivateRoute path='/library' component={ LibraryPage } />
-                            <PrivateRoute path='/swap' component={ SwapPage } />
+                            <PrivateRoute path='/reader' component={ SwapPage } />
+                            <PrivateRoute path='/owner' component={ SwapPage } />
                             <PrivateRoute path='/search' component={ SearchPage } />
                             <PrivateRoute path='/history' component={ HistoryPage } />
                             <PrivateRoute path='/settings' component={ SettingsPage } />
-                            <PrivateRoute path='/greetings' component={ OAuthPage } />
                             <AuthRoute exact path='/register' component={ RegisterPage } />
                             <AuthRoute exact path='/login' component={ LoginPage } />
                         </Switch>
@@ -103,10 +114,9 @@ class App extends Component {
     }
 }
 
-function mapState(state) {
-    const { alert } = state;
-    return { alert };
-}
+const mapState = state => ({
+    alert: state.alert
+})
 
 const actionCreators = {
     clearAlerts: alertActions.clear

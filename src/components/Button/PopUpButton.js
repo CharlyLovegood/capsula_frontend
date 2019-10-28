@@ -9,7 +9,7 @@ const PopUpButton = (props) => {
     const onClose = () => setOpen(undefined);
 
     return (
-        <Box>
+        <Box align='center' justify='center'>
             <Box align='center' justify='center'>
                 <Button
                     icon={props.icon}
@@ -20,6 +20,7 @@ const PopUpButton = (props) => {
                     }
                     onClick={onOpen}
                     fill='horizontal'
+                    {...props}
                 />
             </Box>
             {open && (
