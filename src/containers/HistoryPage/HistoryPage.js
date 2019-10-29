@@ -31,6 +31,10 @@ class HistoryPage extends Component {
 
     render() {
         const {swap} = this.props;
+        let list = [];
+        if (swap.swapsRecieved) {
+            list = (swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})).concat(swap.swapsList.reader.filter(function(item){ return (item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)}));
+        }
         return (
             <Box direction='column' align='center' fill>
                 <Box direction='column' width='xlarge'>
@@ -41,16 +45,16 @@ class HistoryPage extends Component {
                             contentType='swaps'
                             me='owner'
                             object={this.objectCallBack} 
-                            objectList={swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})}
+                            objectList={list}
                         >
                         </Gallery>
-                        <Gallery
+                        {/* <Gallery
                             me='reader'
                             contentType='swaps'
                             object={this.objectCallBack} 
                             objectList={swap.swapsList.reader.filter(function(item){ return (item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)})}
                         >
-                        </Gallery>
+                        </Gallery> */}
                     </Box>
                     }
                 </Box>

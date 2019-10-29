@@ -8,7 +8,7 @@ class Banner extends Component {
     render() {
         if (this.props.size === 'small') {
             return(
-            <Box fill direction='column' align='center'>
+            <Box className={style.title_box} fill direction='column' align='center'>
                 <Box className={style.box} height='500px' width='100%'>
                 </Box>
                 
@@ -35,7 +35,7 @@ class Banner extends Component {
         return (
             <Box
                 pad='10px'
-                height='480px'
+                height='550px'
                 width='xlarge'
                 className={style.container}
                 direction='row'
@@ -50,7 +50,7 @@ class Banner extends Component {
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
-                                    <Button margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                    <Button color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
                                 </Link>
                             </Box>
                             <Box fill>
@@ -61,7 +61,7 @@ class Banner extends Component {
                         </Box>
                     }
                 </Box>
-                <Box elevation='small' height='100%' width='400px' className={style.box}></Box>
+                <Box height='100%' width='50%' className={style.box}></Box>
 
                 {/* <Box className={style.container}>
                     <img src={remote_url.images.banner} className={style.banner}></img>

@@ -33,8 +33,9 @@ const theme = {
         colors: {
             textColor: '#868686',
             menuTextColor: '#000000',
-            brandGradient: 'linear-gradient(90deg, rgba(125,76,219,1) 0%, rgba(112,56,219,1) 100%)',
-            brand: '#8929a4',
+            brandGradient: 'linear-gradient(90deg, rgba(127,17,200,1) 0%, rgba(232,90,90,1) 70%, rgba(252,199,69,1) 100%)',
+            brandGradientH: 'linear-gradient(0deg, rgba(127,17,200,1) 0%, rgba(232,90,90,1) 70%, rgba(252,199,69,1) 100%)',
+            brand: 'rgb(140, 52, 190)',
             brandDark: '#63376f',
             background: '#ffffff',
             contrast: '#000000',

@@ -12,17 +12,18 @@ function Element(props) {
                 align='center' 
                 width={props.width}
                 height='270px' 
-                background='white'
+                background='brandGradientH'
                 pad='20px'
                 elevation='small'
-                border={{ color: 'brandDark', size: 'xsmall' }}
                 round='5px'
+                
             >
                 <Box margin='20px'>
                     {props.icon}
                 </Box>
-                <hr align="center" width='100%' size="1" color="#46135d" />
-                <Text textAlign='center' weight='bold' color='brandDark'>{props.text}</Text>
+
+                {/* <hr align="center" width='100%' size="1" color="white" /> */}
+                <Text textAlign='center' color='white'>{props.text}</Text>
             </Box>}
         </SizeComponent>
     )

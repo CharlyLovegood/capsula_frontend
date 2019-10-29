@@ -6,7 +6,7 @@
 }
 
 .box {
-    background-image: url('./1111.jpg');
+    background-image: url('NEW.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom; 
@@ -16,9 +16,8 @@
     position: relative;
 }
 
-
 .title_box {
-    box-shadow: 0 -11px 8px -9px #0000004d;
+    margin-top: -58px;
 }
 
 
