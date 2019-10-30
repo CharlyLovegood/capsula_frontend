@@ -10,7 +10,7 @@ function request() {
     const requestOptions = {
         method: 'GET',
         url: back_url.library.get_all_books,
-        headers: {'Authorization': 'Token ' + localStorage.token}
+        // headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)
         .then(bookList => {

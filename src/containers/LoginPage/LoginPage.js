@@ -42,7 +42,7 @@ class LoginPage extends Component {
                     localStorage.setItem('firstName', user.first_name);
                     localStorage.setItem('token', user.token);
                     localStorage.setItem('id', user.id);
-                    localStorage.setItem('avatar', user.image);
+                    localStorage.setItem('avatar', user.avatar);
                     localStorage.setItem('location', user.location);
                     document.location.href = 'http://127.0.0.1:3000/';
                 }

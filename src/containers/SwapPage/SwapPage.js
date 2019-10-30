@@ -56,6 +56,7 @@ class SwapPage extends Component {
                 coverage={image}
                 id={id}
                 owner={owner}
+                status={status}
                 type={type}></BookCard>
         )
     }

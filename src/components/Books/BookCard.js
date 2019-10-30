@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import styles from './Book.module.css';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
+import { swapStatuses } from '../../helpers/constants';
+
 
 function BookCard(props) {
     let ButtonBlock = (<Button></Button>);
@@ -36,6 +38,7 @@ function BookCard(props) {
             ButtonBlock = (<Box></Box>);
             break;
     }
+    console.log(props)
     
     return (
         <SizeComponent>
@@ -58,14 +61,31 @@ function BookCard(props) {
                     >
                         <h3 className={styles.text_header}>{props.book.title}</h3>
                         {props.owner &&
+                            <Box>
                             <p className={styles.text}>Владелец: <Link to={`/user/${props.owner.id}`}>{props.owner.name}</Link></p>
+                            {(props.status === swapStatuses.ACCEPTED || props.status === swapStatuses.READING) &&
+                                <Box>
+                                    <p className={styles.text}>Контакты: {props.owner.email}</p>
+                                    <p className={styles.text}>{props.owner.vk}</p>
+                                </Box>
+                            }
+                            </Box>
                         }
                         {props.reader &&
-                            <p className={styles.text}>Читатель: <Link to={`/user/${props.reader.id}`}>{props.reader.name}</Link></p>
+                            <Box>
+                                <p className={styles.text}>Читатель: <Link to={`/user/${props.reader.id}`}>{props.reader.name}</Link></p>
+                                {(props.status === swapStatuses.ACCEPTED || props.status === swapStatuses.READING) &&
+                                    <Box>
+                                        <p className={styles.text}>Контакты: {props.reader.email}</p>
+                                        <p className={styles.text}>{props.reader.vk}</p>
+                                    </Box>
+                                }
+                            </Box>
                         }
                         {props.user &&
                             <p className={styles.text}>Участник обмена: <Link to={`/user/${props.user.id}`}>{props.user.name}</Link></p>
                         }
+
                         <p className={styles.text}>Дата: {props.date}</p>
                     </Box>
                     <Box width='162px' align='center' justify='around'>

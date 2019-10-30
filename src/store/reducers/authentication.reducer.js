@@ -44,7 +44,7 @@ export function authentication(state = initialState, action) {
                     username: action.user.django_user.username,
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
-                    avatar: action.user.image,
+                    avatar: action.user.avatar,
                     location: action.user.location,
                     id: action.user.id
                 } 
@@ -78,7 +78,7 @@ export function authentication(state = initialState, action) {
                     ...state.user,
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
-                    avatar: action.user.image,
+                    avatar: action.user.avatar,
                     location: action.user.location
                 }});
         default:

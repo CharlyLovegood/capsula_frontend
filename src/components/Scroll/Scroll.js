@@ -78,6 +78,7 @@ class Scroll extends Component {
 
 
     onArrowClick = (direction) => {
+        console.log(this.state)
         const {inRow, len, currentNum} = this.state;
         let begin = 0;
         if (direction === 'forward') {
@@ -112,7 +113,7 @@ class Scroll extends Component {
                             align='center'
                             width={this.calculateWidth(size)}
                             >
-                            <FormPrevious color='contrast' 
+                            <FormPrevious size='24px' color='contrast' 
                                 onClick={() => this.onArrowClick('back')} 
                                 className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormPrevious>
@@ -121,7 +122,7 @@ class Scroll extends Component {
                                 return(this.props.object(element.book.title, element.image, element.book.id))
                             })}
 
-                            <FormNext color='contrast' 
+                            <FormNext size='24px' color='contrast' 
                                 onClick={() => this.onArrowClick('forward')} 
                                 className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
                             </FormNext>

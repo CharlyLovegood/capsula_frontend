@@ -7,7 +7,7 @@
 }
 
 .link:after { 
-    color: #7d4cdb;
+    color: #6b277a;
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
@@ -15,17 +15,17 @@
     height: 2px;
     left: 50%;
     position: absolute;
-    background: #7d4cdb;
+    background: #6b277a;
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
 }
 
 .link:hover{ 
-    color: #7d4cdb;
+    color: #6b277a;
 }
 
 .link:hover:after { 
-    color: #7d4cdb;
+    color: #6b277a;
     width: 100%; 
     left: 0; 
 }
@@ -37,7 +37,7 @@
 }
 
 .active {
-    color: #7d4cdb;
+    color: #6b277a;
     color: black;
 
 }

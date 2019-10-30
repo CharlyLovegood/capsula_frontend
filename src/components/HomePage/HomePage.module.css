@@ -9,13 +9,13 @@
 }
 
 .icon_reading_book {
-    background: url('./reading-book.svg');
+    background: url('./book.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .icon_book_shelf {
-    background: url('./bookshelf.svg');
+    background: url('./library.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }

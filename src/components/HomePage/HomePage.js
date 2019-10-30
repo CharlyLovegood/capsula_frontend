@@ -47,7 +47,7 @@ class HomePage extends Component {
                             <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
                         </Box>
                         {this.props.library.found &&
-                        <Scroll object={(title, coverage, id) => <BookItem title={title} coverage={coverage} key={id} id={id}></BookItem>} 
+                        <Scroll object={(title, coverage, id) => <BookItem margin='4px' title={title} coverage={coverage} key={id} id={id}></BookItem>} 
                             objectList={this.props.library.search.searchResult.data} 
                             header='Доступные книги'
                             id={1}>

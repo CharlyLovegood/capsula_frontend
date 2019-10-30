@@ -1,0 +1,33 @@
+.rt {
+    background: url('./1.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.rb {
+    background: url('./3.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.lb {
+    background: url('./2.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.lt {
+    background: url('./4.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.rb_wave {
+    background: url('./5.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}

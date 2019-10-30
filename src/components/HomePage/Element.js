@@ -12,7 +12,7 @@ function Element(props) {
                 align='center' 
                 width={props.width}
                 height='270px' 
-                background='brandGradientH'
+
                 pad='20px'
                 elevation='small'
                 round='5px'
@@ -23,7 +23,7 @@ function Element(props) {
                 </Box>
 
                 {/* <hr align="center" width='100%' size="1" color="white" /> */}
-                <Text textAlign='center' color='white'>{props.text}</Text>
+                <Text textAlign='center' color='brandDark'>{props.text}</Text>
             </Box>}
         </SizeComponent>
     )

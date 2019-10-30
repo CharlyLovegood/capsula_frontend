@@ -21,6 +21,7 @@ import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
 import HistoryPage from './containers/HistoryPage/HistoryPage';
+import HelpPage from './components/HelpPage/Help';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
@@ -36,7 +37,7 @@ const theme = {
             brandGradient: 'linear-gradient(90deg, rgba(127,17,200,1) 0%, rgba(232,90,90,1) 70%, rgba(252,199,69,1) 100%)',
             brandGradientH: 'linear-gradient(0deg, rgba(127,17,200,1) 0%, rgba(232,90,90,1) 70%, rgba(252,199,69,1) 100%)',
             brand: 'rgb(140, 52, 190)',
-            brandDark: '#63376f',
+            brandDark: '#6b277a',
             background: '#ffffff',
             contrast: '#000000',
             light_contrast: '#f9f9f9',
@@ -71,7 +72,7 @@ const theme = {
     },
     heading: {
         font: {
-            family: 'Roboto',
+            family: 'ROboto',
             size: '26px',
             height: '20px',
         },
@@ -107,6 +108,7 @@ class App extends Component {
                             <PrivateRoute path='/settings' component={ SettingsPage } />
                             <AuthRoute exact path='/register' component={ RegisterPage } />
                             <AuthRoute exact path='/login' component={ LoginPage } />
+                            <Route exact path='/rules' component={ HelpPage } />
                         </Switch>
                     </Box>
                 </Router>
