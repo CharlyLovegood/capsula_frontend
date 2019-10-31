@@ -44,7 +44,7 @@ class Banner extends Component {
                 
             >
                 <Box width='50%' direction='column'>
-                    <Heading size='50px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Открывай для себя новые миры, делись своими!</Heading>
+                    <Heading size='60px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Ты то, что ты читаешь</Heading>
                     
                     {!this.props.user.loggedIn &&
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>

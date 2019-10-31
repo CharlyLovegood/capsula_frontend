@@ -103,10 +103,10 @@ class RegisterPage extends Component {
                                     required
                                     fullWidth
                                     variant='outlined'
-                                    name='lastName'
-                                    id='lastName'
+                                    name='lastname'
+                                    id='lastname'
                                     label='Фамилия'
-                                    value={user.lastName}
+                                    value={user.lastname}
                                     onChange={ event => this.handleChange(event) }
                                 />
                             </Grid>

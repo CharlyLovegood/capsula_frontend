@@ -27,7 +27,9 @@ import { history } from './helpers';
 import { connect } from 'react-redux';
 import { alertActions } from './store/actions';
 
-
+import styles from './App.module.css';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
 
 const theme = {
     global: {
@@ -80,6 +82,15 @@ const theme = {
 };
 
 
+const themeUI = createMuiTheme({
+    palette: {
+        primary: {
+            main: 'rgb(140, 52, 190)',
+        }
+    }
+    
+})
+
 
 class App extends Component {
     constructor(props) {
@@ -94,23 +105,25 @@ class App extends Component {
         return (
             <Grommet theme={theme} full>
                 <Router history={history}>
-                    <AppBar></AppBar>
-                    <Box flex align='center' justify='center'>
-                        <Switch>
-                            <Route exact path='/' component={ HomePage } />
-                            <PrivateRoute exact path='/user/:id' component={ UserPage }/>
-                            <PrivateRoute path='/book/:id' component={ BookPage } />
-                            <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
-                            <PrivateRoute path='/reader' component={ SwapPage } />
-                            <PrivateRoute path='/owner' component={ SwapPage } />
-                            <PrivateRoute path='/search' component={ SearchPage } />
-                            <PrivateRoute path='/history' component={ HistoryPage } />
-                            <PrivateRoute path='/settings' component={ SettingsPage } />
-                            <AuthRoute exact path='/register' component={ RegisterPage } />
-                            <AuthRoute exact path='/login' component={ LoginPage } />
-                            <Route exact path='/rules' component={ HelpPage } />
-                        </Switch>
-                    </Box>
+                    <ThemeProvider theme={themeUI}>
+                        <AppBar></AppBar>
+                        <Box flex align='center' justify='center' className={styles.app}>
+                            <Switch>
+                                <Route exact path='/' component={ HomePage } />
+                                <PrivateRoute exact path='/user/:id' component={ UserPage }/>
+                                <PrivateRoute path='/book/:id' component={ BookPage } />
+                                <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
+                                <PrivateRoute path='/reader' component={ SwapPage } />
+                                <PrivateRoute path='/owner' component={ SwapPage } />
+                                <PrivateRoute path='/search' component={ SearchPage } />
+                                <PrivateRoute path='/history' component={ HistoryPage } />
+                                <PrivateRoute path='/settings' component={ SettingsPage } />
+                                <AuthRoute exact path='/register' component={ RegisterPage } />
+                                <AuthRoute exact path='/login' component={ LoginPage } />
+                                <Route exact path='/rules' component={ HelpPage } />
+                            </Switch>
+                        </Box>
+                    </ThemeProvider>
                 </Router>
             </Grommet>
         );
