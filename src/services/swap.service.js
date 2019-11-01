@@ -14,6 +14,7 @@ function getSwap() {
     };
 
     return axios(requestOptions)
+        .then(handleResponse)
         .then(swapList => {
             return swapList;
         }); 
@@ -28,11 +29,17 @@ function changeSwapStatus(id, status) {
     };
     
     return fetch(back_url.swap.change_status(id), requestOptions)
+        .then(handleResponse)
         .then(
             response => {
                 return response;
-            },
-            error => {
-                console.log(error);
             });
+}
+
+export function handleResponse(response) {
+    if (response.status !== 200) {
+        const error = response.statusText;
+        return Promise.reject(error);
+    }
+    return response;
 }

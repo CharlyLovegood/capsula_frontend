@@ -25,7 +25,7 @@ class SwapAgreement extends Component {
 
     render() {
         return (
-            <Box pad='medium' gap='small' width='medium'>
+            <Box pad='medium' gap='small' width='medium' fill align='center'>
                 <Heading level={3} margin='none'>
                     Подтверждение
                 </Heading>
@@ -35,7 +35,7 @@ class SwapAgreement extends Component {
                     Если он решит принять ее, заявка перейдет из раздела "Заявки" в "В процессе" (вкладка Читатель), где вам станут доступны контакты владельца.
                     Если же владелец отклонит заявку, она перейдет во вкладку "История".
                 </Text>
-                <Text>
+                <Text alignSelf='start'>
                     Более подробно о правилах сервиса вы можете узнать во вкладке Правила
                 </Text>
                 <Box

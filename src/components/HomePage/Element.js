@@ -22,7 +22,6 @@ function Element(props) {
                     {props.icon}
                 </Box>
 
-                {/* <hr align="center" width='100%' size="1" color="white" /> */}
                 <Text textAlign='center' color='brandDark'>{props.text}</Text>
             </Box>}
         </SizeComponent>

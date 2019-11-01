@@ -67,7 +67,7 @@ class SwapPage extends Component {
         const {swap} = this.props;
         return (
             <Box direction='column' align='center' fill pad='10px'>
-                <Box direction='column' width='xlarge' align='center'>
+                <Box direction='column' width='xxlarge' align='center'>
 
                     {swap.swapsRecieved && this.props.match.path === '/reader' &&
                         <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>

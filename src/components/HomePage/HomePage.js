@@ -15,7 +15,8 @@ class HomePage extends Component {
     }
 
     calculateWidth(size) {
-        if (size >= 800) return 'xlarge'
+        if (size >= 1000) return 'xxlarge'
+        else if (size >= 800) return 'xlarge'
         else if (size >= 600) return 'large'
         else if (size >= 400) return 'medium'
         else return 'small'
@@ -23,7 +24,8 @@ class HomePage extends Component {
 
 
     calculateElementWidth(size) {
-        if (size >= 800) return '180px'
+        if (size >= 1000) return '230px'
+        else if (size >= 800) return '180px'
         else if (size >= 600) return '280px'
         else return '180px'
     }
@@ -33,7 +35,7 @@ class HomePage extends Component {
             return (
                 <SizeComponent>
                     {size => 
-                    <Box align='center'>
+                    <Box width='xxlarge' align='center'>
                         {size >= 600 &&
                             <Banner user={this.props.user}></Banner>
                         }

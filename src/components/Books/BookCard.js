@@ -38,14 +38,13 @@ function BookCard(props) {
             ButtonBlock = (<Box></Box>);
             break;
     }
-    console.log(props)
     
     return (
         <SizeComponent>
         {size => 
             <Box  
                 direction='row' 
-                width={size >= 800 ? '380px' : '100%'}
+                width={size >= 1000 ? '480px' : '100%'}
                 background='light_contrast' 
                 margin={{'vertical': '10px', 'horizontal':'10px'}}
             >

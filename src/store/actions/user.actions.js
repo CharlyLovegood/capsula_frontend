@@ -8,8 +8,34 @@ export const userActions = {
     logout,
     register,
     getById,
-    editUser
+    editUser,
+    oauth
 };
+
+
+function oauth() {
+    return dispatch => {
+        dispatch(request());
+
+        userService.oauth()
+            .then(
+                user => {
+                    dispatch(success(user));
+                    history.push('/');
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request() { return { type: userConstants.OAUTH_REQUEST } }
+    function success(user) { return { type: userConstants.OAUTH_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.OAUTH_FAILURE, error } }
+}
+
+
 
 function login(username, password) {
     return dispatch => {

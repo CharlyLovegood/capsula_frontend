@@ -65,7 +65,7 @@ class UserPage extends Component {
         }
 
         return (
-            <Box width='xlarge' direction='column' align='center' fill className={styles.profile}>
+            <Box width='xxlarge' direction='column' align='center' fill className={styles.profile}>
                 {this.props.user.userInfoRecieved &&
                     <Box direction='column' align='center' fill className={styles.profile}>
                         <Box background='brandGradient' className={styles.background} align='center'>

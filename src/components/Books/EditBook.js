@@ -48,7 +48,7 @@ class AddNewBook extends Component {
 
     render() {
         return (
-            <Box pad='medium' gap='small' width='medium' align='center'>
+            <Box pad='medium' gap='small' width='medium' align='center' fill>
                 <Heading level={3} margin='none'>
                     Edit book
                 </Heading>
@@ -78,7 +78,7 @@ class AddNewBook extends Component {
                     value={this.state.author}
                     onChange={ event => this.handleChange(event) }>
                 </TextField>
-                <Box fill>
+                <Box fill='horizontal'>
                     <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
                 </Box>
                 <Box

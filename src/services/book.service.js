@@ -8,6 +8,7 @@ export const bookService = {
     editBook
 };
 
+
 function getBook(id) {
     const requestOptions = {
         method: 'GET',
@@ -15,10 +16,12 @@ function getBook(id) {
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)
+        .then(handleResponse)
         .then(book => {
             return book;
         }); 
 }
+
 
 function deleteBook(id) {
     const requestOptions = {
@@ -27,6 +30,7 @@ function deleteBook(id) {
     };
 
     return fetch(back_url.books.delete_book(id), requestOptions)
+        .then(handleResponse)
         .then(
             response => {
                 return response;
@@ -44,12 +48,10 @@ function editBook(book, bookId) {
     };
 
     return fetch(`/library/book_items/${bookId}/`, requestOptions)
+        .then(handleResponse)
         .then(
             response => {
                 return response;
-            },
-            error => {
-                console.log(error);
             });
 }
 
@@ -64,8 +66,18 @@ function addBook(book) {
     };
 
     return fetch(back_url.books.add_book, requestOptions)
+        .then(handleResponse)
         .then(
             response => {
                 return response.json();
             })
+}
+
+
+export function handleResponse(response) {
+    if (response.status !== 200) {
+        const error = response.statusText;
+        return Promise.reject(error);
+    }
+    return response;
 }

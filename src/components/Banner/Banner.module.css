@@ -8,8 +8,8 @@
 .box {
     background-image: url('./banner.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom; 
+    background-size: contain;
+    background-position: center;
 }
 
 .container {

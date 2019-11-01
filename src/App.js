@@ -68,7 +68,7 @@ const theme = {
             'medium': '400px',
             'large': '600px',
             'xlarge': '800px',
-            'xxlarge': '1536px',
+            'xxlarge': '1000px',
             'full': '100%'
         }
     },

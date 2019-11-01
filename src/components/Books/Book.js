@@ -16,7 +16,7 @@ function Book(props) {
 
     return (
         <Link to={link}>
-            <Box background={`url(${bookCoverage})`} 
+            <Box elevation='medium' background={`url(${bookCoverage})`} 
                 width='book-width' 
                 height='book-height'
                 margin={props.margin}

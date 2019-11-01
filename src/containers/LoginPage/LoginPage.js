@@ -27,29 +27,8 @@ class LoginPage extends Component {
             submitted: false };
     }
 
-    componentDidMount(){
-        const requestOptions = {
-            method: 'GET',
-            url: '/auth/login/'
-        };
-
-        return axios(requestOptions)
-            .then(resolve => {
-                if (resolve.status === 200) {
-                    const user = resolve.data;
-                    localStorage.setItem('username', user.django_user.username);
-                    localStorage.setItem('lastName', user.last_name);
-                    localStorage.setItem('firstName', user.first_name);
-                    localStorage.setItem('token', user.token);
-                    localStorage.setItem('id', user.id);
-                    localStorage.setItem('avatar', user.avatar);
-                    localStorage.setItem('location', user.location);
-                    document.location.href = 'http://127.0.0.1:3000/';
-                }
-                if (resolve.status === 204) {
-                }
-            })
-            .catch(error => console.log(error));
+    componentDidMount() {
+        this.props.oauth();
     }
 
     handleOauth(event) {
@@ -80,7 +59,7 @@ class LoginPage extends Component {
                         Вход
                     </Typography>
 
-                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>}
+                    {/* {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>} */}
 
                     <ValidatorForm
                         ref="form"
@@ -145,6 +124,7 @@ const mapState = state => ({
 
 const actionCreators = {
     login: userActions.login,
+    oauth: userActions.oauth,
 };
 
 export default connect(mapState, actionCreators)(LoginPage);

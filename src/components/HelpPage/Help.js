@@ -8,7 +8,7 @@ class HelpPage extends Component {
         return (
             <SizeComponent>
                 {size => 
-                <Box pad='10px' align='center' width='xlarge'>
+                <Box pad='10px' align='center' width='xxlarge'>
                     <Heading margin='0px'>Правила сервиса</Heading> 
                     <Text margin={{vertical: '15px'}} alignSelf='stretch' >Привет, друг!</Text>
                     <Text margin={{vertical: '5px'}}>Представляем тебе сервис для обмена книгами. 

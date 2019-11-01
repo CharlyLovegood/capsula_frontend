@@ -4,7 +4,6 @@ import styles from './Scroll.module.css';
 import { Box } from 'grommet';
 import { FormNext, FormPrevious } from 'grommet-icons';
 
-import { remote_url } from './../../helpers';
 import SizeComponent from '../SizeComponent/SizeComponent';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +14,7 @@ class Scroll extends Component {
         super(props);
         this.state = { 
             viewObjectsList: [], 
-            len: this.props.objectList.length, 
+            len: Math.ceil(this.props.objectList.length/4)*4, 
             currentNum: 0, 
             showArrows: false,
             inRow: 4
@@ -24,9 +23,9 @@ class Scroll extends Component {
 
     calculateWidth(size) {
         if (size >= 800) return 'xlarge'
-        else if (size >= 600) return '600px'
-        else if (size >= 400) return '400px'
-        else if (size >= 200) return 'small'
+        else if (size >= 612) return '612px'
+        else if (size >= 424) return '424px'
+        else if (size >= 236) return '236px'
         else return 'xlarge'
     }
 
@@ -35,10 +34,10 @@ class Scroll extends Component {
         if (size >= 800) {
             inRow = 4;
         }
-        else if (size >= 600) {
+        else if (size >= 612) {
             inRow = 3;
         }
-        else if (size >= 400) {
+        else if (size >= 424) {
             inRow =  2;
         }
         else {
@@ -47,6 +46,7 @@ class Scroll extends Component {
 
         if (inRow !== this.state.inRow) {
             this.setState({inRow: inRow});
+            this.setState({len: Math.ceil(this.props.objectList.length/inRow)*inRow})
         }
         return inRow;
     }
@@ -54,31 +54,17 @@ class Scroll extends Component {
 
     componentDidMount() {
         const {inRow, len} = this.state;
-        if (len !== 0) {
-            const rem = len % inRow;
-            if (rem !== 0) {
-                let i;
-                for (i = 0; i < inRow - rem; i++) {
-                    this.props.objectList.push({book: {title: "", authors: "", genre: 3, id: i*(-35)},
-                    id: i*(-45),
-                    image: remote_url.images.scroll_additional_book,
-                    status: 0})
-                }
-            }
-        }
 
         if (len > inRow) {
             this.setState({showArrows: true});
         }
 
         this.setState({viewObjectsList: this.props.objectList.slice(0, inRow)});
-        this.setState({len: this.props.objectList.length});
     }
 
 
 
     onArrowClick = (direction) => {
-        console.log(this.state)
         const {inRow, len, currentNum} = this.state;
         let begin = 0;
         if (direction === 'forward') {
@@ -101,32 +87,31 @@ class Scroll extends Component {
         return ( 
             <SizeComponent>
                 {size => (
-                <Box direction='column' align='center' width='xlarge'>
+                <Box margin={{vertical: '20px'}} direction='column' align='center' width={this.calculateWidth(size)}>
                     <Link className={styles.header} to={`/user/${this.props.id}/library/`}>
                         {this.props.header}
                     </Link>
-                    <Box direction='column' align='center'>
-                        <Box 
-                            flex 
-                            direction='row' 
-                            justify='around' 
-                            align='center'
-                            width={this.calculateWidth(size)}
-                            >
-                            <FormPrevious size='24px' color='contrast' 
-                                onClick={() => this.onArrowClick('back')} 
-                                className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                            </FormPrevious>
+                    <Box fill
+                        direction='row' 
+                        justify='between' 
+                        align='center'
+                        width={this.calculateWidth(size)}
+                    >
+                        <FormPrevious size='24px' color='contrast' 
+                            onClick={() => this.onArrowClick('back')} 
+                            className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
+                        </FormPrevious>
 
+                        <Box flex='grow' direction='row' justify='start'>
                             {this.state.viewObjectsList.slice(0, this.calculateNum(size)).map((element) => {
                                 return(this.props.object(element.book.title, element.image, element.book.id))
                             })}
-
-                            <FormNext size='24px' color='contrast' 
-                                onClick={() => this.onArrowClick('forward')} 
-                                className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
-                            </FormNext>
                         </Box>
+
+                        <FormNext size='24px' color='contrast' 
+                            onClick={() => this.onArrowClick('forward')} 
+                            className={this.state.showArrows ? styles.arrow : styles.arrow_hidden}>
+                        </FormNext>
                     </Box>
                 </Box>
                 )}

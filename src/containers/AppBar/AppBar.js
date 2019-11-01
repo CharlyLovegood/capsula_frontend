@@ -41,14 +41,13 @@ class AppBar extends Component {
         let showSidebar = this.state.showSidebar;
         return (    
             this.props.user.loggedIn === true ?
-            
             (<SizeComponent>
                 {size => (
                 size >= 600 ?
                 <Box align='center' className={styles.header} >
                     <Box>
                         <Box
-                            width='xlarge'
+                            width='xxlarge'
                             tag='header'
                             direction='row'
                             align='center'

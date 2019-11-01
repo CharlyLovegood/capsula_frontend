@@ -51,6 +51,7 @@ class SettingsPage extends Component {
             'location': this.state.user.domitary,
             'image': this.state.user.avatar
         };
+        
         this.props.editUser(user);
     }
 

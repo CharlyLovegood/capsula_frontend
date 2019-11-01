@@ -10,10 +10,18 @@ function request() {
     const requestOptions = {
         method: 'GET',
         url: back_url.library.get_all_books,
-        // headers: {'Authorization': 'Token ' + localStorage.token}
     };
     return axios(requestOptions)
+        .then(handleResponse)
         .then(bookList => {
             return bookList;
         }); 
+}
+
+export function handleResponse(response) {
+    if (response.status !== 200) {
+        const error = response.statusText;
+        return Promise.reject(error);
+    }
+    return response;
 }

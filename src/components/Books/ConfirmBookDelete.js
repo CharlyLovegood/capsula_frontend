@@ -12,7 +12,7 @@ class ConfirmDeleteBook extends Component {
 
     render() {
         return (
-            <Box pad='medium' gap='small' width='medium' align='center'>
+            <Box pad='medium' gap='small' width='medium' align='center' justify='center' fill>
                 <Heading level={3} margin='none'>
                     Подтвердите удаление книги
                 </Heading>
@@ -21,7 +21,6 @@ class ConfirmDeleteBook extends Component {
                     gap='small'
                     direction='row'
                     align='center'
-                    justify='end'
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
                     <Link to='#'>

@@ -60,6 +60,34 @@ export function authentication(state = initialState, action) {
                     location: '',
                     id: ''
                 }});
+        case userConstants.OAUTH_REQUEST:
+            return {
+                loggingIn: true,
+                user: action.user
+            };
+        case userConstants.OAUTH_SUCCESS:
+            return {
+                loggedIn: true,
+                user: {    
+                    username: action.user.django_user.username,
+                    firstName: action.user.first_name,
+                    lastName: action.user.last_name,
+                    avatar: action.user.avatar,
+                    location: action.user.location,
+                    id: action.user.id
+                } 
+            };
+        case userConstants.OAUTH_FAILURE:
+            return ({
+                loggedIn: false, 
+                user: {
+                    username: '',
+                    firstName: '',
+                    lastName: '',
+                    avatar: '',
+                    location: '',
+                    id: ''
+                }});
         case userConstants.LOGOUT:
             return ({
                 loggedIn: false, 

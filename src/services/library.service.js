@@ -13,7 +13,16 @@ function getBookListById(userId) {
     };
 
     return axios(requestOptions)
+        .then(handleResponse)
         .then(bookList => {
             return bookList;
         }); 
+}
+
+export function handleResponse(response) {
+    if (response.status !== 200) {
+        const error = response.statusText;
+        return Promise.reject(error);
+    }
+    return response;
 }

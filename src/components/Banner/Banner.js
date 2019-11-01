@@ -13,7 +13,7 @@ class Banner extends Component {
                 </Box>
                 
                 <Box pad='10px' margin={{horizontal:'20px', vertical: '-20px'}} background='white' align='center' className={style.title_box}>
-                    <Heading size='40px' color='black' margin={{horizontal:'0px', vertical: '0px'}} textAlign='center' alignSelf='center' level='1'>Открывай для себя новые миры, делись своими</Heading>
+                    <Heading size='40px' color='black' margin={{horizontal:'0px', vertical: '0px'}} textAlign='center' alignSelf='center' level='1'>Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю. Нет… восемь дней в неделю. А. Брэдли</Heading>
                     {!this.props.user.loggedIn &&
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
                             <Box fill>
@@ -35,16 +35,16 @@ class Banner extends Component {
         return (
             <Box
                 pad='10px'
-                height='550px'
-                width='xlarge'
+                height='650px'
+                width='100%'
                 className={style.container}
                 direction='row'
                 justify='between'
-                align='start'
+                align='center'
                 
             >
                 <Box width='50%' direction='column'>
-                    <Heading size='60px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Ты то, что ты читаешь</Heading>
+                    <Heading size='40px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю. Нет… восемь дней в неделю. А. Брэдли</Heading>
                     
                     {!this.props.user.loggedIn &&
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
@@ -61,7 +61,8 @@ class Banner extends Component {
                         </Box>
                     }
                 </Box>
-                <Box height='100%' width='50%' className={style.box}></Box>
+                <Box height='100%' width='70%' className={style.box}>
+                </Box>
 
                 {/* <Box className={style.container}>
                     <img src={remote_url.images.banner} className={style.banner}></img>
