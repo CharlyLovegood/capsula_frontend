@@ -6,6 +6,10 @@ export const swapStatuses = {
     RETURNED: 4
 }
 
+export const urls = {
+    backOauth: 'http://127.0.0.1:8000/auth/login/vk-oauth2/'
+}
+
 export const genres = {
     CLASSIC_RUSSIAN: 0,
     CLASSIC_FOREIGN: 1,

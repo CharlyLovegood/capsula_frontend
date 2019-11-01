@@ -14,8 +14,9 @@ import { connect } from 'react-redux';
 import PrivateLink from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
 
-import * as axios from "axios";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {urls} from './../../helpers';
+
 
 class LoginPage extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class LoginPage extends Component {
     }
 
     handleOauth(event) {
-        document.location.href = 'http://127.0.0.1:8000/auth/login/vk-oauth2/';
+        document.location.href = urls.backOauth;
     }
     
     handleSubmit(event) {
