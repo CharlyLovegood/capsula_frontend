@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Box } from 'grommet';
 
 import { remote_url } from './../../helpers';
+import SizeComponent from '../SizeComponent/SizeComponent';
 
 
 function Book(props) {
@@ -13,15 +14,18 @@ function Book(props) {
         link = '/book/' + props.id;
     }
     
-
     return (
         <Link to={link}>
-            <Box elevation='medium' background={`url(${bookCoverage})`} 
-                width='book-width' 
-                height='book-height'
-                margin={props.margin}
-                animation={props.animation}>
-            </Box>
+            <SizeComponent>
+                {size => 
+                <Box elevation='medium' background={`url(${bookCoverage})`} 
+                    width={size >= 424 ? 'book-width' : 'book-small-width'}
+                    height={size >= 424 ? 'book-height' : 'book-small-height'}
+                    margin={props.margin}
+                    animation={props.animation}>
+                </Box>
+                }
+            </SizeComponent>
         </Link>
     )
 }

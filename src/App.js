@@ -64,6 +64,8 @@ const theme = {
             'xsmall': '96px',
             'book-height': '270px',
             'book-width': '180px',
+            'book-small-height': '200px',
+            'book-small-width': '120px',
             'small': '200px',
             'medium': '400px',
             'large': '600px',

@@ -48,14 +48,14 @@ class LibraryPage extends Component {
                         object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleEditBook={this.props.editBook} handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                         objectList={library.userLibrary}
                         header='Мои книги'
-                        contentType='books'
+                        contentType='smart-books'
                     ></Gallery>
                 }
                 {library.userLibraryRecieved && !this.state.owner &&
                     <Gallery 
                         object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
                         objectList={library.userLibrary}
-                        header='Мои книги'
+                        header='Книги'
                         contentType='books'
                     ></Gallery>
                 }

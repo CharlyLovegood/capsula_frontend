@@ -25,7 +25,7 @@ class Scroll extends Component {
         if (size >= 800) return 'xlarge'
         else if (size >= 612) return '612px'
         else if (size >= 424) return '424px'
-        else if (size >= 236) return '236px'
+        else if (size >= 304) return '304px'
         else return 'xlarge'
     }
 
@@ -41,7 +41,7 @@ class Scroll extends Component {
             inRow =  2;
         }
         else {
-            inRow =  1;
+            inRow =  2;
         }
 
         if (inRow !== this.state.inRow) {

@@ -10,6 +10,14 @@ class Gallery extends Component {
             if (size >= 1000) return 'xxlarge'
             else if (size >= 800) return 'xlarge'
             else if (size >= 600) return 'large'
+            else if (size >= 424) return 'medium'
+            else if (size >= 280) return '280px'
+            else return 'xlarge'
+        }
+        if (contentType === 'smart-books') {
+            if (size >= 1000) return 'xxlarge'
+            else if (size >= 800) return 'xlarge'
+            else if (size >= 600) return 'large'
             else if (size >= 400) return 'medium'
             else if (size >= 200) return 'small'
             else return 'xlarge'
@@ -31,7 +39,7 @@ class Gallery extends Component {
                             justify='start' 
                             align='center'
                         >
-                            {this.props.contentType === 'books' && this.props.objectList.map((element) => {
+                            {(this.props.contentType === 'books' || this.props.contentType === 'smart-books') && this.props.objectList.map((element) => {
                                 return(this.props.object(element.book.title, element.image, element.book.genre, element.book.authors, element.id, element.book.id));
                             })}
 

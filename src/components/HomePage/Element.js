@@ -11,14 +11,12 @@ function Element(props) {
             <Box margin='10px' 
                 align='center' 
                 width={props.width}
-                height='270px' 
-
-                pad='20px'
-                elevation='small'
+                height='240px' 
+                pad='10px'
+                elevation='xsmall'
                 round='5px'
-                
             >
-                <Box margin='20px'>
+                <Box margin='10px'>
                     {props.icon}
                 </Box>
 

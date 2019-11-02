@@ -37,7 +37,7 @@ class HistoryPage extends Component {
         }
         return (
             <Box direction='column' align='center' fill>
-                <Box direction='column' width='xlarge'>
+                <Box direction='column' width='xxlarge'>
                     {swap.swapsRecieved &&
                     <Box align='center'>
                         <Gallery

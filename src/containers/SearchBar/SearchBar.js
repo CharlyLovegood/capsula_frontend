@@ -55,7 +55,7 @@ class SearchBar extends Component {
                     pad='20px'
                 >
                     <Text>
-                        Nothing was found :(
+                        Ничего не найдено :(
                     </Text>
                 </Box>
             ),
@@ -132,7 +132,7 @@ class SearchBar extends Component {
                     onChange={this.onChange}
                     onSelect={this.onSelect}
                     suggestions={this.renderSuggestions()}
-                    placeholder='Искать...'
+                    placeholder='Найти книгу...'
                     onSuggestionsOpen={() => this.setState({ suggestionOpen: true })}
                     onSuggestionsClose={() =>
                     this.setState({ suggestionOpen: false })

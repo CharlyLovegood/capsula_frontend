@@ -157,7 +157,7 @@ class AppBar extends Component {
                 <Box align='center' className={styles.header} >
                     <Box>
                         <Box
-                            width='xlarge'
+                            width='xxlarge'
                             tag='header'
                             direction='row'
                             align='center'
@@ -187,7 +187,7 @@ class AppBar extends Component {
                 <Box align='center' className={styles.header} >
                     <Box>
                         <Box
-                            width='xlarge'
+                            width='xxlarge'
                             tag='header'
                             direction='row'
                             align='center'

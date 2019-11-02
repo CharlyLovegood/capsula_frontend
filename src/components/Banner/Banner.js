@@ -18,7 +18,7 @@ class Banner extends Component {
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
-                                    <Button margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                    <Button color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
                                 </Link>
                             </Box>
                             <Box fill>
@@ -40,14 +40,12 @@ class Banner extends Component {
                 className={style.container}
                 direction='row'
                 justify='between'
-                align='center'
-                
             >
-                <Box width='50%' direction='column'>
-                    <Heading size='40px' margin={{horizontal:'0px', vertical: '0px'}} textAlign='start' color='black' alignSelf='start' level='1'>Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю. Нет… восемь дней в неделю. А. Брэдли</Heading>
+                <Box width='350px' direction='column'>
+                    <Heading size='40px' color='black' level='1'>Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю.</Heading>
                     
                     {!this.props.user.loggedIn &&
-                        <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
+                        <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
                                     <Button color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
@@ -61,7 +59,7 @@ class Banner extends Component {
                         </Box>
                     }
                 </Box>
-                <Box height='100%' width='70%' className={style.box}>
+                <Box animation='slideUp' height='100%' width='70%' className={style.box}>
                 </Box>
 
                 {/* <Box className={style.container}>

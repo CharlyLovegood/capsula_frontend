@@ -20,6 +20,12 @@ class SearchPage extends Component {
         this.props.request();
         this.forceUpdate();
     }
+
+    componentDidUpdate(prevProps) {
+        if ( this.props.search !== prevProps.search && this.props.search.found === true) {
+            this.setState({ suggestedList: this.props.search.search.searchResult.data });
+        }
+    }
   
     onChange = event => this.setState({ value: event.target.value }, () => {
         const { value } = this.state;
@@ -48,7 +54,7 @@ class SearchPage extends Component {
             <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
         ));
         if (res.length === 0 && value !== '') {
-            return [<SearchElement id={'no res'} key={'no res'} name={'Nothing was found :('}></SearchElement>]
+            return [<SearchElement id={'no res'} key={'no res'} name={'Ничего не найдено :('}></SearchElement>]
         } else {
             return res;
         }
