@@ -66,13 +66,14 @@ class SearchPage extends Component {
 
         return (
             <Box direction='column' align='center' width='720px'>
-                <Box fill direction='row' align='center'>
+                <Box fill direction='row' align='center' wrap>
                     <Box
                         background='background'
                         ref={this.boxRef}
                         direction='row'
                         align='center'
-                        fill
+                        flex='grow'
+                        height='55px'
                         pad={{ horizontal: 'small', vertical: 'xsmall' }}
                         margin={{ horizontal: 'small', vertical: 'xsmall' }}
                         round='8px'
@@ -92,7 +93,9 @@ class SearchPage extends Component {
                             placeholder='Найти книгу...'
                         />
                     </Box>
-                    <Filter updateGenre={(genre) => this.setState({genre: genre})}></Filter>
+                    <Box width='300px' margin={{ horizontal: 'small', vertical: 'xsmall' }}>
+                        <Filter  updateGenre={(genre) => this.setState({genre: genre})}></Filter>
+                    </Box>
                 </Box>
                 <Box fill>
                     {this.renderSearchResult()}

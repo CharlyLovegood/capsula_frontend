@@ -34,7 +34,7 @@ class BookPage extends Component {
                 {this.props.book.bookRecieved &&
                 <Box direction='column' align='center' fill>
                     <Box background='brandGradient' className={styles.background} align='center'>
-                        <Book big='true' animation='slideUp' coverage={book.image}></Book>
+                        <Book big='true' coverage={book.image}></Book>
                     </Box>
                     
                     <Box direction='column' align='center' margin={{vertical:'100px'}} width='large'>
@@ -46,7 +46,8 @@ class BookPage extends Component {
                             <Button margin='15px 5px' label='Add to my booklist'></Button>
                         </Box> */}
                         {book.book_items[0] &&
-                        <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>}
+                            <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>
+                        }
                     </Box>
                 </Box>}
 

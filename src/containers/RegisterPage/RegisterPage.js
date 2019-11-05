@@ -14,7 +14,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { connect } from 'react-redux';
 
 import { userActions } from '../../store/actions';
-import PrivateLink from '../../components/PrivateLink/PrivateLink';
+import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
 
 
 

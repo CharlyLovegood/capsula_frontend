@@ -19,6 +19,8 @@ import LoginPage from './containers/LoginPage/LoginPage';
 import RegisterPage from './containers/RegisterPage/RegisterPage';
 import { AppBar } from './containers/AppBar';
 import { SearchPage } from './containers/SearchPage';
+import RedirectPage from './components/RedirectPage/RedirectPage';
+import Footer from './components/Footer/Footer';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
 import HistoryPage from './containers/HistoryPage/HistoryPage';
 import HelpPage from './components/HelpPage/Help';
@@ -109,7 +111,7 @@ class App extends Component {
                 <Router history={history}>
                     <ThemeProvider theme={themeUI}>
                         <AppBar></AppBar>
-                        <Box flex align='center' justify='center' className={styles.app}>
+                        <Box align='center'  className={styles.app}>
                             <Switch>
                                 <Route exact path='/' component={ HomePage } />
                                 <PrivateRoute exact path='/user/:id' component={ UserPage }/>
@@ -121,10 +123,12 @@ class App extends Component {
                                 <PrivateRoute path='/history' component={ HistoryPage } />
                                 <PrivateRoute path='/settings' component={ SettingsPage } />
                                 <AuthRoute exact path='/register' component={ RegisterPage } />
+                                <AuthRoute exact path='/redirect/vk' component={ RedirectPage } />
                                 <AuthRoute exact path='/login' component={ LoginPage } />
                                 <Route exact path='/rules' component={ HelpPage } />
                             </Switch>
                         </Box>
+                        <Footer></Footer>
                     </ThemeProvider>
                 </Router>
             </Grommet>

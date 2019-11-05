@@ -15,7 +15,7 @@ function ParagraphElement(props) {
                 alignSelf={props.align}
                 direction='row' 
                 margin={{vertical: '20px', horizontal:'0px'}}
-                width='80%'
+                fill
             >
                 {/* <Box  margin={{vertical: '0px', horizontal:'-20px'}} alignSelf={rAlign} width='50px' height='50px' className={r} ></Box> */}
                 <Box  pad={{vertical: '0px'}} width='100%'>

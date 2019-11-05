@@ -13,6 +13,7 @@ export const back_url = {
         add_book: '/library/book_items/',
         delete_book: (id) => `/library/book_items/${id}/`,
         get_book: (id) => `/library/books/${id}/`,
+        edit_book: (id) => `/library/book_items/${id}/`,
     },
     library: {
         get_library: '/library/book_items/',

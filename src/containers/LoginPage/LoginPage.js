@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import styles from './LogIn.module.css';
 
 import { connect } from 'react-redux';
-import PrivateLink from '../../components/PrivateLink/PrivateLink';
+import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -26,10 +26,6 @@ class LoginPage extends Component {
             password: '',
             redirect: false,
             submitted: false };
-    }
-
-    componentDidMount() {
-        this.props.oauth();
     }
 
     handleOauth(event) {
@@ -60,7 +56,7 @@ class LoginPage extends Component {
                         Вход
                     </Typography>
 
-                    {/* {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>} */}
+                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>}
 
                     <ValidatorForm
                         ref="form"

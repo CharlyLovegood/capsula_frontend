@@ -14,7 +14,7 @@ import { Search, Menu, FormClose } from 'grommet-icons';
 
 import SearchBar from '../SearchBar/SearchBar';
 import UserAvatar from '../../components/UserProfile/UserAvatar';
-import PrivateLink from '../../components/PrivateLink/PrivateLink';
+import { PrivateLink, PrivateLinkMobile } from '../../components/PrivateLink/PrivateLink';
 
 import styles from './AppBar.module.css';
 import { Link } from 'react-router-dom';
@@ -56,7 +56,7 @@ class AppBar extends Component {
                             pad={{ horizontal: '17px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
                             </Link>
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
@@ -102,7 +102,7 @@ class AppBar extends Component {
                             pad={{ horizontal: '17px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
                             </Link>
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
@@ -135,21 +135,23 @@ class AppBar extends Component {
                                 align='center'
                                 justify='center'
                             >
-                                <Link to={'/user/' + this.props.user.user.id} className={styles.avatar_container}>
-                                    <img
-                                        alt='Avatar'
-                                        src={this.props.user.user.avatar}
-                                        className={styles.small_avatar}
-                                    />
-                                </Link>
-                                {this.props.user.user.username}
-                                <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
-                                <PrivateLink color='menuTextColor' to='/history' label='История' key='История'/>
-                                <PrivateLink color='menuTextColor' to='/reader' label='Читатель' key='Читатель'/>
-                                <PrivateLink color='menuTextColor' to='/owner' label='Владелец' key='Владелец'/>
-                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
-                                <PrivateLink color='menuTextColor' to='/settings' label='Настройки' key='Настройки'/>
-                                <Box margin='12px' onClick={event => this.handleLogOut(event)}>ВЫЙТИ</Box>
+                                <Box align='center' margin='15px'>
+                                    <Link to={'/user/' + this.props.user.user.id} className={styles.avatar_container}>
+                                        <img
+                                            alt='Avatar'
+                                            src={this.props.user.user.avatar}
+                                            className={styles.small_avatar}
+                                        />
+                                    </Link>
+                                    {this.props.user.user.username}
+                                </Box>
+                                <PrivateLinkMobile color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
+                                <PrivateLinkMobile color='menuTextColor' to='/history' label='История' key='История'/>
+                                <PrivateLinkMobile color='menuTextColor' to='/reader' label='Читатель' key='Читатель'/>
+                                <PrivateLinkMobile color='menuTextColor' to='/owner' label='Владелец' key='Владелец'/>
+                                <PrivateLinkMobile color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
+                                <PrivateLinkMobile color='menuTextColor' to='/settings' label='Настройки' key='Настройки'/>
+                                <Box margin='15px' onClick={event => this.handleLogOut(event)}>ВЫЙТИ</Box>
                                 <Link color='menuTextColor' to='/' onClick={event => this.handleLogOut(event)} label='Выйти' key='Выйти'/>
                             </Box>
                         </Layer>
@@ -176,7 +178,7 @@ class AppBar extends Component {
                             pad={{ horizontal: '17px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
                             </Link>
                             
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
@@ -206,7 +208,7 @@ class AppBar extends Component {
                             pad={{ horizontal: '17px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Capsula</Heading>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
                             </Link>
                             
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>

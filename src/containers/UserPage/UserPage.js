@@ -69,7 +69,7 @@ class UserPage extends Component {
                 {this.props.user.userInfoRecieved &&
                     <Box direction='column' align='center' fill className={styles.profile}>
                         <Box background='brandGradient' className={styles.background} align='center'>
-                            <Box animation='slideUp'>
+                            <Box>
                                 <img 
                                     alt='Remy Sharp'
                                     src={user.avatar}

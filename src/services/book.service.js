@@ -39,7 +39,7 @@ function deleteBook(id) {
 
 
 
-function editBook(book, bookId) {
+function editBook(book, id) {
     const requestOptions = {
         method: 'PUT',
         headers: {'Authorization': 'Token ' + localStorage.token,
@@ -47,14 +47,13 @@ function editBook(book, bookId) {
         body: JSON.stringify(book)
     };
 
-    return fetch(`/library/book_items/${bookId}/`, requestOptions)
+    return fetch(back_url.books.delete_book(id), requestOptions)
         .then(handleResponse)
         .then(
             response => {
                 return response;
             });
 }
-
 
 
 function addBook(book) {
