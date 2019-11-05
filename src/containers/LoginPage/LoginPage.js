@@ -30,11 +30,11 @@ class LoginPage extends Component {
     }
 
     handleOauthVk(event) {
-        document.location.href = urls.backOauth;
+        document.location.href = urls.backOauthVk;
     }
     
     handleOauthGoogle(event) {
-        document.location.href = urls.backOauth;
+        document.location.href = urls.backOauthGoogle;
     }
     
     handleSubmit(event) {

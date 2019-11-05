@@ -14,7 +14,8 @@ export const bookStatuses = {
 
 
 export const urls = {
-    backOauth: 'http://127.0.0.1:8000/auth/login/vk-oauth2/'
+    backOauthVk: 'http://127.0.0.1:8000/auth/login/vk-oauth2/',
+    backOauthGoogle: 'http://127.0.0.1:8000/auth/login/google-oauth2/'
 }
 
 export const genres = {
@@ -39,7 +40,7 @@ export const genres = {
     'Эротика': 18,
     'Детское': 19,
     'Религия и философия': 20,
-    'Переодисекие издания': 21
+    'Периодичекие издания': 21
 }
 
 export const genresArray = [
@@ -64,7 +65,7 @@ export const genresArray = [
     'Эротика',
     'Детское',
     'Религия и философия',
-    'Переодисекие издания'
+    'Периодичекие издания'
 ]
 
 
