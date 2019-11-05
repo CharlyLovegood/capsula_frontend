@@ -82,7 +82,7 @@ class HomePage extends Component {
                         // </Scroll>
                             <Box align='center'>
                                 <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={id} id={idAbstract}></BookItem>} 
+                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                     objectList={this.props.library.search.searchResult.data.slice(0,15)}
                                     header='Доступные книги'
                                     contentType='books'

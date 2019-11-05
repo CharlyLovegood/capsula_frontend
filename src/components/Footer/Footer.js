@@ -10,7 +10,7 @@ function Footer(props) {
             gap='small'
             pad='small'
             className={styles.container}
-            background='brandGradient'
+            background='brandDark'
             height='150px'
         >
         </Box>

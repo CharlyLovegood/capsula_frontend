@@ -12,7 +12,7 @@ function BookCard(props) {
     let ButtonBlock = (<Button></Button>);
     switch (props.type) {
         case 'proposal':
-            ButtonBlock = (<Box width='130px' direction='column' gap='5px'>
+            ButtonBlock = (<Box width='140px' direction='column' gap='5px'>
                                 <Button margin='5px' color='brand'  label='Принять' onClick={() => props.handleAccept(props.id)}></Button>
                                 <Button margin='5px' color='dark-3'  label='Отклонить' onClick={() => props.handleReject(props.id)}></Button>
                             </Box>);

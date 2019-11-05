@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import Book from '../../components/Books/Book';
 
 
-class LibraryPage extends Component {
+class WishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,22 +19,22 @@ class LibraryPage extends Component {
     }
 
     componentDidMount() {
-        this.getLibrary();
+        this.getWishList();
     }
 
     componentDidUpdate(prevProps) {
         if(this.props.match.params.id !== prevProps.match.params.id) {
             this.setState({owner: Number(this.props.user.id) === Number(this.props.match.params.id)});
-            this.getLibrary();
+            this.getWishList();
         }
     }
 
     getLibrary() {
-        this.props.getLibrary(this.props.match.params.id);
+        this.props.getWishList(this.props.match.params.id);
     }
 
     render() {
-        const {library} = this.props;
+        const {wishList} = this.props;
 
         return (
             <Box direction='column' align='center' width='xxlarge'>
@@ -70,14 +70,12 @@ class LibraryPage extends Component {
 const mapState = state => ({
     user: state.authentication.user,
     alert: state.alert,
-    library: state.library,
+    wishList: state.wishList,
 })
 
 const actionCreators = {
-    getLibrary: libraryActions.getBookListById,
+    getWishList: libraryActions.getWishList,
     deleteBook: bookActions.deleteBookById,
-    editBook: bookActions.editBook,
-    addBook: bookActions.addBook
 }
 
-export default connect(mapState, actionCreators)(LibraryPage);
+export default connect(mapState, actionCreators)(WishList);

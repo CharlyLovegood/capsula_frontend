@@ -81,7 +81,7 @@ function editBook(book, bookId) {
         bookService.editBook(book, bookId)
             .then(
                 response => { 
-                    dispatch(success(book));
+                    dispatch(success(book, bookId));
                 },
                 error => {
                     dispatch(failure(error));
@@ -91,6 +91,6 @@ function editBook(book, bookId) {
     };
 
     function request(book) { return { type: bookConstants.EDIT_BOOK_REQUEST, book } }
-    function success(book) { return { type: bookConstants.EDIT_BOOK_SUCCESS, book } }
+    function success(book, bookId) { return { type: bookConstants.EDIT_BOOK_SUCCESS, book, bookId } }
     function failure(error) { return { type: bookConstants.EDIT_BOOK_FAILURE, error } }
 }

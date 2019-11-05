@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
 import {genresArray, genres} from './../../helpers'
 
-class AddNewBook extends Component {
+class EditBook extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -24,20 +24,20 @@ class AddNewBook extends Component {
     }
 
     handleSubmit() {
-        // let book = {};
-        // if (this.state.bookName !== this.props.title) book['title'] = this.state.bookName;
-        // if (this.state.genre_code !== this.props.genre) book['genre'] = this.state.genre_code;
-        // if (this.state.image !== this.props.coverage) book['image'] = this.state.image;
-        // if (this.state.author !== this.props.author) book['authors'] = this.state.author;
+        let book = {};
+        if (this.state.bookName !== this.props.title) book['title'] = this.state.bookName;
+        if (this.state.genre_code !== this.props.genre) book['genre'] = this.state.genre_code;
+        if (this.state.image !== this.props.coverage) book['image'] = this.state.image;
+        if (this.state.author !== this.props.author) book['authors'] = this.state.author;
 
-        const book = {
-            'title': this.state.bookName,
-            'genre': this.state.genre_code,
-            'authors': this.state.author,
-            'status': '',
-            'isbn': '',
-            'image': this.state.image
-        };
+        // const book = {
+        //     'title': this.state.bookName,
+        //     'genre': this.state.genre_code,
+        //     'authors': this.state.author,
+        //     'status': '',
+        //     'isbn': '',
+        //     'image': this.state.image
+        // };
         
         console.log(book);
         this.props.editBook(book, this.props.id);
@@ -115,4 +115,4 @@ class AddNewBook extends Component {
     }
 };
 
-export default AddNewBook;
+export default EditBook;
