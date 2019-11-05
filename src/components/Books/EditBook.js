@@ -24,15 +24,22 @@ class AddNewBook extends Component {
     }
 
     handleSubmit() {
-        const book = {
-            "title": this.state.bookName,
-            "genre": this.state.genre_code,
-            "authors": this.state.author,
-            "status": "",
-            "isbn": "",
-            'image': this.state.image
-        };
-          
+        let book = {};
+        if (this.state.bookName !== this.props.title) book['title'] = this.state.bookName;
+        if (this.state.genre_code !== this.props.genre) book['genre'] = this.state.genre_code;
+        if (this.state.image !== this.props.coverage) book['image'] = this.state.image;
+        if (this.state.author !== this.props.author) book['authors'] = this.state.author;
+
+        // const book = {
+        //     "title": this.state.bookName,
+        //     "genre": this.state.genre_code,
+        //     "authors": this.state.author,
+        //     "status": "",
+        //     "isbn": "",
+        //     'image': this.state.image
+        // };
+        
+        console.log(book);
         this.props.editBook(book, this.props.id);
         this.props.onClose();
     }

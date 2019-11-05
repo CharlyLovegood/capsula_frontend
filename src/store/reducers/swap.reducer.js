@@ -25,10 +25,19 @@ export function swap(state=initialState, action) {
                 }
                 return el;
             });
+            swapsList.reader = swapsList.reader.map(el => {
+                if (el.id === action.id) {
+                    el.status = action.status;
+                    return el;
+                }
+                return el;
+            });
             return {
                 swapsRecieved: true,
                 swapsList: swapsList
             }
+        case swapConstants.GET_SWAP_SUCCESS:
+            return state;
         default:
             return state;
     }

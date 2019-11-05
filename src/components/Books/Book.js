@@ -19,8 +19,8 @@ function Book(props) {
             <SizeComponent>
                 {size => 
                 <Box elevation='medium' background={`url(${bookCoverage})`} 
-                    width={size >= 424 ? 'book-width' : 'book-small-width'}
-                    height={size >= 424 ? 'book-height' : 'book-small-height'}
+                    width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
+                    height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
                     margin={props.margin}
                     animation={props.animation}>
                 </Box>

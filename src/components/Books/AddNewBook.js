@@ -35,7 +35,6 @@ class AddNewBook extends Component {
             'genre': this.state.genre_code,
             'image': this.state.image
         };
-          
         this.props.handleAddNewBook(book);
         this.props.onClose();
     }

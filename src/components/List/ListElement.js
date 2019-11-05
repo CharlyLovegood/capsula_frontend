@@ -3,9 +3,10 @@ import styles from './List.module.css';
 import { Link } from 'react-router-dom';
 
 import { Box } from 'grommet';
-import { Transaction } from 'grommet-icons';
+import { Send } from 'grommet-icons';
 import PopUpButton from '../Button/PopUpButton';
 import SwapAgreement from '../Books/SwapAgreement';
+import {bookStatuses} from './../../helpers/constants';
 
 function ListElement(props) {
     return (
@@ -17,12 +18,18 @@ function ListElement(props) {
                     className={styles.avatar}
                 />
             </Link>
-            <Box direction='column' width='100%'> 
-                <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
-                <p className={styles.text}></p>
-            </Box>
-            <Box width='260px'>
-                <PopUpButton  fill='horizontal' innerObject={onclose => <SwapAgreement bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Transaction></Transaction>}></PopUpButton>
+            <Box wrap direction='row' justify='between' align='center' fill>
+                <Box pad='10px' direction='column'> 
+                    <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
+                    <p className={styles.text}></p>
+                </Box>
+                <Box width='180px'>
+                    {props.status === bookStatuses.AVAILABLE ?
+                        <PopUpButton fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Send></Send>}></PopUpButton>
+                        :
+                        <PopUpButton disabled fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Send></Send>}></PopUpButton>
+                    }
+                </Box>
             </Box>
         </Box>
     )

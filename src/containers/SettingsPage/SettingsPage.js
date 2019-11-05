@@ -43,14 +43,24 @@ class SettingsPage extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
-        const user = {
-            'first_name': this.state.user.firstname, 
-            'last_name': this.state.user.lastname, 
-            'vk': this.state.user.vkId,
-            'location': this.state.user.domitary,
-            'image': this.state.user.avatar
-        };
+        let user;
+        if (this.state.user.avatar !== this.props.user.avatar) {
+            user = {
+                'first_name': this.state.user.firstname, 
+                'last_name': this.state.user.lastname, 
+                'vk': this.state.user.vkId,
+                'location': this.state.user.domitary,
+                'image': this.state.user.avatar
+            };
+        }
+        else {
+            user = {
+                'first_name': this.state.user.firstname, 
+                'last_name': this.state.user.lastname, 
+                'vk': this.state.user.vkId,
+                'location': this.state.user.domitary
+            };
+        }
         
         this.props.editUser(user);
     }

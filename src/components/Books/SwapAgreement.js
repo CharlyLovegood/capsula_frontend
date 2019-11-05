@@ -6,21 +6,7 @@ import { Box, Button, Heading, Text } from 'grommet';
 
 class SwapAgreement extends Component {
     swapRequest() {
-        const book = {
-            "book_id": this.props.bookId
-        };
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Authorization': 'Token ' + localStorage.token,
-                    'Content-Type': 'application/json'},
-            body: JSON.stringify(book)
-        }
-    
-        return fetch('/library/swaps/', requestOptions)
-            .then(response => {
-                return response;
-            });
+        this.props.swapRequest(this.props.bookId);
     }
 
     render() {
@@ -64,4 +50,5 @@ class SwapAgreement extends Component {
         )
     }
 }
+
 export default SwapAgreement;

@@ -41,12 +41,13 @@ function login(username, password) {
     return fetch(back_url.authentication.login, requestOptions)
         .then(handleResponse)
         .then(user => {
+            // console.log(user.json())
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
             localStorage.setItem('firstName', user.first_name);
             localStorage.setItem('token', user.token);
             localStorage.setItem('id', user.id);
-            localStorage.setItem('avatar', user.image);
+            localStorage.setItem('avatar', user.avatar);
             localStorage.setItem('location', user.location);
             return user;
         });
@@ -116,12 +117,13 @@ function editUser(user) {
     };
 
     return fetch('/user/me/', requestOptions)
-        .then(handleResponse)
+        .then(handleResponseData)
         .then(
             response => {
+                console.log(user)
+                if (user.image !== undefined) localStorage.setItem('avatar', user.image);
                 localStorage.setItem('lastName', user.last_name);
                 localStorage.setItem('firstName', user.first_name);
-                localStorage.setItem('avatar', user.image);
                 localStorage.setItem('location', user.location);
                 return user;
             });
@@ -130,7 +132,20 @@ function editUser(user) {
 
 
 export function handleResponse(response) {
-    console.log(response);
+    return response.text().then(text => {
+        console.log(response)
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+
+        return data;
+    });
+}
+
+
+export function handleResponseData(response) {
     const data = response.data;
     if (response.status !== 200) {
         const error = response.statusText;

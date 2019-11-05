@@ -12,7 +12,7 @@ class List extends Component {
                 <h3 className={styles.main_text}>Рядом с вами</h3>
 
                 {this.props.objectList.map((object) => {
-                    return(<ListElement {...object}></ListElement>);
+                    return(<ListElement swapRequest={this.props.swapRequest} {...object}></ListElement>);
                 })}
             </Box>
         );

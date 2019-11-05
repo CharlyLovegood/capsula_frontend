@@ -3,7 +3,8 @@ import { back_url } from './../helpers';
 
 export const swapService = {
     getSwap,
-    changeSwapStatus
+    changeSwapStatus,
+    swapRequest
 };
 
 function getSwap() {
@@ -19,6 +20,7 @@ function getSwap() {
             return swapList;
         }); 
 }
+
 
 function changeSwapStatus(id, status) {
     const requestOptions = {
@@ -36,7 +38,30 @@ function changeSwapStatus(id, status) {
             });
 }
 
+function swapRequest(id) {
+    const book = {
+        "book_id": id
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Authorization': 'Token ' + localStorage.token,
+                'Content-Type': 'application/json'},
+        body: JSON.stringify(book)
+    }
+
+    return fetch('/library/swaps/', requestOptions)
+        .then(handleResponse)
+        .then(response => {
+            return response;
+        });
+}
+
+
+
+
 export function handleResponse(response) {
+    console.log(response)
     if (response.status !== 200) {
         const error = response.statusText;
         return Promise.reject(error);

@@ -7,6 +7,7 @@ let avatar = localStorage.getItem('avatar') === 'null' ? null : localStorage.get
 let id = localStorage.getItem('id');
 let location = localStorage.getItem('location');
 
+
 const initialState = username ? { 
     loggedIn: true, 
     user: {
@@ -106,7 +107,7 @@ export function authentication(state = initialState, action) {
                     ...state.user,
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
-                    avatar: action.user.avatar,
+                    avatar: action.user.image,
                     location: action.user.location
                 }});
         default:

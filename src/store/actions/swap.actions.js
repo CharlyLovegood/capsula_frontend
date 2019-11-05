@@ -4,7 +4,8 @@ import { alertActions } from './';
 
 export const swapActions = {
     getSwap,
-    changeSwapStatus
+    changeSwapStatus,
+    swapRequest
 };
 
 function getSwap() {
@@ -47,4 +48,25 @@ function changeSwapStatus(id, status) {
     function request(status, id) { return { type: swapConstants.CHANGE_STATUS_REQUEST, status, id } }
     function success(response, id, status) { return { type: swapConstants.CHANGE_STATUS_SUCCESS, response, id, status } }
     function failure(error) { return { type: swapConstants.CHANGE_STATUS_FAILURE, error } }
+}
+
+function swapRequest(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        swapService.swapRequest(id)
+            .then(
+                response => { 
+                    dispatch(success(response));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(id) { return { type: swapConstants.SWAP_REQUEST, id } }
+    function success(response) { return { type: swapConstants.SWAP_SUCCESS, response } }
+    function failure(error) { return { type: swapConstants.SWAP_FAILURE, error } }
 }

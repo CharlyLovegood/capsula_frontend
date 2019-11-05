@@ -111,7 +111,7 @@ class AppBar extends Component {
                                         <Button icon={<Search></Search>}></Button>
                                     </Link>
                                 </Box>
-                                <Button icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>
+                                <Button margin='-12px' icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>
                             </Box>
                         </Box>
 
@@ -135,12 +135,22 @@ class AppBar extends Component {
                                 align='center'
                                 justify='center'
                             >
+                                <Link to={'/user/' + this.props.user.user.id} className={styles.avatar_container}>
+                                    <img
+                                        alt='Avatar'
+                                        src={this.props.user.user.avatar}
+                                        className={styles.small_avatar}
+                                    />
+                                </Link>
+                                {this.props.user.user.username}
                                 <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
                                 <PrivateLink color='menuTextColor' to='/history' label='История' key='История'/>
                                 <PrivateLink color='menuTextColor' to='/reader' label='Читатель' key='Читатель'/>
                                 <PrivateLink color='menuTextColor' to='/owner' label='Владелец' key='Владелец'/>
                                 <PrivateLink color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
-                                <PrivateLink color='menuTextColor' to='#' onClick={event => this.handleLogOut(event)} label='Выйти' key='Выйти'/>
+                                <PrivateLink color='menuTextColor' to='/settings' label='Настройки' key='Настройки'/>
+                                <Box margin='12px' onClick={event => this.handleLogOut(event)}>ВЫЙТИ</Box>
+                                <Link color='menuTextColor' to='/' onClick={event => this.handleLogOut(event)} label='Выйти' key='Выйти'/>
                             </Box>
                         </Layer>
                         }
@@ -205,8 +215,9 @@ class AppBar extends Component {
                                         <Button icon={<Search></Search>}></Button>
                                     </Link>
                                 </Box>
-                                <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
+                                <Box margin='-12px'>
                                 <PrivateLink color='menuTextColor' to='/login' label='Войти'></PrivateLink>
+                                </Box>
                             </Box>
                         </Box>
                     </Box>

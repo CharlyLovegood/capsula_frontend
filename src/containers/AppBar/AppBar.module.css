@@ -25,3 +25,17 @@
     position: relative;
     margin-bottom: 10px;
 }
+
+
+.avatar_container {
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+}
+
+.small_avatar {
+    height: 100px;
+    border-radius: 100%;
+    width: 100px;
+    object-fit: cover;
+}

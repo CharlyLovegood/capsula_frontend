@@ -6,6 +6,13 @@ export const swapStatuses = {
     RETURNED: 4
 }
 
+export const bookStatuses = {
+    AVAILABLE: 0,
+    READING: 1,
+    NOT_AVAILABLE: 2
+}
+
+
 export const urls = {
     backOauth: 'http://127.0.0.1:8000/auth/login/vk-oauth2/'
 }
@@ -36,28 +43,28 @@ export const genres = {
 }
 
 export const genresArray = [
-    'CLASSIC_RUSSIAN',
-    'CLASSIC_FOREIGN',
-    'SCIENCE_AND_EDUCATION',
-    'COMPUTER_SCIENCE',
-    'EDUCATION',
-    'MODERN',
-    'ADVENTURE',
-    'FANTASY',
-    'HORROR',
-    'DETECTIVES',
-    'BUSINESS',
-    'PSYCHOLOGY',
-    'HEALTH',
-    'DICTIONARY',
-    'POETRY_AND_DRAMA',
-    'COMICS',
-    'HOBBY',
-    'CULTURE_AND_ART',
-    'EROTICA',
-    'CHILD',
-    'RELIGION',
-    'PEREODIC'
+    'Русская классика',
+    'Зарубежная классика',
+    'Наука',
+    'IT',
+    'Образование',
+    'Современная проза',
+    'Приключения',
+    'Фэнтези',
+    'Ужасы',
+    'Детектив',
+    'Бизнес',
+    'Психология',
+    'Здоровье',
+    'Словарь',
+    'Поэзия и драмматургия',
+    'Комиксы',
+    'Хобби',
+    'Культура и искусство',
+    'Эротика',
+    'Детское',
+    'Религия и философия',
+    'Переодисекие издания'
 ]
 
 
