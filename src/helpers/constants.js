@@ -14,8 +14,8 @@ export const bookStatuses = {
 
 
 export const urls = {
-    backOauthVk: 'http://127.0.0.1:8000/auth/login/vk-oauth2/',
-    backOauthGoogle: 'http://127.0.0.1:8000/auth/login/google-oauth2/'
+    backOauthVk: 'https://www.bookovsky.ru/API/auth/login/vk-oauth2/',
+    backOauthGoogle: 'https://www.bookovsky.ru/API/auth/login/google-oauth2/'
 }
 
 export const genres = {

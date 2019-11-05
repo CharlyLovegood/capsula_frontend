@@ -13,6 +13,21 @@ function Footer(props) {
             background='brandDark'
             height='150px'
         >
+            <Box direction='row'>
+                <Box direction='column'>
+                    <Text>Bookovsky</Text>
+                    <Text>
+                        © 2019 Bookovsky. Приложение для обмена книгами
+                    </Text>
+                    <Text>
+                        Мы в соцсетях
+                    </Text>
+                </Box>
+                <Box direction='column'>
+                    <Text></Text>
+                </Box>
+            </Box>
+
         </Box>
     )
 }
