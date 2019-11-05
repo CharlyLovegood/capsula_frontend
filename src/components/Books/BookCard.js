@@ -59,6 +59,7 @@ function BookCard(props) {
                         pad='10px'
                     >
                         <h3 className={styles.text_header}>{props.book.title}</h3>
+                        
                         {props.owner &&
                             <Box>
                             <p className={styles.text}>Владелец: <Link to={`/user/${props.owner.id}`}>{props.owner.name}</Link></p>
@@ -70,6 +71,7 @@ function BookCard(props) {
                             }
                             </Box>
                         }
+
                         {props.reader &&
                             <Box>
                                 <p className={styles.text}>Читатель: <Link to={`/user/${props.reader.id}`}>{props.reader.name}</Link></p>
@@ -81,6 +83,7 @@ function BookCard(props) {
                                 }
                             </Box>
                         }
+
                         {props.user &&
                             <p className={styles.text}>Участник обмена: <Link to={`/user/${props.user.id}`}>{props.user.name}</Link></p>
                         }

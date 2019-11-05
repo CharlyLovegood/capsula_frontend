@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import BoxUI from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -16,6 +16,7 @@ import { userActions } from '../../store/actions';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {urls} from './../../helpers';
+import { Box } from 'grommet';
 
 
 class LoginPage extends Component {
@@ -28,7 +29,11 @@ class LoginPage extends Component {
             submitted: false };
     }
 
-    handleOauth(event) {
+    handleOauthVk(event) {
+        document.location.href = urls.backOauth;
+    }
+    
+    handleOauthGoogle(event) {
         document.location.href = urls.backOauth;
     }
     
@@ -63,7 +68,7 @@ class LoginPage extends Component {
                         onSubmit={(event) => this.handleSubmit(event)}
                         className={styles.form}
                     >
-                        <Box alignContent='center'>
+                        <BoxUI alignContent='center'>
                             <TextValidator
                                 variant='outlined'
                                 margin='normal'
@@ -89,11 +94,14 @@ class LoginPage extends Component {
                                 autoComplete='current-password'
                                 onChange={ event => this.handleChange(event) }
                             />
-                        </Box>
+                        </BoxUI>
 
                         
                         <div className={styles.submit}>
-                        <img alt='vk' onClick={(event) => this.handleOauth(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
+                        <Box direction='row'>
+                            <img alt='vk' onClick={(event) => this.handleOauthVk(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
+                            <img alt='google' onClick={(event) => this.handleOauthGoogle(event)} className={styles.google} src='https://image.flaticon.com/icons/svg/281/281764.svg'></img>
+                        </Box>
                             <Button
                                 color="primary"
                                 variant="contained"

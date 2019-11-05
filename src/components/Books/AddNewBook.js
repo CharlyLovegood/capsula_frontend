@@ -29,13 +29,22 @@ class AddNewBook extends Component {
     }
 
     handleSubmit() {
-        const book = {
-            'title': this.state.bookName,
-            'authors': this.state.author,
-            'genre': this.state.genre_code,
-            'image': this.state.image
-        };
-        console.log(book)
+        let book;
+        if (this.state.image === remote_url.images.add_new_book_default) {
+            book = {
+                'title': this.state.bookName,
+                'authors': this.state.author,
+                'genre': this.state.genre_code
+            };
+        } else {
+            book = {
+                'title': this.state.bookName,
+                'authors': this.state.author,
+                'genre': this.state.genre_code,
+                'image': this.state.image 
+            };
+        }
+        console.log(book);
         this.props.handleAddNewBook(book);
         this.props.onClose();
     }

@@ -34,7 +34,16 @@
   margin-bottom: 15px;
   align-self: center;
 }
+.google {
+  height: 34px;
+  margin: 0px 0px 17px 15px;
+  align-self: center;
+}
 
 .vk:hover {
+  cursor: pointer
+}
+
+.google:hover {
   cursor: pointer
 }
