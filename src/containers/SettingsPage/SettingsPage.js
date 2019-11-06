@@ -8,6 +8,7 @@ import { userActions } from '../../store/actions';
 import { connect } from 'react-redux';
 
 import UserAvatar from './../../components/ImageUpload/ImageUpload';
+import { StatusGood, StatusCritical } from 'grommet-icons';
 
 
 
@@ -82,16 +83,18 @@ class SettingsPage extends Component {
                         Настройки
                     </h2>
 
-                    {(this.state.message !== '' && this.state.error) &&
-                        <Box pad='10px' border={{ color: 'status-ok', size: 'small' }}>
-                            {this.state.message}
+                    {(this.props.alert.type === 'alert-success') &&
+                        <Box round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
+                            <StatusGood color='status-ok'></StatusGood>
+                            {this.props.alert.message}
                         </Box>
                     }
 
 
-                    {(this.state.message !== '' && !this.state.error) &&
-                        <Box pad='10px' border={{ color: 'status-critical', size: 'small' }}>
-                            {this.state.message}
+                    {(this.props.alert.type === 'alert-danger') &&
+                        <Box round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                            <StatusCritical color='status-critical'></StatusCritical>
+                            {this.props.alert.message}
                         </Box>
                     }
                     
