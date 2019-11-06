@@ -102,13 +102,13 @@ class AppBar extends Component {
                             pad={{ horizontal: '10px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
+                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center' >Bookovsky</Heading>
                             </Link>
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
                                     <Link to='/search'>
-                                        <Button icon={<Search></Search>}></Button>
+                                        <Button icon={<Search color='white'></Search>}></Button>
                                     </Link>
                                 </Box>
                                 <Button margin='-12px' icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>
