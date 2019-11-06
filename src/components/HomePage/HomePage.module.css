@@ -12,11 +12,13 @@
     background: url('./book.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 20px;
 }
 
 .icon_book_shelf {
     background: url('./library.svg');
     background-repeat: no-repeat;
+    margin-bottom: 20px;
     background-size: cover;
 }
 
@@ -24,10 +26,12 @@
     background: url('./search.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 20px;
 }
 
 .icon_send {
     background: url('./resume.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 20px;
 }

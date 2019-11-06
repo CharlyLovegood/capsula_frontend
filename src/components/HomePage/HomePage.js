@@ -49,7 +49,7 @@ class HomePage extends Component {
                         }
                         <Box width={this.calculateWidth(size)} margin={{vertical: '70px'}} direction='row' wrap>
                             <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
-                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные тебе книги'></Element>
+                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
                             <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
                             <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
                         </Box>
@@ -62,7 +62,7 @@ class HomePage extends Component {
                             <Box align='center'>
                                 <Gallery 
                                     object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={id} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.searchResult.data.slice(0,15)}
+                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
                                     header='Доступные книги'
                                     contentType='books'
                                 ></Gallery>
@@ -83,7 +83,7 @@ class HomePage extends Component {
                             <Box align='center'>
                                 <Gallery 
                                     object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.searchResult.data.slice(0,15)}
+                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
                                     header='Доступные книги'
                                     contentType='books'
                                 ></Gallery>

@@ -14,13 +14,13 @@ function Element(props) {
                 height='240px' 
                 pad='10px'
                 elevation='xsmall'
-                round='5px'
+                round='12px'
             >
                 <Box margin='10px'>
                     {props.icon}
                 </Box>
 
-                <Text textAlign='center' color='brandDark'>{props.text}</Text>
+                <Text textAlign='center' color='brandDark' size='20px'>{props.text}</Text>
             </Box>}
         </SizeComponent>
     )

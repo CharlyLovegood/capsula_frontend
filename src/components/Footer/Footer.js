@@ -10,7 +10,6 @@ function Footer(props) {
             pad='small'
             className={styles.container}
             background='brandDark'
-            height='150px'
             justify='center'
         >
             <Box direction='row' width='xxlarge' pad='10px'>
@@ -22,6 +21,11 @@ function Footer(props) {
                     <Text>
                         Мы в соцсетях
                     </Text>
+                    <Box direction='row'>
+                        <img className={styles.icon} src='https://image.flaticon.com/icons/svg/372/372393.svg' />
+                        <img className={styles.icon} src='https://image.flaticon.com/icons/svg/372/372414.svg' />
+                        <img className={styles.icon} src='https://image.flaticon.com/icons/svg/372/372410.svg' />
+                    </Box>
                 </Box>
                 <Box direction='column'>
                     <Text></Text>

@@ -10,8 +10,8 @@ class HelpPage extends Component {
                 {size => 
                 <Box pad='10px' align='center' width='xxlarge'>
                     <Heading margin='0px'>Правила сервиса</Heading> 
-                    <Text margin={{vertical: '15px'}} alignSelf='stretch' >Привет, друг!</Text>
-                    <Text margin={{vertical: '5px'}}>Представляем тебе сервис для обмена книгами. 
+                    <Text margin={{vertical: '15px'}} alignSelf='start' >Привет, друг!</Text>
+                    <Text margin={{vertical: '5px'}} alignSelf='start'>Представляем тебе сервис для обмена книгами. 
                         Ты наверняка знаком с концептом книжного свопа, так что освоиться тебе будет несложно. </Text>
                     
                     <ParagraphElement align='start' text='Давай сначала добавим несколько книг тебе на полку, 
