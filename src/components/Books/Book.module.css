@@ -138,3 +138,21 @@
     filter: brightness(0.4);
     opacity: 0.5;
 }
+
+
+
+
+.scroll_container {
+    display: block;
+    height: 100%;
+    width: 350px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.scroll_page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

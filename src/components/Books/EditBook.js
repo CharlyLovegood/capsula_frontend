@@ -5,6 +5,8 @@ import { Box, Button, Heading, Text, Select } from 'grommet';
 import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
 import {genresArray, genres} from './../../helpers'
+import styles from './Book.module.css';
+
 
 class EditBook extends Component {
     constructor(props) {
@@ -56,59 +58,63 @@ class EditBook extends Component {
     render() {
         return (
             <Box pad='medium' gap='small' width='medium' align='center' fill>
-                <Heading level={3} margin='none'>
-                    Edit book
-                </Heading>
-                <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
-                <TextField
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    id='bookName'
-                    label='Book Name'
-                    name='bookName'
-                    autoComplete='bookName'
-                    autoFocus
-                    value={this.state.bookName}
-                    onChange={ event => this.handleChange(event) }>
-                </TextField>                
-                <TextField
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    id='author'
-                    label='Author'
-                    name='author'
-                    autoComplete='author'
-                    value={this.state.author}
-                    onChange={ event => this.handleChange(event) }>
-                </TextField>
-                <Box fill='horizontal'>
-                    <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
-                </Box>
-                <Box
-                    as='footer'
-                    gap='small'
-                    direction='row'
-                    align='center'
-                    justify='end'
-                    pad={{ top: 'medium', bottom: 'small' }}
-                >
-                    <Link to='#'>
-                        <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
-                    </Link>
-                    <Button
-                        label={
-                            <Text color='white'>
-                                <strong>Нет</strong>
-                            </Text>
-                        }
-                        onClick={this.props.onClose}
-                        primary
-                        color='status-critical'
-                    />
+                <Box className={styles.scroll_container}>
+                    <Box className={styles.scroll_page}>
+                        <Heading level={3} margin='none'>
+                            Изменить
+                        </Heading>
+                        <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='bookName'
+                            label='Название'
+                            name='bookName'
+                            autoComplete='bookName'
+                            autoFocus
+                            value={this.state.bookName}
+                            onChange={ event => this.handleChange(event) }>
+                        </TextField>                
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='author'
+                            label='Автор'
+                            name='author'
+                            autoComplete='author'
+                            value={this.state.author}
+                            onChange={ event => this.handleChange(event) }>
+                        </TextField>
+                        <Box fill='horizontal'>
+                            <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
+                        </Box>
+                        <Box
+                            as='footer'
+                            gap='small'
+                            direction='row'
+                            align='center'
+                            justify='end'
+                            pad={{ top: 'medium', bottom: 'small' }}
+                        >
+                            <Link to='#'>
+                                <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
+                            </Link>
+                            <Button
+                                label={
+                                    <Text color='white'>
+                                        <strong>Нет</strong>
+                                    </Text>
+                                }
+                                onClick={this.props.onClose}
+                                primary
+                                color='status-critical'
+                            />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         );

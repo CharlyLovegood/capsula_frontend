@@ -7,6 +7,7 @@ import BookImage from './../ImageUpload/ImageUpload';
 import {genresArray, genres} from './../../helpers'
 
 import { remote_url } from './../../helpers';
+import styles from './Book.module.css';
 
 class AddNewBook extends Component {
     constructor(props) {
@@ -61,58 +62,62 @@ class AddNewBook extends Component {
     render() {
         return (
             <Box pad='medium' gap='small' width='medium' align='center' fill>
-                <Heading level={3} margin='none'>
-                    Добавить книгу
-                </Heading>
-                <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
-                <Text>Обложка</Text>
-                <TextField
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    id='bookname'
-                    label='Название книги'
-                    name='bookname'
-                    autoComplete='bookname'
-                    autoFocus
-                    onChange={ event => this.handleBookNameChange(event) }>
-                </TextField>                
-                <TextField
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    id='author'
-                    label='Автор (Фамилия И.О.)'
-                    name='author'
-                    autoComplete='author'
-                    onChange={ event => this.handleAuthorChange(event) }>
-                </TextField>
-                <Box fill='horizontal'>
-                    <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
-                </Box>
-                <Box
-                    as='footer'
-                    gap='small'
-                    direction='row'
-                    align='center'
-                    justify='end'
-                    pad={{ top: 'medium', bottom: 'small' }}
-                >
-                    <Link to='#'>
-                        <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
-                    </Link>
-                    <Button
-                        label={
-                            <Text color='white'>
-                                <strong>Нет</strong>
-                            </Text>
-                        }
-                        onClick={this.props.onClose}
-                        primary
-                        color='status-critical'
-                    />
+                <Box className={styles.scroll_container}>
+                    <Box className={styles.scroll_page}>
+                        <Heading level={3} margin='none'>
+                            Добавить книгу
+                        </Heading>
+                        <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
+                        <Text>Обложка</Text>
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='bookname'
+                            label='Название книги'
+                            name='bookname'
+                            autoComplete='bookname'
+                            autoFocus
+                            onChange={ event => this.handleBookNameChange(event) }>
+                        </TextField>                
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='author'
+                            label='Автор (Фамилия И.О.)'
+                            name='author'
+                            autoComplete='author'
+                            onChange={ event => this.handleAuthorChange(event) }>
+                        </TextField>
+                        <Box fill='horizontal'>
+                            <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
+                        </Box>
+                        <Box
+                            as='footer'
+                            gap='small'
+                            direction='row'
+                            align='center'
+                            justify='end'
+                            pad={{ top: 'medium', bottom: 'small' }}
+                        >
+                            <Link to='#'>
+                                <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
+                            </Link>
+                            <Button
+                                label={
+                                    <Text color='white'>
+                                        <strong>Нет</strong>
+                                    </Text>
+                                }
+                                onClick={this.props.onClose}
+                                primary
+                                color='status-critical'
+                            />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         );

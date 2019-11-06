@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Box, Button, Layer, Text } from 'grommet';
 
 const PopUpButton = (props) => {
@@ -24,7 +23,7 @@ const PopUpButton = (props) => {
                 />
             </Box>
             {open && (
-                <Layer position='center' modal onClickOutside={onClose} onEsc={onClose}>
+                <Layer responsive={false} position='center' modal onClickOutside={onClose} onEsc={onClose}>
                     { props.innerObject(onClose, props.forceUpdate) }
                 </Layer>
             )}

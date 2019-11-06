@@ -29,7 +29,7 @@
 
 
 .avatar_square {
-    height: 270px;
+    min-height: 270px;
     width: 180px;
     z-index: 2;
     object-fit: cover;
