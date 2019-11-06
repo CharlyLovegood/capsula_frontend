@@ -29,7 +29,7 @@ const SmartBook = (props) => {
                     <h4 className={styles.book_title}>
                         {props.title}
                     </h4>
-                    <Box gap='15px'>
+                    <Box fill='horizontal' gap='15px'>
                         <PopUpButton fill='horizontal' forceUpdate={null}
                             innerObject={(onclose, forceUpdate) => <EditBook genre={props.genre} author={props.author} title={props.title} coverage={bookCoverage} id={props.id} editBook={(book, bookId) => props.handleEditBook(book, bookId)} onClose={onclose} forceUpdate={forceUpdate} />} 
                             label='Изменить' 
@@ -46,7 +46,7 @@ const SmartBook = (props) => {
                             </Box>
                         </Link>
 
-                        <PopUpButton forceUpdate={null}
+                        <PopUpButton fill='horizontal' forceUpdate={null}
                             innerObject={(onclose, forceUpdate) => <ConfirmDeleteBook id={props.id} deleteBook={(book) => props.handleDeleteBook(book)} onClose={onclose} forceUpdate={forceUpdate}></ConfirmDeleteBook>} 
                             label='Удалить' 
                             icon={<Close color='accent-1'></Close>}>
