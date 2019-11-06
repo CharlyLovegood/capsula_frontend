@@ -47,9 +47,9 @@ const theme = {
             light_contrast: '#f9f9f9',
         },
         font: {
-            family: 'Roboto',
-            size: '16px',
-            height: '20px',
+            family: 'Open Sans Condensed',
+            size: '18px',
+            height: '20px'
         },
         button: {
             border: {
@@ -78,7 +78,7 @@ const theme = {
     },
     heading: {
         font: {
-            family: 'ROboto',
+            family: 'Open Sans',
             size: '26px',
             height: '20px',
         },
@@ -91,8 +91,14 @@ const themeUI = createMuiTheme({
         primary: {
             main: 'rgb(140, 52, 190)',
         }
-    }
-    
+    },
+    typography: {
+        "fontFamily": "\"Open Sans Condensed\", sans-serif",
+        "fontSize": 18,
+        "fontWeightLight": 300,
+        "fontWeightRegular": 400,
+        "fontWeightMedium": 500
+       }
 })
 
 

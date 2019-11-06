@@ -53,7 +53,7 @@ class AppBar extends Component {
                             align='center'
                             baseline='center'
                             style={{ zIndex: '1'}}
-                            pad={{ horizontal: '17px'}}
+                            pad={{ horizontal: '10px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
                                 <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
@@ -99,7 +99,7 @@ class AppBar extends Component {
                             align='center'
                             baseline='center'
                             style={{ zIndex: '1'}}
-                            pad={{ horizontal: '17px'}}
+                            pad={{ horizontal: '10px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
                                 <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
@@ -175,7 +175,7 @@ class AppBar extends Component {
                             align='center'
                             baseline='center'
                             style={{ zIndex: '1'}}
-                            pad={{ horizontal: '17px'}}
+                            pad={{ horizontal: '10px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
                                 <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
@@ -205,7 +205,7 @@ class AppBar extends Component {
                             align='center'
                             baseline='center'
                             style={{ zIndex: '1'}}
-                            pad={{ horizontal: '17px'}}
+                            pad={{ horizontal: '10px'}}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
                                 <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>

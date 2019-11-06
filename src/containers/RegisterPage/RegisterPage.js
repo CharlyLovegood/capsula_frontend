@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import styles from './RegisterPage.module.css';
@@ -69,10 +67,6 @@ class RegisterPage extends Component {
         return (
             <Container component='main' maxWidth='xs'>
                 <div className={styles.paper}>
-                    <Avatar className={styles.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-
                     <Typography component='h1' variant='h5' >
                         Регистрация
                     </Typography>

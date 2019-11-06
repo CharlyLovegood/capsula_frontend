@@ -1,3 +1,7 @@
 .gallery_box {
     z-index: 1;
 }
+
+.header {
+    color: black;
+}

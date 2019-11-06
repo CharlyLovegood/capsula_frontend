@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import BoxUI from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -54,9 +52,6 @@ class LoginPage extends Component {
         return (
             <Container component='main' maxWidth='xs'>
                 <div className={styles.paper}>
-                    <Avatar className={styles.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
                     <Typography component='h1' variant='h5'>
                         Вход
                     </Typography>

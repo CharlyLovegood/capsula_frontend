@@ -24,7 +24,7 @@ export default function UserAvatar(props) {
             <Menu
                 pad='0px'
                 dropProps={{ align: { top: "bottom", right: "right" } }}
-                label={<Text size='16px'>{props.name}</Text>}
+                label={<Text>{props.name}</Text>}
                 pad='0px'
                 elevation='none'
                 items={[

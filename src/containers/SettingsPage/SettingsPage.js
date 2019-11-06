@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import { Button, Box } from 'grommet';
@@ -79,9 +78,9 @@ class SettingsPage extends Component {
         return (
             <Container component='main' maxWidth='xs'>
                 <div className={styles.paper}>
-                    <Typography variant='h6' gutterBottom>
-                        Settings
-                    </Typography>
+                    <h2 className={styles.header}>
+                        Настройки
+                    </h2>
 
                     {(this.state.message !== '' && this.state.error) &&
                         <Box pad='10px' border={{ color: 'status-ok', size: 'small' }}>

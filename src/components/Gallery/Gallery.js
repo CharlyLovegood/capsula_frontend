@@ -30,7 +30,7 @@ class Gallery extends Component {
             <SizeComponent>
                 {size => (
                     <Box direction='column' align='center' className={styles.gallery_box}>
-                        <h2>{this.props.header}</h2>
+                        <h2 className={styles.header}>{this.props.header}</h2>
                         <Box 
                             width={this.calculateWidth(size, this.props.contentType)} 
                             flex 
