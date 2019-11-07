@@ -55,12 +55,14 @@ class LibraryPage extends Component {
                     ></Gallery>
                 }
                 <Box margin='20px'>
-                    <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
-                        innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
-                        label='Добавить книгу' 
-                        primary
-                        icon={<Add></Add>}>
-                    </PopUpButton>
+                    {this.state.owner &&
+                        <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
+                            innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
+                            label='Добавить книгу' 
+                            primary
+                            icon={<Add></Add>}>
+                        </PopUpButton>
+                    }
                 </Box>
             </Box>
         )

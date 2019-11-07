@@ -33,6 +33,52 @@ import styles from './App.module.css';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 
+
+
+
+// import firebase from 'firebase';
+// const config = {
+//     apiKey: "AIzaSyBibrWw6b833N4ar2-wY5wIT3TT1IR_pyg",
+//     authDomain: "saharok-221817.firebaseapp.com",
+//     databaseURL: "https://saharok-221817.firebaseio.com",
+//     projectId: "saharok-221817",
+//     storageBucket: "saharok-221817.appspot.com",
+//     messagingSenderId: "406120965570",
+//     appId: "1:406120965570:web:2a1b8bf720ebb0f046e25b"
+// };
+
+// firebase.initializeApp(config);
+
+// const initializePush = () => {
+//     const messaging = firebase.messaging();
+//     messaging
+//         .requestPermission()
+//         .then(() => {
+//             console.log('Permission is granted by user');
+//             return messaging.getToken();
+//         })
+//         .then(token => {
+//             console.log('FCM Token:', token);
+//         })
+//         .catch(error => {
+//             console.log('Error Occurred', error);
+//         });
+// }
+
+// initializePush();
+
+
+
+
+
+
+
+
+
+
+
+
+
 const theme = {
     global: {
         colors: {
@@ -95,11 +141,12 @@ const themeUI = createMuiTheme({
     typography: {
         "fontFamily": "\"Open Sans Condensed\", sans-serif",
         "fontSize": 18,
-        "fontWeightLight": 300,
-        "fontWeightRegular": 400,
-        "fontWeightMedium": 500
+        "fontWeightLight": 300
        }
 })
+
+
+
 
 
 class App extends Component {

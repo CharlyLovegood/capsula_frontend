@@ -108,7 +108,7 @@ class AppBar extends Component {
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
                                     <Link to='/search'>
-                                        <Button icon={<Search color='white'></Search>}></Button>
+                                        <Button icon={<Search></Search>}></Button>
                                     </Link>
                                 </Box>
                                 <Button margin='-12px' icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>

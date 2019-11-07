@@ -1,6 +1,5 @@
 import { Box, Heading, Button, Text } from 'grommet';
 import React, { Component } from 'react';
-import { remote_url } from './../../helpers';
 import style from './Banner.module.css';
 import {Link} from 'react-router-dom';
 
@@ -61,10 +60,6 @@ class Banner extends Component {
                 </Box>
                 <Box animation='slideUp' height='100%' width='70%' className={style.box}>
                 </Box>
-
-                {/* <Box className={style.container}>
-                    <img src={remote_url.images.banner} className={style.banner}></img>
-                </Box> */}
             </Box>
         )
     }
