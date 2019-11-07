@@ -19,7 +19,7 @@ class SettingsPage extends Component {
             user: {
                 firstname: this.props.user.firstName, 
                 lastname: this.props.user.lastName, 
-                vkId: '',
+                vkId: this.props.user.vk,
                 domitary: this.props.user.location,
                 avatar: this.props.user.avatar
             },

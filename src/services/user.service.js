@@ -27,6 +27,7 @@ function oauth() {
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
             localStorage.setItem('location', user.location);
+            localStorage.setItem('vk', user.contact);
             return user;
         })
 }
@@ -41,7 +42,6 @@ function login(username, password) {
     return fetch(back_url.authentication.login, requestOptions)
         .then(handleResponse)
         .then(user => {
-            // console.log(user.json())
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
             localStorage.setItem('firstName', user.first_name);
@@ -49,6 +49,7 @@ function login(username, password) {
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
             localStorage.setItem('location', user.location);
+            localStorage.setItem('vk', user.contact);
             return user;
         });
 }
@@ -68,7 +69,8 @@ function logout() {
             localStorage.removeItem('firstName');
             localStorage.removeItem('avatar');
             localStorage.removeItem('lastName');
-            localStorage.removeItem('location', user.location);
+            localStorage.removeItem('location');
+            localStorage.removeItem('vk');
             localStorage.removeItem('id');
             return user;
         }); 
@@ -124,6 +126,7 @@ function editUser(user) {
                 if (user.image !== undefined) localStorage.setItem('avatar', user.image);
                 localStorage.setItem('lastName', user.last_name);
                 localStorage.setItem('firstName', user.first_name);
+                localStorage.setItem('vk', user.vk);
                 localStorage.setItem('location', user.location);
                 return user;
             });

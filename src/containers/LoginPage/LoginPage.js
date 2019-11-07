@@ -13,7 +13,7 @@ import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
 import { userActions } from '../../store/actions';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import {urls} from './../../helpers';
+import { urls } from './../../helpers';
 import { Box } from 'grommet';
 
 

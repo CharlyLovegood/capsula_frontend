@@ -16,7 +16,7 @@ function Footer(props) {
                 <Box direction='column'>
                     <Text>Bookovsky</Text>
                     <Text>
-                        © 2019 Bookovsky. Приложение для обмена книгами
+                        © 2019 Bookovsky. Сервис для обмена книгами
                     </Text>
                     {/* <Text>
                         Мы в соцсетях

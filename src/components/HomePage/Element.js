@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Text } from 'grommet';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
+import styles from './HomePage.module.css';
 
 
 function Element(props) {
@@ -15,6 +16,7 @@ function Element(props) {
                 pad='10px'
                 elevation='xsmall'
                 round='12px'
+                className={props.style}
             >
                 <Box margin='10px'>
                     {props.icon}

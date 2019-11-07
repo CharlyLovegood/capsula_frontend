@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../../store/actions';
 import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
+import { urls } from './../../helpers';
+import { Box } from 'grommet';
 
 
 
@@ -57,6 +59,14 @@ class RegisterPage extends Component {
                 [name]: value
             }
         });
+    }
+
+    handleOauthVk(event) {
+        document.location.href = urls.backOauthVk;
+    }
+    
+    handleOauthGoogle(event) {
+        document.location.href = urls.backOauthGoogle;
     }
 
 
@@ -159,6 +169,10 @@ class RegisterPage extends Component {
                                 />
                             </Grid>
                             <div className={styles.submit}>
+                                <Box direction='row'>
+                                    <img alt='vk' onClick={(event) => this.handleOauthVk(event)} className={styles.vk} src='https://image.flaticon.com/icons/svg/1216/1216744.svg'></img>
+                                    <img alt='google' onClick={(event) => this.handleOauthGoogle(event)} className={styles.google} src='https://image.flaticon.com/icons/svg/281/281764.svg'></img>
+                                </Box>
                                 <Button
                                     fullWidth
                                     color="primary"

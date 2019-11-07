@@ -20,7 +20,6 @@ class BookPage extends Component {
         fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:` + encodeURIComponent(title))
         .then((response)=> response.json())
         .then((responseData)=> {
-            // console.log(responseData)
             this.setState({items: responseData})
         });
     
@@ -31,12 +30,10 @@ class BookPage extends Component {
             this.setState({id: this.props.match.params.id});
             this.props.getBook(this.props.match.params.id);
             this.fetchData(this.props.book.book.data.title);
-            // console.log(this.state);
         }
         if (this.props.book.book && !this.state.searched) {
             this.fetchData(this.props.book.book.data.title);
             this.setState({searched: true});
-            // console.log(this.state);
         }
     }
 
@@ -53,7 +50,7 @@ class BookPage extends Component {
                         <Book big='true' coverage={book.image}></Book>
                     </Box>
                     
-                    <Box direction='column' align='center' margin={{vertical:'100px'}} width='large'>
+                    <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>
                         {this.state.items.items &&

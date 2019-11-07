@@ -47,11 +47,11 @@ class HomePage extends Component {
                         {size < 600 &&
                             <Banner size='small' user={this.props.user}></Banner>
                         }
-                        <Box width={this.calculateWidth(size)} margin={{vertical: '70px'}} direction='row' wrap>
-                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
-                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
-                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
-                            <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
+                        <Box className={styles.container_gradient} width={this.calculateWidth(size)} margin={{vertical: '70px'}} direction='row' wrap>
+                            <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
+                            <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
+                            <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
+                            <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
                         </Box>
                         {this.props.library.found && !this.props.user.loggedIn &&
                         // <Scroll object={(title, coverage, id) => <BookItem margin='4px' title={title} coverage={coverage} key={id} id={id}></BookItem>} 
@@ -109,10 +109,10 @@ class HomePage extends Component {
                         <Banner size='small' user={this.props.user}></Banner>
                     }
                     <Box width={this.calculateWidth(size)} margin={{vertical: '30px'}} direction='row' wrap>
-                        <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
-                        <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные тебе книги'></Element>
-                        <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
-                        <Element width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
+                        <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
+                        <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные тебе книги'></Element>
+                        <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
+                        <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
                     </Box>
                 </Box>
                 }
