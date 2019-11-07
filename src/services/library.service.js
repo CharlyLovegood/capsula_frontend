@@ -19,7 +19,7 @@ function getBookListById(userId) {
         }); 
 }
 
-export function handleResponse(response) {
+function handleResponse(response) {
     if (response.status !== 200) {
         const error = response.statusText;
         return Promise.reject(error);

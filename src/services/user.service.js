@@ -134,7 +134,7 @@ function editUser(user) {
 
 
 
-export function handleResponse(response) {
+function handleResponse(response) {
     return response.text().then(text => {
         console.log(response)
         const data = text && JSON.parse(text);
@@ -148,7 +148,7 @@ export function handleResponse(response) {
 }
 
 
-export function handleResponseData(response) {
+function handleResponseData(response) {
     const data = response.data;
     if (response.status !== 200) {
         const error = response.statusText;

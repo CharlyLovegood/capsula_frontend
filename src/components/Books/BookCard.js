@@ -65,8 +65,8 @@ function BookCard(props) {
                             <p className={styles.text}>Владелец: <Link to={`/user/${props.owner.id}`}>{props.owner.name}</Link></p>
                             {(props.status === swapStatuses.ACCEPTED || props.status === swapStatuses.READING) &&
                                 <Box>
-                                    <p className={styles.text}>Контакты: {props.owner.email}</p>
-                                    <p className={styles.text}>{props.owner.vk}</p>
+                                    <p className={styles.text}>email: {props.owner.email}</p>
+                                    <p className={styles.text}>vk: {props.owner.vk || 'не указан'}</p>
                                 </Box>
                             }
                             </Box>
@@ -77,8 +77,8 @@ function BookCard(props) {
                                 <p className={styles.text}>Читатель: <Link to={`/user/${props.reader.id}`}>{props.reader.name}</Link></p>
                                 {(props.status === swapStatuses.ACCEPTED || props.status === swapStatuses.READING) &&
                                     <Box>
-                                        <p className={styles.text}>Контакты: {props.reader.email}</p>
-                                        <p className={styles.text}>{props.reader.vk}</p>
+                                        <p className={styles.text}>email: {props.reader.email}</p>
+                                        <p className={styles.text}>vk: {props.reader.vk || 'не указан'}</p>
                                     </Box>
                                 }
                             </Box>
