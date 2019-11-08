@@ -71,14 +71,6 @@ import { createMuiTheme } from '@material-ui/core';
 
 
 
-
-
-
-
-
-
-
-
 const theme = {
     global: {
         colors: {
@@ -86,8 +78,8 @@ const theme = {
             menuTextColor: '#7a7171',
             brandGradient: 'linear-gradient(90deg, rgb(90, 39, 113) 0%, rgb(234, 65, 106) 80%, rgb(234, 180, 72) 100%)',
             brandGradientH: 'linear-gradient(0deg, rgb(90, 39, 113) 0%, rgb(234, 65, 106) 80%, rgb(234, 180, 72) 100%)',
-            brand: 'rgb(113, 39, 121)',
-            brandDark: 'rgb(113, 39, 121)',
+            brand: '#a517b5',
+            brandDark: '#5c0b65',
             background: '#ffffff',
             contrast: '#000000',
             light_contrast: '#f9f9f9',
@@ -135,7 +127,7 @@ const theme = {
 const themeUI = createMuiTheme({
     palette: {
         primary: {
-            main: 'rgb(140, 52, 190)',
+            main: '#a517b5',
         }
     },
     typography: {

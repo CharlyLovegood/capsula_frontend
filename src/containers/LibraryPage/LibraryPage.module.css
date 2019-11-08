@@ -1,0 +1,12 @@
+.primary_button:hover {
+    filter: brightness(98%);
+    color: white;
+    transform: scale(1.02);
+    transition: all 0.2s ease-out;
+}
+
+
+.primary_button {
+    transition: all 0.2s ease-out;
+    border: 0px;
+}

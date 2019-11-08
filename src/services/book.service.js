@@ -66,11 +66,23 @@ function addBook(book) {
     };
 
     return fetch(back_url.books.add_book, requestOptions)
-        .then(handleResponse)
+        .then(handlePostResponse)
         .then(
             response => {
                 return response.json();
             })
+}
+
+
+function handlePostResponse(response) {
+    if (response.status !== 200) {
+        return response.text().then(text => {
+            const data = JSON.parse(text);
+            const error = data.detail || data.msg;
+            return Promise.reject(error);
+        });
+    }
+    return response;
 }
 
 

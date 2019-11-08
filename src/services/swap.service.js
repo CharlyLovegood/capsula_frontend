@@ -58,8 +58,6 @@ function swapRequest(id) {
 }
 
 
-
-
 function handleResponse(response) {
     console.log(response)
     if (response.status !== 200) {

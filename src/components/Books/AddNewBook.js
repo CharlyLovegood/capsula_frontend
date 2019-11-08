@@ -45,7 +45,6 @@ class AddNewBook extends Component {
                 'image': this.state.image 
             };
         }
-        console.log(book);
         this.props.handleAddNewBook(book);
         this.props.onClose();
     }

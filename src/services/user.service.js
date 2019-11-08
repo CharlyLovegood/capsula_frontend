@@ -41,7 +41,7 @@ function login(username, password) {
     };
 
     return fetch(back_url.authentication.login, requestOptions)
-        .then(handleResponse)
+        .then(handlePostResponse)
         .then(user => {
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
@@ -106,7 +106,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(back_url.authentication.registration, requestOptions).then(handleResponseData);
+    return fetch(back_url.authentication.registration, requestOptions).then(handlePostResponse);
 }
 
 
@@ -136,7 +136,6 @@ function editUser(user) {
     return fetch('/user/me/', requestOptions)
         .then(
             response => {
-                console.log(user)
                 if (user.image !== undefined) localStorage.setItem('avatar', user.image);
                 localStorage.setItem('lastName', user.last_name);
                 localStorage.setItem('firstName', user.first_name);
@@ -148,12 +147,12 @@ function editUser(user) {
 
 
 
-function handleResponse(response) {
+function handlePostResponse(response) {
     return response.text().then(text => {
         const data = JSON.parse(text);
-        console.log(data)
+        console.log(JSON.parse(text));
         if (response.status !== 200) {
-            const error = response.statusText;
+            const error = data.detail || data.msg || 'Ошибка';
             return Promise.reject(error);
         }
         return data;
