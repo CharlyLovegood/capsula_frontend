@@ -19,7 +19,7 @@ function oauth() {
     };
 
     return axios(requestOptions)
-        .then(handleResponse)
+        .then(handleResponseData)
         .then(user => {
             localStorage.setItem('username', user.django_user.username);
             localStorage.setItem('lastName', user.last_name);
