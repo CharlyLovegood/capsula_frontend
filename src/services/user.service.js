@@ -152,11 +152,8 @@ function editUser(user) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = JSON.parse(text);
-        console.log(response.statusText)
-        if (!response.ok) {
-            console.log(data.json())
-            console.log(data.message)
-            const error = (data && data.message) || response.statusText;
+        if (response.status !== 200) {
+            const error = response.statusText;
             return Promise.reject(error);
         }
         return data;
