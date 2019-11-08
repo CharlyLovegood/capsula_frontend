@@ -11,10 +11,12 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
 import { userActions } from '../../store/actions';
-import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
 import { urls } from './../../helpers';
 import { Box } from 'grommet';
+
+import { StatusGood, StatusCritical } from 'grommet-icons';
 
 
 
@@ -81,8 +83,20 @@ class RegisterPage extends Component {
                         Регистрация
                     </Typography>
 
-                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message.message}</div>) : <div></div>}
-                    
+                    {(alert.type === 'alert-success') &&
+                        <Box margin='10px' round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
+                            <StatusGood color='status-ok'></StatusGood>
+                            {alert.message}
+                        </Box>
+                    }
+
+                    {(alert.type === 'alert-danger') &&
+                        <Box margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                            <StatusCritical color='status-critical'></StatusCritical>
+                            {alert.message}
+                        </Box>
+                    }
+
                     <ValidatorForm
                         ref="form"
                         onSubmit={(event) => this.handleSubmit(event)}
@@ -189,7 +203,9 @@ class RegisterPage extends Component {
                     </ValidatorForm>
 
                     <Grid container justify='flex-end'>
-                        <PrivateLink color='textColor' to='/login' label='Войти' />
+                        <Link className={styles.register} to='/login'> 
+                            <p>Войти</p>
+                        </Link>
                     </Grid>
                 </div>
             </Container>

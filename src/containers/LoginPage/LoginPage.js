@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import styles from './LogIn.module.css';
 
 import { connect } from 'react-redux';
-import { PrivateLink } from '../../components/PrivateLink/PrivateLink';
+import { Link } from 'react-router-dom';
+
 import { userActions } from '../../store/actions';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
@@ -122,7 +123,10 @@ class LoginPage extends Component {
                         </div>
                     </ValidatorForm>
                     <Grid container justify='flex-end'>
-                        <PrivateLink color='textColor' to='/register' label="Зарегистрироваться"></PrivateLink>
+                        <p>Вы еще не с нами?</p>
+                        <Link className={styles.register} to='/register'> 
+                            <p>Зарегистрироваться</p>
+                        </Link>
                     </Grid>
                 </div>
             </Container>

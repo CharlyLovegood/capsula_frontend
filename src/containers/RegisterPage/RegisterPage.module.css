@@ -57,3 +57,15 @@
   align-items: center;
   flex-direction: column;
 }
+
+
+.register {
+  margin-left: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #8b34be;
+}
+
+.register:hover {
+  font-weight: bolder;
+}
