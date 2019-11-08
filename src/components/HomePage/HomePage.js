@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Box, Button, Text } from 'grommet';
 import Element from './Element';
 import Banner from './../Banner/Banner';
-import Scroll from './../Scroll/Scroll';
 import { connect } from 'react-redux';
 import BookItem from '../../components/Books/Book'
 import { searchActions } from '../../store/actions';
@@ -36,88 +35,66 @@ class HomePage extends Component {
     }
     
     render() {
-        if (this.props.library.found) {
-            return (
-                <SizeComponent>
-                    {size => 
-                    <Box width='xxlarge' align='center'>
-                        {size >= 600 &&
-                            <Banner user={this.props.user}></Banner>
-                        }
-                        {size < 600 &&
-                            <Banner size='small' user={this.props.user}></Banner>
-                        }
-                        <Box className={styles.container_gradient} width={this.calculateWidth(size)} margin={{vertical: '70px'}} direction='row' wrap>
-                            <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
-                            <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
-                            <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
-                            <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
-                        </Box>
-                        {this.props.library.found && !this.props.user.loggedIn &&
-                        // <Scroll object={(title, coverage, id) => <BookItem margin='4px' title={title} coverage={coverage} key={id} id={id}></BookItem>} 
-                        //     objectList={this.props.library.search.searchResult.data} 
-                        //     header='Доступные книги'
-                        //     id={1}>
-                        // </Scroll>
-                            <Box align='center'>
-                                <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                    header='Доступные книги'
-                                    contentType='books'
-                                ></Gallery>
-                                <Text color='#b3a7a7' size='16px'>Войди, чтобы увидеть больше...</Text>
-                                <Box align='center' margin={{vertical: '20px'}}>
-                                    <Link color='textColor' to='/login'>
-                                        <Button margin={{vertical:'5px'}} label={<Text size='23px' color='brand'>Войти</Text>}></Button>
-                                    </Link>
-                                </Box>
-                            </Box>
-                        } 
-                        {this.props.library.found && this.props.user.loggedIn &&
-                        // <Scroll object={(title, coverage, id) => <BookItem margin='4px' title={title} coverage={coverage} key={id} id={id}></BookItem>} 
-                        //     objectList={this.props.library.search.searchResult.data} 
-                        //     header='Доступные книги'
-                        //     id={1}>
-                        // </Scroll>
-                            <Box align='center'>
-                                <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                    header='Доступные книги'
-                                    contentType='books'
-                                ></Gallery>
-                                <Box align='center' margin={{vertical: '20px'}}>
-                                    <Link color='textColor' to='/search'>
-                                        <Button margin={{vertical:'5px'}} label={<Text size='23px' color='brand'>Найти книгу</Text>}></Button>
-                                    </Link>
-                                </Box>
-                            </Box>
-                        } 
-                    </Box>
-                    }
-                </SizeComponent>
-            );
-        } else {
-            return(<SizeComponent>
+        return (
+            <SizeComponent>
                 {size => 
-                <Box align='center'>
+                <Box width='xxlarge' align='center'>
                     {size >= 600 &&
                         <Banner user={this.props.user}></Banner>
                     }
                     {size < 600 &&
                         <Banner size='small' user={this.props.user}></Banner>
                     }
-                    <Box width={this.calculateWidth(size)} margin={{vertical: '30px'}} direction='row' wrap>
-                        <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
-                        <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_search}></Box>} text='Находи интересные тебе книги'></Element>
-                        <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_send}></Box>} text='Отправляй заявки на обмен'></Element>
-                        <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='100px' className={styles.icon_reading_book}></Box>} text='Получай то, что искал'></Element>
+
+                    <Box className={styles.text_box} width='large' align='center'>
+                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Bookovsky - это сервис для обмена книгами</Text>
+                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Работает бесплатно и на доверии</Text>
+                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Найди новую книгу уже сегодня!</Text>
                     </Box>
+
+                    <Box width={this.calculateWidth(size)} margin={{vertical: '40px'}} direction='row' wrap>
+                        <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
+                        <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
+                        <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_send}></Box>} text='Отправляй заявки'></Element>
+                        <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element>
+                    </Box>
+                    {this.props.library.found && !this.props.user.loggedIn &&
+                        <Box align='center'>
+                            <Box className={styles.gradient} align='center'>
+                                <Gallery 
+                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
+                                    header='Доступные книги'
+                                    contentType='books'
+                                ></Gallery>
+                            </Box>
+                            <Link color='textColor' to='/login'>
+                                <Text color='#464141' size='16px'>Войди, чтобы увидеть больше...</Text>
+                            </Link>
+                        </Box>
+                    } 
+                    {this.props.library.found && this.props.user.loggedIn &&
+                        <Box align='center'>
+                            <Box align='center'>
+                                <Gallery 
+                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
+                                    header='Доступные книги'
+                                    contentType='books'
+                                ></Gallery>
+                            </Box>
+                        
+                            <Box align='center' margin={{vertical: '20px'}}>
+                                <Link color='textColor' to='/search'>
+                                    <Button margin={{vertical:'5px'}} label={<Text size='23px' color='brand'>Найти книгу</Text>}></Button>
+                                </Link>
+                            </Box>
+                        </Box>
+                    } 
                 </Box>
                 }
-            </SizeComponent>)
-        }
+            </SizeComponent>
+        );
     }
 }
 

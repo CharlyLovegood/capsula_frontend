@@ -25,11 +25,10 @@ export default function UserAvatar(props) {
                 pad='0px'
                 dropProps={{ align: { top: "bottom", right: "right" } }}
                 label={<Text>{props.name}</Text>}
-                pad='0px'
                 elevation='none'
                 items={[
-                    { icon: <Box pad="10px"><UserSettings/></Box> ,label:  <Box pad="10px" alignSelf="center">Настройки</Box>, href:'/settings', onClick: () => {} },
-                    { icon: <Box pad="10px"><Logout/></Box>, label: <Box pad="10px" alignSelf="center">Выйти</Box>, onClick: props.logout }
+                    { icon: <Box pad="10px"><UserSettings color='brand'/></Box> ,label:  <Box pad="10px" alignSelf="center">Настройки</Box>, href:'/settings', onClick: () => {} },
+                    { icon: <Box pad="10px"><Logout color='brand' /></Box>, label: <Box pad="10px" alignSelf="center">Выйти</Box>, onClick: props.logout }
                 ]}
             />
         </Box>

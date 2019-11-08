@@ -30,4 +30,5 @@
 
 .primary_button {
     transition: all 0.2s ease-out;
+    border: 0px;
 }

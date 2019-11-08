@@ -36,8 +36,6 @@ export function swap(state=initialState, action) {
                 swapsRecieved: true,
                 swapsList: swapsList
             }
-        case swapConstants.GET_SWAP_SUCCESS:
-            return state;
         default:
             return state;
     }

@@ -9,7 +9,7 @@ import SizeComponent from '../SizeComponent/SizeComponent';
 
 function Book(props) {
     const defaultCoverage = remote_url.images.default_book;
-    const [bookCoverage, setBookCoverage] = React.useState(props.coverage ? props.coverage :  defaultCoverage);
+    const bookCoverage = (props.coverage ? props.coverage :  defaultCoverage);
     let link = '#'
     if (props.id > 0) {
         link = '/book/' + props.id;

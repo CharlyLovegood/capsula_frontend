@@ -68,7 +68,7 @@ class BookPage extends Component {
                     </Box>
                 </Box>}
 
-                {(this.props.alert.type === "alert-danger") && <ErrorPage alert={this.props.alert}></ErrorPage>}
+                {(this.props.alert.type === "alert-danger") && <ErrorPage alert={this.props.alert.message}></ErrorPage>}
             </Box>
         )
     }

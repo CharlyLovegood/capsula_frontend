@@ -134,7 +134,6 @@ function editUser(user) {
     };
 
     return fetch('/user/me/', requestOptions)
-        .then(handleResponseData)
         .then(
             response => {
                 console.log(user)
@@ -152,6 +151,7 @@ function editUser(user) {
 function handleResponse(response) {
     return response.text().then(text => {
         const data = JSON.parse(text);
+        console.log(data)
         if (response.status !== 200) {
             const error = response.statusText;
             return Promise.reject(error);

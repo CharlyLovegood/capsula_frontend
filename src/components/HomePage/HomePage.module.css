@@ -11,27 +11,39 @@
 .icon_reading_book {
     background: url('./book.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: center;
+    background-size: contain;
     margin-bottom: 20px;
 }
 
 .icon_book_shelf {
     background: url('./library.svg');
     background-repeat: no-repeat;
+    background-position: center;
     margin-bottom: 20px;
-    background-size: cover;
+    background-size: contain;
 }
 
 .icon_search {
     background: url('./search.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: center;
+    background-size: contain;
     margin-bottom: 20px;
 }
 
 .icon_send {
     background: url('./resume.svg');
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     margin-bottom: 20px;
+}
+
+.text_box {
+    margin-top: 70px;
+}
+
+.gradient {
+    /* background: linear-gradient(90deg, rgb(90, 39, 113) 0%, rgb(234, 65, 106) 80%, rgb(234, 180, 72) 100%); */
 }

@@ -6,15 +6,20 @@ import {Link} from 'react-router-dom';
 class Banner extends Component {
     constructor(props) {
         super(props);
-        const max = 2;
+        const max = 3;
         const min = 0;
         const rand = Math.floor(min + Math.random() * (max + 1 - min));
-        const headers = ['Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю',
+        const headersShort = ['Сон — это хорошо, а книги еще лучше',
             'Читатель видит мир глазами тысячи людей',
-            'Ты то, что ты читаешь'];
-
+            'Чтобы остановить время, не нужна волшебная палочка. Возьми чай и книгу',
+            'Если у тебя есть книги, ты уже не одинок'];
+        const headersLong = ['Рай – это место, где библиотека открыта двадцать четыре часа в сутки, семь дней в неделю',
+            'Чтобы остановить время, не нужна волшебная палочка. Возьми чай и книгу',
+            '— С чем  предпочитаете кофе? с сахаром, молоком, корицей? — Я предпочитаю с книгой',
+            'Книги разбивают кандалы времени, доказывая, что люди способны на волшебство'];
         this.state = {
-            header: headers[rand]
+            headerLong: headersLong[rand],
+            headerShort: headersShort[rand]
         };
     }
 
@@ -27,12 +32,12 @@ class Banner extends Component {
                 </Box>
                 
                 <Box pad='10px' margin={{horizontal:'20px', vertical: '-20px'}} background='white' align='center' className={style.title_box}>
-                    <Heading size='40px' color='black' margin={{horizontal:'0px', vertical: '0px'}} textAlign='center' alignSelf='center' level='1'>{this.state.header}</Heading>
+                    <Heading size='40px' color='black' margin={{horizontal:'0px', vertical: '0px'}} textAlign='center' alignSelf='center' level='1'>{this.state.headerShort}</Heading>
                     {!this.props.user.loggedIn &&
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
-                                    <Button hoverIndicator={{dark: 'small'}} color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                    <Button hoverIndicator={{dark: 'small'}} color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' className={style.primary_button} primary label={<Text size='23px'>Присоединиться</Text>}></Button>
                                 </Link>
                             </Box>
                             <Box fill>
@@ -56,7 +61,7 @@ class Banner extends Component {
                 justify='between'
             >
                 <Box width='350px' direction='column'>
-                    <Heading size='40px' color='black' level='1'>{this.state.header}</Heading>
+                    <Heading size='40px' color='black' level='1'>{this.state.headerLong}</Heading>
                     
                     {!this.props.user.loggedIn &&
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start'>

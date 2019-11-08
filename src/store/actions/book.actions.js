@@ -21,8 +21,9 @@ function getBook(bookId) {
                     dispatch(success(book));
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error.response.data.detail));
+                    // console.log(error.response)
+                    dispatch(failure(error.response.statusText));
+                    dispatch(alertActions.error(error.response.statusText));
                     if (error.response.status === 401) {
                         userService.forceLogout();
                         dispatch(forceLogout(error));

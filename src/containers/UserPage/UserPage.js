@@ -96,9 +96,8 @@ class UserPage extends Component {
                     </Box>
                 }
 
-                {this.props.user.error &&
-                    <ErrorPage alert={this.props.alert}></ErrorPage>
-                }
+                {(this.props.alert.type === "alert-danger") && <ErrorPage alert={this.props.alert.message}></ErrorPage>}
+                
             </Box>
         )
     }
