@@ -21,7 +21,6 @@ function getSwap() {
                     dispatch(success(swapList.data));
                 },
                 error => {
-                    
                     if (error.response.status === 401) {
                         dispatch(forceLogout(error));
                         dispatch(alertActions.error('Token expired'));

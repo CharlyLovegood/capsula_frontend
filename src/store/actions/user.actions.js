@@ -48,8 +48,8 @@ function login(username, password) {
                     history.push('/');
                 },
                 error => {
-                    dispatch(failure(error.response.statusText));
-                    dispatch(alertActions.error(error.response.statusText));
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
                 }
             );
     };
