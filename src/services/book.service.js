@@ -15,8 +15,9 @@ function getBook(id) {
         url: back_url.books.get_book(id),
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
+    
     return axios(requestOptions)
-        .then(handleResponse)
+        .then(response => handleResponse(response))
         .then(book => {
             return book;
         }); 

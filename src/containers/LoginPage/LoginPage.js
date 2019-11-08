@@ -15,6 +15,7 @@ import { userActions } from '../../store/actions';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { urls } from './../../helpers';
 import { Box } from 'grommet';
+import { StatusGood, StatusCritical } from 'grommet-icons';
 
 
 class LoginPage extends Component {
@@ -56,7 +57,19 @@ class LoginPage extends Component {
                         Вход
                     </Typography>
 
-                    {alert.message !== undefined ? (<div className={styles.error}>{alert.message}</div>) : <div></div>}
+                    {(alert.type === 'alert-success') &&
+                        <Box margin='10px' round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
+                            <StatusGood color='status-ok'></StatusGood>
+                            {alert.message}
+                        </Box>
+                    }
+
+                    {(alert.type === 'alert-danger') &&
+                        <Box margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                            <StatusCritical color='status-critical'></StatusCritical>
+                            {alert.message}
+                        </Box>
+                    }
 
                     <ValidatorForm
                         ref="form"

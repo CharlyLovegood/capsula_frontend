@@ -13,7 +13,7 @@ class ErrorPage extends Component {
                 justify='center'
             >
                 <h3>Error</h3>
-                <p>{this.props.alert.message ? this.props.alert.message.response.data.msg : ''}</p>
+                <p>{this.props.alert.message ? this.props.alert.message : ''}</p>
                 <img src={remote_url.images.error} alt='error 404'></img>
             </Box>
         )

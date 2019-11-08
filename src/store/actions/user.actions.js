@@ -49,6 +49,7 @@ function login(username, password) {
                 },
                 error => {
                     dispatch(failure(error));
+                    console.log(error.response)
                     dispatch(alertActions.error(error));
                 }
             );
@@ -61,10 +62,27 @@ function login(username, password) {
 
 
 function logout() {
-    userService.logout();
-    history.push('/login');
-    return { type: userConstants.LOGOUT };
+    return dispatch => {
+    userService.logout()            
+        .then(
+            user => { 
+                dispatch(success());
+                history.push('/login');
+                dispatch(alertActions.success('Successful logout'));
+            },
+            error => {
+                dispatch(failure(error));
+                dispatch(alertActions.error('Token expired'));
+                history.push('/login');
+                userService.forceLogout();
+            }
+        );
+    } 
+    function success() { return { type: userConstants.LOGOUT_SUCCESS } }
+    function failure(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 }
+
+
 
 
 function register(user) {

@@ -7,7 +7,8 @@ export const userService = {
     register,
     getById,
     editUser,
-    oauth
+    oauth,
+    forceLogout
 };
 
 
@@ -63,6 +64,7 @@ function logout() {
     }
 
     return axios(requestOptions)
+        .then(handleResponseData)
         .then(user => {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
@@ -75,6 +77,19 @@ function logout() {
             return user;
         }); 
 }
+
+
+function forceLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('avatar');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('location');
+    localStorage.removeItem('vk');
+    localStorage.removeItem('id');
+}
+
 
 
 function register(user) {
@@ -91,7 +106,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(back_url.authentication.registration, requestOptions).then(handleResponse);
+    return fetch(back_url.authentication.registration, requestOptions).then(handleResponseData);
 }
 
 
@@ -136,13 +151,14 @@ function editUser(user) {
 
 function handleResponse(response) {
     return response.text().then(text => {
-        console.log(response)
-        const data = text && JSON.parse(text);
+        const data = JSON.parse(text);
+        console.log(response.statusText)
         if (!response.ok) {
+            console.log(data.json())
+            console.log(data.message)
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 }

@@ -96,7 +96,19 @@ export function authentication(state = initialState, action) {
                     id: '',
                     vk: ''
                 }});
-        case userConstants.LOGOUT:
+        case userConstants.LOGOUT_SUCCESS:
+            return ({
+                loggedIn: false, 
+                user: {
+                    username: '',
+                    firstName: '',
+                    lastName: '',
+                    avatar: '',
+                    location: '',
+                    id: '',
+                    vk: ''
+                }});
+        case userConstants.LOGOUT_FAILURE:
             return ({
                 loggedIn: false, 
                 user: {

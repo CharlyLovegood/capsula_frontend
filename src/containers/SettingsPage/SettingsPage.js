@@ -84,7 +84,7 @@ class SettingsPage extends Component {
                     </h2>
 
                     {(this.props.alert.type === 'alert-success') &&
-                        <Box round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
+                        <Box margin='10px' round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
                             <StatusGood color='status-ok'></StatusGood>
                             {this.props.alert.message}
                         </Box>
@@ -92,7 +92,7 @@ class SettingsPage extends Component {
 
 
                     {(this.props.alert.type === 'alert-danger') &&
-                        <Box round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                        <Box margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
                             <StatusCritical color='status-critical'></StatusCritical>
                             {this.props.alert.message}
                         </Box>

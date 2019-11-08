@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from 'grommet';
+import styles from './Book.module.css';
 
 import { remote_url } from './../../helpers';
 import SizeComponent from '../SizeComponent/SizeComponent';
@@ -18,7 +19,7 @@ function Book(props) {
         <Link to={link}>
             <SizeComponent>
                 {size => 
-                <Box elevation='medium' background={`url(${bookCoverage})`} 
+                <Box className={styles.book} elevation='large' background={`url(${bookCoverage})`} 
                     width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
                     height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
                     margin={props.margin}

@@ -1,6 +1,7 @@
-import { bookService } from '../../services';
-import { bookConstants } from '../constants';
+import { bookService, userService } from '../../services';
+import { bookConstants, userConstants } from '../constants';
 import { alertActions } from './';
+import { history } from '../../helpers';
 
 export const bookActions = {
     getBook,
@@ -21,7 +22,13 @@ function getBook(bookId) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(alertActions.error(error.response.data.detail));
+                    if (error.response.status === 401) {
+                        userService.forceLogout();
+                        dispatch(forceLogout(error));
+                        dispatch(alertActions.error('Token expired'));
+                        history.push('/login');
+                    }
                 }
             );
     };
@@ -29,6 +36,7 @@ function getBook(bookId) {
     function request(bookId) { return { type: bookConstants.GET_BOOK_REQUEST, bookId} }
     function success(book) { return { type: bookConstants.GET_BOOK_SUCCESS, book } }
     function failure(error) { return { type: bookConstants.GET_BOOK_FAILURE, error } }
+    function forceLogout(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 }
 
 function deleteBookById(bookId) {

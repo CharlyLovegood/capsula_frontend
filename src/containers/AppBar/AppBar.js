@@ -8,7 +8,8 @@ import {
     Button,
     Collapsible,
     Heading,
-    Layer
+    Layer,
+    Text
 } from 'grommet';
 import { Search, Menu, FormClose } from 'grommet-icons';
 
@@ -55,9 +56,12 @@ class AppBar extends Component {
                             style={{ zIndex: '1'}}
                             pad={{ horizontal: '10px'}}
                         >
-                            <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
-                            </Link>
+                            <Box gap='5px' direction='row' align='center'>
+                                <Link to='/' style={{ textDecoration: 'none' }}>
+                                    <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky </Heading>
+                                </Link>
+                                <Text color='menuTextColor'>| возьми книгу сегодня</Text>
+                            </Box>
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
@@ -152,7 +156,6 @@ class AppBar extends Component {
                                 <PrivateLinkMobile color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
                                 <PrivateLinkMobile color='menuTextColor' to='/settings' label='Настройки' key='Настройки'/>
                                 <Box margin='15px' onClick={event => this.handleLogOut(event)}>ВЫЙТИ</Box>
-                                <Link color='menuTextColor' to='/' onClick={event => this.handleLogOut(event)} label='Выйти' key='Выйти'/>
                             </Box>
                         </Layer>
                         }
@@ -177,20 +180,17 @@ class AppBar extends Component {
                             style={{ zIndex: '1'}}
                             pad={{ horizontal: '10px'}}
                         >
-                            <Link to='/' style={{ textDecoration: 'none' }}>
-                                <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky</Heading>
-                            </Link>
+                            <Box gap='5px' direction='row' align='center'>
+                                <Link to='/' style={{ textDecoration: 'none' }}>
+                                    <Heading className={styles.logo} level='1' margin='none' alignSelf='center'>Bookovsky </Heading>
+                                </Link>
+                                <Text color='menuTextColor'>| возьми книгу сегодня</Text>
+                            </Box>
                             
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
-                                <Box>
-                                    <Button icon={<Search></Search>} onClick={() => this.setState({showSidebar: !this.state.showSidebar})}></Button>
-                                </Box>
-                                <Collapsible direction="horizontal" open={showSidebar}>
-                                    <SearchBar close={()=> this.setState({showSidebar: !this.state.showSidebar})}></SearchBar>
-                                </Collapsible>
-
                                 <PrivateLink color='menuTextColor' to='/rules' label='Правила' />
-                                <PrivateLink color='menuTextColor' to='/login' label='Войти'></PrivateLink>
+                                <PrivateLink color='menuTextColor' to='/login' label='Войти' />
+                                <PrivateLink color='menuTextColor' to='/register' label='Присоединиться' />
                             </Box>
                         </Box>
                     </Box>
@@ -212,14 +212,8 @@ class AppBar extends Component {
                             </Link>
                             
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
-                                <Box>
-                                    <Link to='/search'>
-                                        <Button icon={<Search></Search>}></Button>
-                                    </Link>
-                                </Box>
-                                <Box margin='-12px'>
+                                <PrivateLinkMobile color='menuTextColor' to='/rules' label='Правила' key='Правила'/>
                                 <PrivateLink color='menuTextColor' to='/login' label='Войти'></PrivateLink>
-                                </Box>
                             </Box>
                         </Box>
                     </Box>

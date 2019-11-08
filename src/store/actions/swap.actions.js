@@ -1,6 +1,9 @@
-import { swapService } from '../../services';
-import { swapConstants } from '../constants';
+import { swapService, userService } from '../../services';
+import { swapConstants, userConstants } from '../constants';
 import { alertActions } from './';
+import { history } from '../../helpers';
+
+
 
 export const swapActions = {
     getSwap,
@@ -18,11 +21,21 @@ function getSwap() {
                     dispatch(success(swapList.data));
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    
+                    if (error.response.status === 401) {
+                        dispatch(forceLogout(error));
+                        dispatch(alertActions.error('Token expired'));
+                        userService.forceLogout();
+                        history.push('/login');
+                    } else {
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                    }
                 }
             );
     };
+
+    function forceLogout(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 
     function request() { return { type: swapConstants.GET_SWAP_REQUEST } }
     function success(swapsList) { return { type: swapConstants.GET_SWAP_SUCCESS, swapsList } }
@@ -39,11 +52,20 @@ function changeSwapStatus(id, status) {
                     dispatch(success(response, id, status));
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    if (error.response.status === 401) {
+                        dispatch(forceLogout(error));
+                        dispatch(alertActions.error('Token expired'));
+                        userService.forceLogout();
+                        history.push('/login');
+                    } else {
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                    }
                 }
             );
     };
+
+    function forceLogout(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 
     function request(status, id) { return { type: swapConstants.CHANGE_STATUS_REQUEST, status, id } }
     function success(response, id, status) { return { type: swapConstants.CHANGE_STATUS_SUCCESS, response, id, status } }
@@ -60,11 +82,20 @@ function swapRequest(id) {
                     dispatch(success(response));
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    if (error.response.status === 401) {
+                        dispatch(forceLogout(error));
+                        dispatch(alertActions.error('Token expired'));
+                        userService.forceLogout();
+                        history.push('/login');
+                    } else {
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));       
+                    }
                 }
             );
     };
+
+    function forceLogout(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
 
     function request(id) { return { type: swapConstants.SWAP_REQUEST, id } }
     function success(response) { return { type: swapConstants.SWAP_SUCCESS, response } }

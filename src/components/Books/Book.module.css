@@ -1,8 +1,11 @@
+.book:hover {
+    filter: brightness(95%);
+    transform: scale(1.01);
+    transition: all 0.2s ease-in;
+}
+
 .book {
-    background-size: cover;
-    height: 250px;
-    width: 160px;
-    position: relative;
+    transition: all 0.2s ease-in;
 }
 
 .small_book {
