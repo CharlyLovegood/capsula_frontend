@@ -17,7 +17,7 @@ export default function UserAvatar(props) {
                     <img
                         src={avatar}
                         className={styles.big_avatar}
-                        onError={()=>{console.log('ff')}}
+                        onError={() => {setAvatar(defaultAvatar)}}
                     />
                 </Box>
             </label>
