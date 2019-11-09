@@ -52,7 +52,7 @@ class LibraryPage extends Component {
                             ></Gallery>
                             {this.userLibrary !== [] &&
                                 <Box>
-                                    Не сдерживай себя, добавь книги на полку :)
+                                    Здесь не хватает твоих книг :)
                                 </Box>
                             }
                         </Box>

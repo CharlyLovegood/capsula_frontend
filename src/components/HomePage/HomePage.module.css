@@ -44,6 +44,17 @@
     margin-top: 70px;
 }
 
-.gradient {
-    /* background: linear-gradient(90deg, rgb(90, 39, 113) 0%, rgb(234, 65, 106) 80%, rgb(234, 180, 72) 100%); */
+
+
+
+.element:hover {
+    filter: brightness(95%);
+    transform: scale(1.01);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.336);
+    transition: all 0.2s ease-in;
+}
+
+.element {
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.20);
+    transition: all 0.2s ease-in;
 }

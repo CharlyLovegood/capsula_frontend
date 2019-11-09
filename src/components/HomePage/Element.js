@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Text } from 'grommet';
+import styles from './HomePage.module.css';
 
 function Element(props) {
     return (
@@ -10,7 +11,7 @@ function Element(props) {
             pad='10px'
             elevation='xsmall'
             round='12px'
-            className={props.style}
+            className={styles.element}
         >
             <Box margin='10px'>
                 {props.icon}

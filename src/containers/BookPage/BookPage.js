@@ -47,7 +47,7 @@ class BookPage extends Component {
                 {this.props.book.bookRecieved &&
                 <Box direction='column' align='center' fill>
                     <Box background='brandGradient' className={styles.background} align='center'>
-                        <Book big='true' coverage={book.image}></Book>
+                        <Book title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
                     </Box>
                     
                     <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>

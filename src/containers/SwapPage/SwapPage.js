@@ -95,7 +95,7 @@ class SwapPage extends Component {
                             </Tab>
                             <Tab title='На руках'>
                                 <Gallery
-                                    message='Здесь пусто, у вас нет на руках чужих книг'
+                                    message='Здесь пусто, у вас на руках нет чужих книг'
                                     contentType='swaps'
                                     me='reader'
                                     type='onHands'

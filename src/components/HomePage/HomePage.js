@@ -62,13 +62,13 @@ class HomePage extends Component {
                         <Box align='center'>
                             <Box className={styles.gradient} align='center'>
                                 <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                     objectList={this.props.library.search.searchResult.data.slice(0,10)}
                                     header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                     contentType='books'
                                 ></Gallery>
                             </Box>
-                            <Link color='textColor' to='/login'>
+                            <Link to='/login'>
                                 <Text color='#464141' size='16px'>Войди, чтобы увидеть больше...</Text>
                             </Link>
                         </Box>
@@ -76,14 +76,14 @@ class HomePage extends Component {
                     {this.props.library.found && this.props.user.loggedIn &&
                         <Box align='center'>
                             <Gallery 
-                                object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                 objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
+                                header={<a href='/search'><Text color='black' size='30px'>Доступные книги</Text></a>}
                                 contentType='books'
                             ></Gallery>
-                            <Link color='textColor' to='/search'>
+                            <a href='/search'>
                                 <Text color='#464141' size='16px'>Увидеть больше...</Text>
-                            </Link>
+                            </a>
                         </Box>
                     } 
                 </Box>
