@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { searchActions } from '../../store/actions';
 import SearchElement from '../../components/Search/SearchElement';
 import Filter from '../../components/Filter/Filter';
+import Book from '../../components/Books/Book';
+import Gallery from '../../components/Gallery/Gallery';
 
 
 class SearchPage extends Component {
@@ -41,7 +43,27 @@ class SearchPage extends Component {
     onSelect = event => this.setState({ value: event.suggestion.value });
 
     renderSearchResult = () => {
+        // const { value, suggestedList } = this.state;
+        // const res = suggestedList.filter((el) => {
+        //     if (this.state.genre !== ''){
+        //         return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
+        //     } else {
+        //         return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
+
+        //     }
+        // })
+        // .map((el) => (
+        //     <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
+        // ));
+
+
+        // if (res.length === 0 && value !== '') {
+        //     return [<SearchElement id={'no res'} key={'no res'} name={'Ничего не найдено :('}></SearchElement>]
+        // } else {
+        //     return res;
+        // }
         const { value, suggestedList } = this.state;
+
         const res = suggestedList.filter((el) => {
             if (this.state.genre !== ''){
                 return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
@@ -50,22 +72,20 @@ class SearchPage extends Component {
 
             }
         })
-        .map((el) => (
-            <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
-        ));
-        if (res.length === 0 && value !== '') {
-            return [<SearchElement id={'no res'} key={'no res'} name={'Ничего не найдено :('}></SearchElement>]
-        } else {
-            return res;
-        }
-        
+
+        return(
+        <Gallery 
+            object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 
+            objectList={res}
+            contentType='books'
+        ></Gallery>)
     };
   
     render() {
         const { value } = this.state;
 
         return (
-            <Box direction='column' align='center' width='720px'>
+            <Box direction='column' align='center' width='xxlarge'>
                 <Box fill direction='row' align='center' wrap>
                     <Box
                         background='background'
@@ -93,11 +113,11 @@ class SearchPage extends Component {
                             placeholder='Найти книгу...'
                         />
                     </Box>
-                    <Box width='300px' margin={{ horizontal: 'small', vertical: 'xsmall' }}>
+                    <Box width='400px' margin={{ horizontal: 'small', vertical: 'xsmall' }}>
                         <Filter  updateGenre={(genre) => this.setState({genre: genre})}></Filter>
                     </Box>
                 </Box>
-                <Box fill>
+                <Box direction='row' wrap fill>
                     {this.renderSearchResult()}
                 </Box>
             </Box>

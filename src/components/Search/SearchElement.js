@@ -28,7 +28,7 @@ function SearchElement(props) {
                     className={styles.container}
                 >
                     <Image
-                        width='70px'
+                        width='110px'
                         src={props.image}
                     />
                     <Box direction='column'>

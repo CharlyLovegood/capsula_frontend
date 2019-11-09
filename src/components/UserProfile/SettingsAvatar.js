@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from 'grommet';
 import styles from './UserProfile.module.css';
 import {Camera} from 'grommet-icons';
+import { remote_url } from './../../helpers';
 
 export default function UserAvatar(props) {
     const defaultAvatar = remote_url.images.user_default;

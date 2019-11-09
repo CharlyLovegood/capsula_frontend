@@ -64,7 +64,7 @@ class HomePage extends Component {
                                 <Gallery 
                                     object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                     objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                    header='Доступные книги'
+                                    header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                     contentType='books'
                                 ></Gallery>
                             </Box>
@@ -75,20 +75,15 @@ class HomePage extends Component {
                     } 
                     {this.props.library.found && this.props.user.loggedIn &&
                         <Box align='center'>
-                            <Box align='center'>
-                                <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                    header='Доступные книги'
-                                    contentType='books'
-                                ></Gallery>
-                            </Box>
-                        
-                            <Box align='center' margin={{vertical: '20px'}}>
-                                <Link color='textColor' to='/search'>
-                                    <Button margin={{vertical:'5px'}} label={<Text size='23px' color='brand'>Найти книгу</Text>}></Button>
-                                </Link>
-                            </Box>
+                            <Gallery 
+                                object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                objectList={this.props.library.search.searchResult.data.slice(0,10)}
+                                header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
+                                contentType='books'
+                            ></Gallery>
+                            <Link color='textColor' to='/search'>
+                                <Text color='#464141' size='16px'>Увидеть больше...</Text>
+                            </Link>
                         </Box>
                     } 
                 </Box>

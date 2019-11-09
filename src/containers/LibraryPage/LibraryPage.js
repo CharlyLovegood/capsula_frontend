@@ -43,20 +43,34 @@ class LibraryPage extends Component {
             {library.userLibraryRecieved &&
                 <Box direction='column' align='center' width='xxlarge'>
                     {this.state.owner &&
-                        <Gallery 
-                            object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleEditBook={this.props.editBook} handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
-                            objectList={library.userLibrary}
-                            // header='Мои книги'
-                            contentType='smart-books'
-                        ></Gallery>
+                        <Box direction='column' align='center' width='xxlarge'>
+                            <Gallery 
+                                object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleEditBook={this.props.editBook} handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
+                                objectList={library.userLibrary}
+                                // header='Мои книги'
+                                contentType='smart-books'
+                            ></Gallery>
+                            {this.userLibrary !== [] &&
+                                <Box>
+                                    Не сдерживай себя, добавь книги на полку :)
+                                </Box>
+                            }
+                        </Box>
                     }
                     {!this.state.owner &&
-                        <Gallery 
-                            object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
-                            objectList={library.userLibrary}
-                            // header='Книги'
-                            contentType='books'
-                        ></Gallery>
+                        <Box direction='column' align='center' width='xxlarge'>
+                            <Gallery 
+                                object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
+                                objectList={library.userLibrary}
+                                // header='Книги'
+                                contentType='books'
+                            ></Gallery>
+                            {this.userLibrary !== [] &&
+                                <Box>
+                                    Здесь пусто, владелец еще не добавил книги на свою полку
+                                </Box>
+                            }
+                        </Box>
                     }
                     <Box margin='20px'>
                         {this.state.owner &&
@@ -70,7 +84,7 @@ class LibraryPage extends Component {
                             </PopUpButton>
                         }
                     </Box>
-                </Box>
+                </Box> 
             }
 
             {(this.props.alert.type === "alert-danger") && <ErrorPage alert={this.props.alert.message}></ErrorPage>}

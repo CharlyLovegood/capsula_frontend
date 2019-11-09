@@ -7,15 +7,22 @@ import { Send } from 'grommet-icons';
 import PopUpButton from '../Button/PopUpButton';
 import SwapAgreement from '../Books/SwapAgreement';
 import {bookStatuses} from './../../helpers/constants';
+import { remote_url } from './../../helpers';
 
 function ListElement(props) {
+    const defaultAvatar = remote_url.images.user_default;
+
+    const [avatar, setAvatar] = React.useState(props.owner.avatar ? props.owner.avatar : defaultAvatar);
+
+
     return (
         <Box direction='row' justify='between' align='center' fill pad='20px'>
             <Link to={`/user/${props.owner.id}`}>
                 <img
                     alt='Remy Sharp'
-                    src={props.owner.avatar}
+                    src={avatar}
                     className={styles.avatar}
+                    onError={() => {setAvatar(defaultAvatar)}}
                 />
             </Link>
             <Box wrap direction='row' justify='between' align='center' fill>
