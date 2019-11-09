@@ -8,6 +8,7 @@ import { userpage } from './userpage.reducer';
 import { library } from './library.reducer';
 import { book } from './book.reducer';
 import { swap } from './swap.reducer';
+import { wishlist } from './wishlist.reducer';
 
 
 const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     userpage,
     library,
     book,
-    swap
+    swap,
+    wishlist
 });
 
 export default rootReducer;

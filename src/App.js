@@ -23,6 +23,7 @@ import RedirectPage from './components/RedirectPage/RedirectPage';
 import Footer from './components/Footer/Footer';
 import SettingsPage from './containers/SettingsPage/SettingsPage';
 import HistoryPage from './containers/HistoryPage/HistoryPage';
+import Wishlist from './containers/Wishlist/Wishlist';
 import HelpPage from './components/HelpPage/Help';
 
 import { history } from './helpers';
@@ -161,6 +162,7 @@ class App extends Component {
                                 <Route exact path='/' component={ HomePage } />
                                 <PrivateRoute exact path='/user/:id' component={ UserPage }/>
                                 <PrivateRoute path='/book/:id' component={ BookPage } />
+                                <PrivateRoute path='/user/:id/wishlist' component={ Wishlist } />
                                 <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
                                 <PrivateRoute path='/reader' component={ SwapPage } />
                                 <PrivateRoute path='/owner' component={ SwapPage } />

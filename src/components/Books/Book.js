@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Box, Text } from 'grommet';
 import styles from './Book.module.css';
 
-import { remote_url } from './../../helpers';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
 
@@ -19,7 +18,6 @@ function Book(props) {
     // const min = 0;
     // const rand = Math.floor(min + Math.random() * (max + 1 - min));
 
-    const defaultCoverage = remote_url.images.default_book;
     const bookCoverage = `url("${props.coverage}")`;
     const background = props.coverage ? bookCoverage : 'brandDark';
 
@@ -32,7 +30,7 @@ function Book(props) {
         <Link to={link}>
             <SizeComponent>
                 {size => 
-                <Box key={props.id} className={styles.book} elevation='large' background={background} 
+                <Box key={props.id} className={styles.book} background={background} 
                     width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
                     height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
                     margin={props.margin}

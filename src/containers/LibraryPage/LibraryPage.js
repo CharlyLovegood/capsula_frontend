@@ -50,7 +50,7 @@ class LibraryPage extends Component {
                                 // header='Мои книги'
                                 contentType='smart-books'
                             ></Gallery>
-                            {this.userLibrary !== [] &&
+                            {library.userLibrary.length === 0 &&
                                 <Box>
                                     Здесь не хватает твоих книг :)
                                 </Box>
@@ -65,7 +65,7 @@ class LibraryPage extends Component {
                                 // header='Книги'
                                 contentType='books'
                             ></Gallery>
-                            {this.userLibrary !== [] &&
+                            {library.userLibrary.length === 0 &&
                                 <Box>
                                     Здесь пусто, владелец еще не добавил книги на свою полку
                                 </Box>

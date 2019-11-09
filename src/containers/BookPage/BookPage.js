@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import styles from './BookPage.module.css';
 import Book from '../../components/Books/Book';
 import List from '../../components/List/List';
-import { Box } from 'grommet';
+import { Box, Button } from 'grommet';
 
 import { connect } from 'react-redux';
-import { bookActions, swapActions } from '../../store/actions'
+import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 
 import ErrorPage from './../../components/Error/ErrorPage';
 
@@ -51,6 +51,10 @@ class BookPage extends Component {
                     </Box>
                     
                     <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>
+                        <Box direction='row' justify='center'>
+                            <Button margin='15px 5px' primary label='Add to wishlist' onClick={() => this.props.addToWishlist(book, book.id)}></Button>
+                            {/* <Button margin='15px 5px' label='Add to my booklist'></Button> */}
+                        </Box>
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>
                         {this.state.items.items &&
@@ -58,17 +62,13 @@ class BookPage extends Component {
                                 {this.state.items.items[0].volumeInfo.description}
                             </p>
                         }
-                        {/* <Box direction='row' justify='center'>
-                            <Button margin='15px 5px' primary label='Add to wishlist'></Button>
-                            <Button margin='15px 5px' label='Add to my booklist'></Button>
-                        </Box> */}
                         {book.book_items[0] &&
                             <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>
                         }
                     </Box>
                 </Box>}
 
-                {(this.props.alert.type === "alert-danger") && <ErrorPage alert={this.props.alert.message}></ErrorPage>}
+                {(this.props.alert.type === "alert-danger" && !this.props.book.bookRecieved) && <ErrorPage alert={this.props.alert.message}></ErrorPage>}
             </Box>
         )
     }
@@ -84,7 +84,8 @@ const actionCreators = {
     getBook: bookActions.getBook,
     deleteBook: bookActions.deleteBook,
     addBook: bookActions.addBook,
-    swapRequest: swapActions.swapRequest
+    swapRequest: swapActions.swapRequest,
+    addToWishlist: wishlistActions.addToWishlist
 };
 
 export default connect(mapState, actionCreators)(BookPage);

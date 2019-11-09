@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 
 import { searchActions } from '../../store/actions';
-import SearchElement from '../../components/Search/SearchElement';
+// import SearchElement from '../../components/Search/SearchElement';
 import Filter from '../../components/Filter/Filter';
 import Book from '../../components/Books/Book';
 import Gallery from '../../components/Gallery/Gallery';

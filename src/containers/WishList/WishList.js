@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { Box } from 'grommet';
-import SmartBook from '../../components/Books/SmartBook';
+import SmartBook from '../../components/Books/WishBook';
 import Gallery from '../../components/Gallery/Gallery';
-import { Add } from 'grommet-icons';
-import PopUpButton from '../../components/Button/PopUpButton';
-import AddNewBook from '../../components/Books/AddNewBook';
-import { libraryActions, bookActions } from '../../store/actions';
+import { wishlistActions } from '../../store/actions';
 import { connect } from 'react-redux';
 import Book from '../../components/Books/Book';
+import { StatusGood, StatusCritical } from 'grommet-icons';
 
 
-class WishList extends Component {
+class Wishlist extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,49 +17,65 @@ class WishList extends Component {
     }
 
     componentDidMount() {
-        this.getWishList();
+        this.getWishlist();
     }
 
     componentDidUpdate(prevProps) {
         if(this.props.match.params.id !== prevProps.match.params.id) {
             this.setState({owner: Number(this.props.user.id) === Number(this.props.match.params.id)});
-            this.getWishList();
+            this.getWishlist();
         }
     }
 
-    getLibrary() {
-        this.props.getWishList(this.props.match.params.id);
+    getWishlist() {
+        this.props.getWishlist(this.props.match.params.id);
     }
 
     render() {
-        const {wishList} = this.props;
+        const { wishlist } = this.props;
 
         return (
             <Box direction='column' align='center' width='xxlarge'>
-                {library.userLibraryRecieved && this.state.owner &&
+
+                {(this.props.alert.type === 'alert-success') &&
+                    <Box margin='10px' round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
+                        <StatusGood color='status-ok'></StatusGood>
+                        {this.props.alert.message}
+                    </Box>
+                }
+
+
+                {(this.props.alert.type === 'alert-danger') &&
+                    <Box margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                        <StatusCritical color='status-critical'></StatusCritical>
+                        {this.props.alert.message}
+                    </Box>
+                }
+
+                {wishlist.wishlistRecieved && this.state.owner &&
                     <Gallery 
-                        object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleEditBook={this.props.editBook} handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
-                        objectList={library.userLibrary}
+                        object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteFromWishlist={this.props.deleteFromWishlist} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
+                        objectList={wishlist.wishlist}
                         // header='Мои книги'
                         contentType='smart-books'
                     ></Gallery>
                 }
-                {library.userLibraryRecieved && !this.state.owner &&
+                {wishlist.wishlistRecieved && !this.state.owner &&
                     <Gallery 
-                        object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
-                        objectList={library.userLibrary}
+                        object={(title, coverage, genre, author, id, idAbstract) => <Book margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
+                        objectList={wishlist.wishlist}
                         // header='Книги'
                         contentType='books'
                     ></Gallery>
                 }
-                <Box margin='20px'>
-                    <PopUpButton forceUpdate={() => this.getLibrary(this.props.user.id)} 
+                {/* <Box margin='20px'>
+                    <PopUpButton forceUpdate={() => this.getwishlist(this.props.user.id)} 
                         innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
                         label='Добавить книгу' 
                         primary
                         icon={<Add></Add>}>
                     </PopUpButton>
-                </Box>
+                </Box> */}
             </Box>
         )
     }
@@ -70,12 +84,12 @@ class WishList extends Component {
 const mapState = state => ({
     user: state.authentication.user,
     alert: state.alert,
-    wishList: state.wishList,
+    wishlist: state.wishlist
 })
 
 const actionCreators = {
-    getWishList: libraryActions.getWishList,
-    deleteBook: bookActions.deleteBookById,
+    getWishlist: wishlistActions.getWishlist,
+    deleteFromWishlist: wishlistActions.deleteFromWishlist,
 }
 
-export default connect(mapState, actionCreators)(WishList);
+export default connect(mapState, actionCreators)(Wishlist);

@@ -32,5 +32,10 @@ export const back_url = {
         login: '/auth/login/',
         logout: '/auth/logout/',
         registration: '/auth/registration/'
+    },
+    wishlist: {
+        delete_from_wishlist: (id) => `/library/wishlist/${id}/`,
+        add_to_wishlist: '/library/wishlist/',
+        get_wishlist: '/library/wishlist/'
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Button, Text } from 'grommet';
+import { Box, Text } from 'grommet';
 import Element from './Element';
 import Banner from './../Banner/Banner';
 import { connect } from 'react-redux';
@@ -78,12 +78,12 @@ class HomePage extends Component {
                             <Gallery 
                                 object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                 objectList={this.props.library.search.searchResult.data.slice(0,10)}
-                                header={<a href='/search'><Text color='black' size='30px'>Доступные книги</Text></a>}
+                                header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                 contentType='books'
                             ></Gallery>
-                            <a href='/search'>
+                            <Link to='/search'>
                                 <Text color='#464141' size='16px'>Увидеть больше...</Text>
-                            </a>
+                            </Link>
                         </Box>
                     } 
                 </Box>

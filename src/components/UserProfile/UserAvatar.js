@@ -27,7 +27,7 @@ export default function UserAvatar(props) {
                 label={<Text>{props.name}</Text>}
                 elevation='none'
                 items={[
-                    { icon: <Box pad="10px"><UserSettings color='brand'/></Box> ,label:  <Box pad="10px" alignSelf="center">Настройки</Box>, href:'/settings', onClick: () => {} },
+                    { icon: <Box pad="10px"><UserSettings color='brand'/></Box> ,label:  <Link to='/settings'><Box pad="10px" alignSelf="center">Настройки</Box></Link>, onClick: () => {} },
                     { icon: <Box pad="10px"><Logout color='brand' /></Box>, label: <Box pad="10px" alignSelf="center">Выйти</Box>, onClick: props.logout }
                 ]}
             />

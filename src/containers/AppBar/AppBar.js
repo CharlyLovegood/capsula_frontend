@@ -86,6 +86,7 @@ class AppBar extends Component {
                             style={{ zIndex: '10' }}
                         >   
                             <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги' />
+                            <PrivateLink color='menuTextColor' to={`/user/${this.props.user.user.id}/wishlist`} label='Вишлист' key='Вишлист' />
                             <PrivateLink color='menuTextColor' to='/history' label='История' key='История' />
                             <PrivateLink color='menuTextColor' to='/reader' label='Читатель' key='Читатель' />
                             <PrivateLink color='menuTextColor' to='/owner' label='Владелец' key='Владелец' />
@@ -150,6 +151,7 @@ class AppBar extends Component {
                                     {this.props.user.user.username}
                                 </Box>
                                 <PrivateLinkMobile color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
+                                <PrivateLinkMobile color='menuTextColor' to={`/user/${this.props.user.user.id}/wishlist`} label='Вишлист' key='Вишлист'/>
                                 <PrivateLinkMobile color='menuTextColor' to='/history' label='История' key='История'/>
                                 <PrivateLinkMobile color='menuTextColor' to='/reader' label='Читатель' key='Читатель'/>
                                 <PrivateLinkMobile color='menuTextColor' to='/owner' label='Владелец' key='Владелец'/>
