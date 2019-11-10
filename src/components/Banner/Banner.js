@@ -37,12 +37,12 @@ class Banner extends Component {
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start' width='90%'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
-                                    <Button hoverIndicator={{dark: 'small'}} color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' className={style.primary_button} primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                    <Button hoverIndicator={{dark: 'small'}} color='brandGradient' margin={{vertical:'5px'}} fill='horizontal' className={style.primary_button} primary label={<Text size='23px'><strong>Присоединиться</strong></Text>}></Button>
                                 </Link>
                             </Box>
                             <Box fill>
                                 <Link color='textColor' to='/login'>
-                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'>Войти</Text>}></Button>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'><strong>Войти</strong></Text>}></Button>
                                 </Link>
                             </Box>
                         </Box>
@@ -67,12 +67,12 @@ class Banner extends Component {
                         <Box margin={{vertical:'20px'}} direction='column' align='start' justify='start'>
                             <Box fill>
                                 <Link color='textColor' to='/register'>
-                                    <Button margin={{vertical:'5px'}} color='brandGradient' className={style.primary_button} fill='horizontal' primary label={<Text size='23px'>Присоединиться</Text>}></Button>
+                                    <Button margin={{vertical:'5px'}} color='brandGradient' className={style.primary_button} fill='horizontal' primary label={<Text size='23px'><strong>Присоединиться</strong></Text>}></Button>
                                 </Link>
                             </Box>
                             <Box fill>
                                 <Link color='textColor' to='/login'>
-                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'>Войти</Text>}></Button>
+                                    <Button margin={{vertical:'5px'}} fill='horizontal' label={<Text size='23px' color='brand'><strong>Войти</strong></Text>}></Button>
                                 </Link>
                             </Box>
                         </Box>

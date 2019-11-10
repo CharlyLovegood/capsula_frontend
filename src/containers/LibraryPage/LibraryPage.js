@@ -79,7 +79,6 @@ class LibraryPage extends Component {
                                 label='Добавить книгу' 
                                 primary
                                 className={styles.primary_button}
-                                color='brandGradient'
                                 icon={<Add></Add>}>
                             </PopUpButton>
                         }
@@ -107,4 +106,6 @@ const actionCreators = {
     addBook: bookActions.addBook
 }
 
-export default connect(mapState, actionCreators)(LibraryPage);
+const connectedLibraryPage = connect(mapState, actionCreators)(LibraryPage);
+
+export { connectedLibraryPage as LibraryPage };

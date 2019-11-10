@@ -117,7 +117,7 @@ class SearchPage extends Component {
                         <Filter  updateGenre={(genre) => this.setState({genre: genre})}></Filter>
                     </Box>
                 </Box>
-                <Box direction='row' wrap fill>
+                <Box justify='center' direction='row' wrap fill>
                     {this.renderSearchResult()}
                 </Box>
             </Box>

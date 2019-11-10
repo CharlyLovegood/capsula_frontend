@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
-import {
-    Box,
-    Grommet,
-} from 'grommet';
+
+import { Box, Grommet } from 'grommet';
+
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core';
 
 import { Router, Switch, Route } from 'react-router-dom'
 
-import HomePage from './components/HomePage/HomePage'
-import BookPage from './containers/BookPage/BookPage';
-import LibraryPage from './containers/LibraryPage/LibraryPage';
+
+import { AppBar,
+    SearchPage, 
+    UserPage, 
+    BookPage, 
+    HistoryPage, 
+    SettingsPage, 
+    Wishlist, 
+    LibraryPage,
+    SwapPage,
+    LoginPage,
+    RegisterPage,
+    HomePage 
+} from './containers';
+    
 import PrivateRoute from './components/PrivateRouter/PrivateRouter';
 import AuthRoute from './components/PrivateRouter/AuthRouter';
-
-import SwapPage from './containers/SwapPage/SwapPage';
-
-import UserPage from './containers/UserPage/UserPage';
-import LoginPage from './containers/LoginPage/LoginPage';
-import RegisterPage from './containers/RegisterPage/RegisterPage';
-import { AppBar } from './containers/AppBar';
-import { SearchPage } from './containers/SearchPage';
 import RedirectPage from './components/RedirectPage/RedirectPage';
 import Footer from './components/Footer/Footer';
-import SettingsPage from './containers/SettingsPage/SettingsPage';
-import HistoryPage from './containers/HistoryPage/HistoryPage';
-import Wishlist from './containers/Wishlist/Wishlist';
 import HelpPage from './components/HelpPage/Help';
 
 import { history } from './helpers';
 import { connect } from 'react-redux';
-import { alertActions } from './store/actions';
 
 import styles from './App.module.css';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core';
 
+import { alertActions } from './store/actions';
 
 
 

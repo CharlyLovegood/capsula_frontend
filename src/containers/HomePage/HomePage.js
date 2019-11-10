@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Box, Text } from 'grommet';
 import Element from './Element';
-import Banner from './../Banner/Banner';
+import Banner from './../../components/Banner/Banner';
 import { connect } from 'react-redux';
-import BookItem from '../../components/Books/Book'
+import BookItem from './../../components/Books/Book'
 import { searchActions } from '../../store/actions';
 import styles from './HomePage.module.css';
-import SizeComponent from '../SizeComponent/SizeComponent';
-import Gallery from './../Gallery/Gallery';
+import SizeComponent from './../../components/SizeComponent/SizeComponent';
+import Gallery from './../../components/Gallery/Gallery';
 import {Link} from 'react-router-dom';
 
 
@@ -102,4 +102,7 @@ const actionCreators = {
     request: searchActions.request
 };
 
-export default connect(mapState, actionCreators)(HomePage);
+
+const connectedHomePage = connect(mapState, actionCreators)(HomePage);
+
+export { connectedHomePage as HomePage };

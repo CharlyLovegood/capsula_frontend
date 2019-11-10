@@ -159,4 +159,7 @@ const actionCreators = {
     changeSwapStatus: swapActions.changeSwapStatus
 }
 
-export default connect(mapState, actionCreators)(SwapPage);
+
+const connectedSwapPage = connect(mapState, actionCreators)(SwapPage);
+
+export { connectedSwapPage as SwapPage };

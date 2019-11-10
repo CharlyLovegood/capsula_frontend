@@ -72,4 +72,6 @@ const actionCreators = {
     getSwap: swapActions.getSwap,
 }
 
-export default connect(mapState, actionCreators)(HistoryPage);
+const connectedHistoryPage = connect(mapState, actionCreators)(HistoryPage);
+
+export { connectedHistoryPage as HistoryPage };

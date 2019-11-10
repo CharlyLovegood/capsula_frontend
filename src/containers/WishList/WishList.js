@@ -92,4 +92,7 @@ const actionCreators = {
     deleteFromWishlist: wishlistActions.deleteFromWishlist,
 }
 
-export default connect(mapState, actionCreators)(Wishlist);
+
+const connectedWishlist = connect(mapState, actionCreators)(Wishlist);
+
+export { connectedWishlist as Wishlist };

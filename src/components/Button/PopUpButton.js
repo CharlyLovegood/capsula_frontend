@@ -12,14 +12,14 @@ const PopUpButton = (props) => {
             <Box fill='horizontal' align='center' justify='center'>
                 <Button
                     icon={props.icon}
+                    onClick={onOpen}
+                    fill='horizontal'
+                    {...props}
                     label={
                         <Text>
                             <strong>{props.label}</strong>
                         </Text>
                     }
-                    onClick={onOpen}
-                    fill='horizontal'
-                    {...props}
                 />
             </Box>
             {open && (

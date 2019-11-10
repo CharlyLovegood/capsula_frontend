@@ -144,4 +144,6 @@ const actionCreators = {
     oauth: userActions.oauth,
 };
 
-export default connect(mapState, actionCreators)(LoginPage);
+const connectedLoginPage = connect(mapState, actionCreators)(LoginPage);
+
+export { connectedLoginPage as LoginPage };

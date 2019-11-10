@@ -19,7 +19,7 @@ export function wishlist(state = initialState, action) {
                 error: action.error
             }
         case wishlistConstants.DELETE_FROM_WISHLIST_SUCCESS:
-            wishlist = state.wishlist;
+            wishlist = state.wishlist || [];
             wishlist = wishlist.filter(function(item) {
                 return item.id !== action.id
             })

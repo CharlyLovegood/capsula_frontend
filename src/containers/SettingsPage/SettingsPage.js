@@ -182,4 +182,7 @@ const actionCreators = {
     editUser: userActions.editUser
 }
 
-export default connect(mapState, actionCreators)(SettingsPage);
+
+const connectedSettingsPage = connect(mapState, actionCreators)(SettingsPage);
+
+export { connectedSettingsPage as SettingsPage };

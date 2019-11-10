@@ -115,4 +115,6 @@ const actionCreators = {
     getBookList: libraryActions.getBookListById
 }
 
-export default connect(mapState, actionCreators)(UserPage);
+const connectedUserPage = connect(mapState, actionCreators)(UserPage);
+
+export { connectedUserPage as UserPage };

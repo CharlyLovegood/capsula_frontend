@@ -223,4 +223,6 @@ const actionCreators = {
     register: userActions.register
 }
 
-export default connect(mapState, actionCreators)(RegisterPage);
+const connectedRegisterPage = connect(mapState, actionCreators)(RegisterPage);
+
+export { connectedRegisterPage as RegisterPage };

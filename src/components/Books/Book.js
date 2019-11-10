@@ -38,7 +38,7 @@ function Book(props) {
                         { !props.coverage &&
                             <Box pad='10px' align='center' alignContent='center'>
                                 <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
-                                <Text color='white'>{props.author}</Text>
+                                <Text textAlign='center' color='white'>{props.author}</Text>
                             </Box>
                         }
                 </Box>
