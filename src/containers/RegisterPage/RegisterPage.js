@@ -202,7 +202,8 @@ class RegisterPage extends Component {
                         </Grid>
                     </ValidatorForm>
 
-                    <Grid container justify='flex-end'>
+                    <Grid container justify='flex-end'>                        
+                        <p>Уже есть аккаунт?</p>
                         <Link className={styles.register} to='/login'> 
                             <p>Войти</p>
                         </Link>

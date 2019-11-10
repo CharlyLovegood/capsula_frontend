@@ -101,17 +101,15 @@ class EditBook extends Component {
                             pad={{ top: 'medium', bottom: 'small' }}
                         >
                             <Link to='#'>
-                                <Button label='Да' color='dark-3' onClick={event => this.handleSubmit(event)}/>
+                                <Button label={
+                                    <Text color='white'>
+                                        <strong>Да</strong>
+                                    </Text>
+                                } primary onClick={event => this.handleSubmit(event)}/>
                             </Link>
                             <Button
-                                label={
-                                    <Text color='white'>
-                                        <strong>Нет</strong>
-                                    </Text>
-                                }
+                                label='Нет'
                                 onClick={this.props.onClose}
-                                primary
-                                color='status-critical'
                             />
                         </Box>
                     </Box>

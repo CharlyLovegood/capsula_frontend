@@ -36,17 +36,15 @@ class SwapAgreement extends Component {
                             pad={{ top: 'medium', bottom: 'small' }}
                         >
                             <Link to='/reader'>
-                                <Button onClick={() => this.swapRequest()} label='Да' color='dark-3' />
+                                <Button onClick={() => this.swapRequest()} label={
+                                    <Text color='white'>
+                                        <strong>Да</strong>
+                                    </Text>
+                                } primary />
                             </Link>
                             <Button
-                                label={
-                                    <Text color='white'>
-                                        <strong>Нет</strong>
-                                    </Text>
-                                }
+                                label='Нет'
                                 onClick={this.props.onClose}
-                                primary
-                                color='status-critical'
                             />
                         </Box>
                     </Box>

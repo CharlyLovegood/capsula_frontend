@@ -27,17 +27,15 @@ class ConfirmDeleteBook extends Component {
                             pad={{ top: 'medium', bottom: 'small' }}
                         >
                             <Link to='#'>
-                                <Button label='Да' color='dark-3' onClick={() => this.handleSubmit()}/>
+                                <Button label={
+                                    <Text color='white'>
+                                        <strong>Да</strong>
+                                    </Text>
+                                } primary onClick={() => this.handleSubmit()}/>
                             </Link>
                             <Button
-                                label={
-                                    <Text color='white'>
-                                        <strong>Нет</strong>
-                                    </Text>
-                                }
+                                label='Нет'
                                 onClick={this.props.onClose}
-                                primary
-                                color='status-critical'
                             />
                         </Box>
                     </Box>
