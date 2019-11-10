@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Search } from 'grommet-icons';
+import { Search, Next, Previous } from 'grommet-icons';
 import { 
     Box, 
     TextInput
@@ -7,28 +7,36 @@ import {
 import { connect } from 'react-redux';
 
 import { searchActions } from '../../store/actions';
-// import SearchElement from '../../components/Search/SearchElement';
 import Filter from '../../components/Filter/Filter';
 import Book from '../../components/Books/Book';
 import Gallery from '../../components/Gallery/Gallery';
 
+import styles from './SearchPage.module.css'
 
 class SearchPage extends Component {
-    state = { value: '', suggestedList: [], genre: '' };
+    state = { value: '', suggestedList: [], genre: '', page: 1, pageItems: [], max: 1000 };
 
     boxRef = createRef();
   
+
     componentDidMount() {
-        window.scrollTo(0, 0);
         this.props.request();
+        this.props.requestPage(this.state.page);
         this.forceUpdate();
     }
 
+
     componentDidUpdate(prevProps) {
+        if ( this.props.search !== prevProps.search && this.props.search.page.found === true) {
+            this.setState({ pageItems: this.props.search.page.search });
+        }
         if ( this.props.search !== prevProps.search && this.props.search.found === true) {
-            this.setState({ suggestedList: this.props.search.search.searchResult.data });
+            this.setState({ suggestedList: this.props.search.search });
+            this.setState({ max: Math.floor(this.props.search.search.length/30) + 1 });
+            console.log(Math.floor(this.props.search.search.length/30) + 1)
         }
     }
+
   
     onChange = event => this.setState({ value: event.target.value }, () => {
         const { value } = this.state;
@@ -36,12 +44,14 @@ class SearchPage extends Component {
             this.setState({ suggestedList: [] });
         } else {
             if (this.props.search.search) {
-                this.setState({ suggestedList: this.props.search.search.searchResult.data });
+                this.setState({ suggestedList: this.props.search.search });
             }
         }
     });
 
+
     onSelect = event => this.setState({ value: event.suggestion.value });
+
 
     renderSearchResult = () => {
         // const { value, suggestedList } = this.state;
@@ -63,16 +73,27 @@ class SearchPage extends Component {
         // } else {
         //     return res;
         // }
-        const { value, suggestedList } = this.state;
+        const { value, suggestedList, pageItems, genre } = this.state;
+        let res = [];
+        if (value === '' || genre === '') {
+            res = pageItems.filter((el) => {
+                if (this.state.genre !== ''){
+                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
+                } else {
+                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
 
-        const res = suggestedList.filter((el) => {
-            if (this.state.genre !== ''){
-                return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
-            } else {
-                return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                }
+            })
+        } else {
+            res = suggestedList.filter((el) => {
+                if (this.state.genre !== ''){
+                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
+                } else {
+                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
 
-            }
-        })
+                }
+            })
+        }
 
         return(
         <Gallery 
@@ -81,9 +102,27 @@ class SearchPage extends Component {
             contentType='books'
         ></Gallery>)
     };
+
+    Next() {
+        if (this.state.page < this.state.max) {
+            window.scrollTo(0,0);
+            console.log(this.state.max);
+            console.log(this.state.page);
+            this.props.requestPage(this.state.page + 1);
+            this.setState({page: this.state.page + 1});
+        }
+    }
+
+    Previous() {
+        if (this.state.page >= 2) {
+            window.scrollTo(0,0);
+            this.props.requestPage(this.state.page - 1);
+            this.setState({page: this.state.page - 1});
+        }
+    }
   
     render() {
-        const { value } = this.state;
+        const { value, page } = this.state;
 
         return (
             <Box direction='column' align='center' width='xxlarge'>
@@ -121,6 +160,15 @@ class SearchPage extends Component {
                 <Box justify='center' direction='row' wrap fill>
                     {this.renderSearchResult()}
                 </Box>
+
+                {this.state.genre === '' && this.state.value === '' &&
+                    <Box margin='10px' gap='10px' direction='row'>
+                        <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
+                        {page}
+                        <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
+                    </Box>
+                }
+
             </Box>
         );
     }
@@ -131,7 +179,8 @@ const mapState = state => ({
 })
 
 const actionCreators = {
-    request: searchActions.request
+    request: searchActions.request,
+    requestPage: searchActions.requestPage
 }
 
 const connectedSearchPage = connect(mapState, actionCreators)(SearchPage);

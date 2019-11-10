@@ -18,7 +18,8 @@ export const back_url = {
     library: {
         get_library: '/library/book_items/',
         get_library_by_id: (id) => `/library/${id}/book_items/`,
-        get_all_books: '/library/books/'
+        get_all_books: `/library/books/`,
+        get_all_books_page: (page) => `/library/books/?pages=${page}`
     },
     swap: {
         get_swap_list: '/library/swaps/',

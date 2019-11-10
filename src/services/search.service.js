@@ -3,7 +3,8 @@ import { back_url } from './../helpers';
 
 
 export const searchService = {
-    request
+    request,
+    requestPage
 };
 
 function request() {
@@ -14,9 +15,23 @@ function request() {
     return axios(requestOptions)
         .then(handleResponse)
         .then(bookList => {
+            console.log(bookList)
             return bookList;
         }); 
 }
+
+function requestPage(page) {
+    const requestOptions = {
+        method: 'GET',
+        url: back_url.library.get_all_books_page(page),
+    };
+    return axios(requestOptions)
+        .then(handleResponse)
+        .then(bookList => {
+            return bookList;
+        }); 
+}
+
 
 function handleResponse(response) {
     if (response.status !== 200) {

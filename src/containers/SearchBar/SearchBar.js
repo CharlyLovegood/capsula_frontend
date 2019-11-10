@@ -18,7 +18,9 @@ class SearchBar extends Component {
   
     componentDidMount() {
         this.forceUpdate();
-        this.props.request();
+        if (!this.props.search.search) {
+            this.props.request();
+        }
     }
   
     onChange = event => this.setState({ value: event.target.value }, () => {
@@ -27,7 +29,7 @@ class SearchBar extends Component {
             this.setState({ suggestedList: [] });
         } else {
             if (this.props.search.search) {
-                this.setState({ suggestedList: this.props.search.search.searchResult.data });
+                this.setState({ suggestedList: this.props.search.search });
             }
         }
     });

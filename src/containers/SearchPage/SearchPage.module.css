@@ -1,0 +1,16 @@
+.active {
+    stroke: rgb(66, 66, 66);
+}
+.active:hover {
+    stroke: #a517b5;
+    cursor: pointer;
+}
+
+.disabled {
+    stroke: rgb(200, 200, 200);
+}
+
+.disabled:hover {
+    cursor: pointer;
+    stroke: rgb(200, 200, 200);
+}
