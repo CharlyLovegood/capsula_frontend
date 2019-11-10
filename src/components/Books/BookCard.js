@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './Book.module.css';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
-import { swapStatuses } from '../../helpers/constants';
+import { swapStatuses, swapResults } from '../../helpers/constants';
 
 
 function BookCard(props) {
@@ -38,6 +38,8 @@ function BookCard(props) {
             ButtonBlock = (<Box></Box>);
             break;
     }
+    
+    console.log(swapResults[props.history])
     
     return (
         <SizeComponent>
@@ -85,7 +87,10 @@ function BookCard(props) {
                         }
 
                         {props.user &&
-                            <p className={styles.text}>Участник обмена: <Link to={`/user/${props.user.id}`}>{props.user.name}</Link></p>
+                            <Box>
+                                <p className={styles.text}>Участник обмена: <Link to={`/user/${props.user.id}`}>{props.user.name}</Link></p>
+                                <p className={styles.text}>Состояние: {swapResults[props.history]}</p>
+                            </Box>
                         }
 
                         <p className={styles.text}>Дата: {props.date}</p>

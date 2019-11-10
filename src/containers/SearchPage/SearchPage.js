@@ -19,6 +19,7 @@ class SearchPage extends Component {
     boxRef = createRef();
   
     componentDidMount() {
+        window.scrollTo(0, 0);
         this.props.request();
         this.forceUpdate();
     }

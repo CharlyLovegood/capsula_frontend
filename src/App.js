@@ -28,6 +28,8 @@ import RedirectPage from './components/RedirectPage/RedirectPage';
 import Footer from './components/Footer/Footer';
 import HelpPage from './components/HelpPage/Help';
 
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+
 import { history } from './helpers';
 import { connect } from 'react-redux';
 
@@ -153,11 +155,12 @@ class App extends Component {
     
     render() {
         return (
-            <Grommet theme={theme} full>
+            <Grommet theme={theme}>
                 <Router history={history}>
+                    <ScrollToTop />
                     <ThemeProvider theme={themeUI}>
                         <AppBar></AppBar>
-                        <Box align='center'  className={styles.app}>
+                        <Box align='center' className={styles.app}>
                             <Switch>
                                 <Route exact path='/' component={ HomePage } />
                                 <PrivateRoute exact path='/user/:id' component={ UserPage }/>

@@ -25,7 +25,9 @@ class HistoryPage extends Component {
                 user={reader || owner}
                 coverage={image}
                 id={id}
-                type={type}></BookCard>
+                type={type}
+                history={status}>
+            </BookCard>
         )
     }
 

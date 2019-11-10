@@ -16,3 +16,7 @@ a {
 .app {
     min-height: 100vh;
 }
+
+body {
+    margin: 0px;
+}
