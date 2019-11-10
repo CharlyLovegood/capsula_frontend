@@ -14,7 +14,7 @@ import { AppBar,
     BookPage, 
     HistoryPage, 
     SettingsPage, 
-    Wishlist, 
+    WishList, 
     LibraryPage,
     SwapPage,
     LoginPage,
@@ -162,7 +162,7 @@ class App extends Component {
                                 <Route exact path='/' component={ HomePage } />
                                 <PrivateRoute exact path='/user/:id' component={ UserPage }/>
                                 <PrivateRoute path='/book/:id' component={ BookPage } />
-                                <PrivateRoute path='/user/:id/wishlist' component={ Wishlist } />
+                                <PrivateRoute path='/user/:id/wishlist' component={ WishList } />
                                 <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
                                 <PrivateRoute path='/reader' component={ SwapPage } />
                                 <PrivateRoute path='/owner' component={ SwapPage } />

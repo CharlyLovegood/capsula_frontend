@@ -8,7 +8,7 @@ import Book from '../../components/Books/Book';
 import { StatusGood, StatusCritical } from 'grommet-icons';
 
 
-class Wishlist extends Component {
+class WishList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,6 +93,6 @@ const actionCreators = {
 }
 
 
-const connectedWishlist = connect(mapState, actionCreators)(Wishlist);
+const connectedWishlist = connect(mapState, actionCreators)(WishList);
 
-export { connectedWishlist as Wishlist };
+export { connectedWishlist as WishList };

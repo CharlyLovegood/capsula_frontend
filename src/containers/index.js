@@ -10,5 +10,5 @@ export * from './SearchPage/SearchPage';
 export * from './SettingsPage/SettingsPage';
 export * from './SwapPage/SwapPage';
 export * from './UserPage/UserPage';
-export * from './Wishlist/Wishlist';
+export * from './WishList/WishList';
 export * from './HomePage/HomePage';
