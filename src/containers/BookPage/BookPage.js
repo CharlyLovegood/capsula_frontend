@@ -10,10 +10,14 @@ import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 import ErrorPage from './../../components/Error/ErrorPage';
 
 class BookPage extends Component {
-    state = { id: this.props.match.params.id, items: [], searched: false, addedToWishlist: undefined }
+    state = { id: this.props.match.params.id, items: [], searched: false, addedToWishlist: undefined, changed: false }
 
     componentDidMount() {
         this.props.getBook(this.state.id);
+    }
+
+    componentWillUnmount() {
+        this.setState({ addedToWishlist: undefined })
     }
 
     fetchData(title) {
@@ -30,6 +34,7 @@ class BookPage extends Component {
             this.setState({id: this.props.match.params.id});
             this.props.getBook(this.props.match.params.id);
             this.fetchData(this.props.book.book.data.title);
+            
         }
         if (this.props.book.book && !this.state.searched) {
             this.fetchData(this.props.book.book.data.title);
@@ -40,11 +45,13 @@ class BookPage extends Component {
     addToWishlist(book, id) {
         this.props.addToWishlist(book, id);
         this.setState({addedToWishlist: !this.state.addedToWishlist });
+        this.setState({changed: true});
     }
 
     deleteFromWishlist(id) {
         this.props.deleteFromWishlist(id);
         this.setState({addedToWishlist: !this.state.addedToWishlist });
+        this.setState({changed: true});
     }
 
     render() {
@@ -52,7 +59,7 @@ class BookPage extends Component {
         let {addedToWishlist} = this.state
         if (this.props.book.book) {
             book = this.props.book.book.data;
-            if (addedToWishlist === undefined) {
+            if (addedToWishlist !== book.wishlist.added && !this.state.changed) {
                 this.setState({ addedToWishlist: book.wishlist.added })
             }
         }
