@@ -9,7 +9,7 @@ function Filter(props) {
     const [option, setOption] = React.useState('Жанр');
     return (
             <Select options={genresArray} onChange={({ option }) => {
-                setOption(option);
+                setOption(option === '. . .' ? 'Жанр' : option);
                 props.updateGenre(genres[option]);
             }} valueLabel={
                 <Box width='180px'
@@ -22,7 +22,8 @@ function Filter(props) {
                 >
                     <Text>{option}</Text>
                 </Box>
-            }>
+            }
+            >
             </Select>
     )
 }

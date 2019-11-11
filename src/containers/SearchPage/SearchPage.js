@@ -14,7 +14,7 @@ import Gallery from '../../components/Gallery/Gallery';
 import styles from './SearchPage.module.css'
 
 class SearchPage extends Component {
-    state = { value: '', suggestedList: [], genre: '', page: 1, pageItems: [], max: 1000 };
+    state = { value: '', suggestedList: [], genre: -1, page: 1, pageItems: [], max: 1000 };
 
     boxRef = createRef();
   
@@ -33,7 +33,6 @@ class SearchPage extends Component {
         if ( this.props.search !== prevProps.search && this.props.search.found === true) {
             this.setState({ suggestedList: this.props.search.search });
             this.setState({ max: Math.floor(this.props.search.search.length/30) + 1 });
-            console.log(Math.floor(this.props.search.search.length/30) + 1)
         }
     }
 
@@ -75,9 +74,11 @@ class SearchPage extends Component {
         // }
         const { value, suggestedList, pageItems, genre } = this.state;
         let res = [];
-        if (value === '' || genre === '') {
+        console.log(genre)
+
+        if (value === '' && genre === -1) {
             res = pageItems.filter((el) => {
-                if (this.state.genre !== ''){
+                if (this.state.genre !== -1){
                     return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
                 } else {
                     return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
@@ -86,13 +87,13 @@ class SearchPage extends Component {
             })
         } else {
             res = suggestedList.filter((el) => {
-                if (this.state.genre !== ''){
+                if (this.state.genre !== -1){
                     return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
                 } else {
                     return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
 
                 }
-            })
+            });
         }
 
         return(
@@ -103,11 +104,11 @@ class SearchPage extends Component {
         ></Gallery>)
     };
 
+    
+
     Next() {
         if (this.state.page < this.state.max) {
             window.scrollTo(0,0);
-            console.log(this.state.max);
-            console.log(this.state.page);
             this.props.requestPage(this.state.page + 1);
             this.setState({page: this.state.page + 1});
         }
@@ -126,7 +127,7 @@ class SearchPage extends Component {
 
         return (
             <Box direction='column' align='center' width='xxlarge'>
-                <Box fill direction='row' align='center' wrap>
+                <Box fill='horizontal' direction='row' align='center' wrap>
                     <Box
                         background='background'
                         ref={this.boxRef}
@@ -154,14 +155,14 @@ class SearchPage extends Component {
                         />
                     </Box>
                     <Box width='400px' margin={{ horizontal: 'small', vertical: 'xsmall' }}>
-                        <Filter  updateGenre={(genre) => this.setState({genre: genre})}></Filter>
+                        <Filter updateGenre={(genre) => this.setState({genre: genre})}></Filter>
                     </Box>
                 </Box>
                 <Box justify='center' direction='row' wrap fill>
                     {this.renderSearchResult()}
                 </Box>
 
-                {this.state.genre === '' && this.state.value === '' &&
+                {this.state.genre === -1 && this.state.value === '' &&
                     <Box margin='10px' gap='10px' direction='row'>
                         <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
                         {page}

@@ -22,7 +22,7 @@ export function search(state = initialState, action) {
             return {
                 ...state,
                 page: {
-                    sherching: true,
+                    searching: true,
                     search: action
                 }
             }
