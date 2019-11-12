@@ -28,7 +28,7 @@ function ListElement(props) {
             <Box wrap direction='row' justify='between' align='center' fill>
                 <Box pad='10px' direction='column'> 
                     <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
-                    <p className={styles.text}>{!props.near ? 'В твоей общаге' : ''}</p>
+                    <p className={styles.text}>{props.near ? 'В твоей общаге' : ''}</p>
                 </Box>
                 <Box width='180px'>
                     {props.status === bookStatuses.AVAILABLE ?
