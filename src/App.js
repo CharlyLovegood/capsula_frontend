@@ -5,7 +5,7 @@ import { Box, Grommet } from 'grommet';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
 
-import { Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
 
 import { AppBar,
@@ -172,6 +172,9 @@ class App extends Component {
                                 <PrivateRoute path='/search' component={ SearchPage } />
                                 <PrivateRoute path='/history' component={ HistoryPage } />
                                 <PrivateRoute path='/settings' component={ SettingsPage } />
+
+
+                                <Redirect from="*" to="/" />
                                 <AuthRoute exact path='/register' component={ RegisterPage } />
                                 <AuthRoute exact path='/redirect/vk' component={ RedirectPage } />
                                 <AuthRoute exact path='/login' component={ LoginPage } />
