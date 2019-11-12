@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Heading, Text, Select } from 'grommet';
 import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
-import {genresArray, genres} from './../../helpers'
+import {genresArray2, genres} from './../../helpers'
 
 import { remote_url } from './../../helpers';
 import styles from './Book.module.css';
@@ -92,7 +92,7 @@ class AddNewBook extends Component {
                             onChange={ event => this.handleAuthorChange(event) }>
                         </TextField>
                         <Box fill='horizontal'>
-                            <Select options={genresArray} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
+                            <Select options={genresArray2} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
                         </Box>
                         <Box
                             as='footer'
