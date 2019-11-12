@@ -26,12 +26,18 @@
 
 .header1 {
     color: black;
-    font-size: 26px;
+    font-size: 32px;
     margin: 10px;
 }
 
 .header2 {
     color: grey;
-    font-size: 16px;
+    font-size: 24px;
     margin: 0px;
+}
+
+.text {
+    color: grey;
+    font-size: 18px;
+    margin: 5px;
 }

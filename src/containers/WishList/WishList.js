@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box } from 'grommet';
+import { Box, Text } from 'grommet';
 import SmartBook from '../../components/Books/WishBook';
 import Gallery from '../../components/Gallery/Gallery';
 import { wishlistActions } from '../../store/actions';
@@ -52,21 +52,34 @@ class WishList extends Component {
                     </Box>
                 }
 
+                {}
+
                 {wishlist.wishlistRecieved && this.state.owner &&
-                    <Gallery 
-                        object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteFromWishlist={this.props.deleteFromWishlist} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
-                        objectList={wishlist.wishlist}
-                        // header='Мои книги'
-                        contentType='smart-books'
-                    ></Gallery>
+                    <Box align='center' width='xxlarge'>
+                        {wishlist.wishlist.length === 0 &&
+                            <Text margin='30px'>Сюда можно складывать все то, что вам понравилось</Text>
+                        }
+                        <Gallery 
+                            object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteFromWishlist={this.props.deleteFromWishlist} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
+                            objectList={wishlist.wishlist}
+                            //  header='Мои книги'
+                            contentType='smart-books'
+                        ></Gallery>
+                    </Box>
                 }
                 {wishlist.wishlistRecieved && !this.state.owner &&
-                    <Gallery 
-                        object={(title, coverage, genre, author, id, idAbstract) => <Book margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
-                        objectList={wishlist.wishlist}
-                        // header='Книги'
-                        contentType='books'
-                    ></Gallery>
+                    <Box align='center' width='xxlarge'>
+                        {wishlist.wishlist.length === 0 &&
+                            <Text margin='30px'>Пользователь еще не добавил книг в вишлист</Text>
+                        }
+                        <Gallery 
+                            object={(title, coverage, genre, author, id, idAbstract) => <Book margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
+                            objectList={wishlist.wishlist}
+                            // header='Книги'
+                            contentType='books'
+                        ></Gallery>
+                    </Box>
+
                 }
                 {/* <Box margin='20px'>
                     <PopUpButton forceUpdate={() => this.getwishlist(this.props.user.id)} 

@@ -51,8 +51,8 @@ class LibraryPage extends Component {
                                 contentType='smart-books'
                             ></Gallery>
                             {library.userLibrary.length === 0 &&
-                                <Box>
-                                    Здесь не хватает твоих книг :)
+                                <Box margin='20px'>
+                                    Здесь не хватает твоих книг
                                 </Box>
                             }
                         </Box>

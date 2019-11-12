@@ -84,7 +84,7 @@ class SwapPage extends Component {
                             </Tab>
                             <Tab title='В процессе'>
                                 <Gallery
-                                    message='Здесь пусто, нет активных передач'
+                                    message='Нет активных передач'
                                     contentType='swaps'
                                     me='reader'
                                     type='inProcess'
@@ -95,7 +95,7 @@ class SwapPage extends Component {
                             </Tab>
                             <Tab title='На руках'>
                                 <Gallery
-                                    message='Здесь пусто, у вас на руках нет чужих книг'
+                                    message='У вас на руках нет чужих книг'
                                     contentType='swaps'
                                     me='reader'
                                     type='onHands'
@@ -110,7 +110,7 @@ class SwapPage extends Component {
                         <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                             <Tab title='Заявки' >
                                 <Gallery
-                                    message='Здесь пусто, вам пока не отправили заявку на книгу'
+                                    message='Вам пока не отправили заявку на книгу'
                                     contentType='swaps'
                                     me='owner'
                                     type='proposal'
@@ -121,7 +121,7 @@ class SwapPage extends Component {
                             </Tab>
                             <Tab title='В процессе'>
                                 <Gallery
-                                    message='Здесь пусто, нет активных передач'
+                                    message='Нет активных передач'
                                     contentType='swaps'
                                     me='owner'
                                     type='inProcess'
@@ -132,7 +132,7 @@ class SwapPage extends Component {
                             </Tab>
                             <Tab title='На руках'>
                                 <Gallery
-                                    message='Здесь пусто, все ваши книги у вас'
+                                    message='Все ваши книги у вас'
                                     contentType='swaps'
                                     me='owner'
                                     type='onHands'

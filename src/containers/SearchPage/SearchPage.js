@@ -74,7 +74,6 @@ class SearchPage extends Component {
         // }
         const { value, suggestedList, pageItems, genre } = this.state;
         let res = [];
-        console.log(genre)
 
         if (value === '' && genre === -1) {
             res = pageItems.filter((el) => {
@@ -159,7 +158,9 @@ class SearchPage extends Component {
                     </Box>
                 </Box>
                 <Box justify='center' direction='row' wrap fill>
-                    {this.renderSearchResult()}
+                    {this.props.search.found &&
+                        this.renderSearchResult()
+                    }
                 </Box>
 
                 {this.state.genre === -1 && this.state.value === '' &&

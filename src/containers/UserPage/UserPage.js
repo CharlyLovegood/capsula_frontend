@@ -5,7 +5,7 @@ import Book from '../../components/Books/Book'
 import Scroll from '../../components/Scroll/Scroll'
 import { connect } from 'react-redux';
 
-import { userActions, libraryActions } from '../../store/actions';
+import { userActions, libraryActions, wishlistActions } from '../../store/actions';
 import ErrorPage from './../../components/Error/ErrorPage';
 import { remote_url } from '../../helpers';
 
@@ -16,7 +16,9 @@ class UserPage extends Component {
             'firstName': '',
             'username': '',
             'avatar': '',
-            'id': this.props.match.params.id
+            'id': this.props.match.params.id,
+            'booksTaken': 0,
+            'booksGiven': 0
         }
     }
     
@@ -26,7 +28,9 @@ class UserPage extends Component {
             'firstName': this.props.user.user.first_name,
             'username': this.props.user.user.django_user.username,
             'avatar': this.props.user.user.avatar ? this.props.user.user.avatar : remote_url.images.user_default,
-            'id': this.props.match.params.id
+            'id': this.props.match.params.id,
+            'booksTaken': this.props.user.user.books_taken,
+            'booksGiven': this.props.user.user.books_given
         });
     }
 
@@ -37,6 +41,7 @@ class UserPage extends Component {
             const user = this.setUser()
             this.setState({user: user})
         }
+        this.getWishlist();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -55,13 +60,22 @@ class UserPage extends Component {
     }
 
 
+    getWishlist() {
+        this.props.getWishlist(this.props.match.params.id);
+    }
+
 
     render() {
         let {user} = this.state;
         let library= [];
+        let {wishlist} = [];
 
         if (this.props.library.userLibraryRecieved) {
             library = this.props.library.userLibrary;
+        }
+
+        if (this.props.wishlist.wishlistRecieved) {
+            wishlist = this.props.wishlist.wishlist;
         }
 
         return (
@@ -80,16 +94,25 @@ class UserPage extends Component {
                         </Box>
                         <h3 className={styles.header1}>{user.username}</h3>
                         <p className={styles.header2}>{user.lastName} {user.firstName}</p>
-                        {this.props.library.error &&
-                            <ErrorPage alert={this.props.alert}></ErrorPage>
-                        }
+                        <Box margin='20px'  align='center'>
+                            <p className={styles.text}>Книг было одолжено: {user.booksGiven}</p>
+                            <p className={styles.text}>Книг было взято: {user.booksTaken}</p>
+                        </Box>
                         {this.props.library.error &&
                             <Box></Box>
                         }
-                        {this.props.library.userLibraryRecieved &&
+                        {this.props.library.userLibraryRecieved && this.props.library.userLibrary.length !== 0 &&
                             <Scroll object={(title, coverage, id) => <Book margin='4px' title={title} coverage={coverage} key={id} id={id}></Book>} 
                                 objectList={library} 
                                 header='Мои книги'
+                                id={user.id}>
+                            </Scroll>
+                        }
+
+                        {this.props.wishlist.wishlistRecieved && this.props.wishlist.wishlist.length !== 0 &&
+                            <Scroll object={(title, coverage, id) => <Book margin='4px' title={title} coverage={coverage} key={id} id={id}></Book>} 
+                                objectList={wishlist} 
+                                header='Мой вишлист'
                                 id={user.id}>
                             </Scroll>
                         }
@@ -106,13 +129,15 @@ class UserPage extends Component {
 const mapState = state => ({
     user: state.userpage,
     library: state.library,
-    alert: state.alert
+    alert: state.alert, 
+    wishlist: state.wishlist
 })
 
 const actionCreators = {
     logout: userActions.logout,
     getUser: userActions.getById,
-    getBookList: libraryActions.getBookListById
+    getBookList: libraryActions.getBookListById,
+    getWishlist: wishlistActions.getWishlist
 }
 
 const connectedUserPage = connect(mapState, actionCreators)(UserPage);
