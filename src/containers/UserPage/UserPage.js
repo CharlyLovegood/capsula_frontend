@@ -109,13 +109,13 @@ class UserPage extends Component {
                             </Scroll>
                         }
 
-                        {this.props.wishlist.wishlistRecieved && this.props.wishlist.wishlist.length !== 0 &&
+                        {/* {this.props.wishlist.wishlistRecieved && this.props.wishlist.wishlist.length !== 0 &&
                             <Scroll object={(title, coverage, id) => <Book margin='4px' title={title} coverage={coverage} key={id} id={id}></Book>} 
                                 objectList={wishlist} 
                                 header='Мой вишлист'
                                 id={user.id}>
                             </Scroll>
-                        }
+                        } */}
                     </Box>
                 }
 
