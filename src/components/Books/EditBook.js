@@ -41,14 +41,11 @@ class EditBook extends Component {
         //     'image': this.state.image
         // };
         
-        console.log(book);
         this.props.editBook(book, this.props.id);
         this.props.onClose();
     }
 
     setValue(genre) {
-        console.log(genre);
-        console.log(genres[genre]);
         this.setState({genre_code: genres[genre]});
         this.setState({genre: genre});
     }

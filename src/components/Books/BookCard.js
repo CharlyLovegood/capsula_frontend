@@ -39,7 +39,6 @@ function BookCard(props) {
             break;
     }
     
-    console.log(swapResults[props.history])
     
     return (
         <SizeComponent>

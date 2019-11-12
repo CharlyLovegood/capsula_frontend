@@ -17,7 +17,6 @@ function getBookListById(userId) {
                     dispatch(success(userLibrary));
                 },
                 error => {
-                    console.log(error.response)
                     dispatch(failure(error.response.statusTesxt));
                     dispatch(alertActions.error(error.response.statusTesxt));
                     if (error.response.status === 401) {

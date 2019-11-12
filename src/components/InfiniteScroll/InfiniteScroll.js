@@ -14,8 +14,7 @@ const LazyInfiniteScroll = (props) => {
     const onMore = () => {
         setItems(allItems.slice(0, items.length + 30));
     };
-    console.log(items);
-    console.log(allItems);
+
     return (
         <Grommet theme={grommet}>
             <Box>

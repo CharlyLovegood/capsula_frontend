@@ -15,7 +15,6 @@ function request() {
     return axios(requestOptions)
         .then(handleResponse)
         .then(bookList => {
-            console.log(bookList)
             return bookList;
         }); 
 }

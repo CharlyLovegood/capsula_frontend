@@ -20,7 +20,6 @@ function getBookListById(userId) {
 }
 
 function handleResponse(response) {
-    console.log(response)
     if (response.status !== 200) {
         const error = response.statusText;
         return Promise.reject(error);

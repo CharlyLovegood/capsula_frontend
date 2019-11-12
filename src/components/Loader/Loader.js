@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from 'grommet';
 
 function Loader(props) {
-    console.log('ddd')
     return(
         // <div className="lds-roller">
         //     <div>

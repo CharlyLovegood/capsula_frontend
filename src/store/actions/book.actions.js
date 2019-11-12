@@ -21,7 +21,6 @@ function getBook(bookId) {
                     dispatch(success(book));
                 },
                 error => {
-                    // console.log(error.response)
                     dispatch(failure(error.response.statusText));
                     dispatch(alertActions.error(error.response.statusText));
                     if (error.response.status === 401) {

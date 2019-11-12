@@ -150,7 +150,6 @@ function editUser(user) {
 function handlePostResponse(response) {
     return response.text().then(text => {
         const data = JSON.parse(text);
-        console.log(JSON.parse(text));
         if (response.status !== 200) {
             const error = data.detail || data.msg || 'Ошибка';
             return Promise.reject(error);
