@@ -173,12 +173,10 @@ class App extends Component {
                                 <PrivateRoute path='/history' component={ HistoryPage } />
                                 <PrivateRoute path='/settings' component={ SettingsPage } />
 
-
                                 <AuthRoute exact path='/register' component={ RegisterPage } />
                                 <AuthRoute exact path='/redirect/vk' component={ RedirectPage } />
                                 <AuthRoute exact path='/login' component={ LoginPage } />
                                 <Route exact path='/rules' component={ HelpPage } />
-
 
                                 <Redirect from="*" to="/" />
                             </Switch>

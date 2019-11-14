@@ -66,6 +66,7 @@ class HomePage extends Component {
                                     objectList={this.props.library.search.slice(0,10)}
                                     header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                     contentType='books'
+                                    key='HomePageGalleryNAuth'
                                 ></Gallery>
                             </Box>
                             <Link to='/login'>
@@ -80,6 +81,7 @@ class HomePage extends Component {
                                 objectList={this.props.library.search.slice(0,10)}
                                 header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                 contentType='books'
+                                key='HomePageGalleryAuth'
                             ></Gallery>
                             <Link to='/search'>
                                 <Text color='#464141' size='16px'>Увидеть больше...</Text>

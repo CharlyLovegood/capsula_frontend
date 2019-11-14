@@ -10,7 +10,13 @@ import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 import ErrorPage from './../../components/Error/ErrorPage';
 
 class BookPage extends Component {
-    state = { id: this.props.match.params.id, items: [], searched: false, addedToWishlist: undefined, changed: false }
+    state = { id: this.props.match.params.id, 
+        items: [], 
+        description: '',
+        addedToWishlist: undefined, 
+        changed: false,
+        book: undefined
+    }
 
     componentDidMount() {
         this.props.getBook(this.state.id);
@@ -21,24 +27,29 @@ class BookPage extends Component {
     }
 
     fetchData(title) {
+        console.log(title);
+
         fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:` + encodeURIComponent(title))
         .then((response)=> response.json())
         .then((responseData)=> {
-            this.setState({items: responseData})
+            this.setState({items: responseData});
+            if (responseData.totalItems !== 0) {
+                this.setState({description: responseData.items[0].volumeInfo.description});
+            } else {
+                this.setState({description: ''});
+            }
         });
     
     }
 
     componentDidUpdate() {
+        if (this.props.book.bookRecieved && this.state.book !== this.props.book.book.data) {
+            this.setState({book: this.props.book.book.data});
+            this.fetchData(this.props.book.book.data.title);
+        }
         if (this.state.id !== this.props.match.params.id) {
             this.setState({id: this.props.match.params.id});
             this.props.getBook(this.props.match.params.id);
-            this.fetchData(this.props.book.book.data.title);
-            
-        }
-        if (this.props.book.book && !this.state.searched) {
-            this.fetchData(this.props.book.book.data.title);
-            this.setState({searched: true});
         }
     }
 
@@ -55,17 +66,12 @@ class BookPage extends Component {
     }
 
     render() {
-        let book = {};
+        let {book} = this.state;
         let {addedToWishlist} = this.state
-        if (this.props.book.book) {
-            book = this.props.book.book.data;
-            if (addedToWishlist !== book.wishlist.added && !this.state.changed) {
-                this.setState({ addedToWishlist: book.wishlist.added })
-            }
-        }
+ 
         return (
             <Box  direction='column' align='center' fill>
-                {this.props.book.bookRecieved &&
+                {this.state.book &&
                 <Box direction='column' align='center' fill>
                     <Box background='brandGradient' className={styles.background} align='center'>
                         <Book title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
@@ -82,11 +88,9 @@ class BookPage extends Component {
                         </Box>
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>
-                        {this.state.items.items &&
-                            <p className={styles.text}>
-                                {this.state.items.items[0].volumeInfo.description}
-                            </p>
-                        }
+                        <p className={styles.text}>
+                            {this.state.description}
+                        </p>
                         {book.book_items[0] &&
                             <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>
                         }

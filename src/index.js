@@ -8,6 +8,11 @@ import { store } from './helpers';
 
 import * as serviceWorker from './serviceWorker';
 
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({dsn: "https://b9bf7762b8f34856bf3487cff8f77910@sentry.io/1819493"});
+
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

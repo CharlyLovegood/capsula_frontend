@@ -49,6 +49,7 @@ class LibraryPage extends Component {
                                 objectList={library.userLibrary}
                                 // header='Мои книги'
                                 contentType='smart-books'
+                                key='LibraryGalleryOwner'
                             ></Gallery>
                             {library.userLibrary.length === 0 &&
                                 <Box margin='20px'>
@@ -64,6 +65,7 @@ class LibraryPage extends Component {
                                 objectList={library.userLibrary}
                                 // header='Книги'
                                 contentType='books'
+                                key='LibraryGalleryReader'
                             ></Gallery>
                             {library.userLibrary.length === 0 &&
                                 <Box>
@@ -79,7 +81,8 @@ class LibraryPage extends Component {
                                 label='Добавить книгу' 
                                 primary
                                 className={styles.primary_button}
-                                icon={<Add></Add>}>
+                                icon={<Add></Add>}
+                                key='PopUbLibraryButton'>
                             </PopUpButton>
                         }
                     </Box>
