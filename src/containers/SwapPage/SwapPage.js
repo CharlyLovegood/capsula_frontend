@@ -17,12 +17,19 @@ class SwapPage extends Component {
         this.state = { 
             index: 0, 
             viewObjectsList: [],
+            swapsList: undefined
         };
     }
 
     componentDidMount(props) {
         this.setState({index: this.props.index});
         this.props.getSwap();
+    }
+
+    componentDidUpdate() {
+        if (!this.state.swapsList && this.props.swap.swapsRecieved) {
+            this.setState({ swapsList: this.props.swap.swapsList});
+        }
     }
     
     handleReject(id) {
@@ -69,12 +76,13 @@ class SwapPage extends Component {
     
     render() {
         const onActive = nextIndex => this.setState({index: nextIndex});
-        const {swap} = this.props;
+        const swapsList = this.state.swapsList;
+
         return (
             <Box direction='column' align='center' fill pad='10px'>
                 <Box direction='column' width='xxlarge' align='center'>
 
-                    {swap.swapsRecieved && this.props.match.path === '/reader' &&
+                    {swapsList && this.props.match.path === '/reader' &&
                         <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                             <Tab title='Заявки' >
                                 <Gallery
@@ -83,7 +91,7 @@ class SwapPage extends Component {
                                     type='request'
                                     me='reader'
                                     object={this.objectCallBack} 
-                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                    objectList={swapsList.reader.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
                                 >
                                 </Gallery>
                             </Tab>
@@ -94,7 +102,7 @@ class SwapPage extends Component {
                                     me='reader'
                                     type='inProcess'
                                     object={this.objectCallBack} 
-                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                    objectList={swapsList.reader.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
                                 >
                                 </Gallery>
                             </Tab>
@@ -105,13 +113,13 @@ class SwapPage extends Component {
                                     me='reader'
                                     type='onHands'
                                     object={this.objectCallBack}
-                                    objectList={swap.swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
+                                    objectList={swapsList.reader.filter(function(item){ return item.status === swapStatuses.READING})}
                                 >
                                 </Gallery>
                             </Tab>
                         </Tabs>
                     }
-                    {swap.swapsRecieved && this.props.match.path === '/owner' &&
+                    {swapsList && this.props.match.path === '/owner' &&
                         <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
                             <Tab title='Заявки' >
                                 <Gallery
@@ -120,7 +128,7 @@ class SwapPage extends Component {
                                     me='owner'
                                     type='proposal'
                                     object={this.objectCallBack} 
-                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
+                                    objectList={swapsList.owner.filter(function(item){ return item.status === swapStatuses.CONSIDERED})}
                                 >
                                 </Gallery>
                             </Tab>
@@ -131,7 +139,7 @@ class SwapPage extends Component {
                                     me='owner'
                                     type='inProcess'
                                     object={this.objectCallBack}
-                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
+                                    objectList={swapsList.owner.filter(function(item){ return item.status === swapStatuses.ACCEPTED})}
                                 >
                                 </Gallery>
                             </Tab>
@@ -142,7 +150,7 @@ class SwapPage extends Component {
                                     me='owner'
                                     type='onHands'
                                     object={this.objectCallBack} 
-                                    objectList={swap.swapsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
+                                    objectList={swapsList.owner.filter(function(item){ return item.status === swapStatuses.READING})}
                                 >
                                 </Gallery>
                             </Tab>

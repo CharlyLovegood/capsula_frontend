@@ -11,6 +11,10 @@ export default function UserAvatar(props) {
 
     const [avatar, setAvatar] = React.useState(props.avatar ? props.avatar : defaultAvatar);
 
+    if (props.avatar && props.avatar !== avatar) {
+        setAvatar(props.avatar);
+    }
+
     return (
         <Box direction='row' width='auto' align='center'>
             <Link to={'/user/' + props.id} className={styles.avatar_container}>
