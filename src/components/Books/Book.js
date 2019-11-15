@@ -5,6 +5,7 @@ import styles from './Book.module.css';
 
 import SizeComponent from '../SizeComponent/SizeComponent';
 
+import { remote_url } from './../../helpers';
 
 function Book(props) {
     // const gradientList = [
@@ -17,9 +18,8 @@ function Book(props) {
     // const max = 4;
     // const min = 0;
     // const rand = Math.floor(min + Math.random() * (max + 1 - min));
-
-    const bookCoverage = `url("${props.coverage}")`;
-    const background = props.coverage ? bookCoverage : 'brandDark';
+    const defaultCoverage = remote_url.images.default_book;
+    const background = props.coverage ? props.coverage : defaultCoverage;
 
     let link = '#'
     if (props.id > 0) {
@@ -30,7 +30,7 @@ function Book(props) {
         <Link to={link}>
             <SizeComponent>
                 {size => 
-                <Box key={props.id} className={styles.book} background={background} 
+                <Box key={props.id} className={styles.book} background={`url("${background}")`} 
                     width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
                     height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
                     margin={props.margin}

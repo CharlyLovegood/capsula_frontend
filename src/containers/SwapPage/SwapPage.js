@@ -29,6 +29,10 @@ class SwapPage extends Component {
         this.props.changeSwapStatus(id, swapStatuses.REJECTED);
     }
 
+    handleCancel(id) {
+        this.props.changeSwapStatus(id, swapStatuses.CANCELED);
+    }
+
     handleAccept(id) {
         this.props.changeSwapStatus(id, swapStatuses.ACCEPTED);
     }
@@ -47,6 +51,7 @@ class SwapPage extends Component {
                 handleAccept={id => this.handleAccept(id)}
                 handleBookDelivered={id => this.handleBookDelivered(id)}
                 handleFinishSwap={id => this.handleFinishSwap(id)}        
+                handleCancel={id => this.handleCancel(id)}        
                 margin='10px' 
                 book={book} 
                 key={id}

@@ -3,7 +3,8 @@ export const swapStatuses = {
     ACCEPTED: 1,
     REJECTED: 2,
     READING: 3,
-    RETURNED: 4
+    RETURNED: 4,
+    CANCELED: 5
 }
 
 
@@ -12,7 +13,8 @@ export const swapResults = [
     'Заявка была принята',
     'Заявка была отклонена',
     'Читается',
-    'Книга возвращена'
+    'Книга возвращена',
+    'Отмена запроса'
 ]
 
 

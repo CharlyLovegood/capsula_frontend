@@ -27,8 +27,6 @@ class BookPage extends Component {
     }
 
     fetchData(title) {
-        console.log(title);
-
         fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:` + encodeURIComponent(title))
         .then((response)=> response.json())
         .then((responseData)=> {

@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Box, Button, Heading, Text, Select, Tab, Tabs } from 'grommet';
+import { Box, 
+    Button, 
+    Heading, 
+    Text, 
+    Select, 
+    // Tab, 
+    // Tabs 
+} from 'grommet';
 import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
 import {genresArray2, genres} from './../../helpers'
 
 import { remote_url } from './../../helpers';
 import styles from './Book.module.css';
+import { StatusCritical } from 'grommet-icons';
+
+
 
 class AddNewBook extends Component {
     constructor(props) {
@@ -21,26 +31,28 @@ class AddNewBook extends Component {
             ISBN: '',
             api_image: '',
             api_bookName: '',
-            api_author: ''
+            api_author: '',
+            alert: false,
+            message: ''
         };
     }
 
     handleAuthorChange(event) {
-        this.setState({author: event.target.value});
+        this.setState({author: event.target.value, alert: false});
     }
 
     handleBookNameChange(event) {
-        this.setState({bookName: event.target.value});
+        this.setState({bookName: event.target.value, alert: false});
     }
 
     handleChange(event) {
         const { name, value } = event.target;
-        this.setState({ [name]: value });
+        this.setState({ [name]: value, alert: false });
     }
 
     SetISBN(event) {
         const isbn = event.target.value;
-        this.setState({ ISBN: isbn });
+        this.setState({ ISBN: isbn, alert: false });
 
         if (isbn !== '') {
             fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:` + encodeURIComponent(isbn))
@@ -69,42 +81,65 @@ class AddNewBook extends Component {
 
     handleSubmit() {
         let book = {};
-        if (this.state.image === remote_url.images.add_new_book_default) {
-            book = {
-                'title': this.state.bookName,
-                'authors': this.state.author,
-                'genre': this.state.genre_code
-            };
+        const {bookName, genre_code, author} = this.state;
+        if (bookName !== '' && genre_code !== 0 && author !== '') {
+            if (this.state.image === remote_url.images.add_new_book_default) {
+                book = {
+                    'title': this.state.bookName,
+                    'authors': this.state.author,
+                    'genre': this.state.genre_code
+                };
+            } else {
+                book = {
+                    'title': this.state.bookName,
+                    'authors': this.state.author,
+                    'genre': this.state.genre_code,
+                    'image': this.state.image 
+                };
+            }
+            this.props.handleAddNewBook(book);
+            this.props.onClose();
+        } else if (bookName !== '' && author !== '') {
+            this.setState({message: 'Заполните жанр', alert: true});
+        } else if (genre_code !== 0 && author !== '') {
+            this.setState({message: 'Заполните название', alert: true});
+        } else if (genre_code !== 0 && bookName !== '') {
+            this.setState({message: 'Заполните автора', alert: true});
         } else {
-            book = {
-                'title': this.state.bookName,
-                'authors': this.state.author,
-                'genre': this.state.genre_code,
-                'image': this.state.image 
-            };
+            this.setState({message: 'Заполните недостающие поля', alert: true});
         }
-        this.props.handleAddNewBook(book);
-        this.props.onClose();
     }
 
     handleSubmitISBN() {
         let book = {};
-        if (this.state.api_image === remote_url.images.add_new_book_default) {
-            book = {
-                'title': this.state.api_bookName,
-                'authors': this.state.api_author,
-                'genre': this.state.genre_code
-            };
+        const {api_bookName, genre_code, api_author} = this.state;
+        if (api_bookName !== '' && genre_code !== 0 && api_author !== '') {
+            if (this.state.api_image === remote_url.images.add_new_book_default) {
+                book = {
+                    'title': this.state.api_bookName,
+                    'authors': this.state.api_author,
+                    'genre': this.state.genre_code
+                };
+            } else {
+                book = {
+                    'title': this.state.api_bookName,
+                    'authors': this.state.api_author,
+                    'genre': this.state.genre_code,
+                    'image': this.state.api_image 
+                };
+            }
+            this.props.handleAddNewBook(book);
+            this.props.onClose();
+
+        } else if (api_bookName !== '' && api_author !== '') {
+            this.setState({message: 'Заполните жанр', alert: true});
+        } else if (genre_code !== 0 && api_author !== '') {
+            this.setState({message: 'Заполните название', alert: true});
+        } else if (genre_code !== 0 && api_bookName !== '') {
+            this.setState({message: 'Заполните автора', alert: true});
         } else {
-            book = {
-                'title': this.state.api_bookName,
-                'authors': this.state.api_author,
-                'genre': this.state.genre_code,
-                'image': this.state.api_image 
-            };
+            this.setState({message: 'Заполните недостающие поля', alert: true});
         }
-        this.props.handleAddNewBook(book);
-        this.props.onClose();
     }
 
     setValue(genre) {
@@ -117,15 +152,23 @@ class AddNewBook extends Component {
     }
 
     render() {
+        const {alert, message} = this.state;
         return (
             <Box pad='medium' gap='small' width='medium' align='center' fill>
-                <Box className={styles.scroll_container}>
+                <Box align='center' className={styles.scroll_container}>
                     <Heading textAlign='center' level={3} margin='none'>
                         Добавить книгу
                     </Heading>
 
-                    <Tabs>
-                        <Tab title='Вручную'>
+                    {(alert) &&
+                        <Box justify='center' align='center' margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                            <StatusCritical color='status-critical'></StatusCritical>
+                            {message}
+                        </Box>
+                    }
+
+                    {/* <Tabs> */}
+                        {/* <Tab title='Вручную'> */}
                             <Box className={styles.scroll_page}>
                                 <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
                                 <Text>Обложка</Text>
@@ -177,7 +220,7 @@ class AddNewBook extends Component {
                                     />
                                 </Box>
                             </Box>
-                        </Tab>
+                        {/* </Tab>
                         <Tab title='ISBN - код'>
                             <Box className={styles.scroll_page}>
 
@@ -235,7 +278,7 @@ class AddNewBook extends Component {
                                     direction='row'
                                     align='center'
                                     justify='end'
-                                    pad={{ top: 'medium', bottom: 'small' }}
+                                    pad={{ top: 'medium', bottom: 'none' }}
                                 >
                                     <Link to='#'>
                                         <Button  primary label={
@@ -251,7 +294,7 @@ class AddNewBook extends Component {
                                 </Box>
                             </Box>
                         </Tab>
-                    </Tabs>
+                    </Tabs> */}
                 </Box>
             </Box>
         );

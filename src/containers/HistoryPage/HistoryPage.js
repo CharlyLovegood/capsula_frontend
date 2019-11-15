@@ -35,7 +35,7 @@ class HistoryPage extends Component {
         const {swap} = this.props;
         let list = [];
         if (swap.swapsRecieved) {
-            list = (swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})).concat(swap.swapsList.reader.filter(function(item){ return (item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)}));
+            list = (swap.swapsList.owner.filter(function(item){ return ((item.status === swapStatuses.REJECTED )|| (item.status === swapStatuses.RETURNED))})).concat(swap.swapsList.reader.filter(function(item){ return (item.status === swapStatuses.CANCELED || item.status === swapStatuses.REJECTED || item.status === swapStatuses.RETURNED)}));
         }
         return (
             <Box direction='column' align='center' fill>

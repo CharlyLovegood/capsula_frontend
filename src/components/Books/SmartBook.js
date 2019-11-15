@@ -18,6 +18,8 @@ const SmartBook = (props) => {
         <Box margin='10px' width='book-width' height='book-height' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
                 <Box background={`url(${bookCoverage})`} className={styles.book_card_front}>
+                    <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
+                    <Text textAlign='center' color='white'>{props.author}</Text>
                 </Box>
                 <Box background='brand' pad={{horizontal: '5px', vertical: '20px'}} align='center' justify='end' className={styles.book_card_back}>
                     <img 

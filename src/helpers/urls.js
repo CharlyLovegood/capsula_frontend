@@ -4,7 +4,7 @@ export const remote_url = {
         scroll_additional_book: 'htps://thelogocompany.net/wp-content/uploads/2016/05/gradient.jpg',
         error: 'https://i.pinimg.com/originals/b0/2d/6b/b02d6b7c02aab3197f171a7e1d815aef.gif',
         add_new_book_default: 'https://i.pinimg.com/564x/10/c0/ec/10c0ec7c0fbd08020a41162d9d28e9d7.jpg',
-        default_book: 'https://i.pinimg.com/564x/91/44/88/914488383fa8028585ee69f2fd975e77.jpg',
+        default_book: 'https://i.pinimg.com/564x/c6/81/79/c6817902246bd9723c2520a86c6105b9.jpg',
     }
 }
 
