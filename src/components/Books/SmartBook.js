@@ -12,14 +12,25 @@ import EditBook from './EditBook';
 
 const SmartBook = (props) => {
     const defaultCoverage = remote_url.images.default_book;
+    
     const [bookCoverage, setBookCoverage] = React.useState(props.coverage ? props.coverage : defaultCoverage);
+    const [prevBookCoverage, setPrevBookCoverage] = React.useState(props.coverage);
+
+    if (props.coverage !== prevBookCoverage) {
+        setBookCoverage(props.coverage);
+        setPrevBookCoverage(props.coverage);
+    }
 
     return (
         <Box margin='10px' width='book-width' height='book-height' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
-                <Box background={`url(${bookCoverage})`} className={styles.book_card_front}>
-                    <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
-                    <Text textAlign='center' color='white'>{props.author}</Text>
+                <Box background={`url(${bookCoverage})`} className={styles.book_card_front} onError={() => setBookCoverage(remote_url.images.default_book)}>
+                { bookCoverage === defaultCoverage &&
+                    <Box>
+                        <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
+                        <Text textAlign='center' color='white'>{props.author}</Text>
+                    </Box>
+                }
                 </Box>
                 <Box background='brand' pad={{horizontal: '5px', vertical: '20px'}} align='center' justify='end' className={styles.book_card_back}>
                     <img 

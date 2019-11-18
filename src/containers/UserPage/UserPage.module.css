@@ -5,19 +5,23 @@
     margin: 5px;
 }
 
+
 .big_avatar {
     height: 250px;
     border-radius: 100%;
     width: 250px;
-    margin: 30px;
+    margin-top: 30px;
     object-fit: cover;
+    /* position: absolute; */
+    align-self: center;
 }
+
 
 .background {
     height: 220px;
     width: 100%;
     margin: 0px 0px 70px 0px;
-    background-size: cover;
+    position: relative;
 }
 
 .profile {

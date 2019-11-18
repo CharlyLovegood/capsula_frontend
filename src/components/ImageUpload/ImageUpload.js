@@ -10,7 +10,8 @@ export default class ImageUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            image: this.props.img
+            image: this.props.img || remote_url.images.user_default,
+            initialImg: this.props.img || remote_url.images.user_default
         }
     }
 
@@ -29,18 +30,22 @@ export default class ImageUpload extends Component {
 
     fileUpload(event) {
         return new Promise((resolve, reject) => {
-            event.preventDefault();
-            let reader = new FileReader();
-            let file = event.target.files[0];
-            reader.readAsDataURL(file);
-            let extension = file.name.split('.').pop().toLowerCase();
-            if (extension === 'png' || extension === 'jpg' || extension === 'jpeg') {
-                this.readFile(file).then( function(result) {
-                    resolve(result); 
-                });
-            }
-            else {
-                resolve(file.name);
+            if ( event.target.files[0]) {
+                event.preventDefault();
+                let reader = new FileReader();
+                let file = event.target.files[0];
+                // reader.readAsDataURL(file);
+                let extension = file.name.split('.').pop().toLowerCase();
+                if (extension === 'png' || extension === 'jpg' || extension === 'jpeg') {
+                    this.readFile(file).then( function(result) {
+                        resolve(result); 
+                    });
+                }
+                else {
+                    reject(file.name);
+                }
+            } else {
+                reject('Нет файла')
             }
         })
     };
@@ -53,13 +58,26 @@ export default class ImageUpload extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.state.image !== this.props.img) {
-            this.setState({ image: this.props.img });
-        }
-        if (this.state.image !== prevProps.img) {
-            this.setState({ image: this.props.img });
+        // if (this.state.image !== this.state.initialImg) {
+        //     this.setState({ image: this.state.initialImg });
+        // }
+        // if (this.state.image !== prevProps.img) {
+        //     this.setState({ image: this.props.img });
+        // }
+    }
+
+
+    onError() {
+        console.log('error')
+        if (this.state.image === this.state.initialImg) {
+            this.setState({ image: remote_url.images.user_default });
+            this.props.returnImage(remote_url.images.user_default);
+        } else {
+            this.setState({image: this.state.initialImg})
+            this.props.returnImage(this.state.initialImg);
         }
     }
+
 
     render() {
         return (
@@ -72,7 +90,7 @@ export default class ImageUpload extends Component {
                             alt='Avatar'
                             src={this.state.image}
                             className={this.props.shape ? styles.avatar_square : styles.avatar }
-                            onError={()=>{this.setState({image: remote_url.images.user_default})}}
+                            onError={()=> this.onError()}
                         />
                     </Box>
                 </label>

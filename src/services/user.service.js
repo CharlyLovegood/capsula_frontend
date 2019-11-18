@@ -148,6 +148,20 @@ function editUser(user) {
 
 
 function handlePostResponse(response) {
+    if (response.status === 500) {
+        const error = 'Сервер не отвечает';
+        return Promise.reject(error);
+    }
+
+    if (response.status === 401) {
+        forceLogout();
+        return response.text().then(text => {
+            const data = JSON.parse(text);
+            const error = data.detail || data.msg || 'Ошибка';
+            return Promise.reject(error);
+        });
+    }
+
     return response.text().then(text => {
         const data = JSON.parse(text);
         if (response.status !== 200) {

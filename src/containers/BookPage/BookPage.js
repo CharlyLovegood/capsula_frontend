@@ -71,8 +71,8 @@ class BookPage extends Component {
             <Box  direction='column' align='center' fill>
                 {this.state.book &&
                 <Box direction='column' align='center' fill>
-                    <Box background='brandGradient' className={styles.background} align='center'>
-                        <Book title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                    <Box  background='brandGradient' className={styles.background} align='center'>
+                        <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
                     </Box>
                     
                     <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>
