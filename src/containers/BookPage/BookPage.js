@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import styles from './BookPage.module.css';
 import Book from '../../components/Books/Book';
 import List from '../../components/List/List';
-import { Box, Button } from 'grommet';
+import { Box, Button, Text } from 'grommet';
 
 import { connect } from 'react-redux';
 import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 
 import ErrorPage from './../../components/Error/ErrorPage';
+import Map from '../../components/Map/Map';
+import SizeComponent from '../../components/SizeComponent/SizeComponent';
 
 class BookPage extends Component {
     state = { id: this.props.match.params.id, 
@@ -75,7 +77,7 @@ class BookPage extends Component {
                         <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
                     </Box>
                     
-                    <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>
+                    <Box pad='10px' direction='column' align='center' margin={{vertical:'50px'}} width='large'>
                         <Box direction='row' justify='center'>
                             {addedToWishlist &&
                                 <Button margin='15px 5px' primary label={<strong>Удалить из вишлиста</strong>} onClick={() => this.deleteFromWishlist(book.wishlist.id)}></Button>
@@ -90,7 +92,14 @@ class BookPage extends Component {
                             {this.state.description}
                         </p>
                         {book.book_items[0] &&
-                            <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>
+                        <SizeComponent>
+                            {size =>
+                            <Box direction='column' align='center' fill='horizontal'>
+                                <Text color='black' size='22px'><strong>Доступные книги</strong></Text>
+                                <Map key='bookpagemap' width={size > 600 ? '600' : size-20}  interactive={false} list={<List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id} />} swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></Map>
+                            </Box>
+                            }
+                        </SizeComponent>
                         }
                     </Box>
                 </Box>}

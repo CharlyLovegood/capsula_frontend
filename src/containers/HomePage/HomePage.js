@@ -47,24 +47,29 @@ class HomePage extends Component {
                     }
 
                     <Box className={styles.text_box} width='large' align='center'>
-                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Bookovsky - это сервис для обмена книгами</Text>
-                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Работает бесплатно и на доверии</Text>
-                        <Text size='30px' color='brandDark' textAlign='center' alignSelf='center'>Найди новую книгу уже сегодня!</Text>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Bookovsky - сервис для обмена книгами</Text>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Работает бесплатно и на доверии</Text>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Найди новую книгу уже сегодня!</Text>
                     </Box>
 
                     <Box width={this.calculateWidth(size)} margin={{vertical: '40px'}} direction='row' wrap>
+                        {/* <Element key='1' source='4.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
+                        <Element key='2' source='6.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
+                        <Element key='3' source='7.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_send}></Box>} text='Отправляй заявки'></Element>
+                        <Element key='4' source='8.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element> */}
                         <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
                         <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
                         <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_send}></Box>} text='Отправляй заявки'></Element>
                         <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element>
                     </Box>
+                    
                     {this.props.library.found && !this.props.user.loggedIn &&
                         <Box align='center'>
                             <Box className={styles.gradient} align='center'>
                                 <Gallery 
-                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                    object={(title, coverage, genre, author, id, idAbstract) => <BookItem info margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
                                     objectList={this.props.library.search.slice(0,10)}
-                                    header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
+                                    header={<Link to='/search/1'>Доступные книги</Link>}
                                     contentType='books'
                                     key='HomePageGalleryNAuth'
                                 ></Gallery>
@@ -77,13 +82,13 @@ class HomePage extends Component {
                     {this.props.library.found && this.props.user.loggedIn &&
                         <Box align='center'>
                             <Gallery 
-                                object={(title, coverage, genre, author, id, idAbstract) => <BookItem margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                objectList={this.props.library.search.slice(0,10)}
-                                header={<Link to='search'><Text color='black' size='30px'>Доступные книги</Text></Link>}
+                                object={(title, coverage, genre, author, id, idAbstract) => <BookItem info margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
+                                objectList={this.props.library.search.slice(10,20)}
+                                header={<Link to='/search/1'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                 contentType='books'
                                 key='HomePageGalleryAuth'
                             ></Gallery>
-                            <Link to='/search'>
+                            <Link to='/search/1'>
                                 <Text color='#464141' size='16px'>Увидеть больше...</Text>
                             </Link>
                         </Box>

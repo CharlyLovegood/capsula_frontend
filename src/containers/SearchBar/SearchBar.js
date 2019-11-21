@@ -57,13 +57,13 @@ class SearchBar extends Component {
                     pad='20px'
                 >
                     <Text>
-                        Ничего не найдено :(
+                        Ничего не найдено
                     </Text>
                 </Box>
             ),
             value: ''}, 
             {label: (
-                    <Link className={style.link} to='/search' >
+                    <Link className={style.link} to='/search/1' >
                         <Box
                             direction='row'
                             align='center'
@@ -81,7 +81,7 @@ class SearchBar extends Component {
         } else {
             res.push({
                 label: (
-                    <Link className={style.link} to='/search' >
+                    <Link className={style.link} to='/search/1' >
                         <Box
                             direction='row'
                             align='center'

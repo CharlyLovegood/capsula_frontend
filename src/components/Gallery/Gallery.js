@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Gallery.module.css';
 
-import { Box } from 'grommet';
+import { Box, Heading } from 'grommet';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
 class Gallery extends Component {
@@ -11,7 +11,7 @@ class Gallery extends Component {
             else if (size >= 800) return 'xlarge'
             else if (size >= 600) return 'large'
             else if (size >= 424) return 'medium'
-            else if (size >= 280) return '280px'
+            else if (size >= 320) return '320px'
             else return 'xlarge'
         }
         if (contentType === 'smart-books') {
@@ -30,7 +30,7 @@ class Gallery extends Component {
             <SizeComponent>
                 {size => (
                     <Box direction='column' align='center' className={styles.gallery_box}>
-                        <h2 className={styles.header}>{this.props.header}</h2>
+                        <Heading className={styles.header}>{this.props.header}</Heading>
                         <Box 
                             width={this.calculateWidth(size, this.props.contentType)} 
                             flex 

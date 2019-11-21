@@ -16,7 +16,7 @@ function ListElement(props) {
 
 
     return (
-        <Box direction='row' justify='between' align='center' fill pad='20px'>
+        <Box direction='row' justify='between' align='center' fill='horizontal' pad='20px'>
             <Link to={`/user/${props.owner.id}`}>
                 <img
                     alt='Remy Sharp'

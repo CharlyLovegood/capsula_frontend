@@ -121,13 +121,14 @@ export function authentication(state = initialState, action) {
                     vk: ''
                 }});
         case userConstants.EDIT_SUCCESS:
+
             return ({
                 loggedIn: true, 
                 user: {
                     ...state.user,
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
-                    avatar: action.user.image,
+                    avatar: action.user.image ? action.user.image : state.user.avatar,
                     location: action.user.location,
                     vk: action.user.vk
                 }});

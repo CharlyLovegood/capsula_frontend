@@ -29,6 +29,11 @@ export const back_url = {
         change_user_data: '/user/me/',
         get_user_by_id: (id) => `/user/${id}/`
     },
+    map: {
+        get_list: '/map/',
+        add_marker: '/map/',
+        delete_marker: (id) => `/map/${id}/`
+    },
     authentication: {
         login: '/auth/login/',
         logout: '/auth/logout/',

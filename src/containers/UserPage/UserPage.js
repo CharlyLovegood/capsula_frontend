@@ -68,15 +68,15 @@ class UserPage extends Component {
     render() {
         let {user} = this.state;
         let library= [];
-        let {wishlist} = [];
+        // let {wishlist} = [];
 
         if (this.props.library.userLibraryRecieved) {
             library = this.props.library.userLibrary;
         }
 
-        if (this.props.wishlist.wishlistRecieved) {
-            wishlist = this.props.wishlist.wishlist;
-        }
+        // if (this.props.wishlist.wishlistRecieved) {
+        //     wishlist = this.props.wishlist.wishlist;
+        // }
 
         return (
             <Box width='xxlarge' direction='column' align='center' fill className={styles.profile}>

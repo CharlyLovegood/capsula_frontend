@@ -13,6 +13,9 @@ class SizeComponent extends React.Component {
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions);
     }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateDimensions);
+    }
 
     updateDimensions() {
         this.setState({

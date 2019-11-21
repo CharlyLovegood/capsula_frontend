@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import { Button, Box } from 'grommet';
+import { Button, Box, Text } from 'grommet';
 import styles from './SettingsPage.module.css';
-import { userActions } from '../../store/actions';
+import { userActions, mapActions } from '../../store/actions';
 import { connect } from 'react-redux';
+
 
 import UserAvatar from './../../components/ImageUpload/ImageUpload';
 import { StatusGood, StatusCritical } from 'grommet-icons';
+import Map from '../../components/Map/Map';
+import SizeComponent from '../../components/SizeComponent/SizeComponent';
+
 
 
 
@@ -19,14 +22,18 @@ class SettingsPage extends Component {
             user: {
                 firstname: this.props.user.firstName, 
                 lastname: this.props.user.lastName, 
-                vkId: this.props.user.vk,
-                domitary: this.props.user.location,
+                vkId: this.props.user.vk !== 'null' ? this.props.user.vk : '',
+                domitary: this.props.user.location !== 'null' ? this.props.user.location : '',
                 avatar: this.props.user.avatar
             },
             permission: true,
             message: '',
             error: false
         }
+    }
+
+    componentDidMount() {
+        this.props.getMap();
     }
 
     handleChange(event) {
@@ -77,11 +84,13 @@ class SettingsPage extends Component {
     render() {
         const { user } = this.state;
         return (
-            <Container component='main' maxWidth='xs'>
+            <Box width='580px' pad='10px'>
                 <div className={styles.paper}>
                     <h2 className={styles.header}>
                         Настройки
                     </h2>
+
+                    
 
                     {(this.props.alert.type === 'alert-success') &&
                         <Box margin='10px' round='10px' direction='row' gap='10px' pad='10px' border={{ color: 'status-ok', size: 'xsmall' }}>
@@ -98,10 +107,12 @@ class SettingsPage extends Component {
                         </Box>
                     }
                     
-                    <UserAvatar img={user.avatar} 
-                                returnImage={(avatar) => this.handleImageChange(avatar)} 
-                                handleImageUpload={event => this.handleImageUpload(event)}>
-                    </UserAvatar>
+                    <Box margin={{vertical: '30px'}}>
+                        <UserAvatar img={user.avatar} 
+                            returnImage={(avatar) => this.handleImageChange(avatar)} 
+                            handleImageUpload={event => this.handleImageUpload(event)}>
+                        </UserAvatar>
+                    </Box>
                     
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
@@ -155,31 +166,46 @@ class SettingsPage extends Component {
                                 onChange={ event => this.handleChange(event) }
                             />
                         </Grid>
-                        <Button
-                            type='submit'
-                            fill='horizontal'
-                            primary
-                            color='brand'
-                            label='Сохранить'
-                            onClick={event => this.handleSubmit(event)}
-                            margin='12px'
-                        >
-                        </Button>
+
+                        <SizeComponent>
+                            {size =>
+                                <Box gap='10px' fill='horizontal' align='center' pad='12px' direction='column'> 
+                                    <Text color='black' size='22px'><strong>Ваши точки обмена</strong></Text>
+                                    <Map width={size > 560 ? 560 : size - 20} interactive={true}></Map>
+                                </Box>
+                            }
+                        </SizeComponent>
+                        
+                        <Box fill='horizontal' align='center' pad='12px'>
+                            <Box width='60%'>
+                                <Button
+                                    type='submit'
+                                    primary
+                                    color='brand'
+                                    label={<Text><strong>Сохранить</strong></Text>}
+                                    onClick={event => this.handleSubmit(event)}
+                                    margin='12px'
+                                >
+                                </Button>
+                            </Box>
+                        </Box>
                     </Grid>
                 </div>
-            </Container>
+            </Box>
         );
     }
 }
 
 const mapState = state => ({
     user: state.authentication.user,
-    alert: state.alert
+    alert: state.alert,
+    map: state.map
 })
 
 const actionCreators = {
     getUser: userActions.getById,
-    editUser: userActions.editUser
+    editUser: userActions.editUser,
+    getMap: mapActions.getMarkersList
 }
 
 
