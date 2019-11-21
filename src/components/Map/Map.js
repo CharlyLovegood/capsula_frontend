@@ -76,27 +76,11 @@ class Map extends Component {
                 info: {},
                 show: false,
             },
-            markers: [
-                {
-                    id: 1,
-                    name: 'Дом',
-                    latitude: 55.920202599999996,
-                    longitude: 37.5198476,
-                },
-                {
-                    id: 2,
-                    name: 'Учеба',
-                    latitude: 55.7577,
-                    longitude: 37.5398476,
-                },
-                {
-                    id: 3,
-                    name: 'Работа',
-                    latitude: 57.7577,
-                    longitude: 38.4376,
-                }
-            ]
+            markers: this.props.markers
         };
+        this.setState({markers: this.props.map});
+        console.log(this.props.markers);
+
         this.renderPopup = this.renderPopup.bind(this);
         this.renderMarkerPopup = this.renderMarkerPopup.bind(this);
     }
@@ -123,16 +107,16 @@ class Map extends Component {
             this.setState({ permissionGiven: true });
             this.setState({currentPosition: { latitude: crd.latitude, longitude: crd.longitude }});
 
-            console.log('Ваше текущее метоположение:');
-            console.log(`Широта: ${crd.latitude}`);
-            console.log(`Долгота: ${crd.longitude}`);
-            console.log(`Плюс-минус ${crd.accuracy} метров.`);
+            // console.log('Ваше текущее метоположение:');
+            // console.log(`Широта: ${crd.latitude}`);
+            // console.log(`Долгота: ${crd.longitude}`);
+            // console.log(`Плюс-минус ${crd.accuracy} метров.`);
         };
           
         const error = (err) => {
             this.setState({permissionGiven: false});
 
-            console.warn(`ERROR(${err.code}): ${err.message}`);
+            // console.warn(`ERROR(${err.code}): ${err.message}`);
         };
 
         navigator.geolocation.getCurrentPosition(success, error, options);
@@ -181,8 +165,11 @@ class Map extends Component {
             this.setState( {markers: [...markers, {latitude: latitude, longitude: longitude, name: markerName, id: markers[markers.length-1].id + 1} ]} );
             this.setState({markerName: ''});
             this.setState({newMarker: true});
+            this.props.addMarker({latitude: latitude, longitude: longitude, name: markerName});
             return true;
         }
+
+
         return false;
     }
 
@@ -209,7 +196,9 @@ class Map extends Component {
     deleteMarker(id) {
         this.setState({markers: this.state.markers.filter(el => {
             return el.id !== id
-        })})
+        })});
+
+        this.props.deleteMarker(id);
     }
 
     renderPopup(){
@@ -259,8 +248,8 @@ class Map extends Component {
                             {this.state.markers.map(el => {
                                 return(
                                     <Mark name={el.name} key={el.latitude + el.longitude} 
-                                            latitude={el.latitude} 
-                                            longitude={el.longitude} 
+                                            latitude={Number(el.latitude)} 
+                                            longitude={Number(el.longitude)} 
                                             setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {
                                             latitude: latitude,
                                             longitude: longitude,

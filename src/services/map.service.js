@@ -20,7 +20,7 @@ function getMarkersList() {
     return axios(requestOptions)
         .then(response => handleResponse(response))
         .then(map => {
-            return map;
+            return map.data;
         }); 
 }
 

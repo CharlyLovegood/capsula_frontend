@@ -67,9 +67,8 @@ function addMarker(marker) {
 
         mapService.addMarker(marker)
             .then(
-                response => { 
-                    console.log(response)
-                    // dispatch(success(marker, response.map.id, response.id));
+                marker => { 
+                    dispatch(success(marker));
                 },
                 error => {
                     dispatch(failure(error));
@@ -79,6 +78,6 @@ function addMarker(marker) {
     };
 
     function request(marker) { return { type: mapConstants.ADD_MARKER_REQUEST, marker } }
-    // function success(marker, abstractId, id) { return { type: mapConstants.ADD_MARKER_SUCCESS, map, id, abstractId } }
+    function success(marker) { return { type: mapConstants.ADD_MARKER_SUCCESS, marker } }
     function failure(error) { return { type: mapConstants.ADD_MARKER_FAILURE, error } }
 }

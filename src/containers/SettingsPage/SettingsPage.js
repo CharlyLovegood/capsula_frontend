@@ -171,7 +171,14 @@ class SettingsPage extends Component {
                             {size =>
                                 <Box gap='10px' fill='horizontal' align='center' pad='12px' direction='column'> 
                                     <Text color='black' size='22px'><strong>Ваши точки обмена</strong></Text>
-                                    <Map width={size > 560 ? 560 : size - 20} interactive={true}></Map>
+                                    {this.props.map.resievedMap &&
+                                        <Map deleteMarker={(id) => this.props.deleteMarker(id)}  
+                                            addMarker={(marker) => this.props.addMarker(marker)} 
+                                            markers={this.props.map.map}
+                                            width={size > 560 ? 560 : size - 20} 
+                                            interactive={true}>
+                                        </Map>
+                                    }
                                 </Box>
                             }
                         </SizeComponent>
@@ -205,7 +212,9 @@ const mapState = state => ({
 const actionCreators = {
     getUser: userActions.getById,
     editUser: userActions.editUser,
-    getMap: mapActions.getMarkersList
+    getMap: mapActions.getMarkersList,
+    addMarker: mapActions.addMarker,
+    deleteMarker: mapActions.deleteMarker
 }
 
 
