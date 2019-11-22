@@ -52,8 +52,6 @@ class WishList extends Component {
                     </Box>
                 }
 
-                {}
-
                 {wishlist.wishlistRecieved && this.state.owner &&
                     <Box align='center' width='xxlarge'>
                         {wishlist.wishlist.length === 0 &&

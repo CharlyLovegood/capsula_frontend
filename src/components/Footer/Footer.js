@@ -18,13 +18,19 @@ function Footer(props) {
                     <Text>
                         © 2019 Bookovsky. Сервис для обмена книгами
                     </Text>
-                    <Text>
-                        Мы в соцсетях
-                    </Text>
-                    <Box direction='row'>
-                        <a title='telegram' href='https://t.me/booookovsky'>
-                            <img className={styles.icon} src='https://image.flaticon.com/icons/svg/1604/1604538.svg' />
-                        </a>
+                    <Box margin={{vertical: '30px'}}>
+                        <Text>
+                            Мы в соцсетях:
+                        </Text>
+                        <Box direction='row' gap='10px'>
+                            <a title='telegram' href='https://t.me/booookovsky'>
+                                <img className={styles.icon} src='https://image.flaticon.com/icons/svg/906/906377.svg' />
+                            </a>
+                            <a title='vk' href='https://vk.com/public189055518'>
+                                <img className={styles.icon} src='https://image.flaticon.com/icons/svg/145/145813.svg' />
+                            </a>
+                        </Box>
+                        
                     </Box>
                 </Box>
                 <Box direction='column'>

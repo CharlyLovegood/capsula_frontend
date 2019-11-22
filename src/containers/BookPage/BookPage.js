@@ -17,11 +17,32 @@ class BookPage extends Component {
         description: '',
         addedToWishlist: undefined, 
         changed: false,
-        book: undefined
+        book: undefined, 
+        currentPosition: {}
     }
 
     componentDidMount() {
-        this.props.getBook(this.state.id);
+        
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        
+        const success = (pos) => {
+            var crd = pos.coords;
+            this.setState({currentPosition: { latitude: crd.latitude, longitude: crd.longitude }});
+            this.props.getBook(this.state.id, crd);
+        };
+          
+        const error = (err) => {
+            this.setState({permissionGiven: false});
+            this.props.getBook(this.state.id);
+        };
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+        // this.props.getBook(this.state.id, this.state.currentPosition);
     }
 
     componentWillUnmount() {
@@ -39,7 +60,6 @@ class BookPage extends Component {
                 this.setState({description: ''});
             }
         });
-    
     }
 
     componentDidUpdate() {
@@ -74,7 +94,9 @@ class BookPage extends Component {
                 {this.state.book &&
                 <Box direction='column' align='center' fill>
                     <Box  background='brandGradient' className={styles.background} align='center'>
-                        <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                        <Box margin={{vertical:'130px'}}>
+                            <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                        </Box>
                     </Box>
                     
                     <Box pad='10px' direction='column' align='center' margin={{vertical:'50px'}} width='large'>
@@ -96,7 +118,13 @@ class BookPage extends Component {
                             {size =>
                             <Box direction='column' align='center' fill='horizontal'>
                                 <Text color='black' size='22px'><strong>Доступные книги</strong></Text>
-                                <Map key='bookpagemap' width={size > 600 ? '600' : size-20}  interactive={false} list={<List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id} />} swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></Map>
+                                <Map markers={book.book_items} 
+                                    key='bookpagemap' 
+                                    width={size > 600 ? '600' : size-20}  
+                                    interactive={false} 
+                                    list={<List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id} />} 
+                                    swapRequest={this.props.swapRequest} 
+                                    bookId={book.book_items[0].id}></Map>
                             </Box>
                             }
                         </SizeComponent>

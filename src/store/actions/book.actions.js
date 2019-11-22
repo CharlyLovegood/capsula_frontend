@@ -11,11 +11,11 @@ export const bookActions = {
 };
 
 
-function getBook(bookId) {
+function getBook(bookId, currentPosition) {
     return dispatch => {
         dispatch(request({ bookId }));
-
-        bookService.getBook(bookId)
+        console.log(currentPosition)
+        bookService.getBook(bookId, currentPosition)
             .then(
                 book => { 
                     dispatch(success(book));

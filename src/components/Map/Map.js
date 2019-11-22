@@ -10,6 +10,9 @@ import { Location } from 'grommet-icons';
 import Mark from './Marker';
 import { Button, Box, Tabs, Tab, TextInput, Text } from 'grommet';
 import ListElement from './ListElement';
+import { remote_url } from './../../helpers';
+
+import styles from './Map.module.css';
 
 
 const navStyle = {
@@ -76,11 +79,8 @@ class Map extends Component {
                 info: {},
                 show: false,
             },
-            markers: this.props.markers
+            markers: []
         };
-        this.setState({markers: this.props.map});
-        console.log(this.props.markers);
-
         this.renderPopup = this.renderPopup.bind(this);
         this.renderMarkerPopup = this.renderMarkerPopup.bind(this);
     }
@@ -94,29 +94,31 @@ class Map extends Component {
     
 
     componentDidMount() {
+        if (this.props.interactive) {
+            this.setState({markers: this.props.markers});
+        } else {
+            const m = this.props.markers.map(el => {
+                return {latitude: null, longitude: null, distance: null, ...el.point , ...el.owner}
+            })
+            this.setState({markers: m});
+        }
+
         const options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
         };
-          
+        
         const success = (pos) => {
             var crd = pos.coords;
 
             this.setState({viewport: { ...this.state.viewport, latitude: crd.latitude, longitude: crd.longitude }})
             this.setState({ permissionGiven: true });
             this.setState({currentPosition: { latitude: crd.latitude, longitude: crd.longitude }});
-
-            // console.log('Ваше текущее метоположение:');
-            // console.log(`Широта: ${crd.latitude}`);
-            // console.log(`Долгота: ${crd.longitude}`);
-            // console.log(`Плюс-минус ${crd.accuracy} метров.`);
         };
           
         const error = (err) => {
             this.setState({permissionGiven: false});
-
-            // console.warn(`ERROR(${err.code}): ${err.message}`);
         };
 
         navigator.geolocation.getCurrentPosition(success, error, options);
@@ -162,13 +164,12 @@ class Map extends Component {
         const { latitude, longitude } = this.state.currentPosition;
         let { markers, markerName } = this.state;
         if (markerName !== '') {
-            this.setState( {markers: [...markers, {latitude: latitude, longitude: longitude, name: markerName, id: markers[markers.length-1].id + 1} ]} );
+            this.setState( {markers: [...markers, {latitude: latitude, longitude: longitude, name: markerName, id: markers.length !== 0 ? markers[markers.length-1].id + 1 : 1} ]} );
             this.setState({markerName: ''});
             this.setState({newMarker: true});
             this.props.addMarker({latitude: latitude, longitude: longitude, name: markerName});
             return true;
         }
-
 
         return false;
     }
@@ -211,7 +212,18 @@ class Map extends Component {
                 onClose={() => this.setState({popupInfo: {...this.state.popupInfo, show: false}})}
                 closeOnClick={false}
             >
-                {this.state.popupInfo.info.name}
+                <Box margin={{vertical: '-5px'}} direction='row'>
+                    <img 
+                        alt='avatar'
+                        src={this.state.popupInfo.info.avatar || remote_url.images.user_default}
+                        className={styles.avatar}
+                        onError={()=>{this.setState({popupInfo: {info: {...this.state.popupInfo.info, avatar: remote_url.images.user_default}}})}}
+                    />
+                    <Box pad='10px' direction='column'>
+                        <Text>{this.state.popupInfo.info.django_user.username}</Text>
+                        <Text>{String(this.state.popupInfo.info.distance).slice(0,5)} км</Text>
+                    </Box>
+                </Box>
             </Popup>
         )
     }
@@ -219,106 +231,115 @@ class Map extends Component {
 
 
     render() {
+        const mapTab = (<Tab title='Карта'>
+        {!this.state.permissionGiven &&
+            <Box align='center' fill='horizontal' height='30px'>
+                <Text>Вы не дали доступ к своей геопозиции</Text>
+            </Box>
+        }
+        <Box height='5px'></Box>
+        <ReactMapGL
+            {...this.state.viewport}
+            mapStyle='mapbox://styles/mapbox/dark-v10'
+            transitionInterpolator={new FlyToInterpolator({curve: 14})}
+            mapboxApiAccessToken='pk.eyJ1IjoiaXZhbm92YW5hdGFzaGEiLCJhIjoiY2szNG42b3ZvMG5ubzNsbnlnMDU1eWRoMCJ9._ffQ1YfkfgpyfNrmzSRvCg'
+            onViewportChange={(viewport) => this.setState({viewport})}
+        >
+            <Layer {...BuildingsLayer} />
+            
+            <Box gap='5px' className='nav' style={navStyle}>
+                <NavigationControl />
+                <GeolocateControl trackUserLocation={true}
+                    showUserLocation={true}
+                    positionOptions={{enableHighAccuracy: true}}/>
+            </Box>
+
+            {this.state.markers.map(el => {
+                return(
+                    <Mark el={el} name={el.name} key={el.latitude + el.longitude} 
+                            latitude={Number(el.latitude)} 
+                            longitude={Number(el.longitude)} 
+                            setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {
+                            latitude: latitude,
+                            longitude: longitude,
+                        }, info: el, show: true}
+                    })}></Mark>
+                )
+            })}
+
+
+            {this.state.addMarker && this.addMarker()}
+
+            {this.props.interactive && this.renderMarkerPopup()}
+            {!this.props.interactive && this.renderPopup()}
+
+        </ReactMapGL>
+        {this.props.interactive &&
+            <Box gap='10px' fill='horizontal' direction='row'>
+                <Box width='50%' margin={{vertical: '10px'}}>
+                    <Button onClick={() => {
+                        if (this.state.addMarker === false) {
+                            this.setState({addMarker: true, label: 'Подтвердить'});
+                        } else {
+                            if (this.confirmMarker()) {
+                                this.setState({addMarker: false, label: 'Добавить точку', newMarker: true});
+                                this.setState({popupInfo: null});
+                            }
+                        }
+                    }} label={<Text color='brand'><strong>{this.state.label}</strong></Text>} />
+                </Box>
+                <Box width='50%' margin={{vertical: '10px'}}>
+                    <Button onClick={() => this.setState({addMarker: false, label: 'Добавить точку', popupInfo: null, newMarker: true, markerName: ''})} 
+                        disabled={!this.state.addMarker} 
+                        label={<Text color='brand'><strong>Отменить добавление</strong></Text>}>
+                    </Button>
+                </Box>
+            </Box>
+        }
+    </Tab>);
+        const listTab = (
+            <Tab title='Список'>
+                {!this.state.permissionGiven &&
+                    <Box align='center' fill='horizontal'>
+                        <Text>Вы не дали доступ к своей геопозиции</Text>
+                    </Box>
+                }
+                <Box height='5px'></Box>
+                {this.props.interactive &&
+                    <Box gap='10px' direction='column' height='456px' fill='horizontal'>
+
+                        {this.state.markers.map(el => {
+                            return(
+                                <ListElement deleteMarker={() => this.deleteMarker(el.id)} 
+                                    name={el.name} 
+                                    latitude={el.latitude} 
+                                    longitude={el.longitude} 
+                                    key={el.latitude + el.longitude + '_list'} 
+                                />
+                            )
+                        })}
+                    </Box>
+                }
+                {!this.props.interactive &&
+                    <Box gap='10px' direction='column' height='400px' fill='horizontal'>
+                        {this.props.list}
+                    </Box>
+                }
+            </Tab>);
         return (
             <Box align='center' fill direction='column'>
+                {this.props.interactive && 
                 <Tabs fill>
-                    <Tab title='Карта'>
-                        {!this.state.permissionGiven &&
-                            <Box align='center' fill='horizontal' height='30px'>
-                                <Text>Вы не дали доступ к своей геопозиции</Text>
-                            </Box>
-                        }
-                        <Box height='5px'></Box>
-                        <ReactMapGL
-                            {...this.state.viewport}
-                            mapStyle='mapbox://styles/mapbox/dark-v10'
-                            transitionInterpolator={new FlyToInterpolator({curve: 14})}
-                            mapboxApiAccessToken='pk.eyJ1IjoiaXZhbm92YW5hdGFzaGEiLCJhIjoiY2szNG42b3ZvMG5ubzNsbnlnMDU1eWRoMCJ9._ffQ1YfkfgpyfNrmzSRvCg'
-                            onViewportChange={(viewport) => this.setState({viewport})}
-                        >
-                            <Layer {...BuildingsLayer} />
-                            
-                            <Box gap='5px' className='nav' style={navStyle}>
-                                <NavigationControl />
-                                <GeolocateControl trackUserLocation={true}
-                                    showUserLocation={true}
-                                    positionOptions={{enableHighAccuracy: true}}/>
-                            </Box>
-
-                            {this.state.markers.map(el => {
-                                return(
-                                    <Mark name={el.name} key={el.latitude + el.longitude} 
-                                            latitude={Number(el.latitude)} 
-                                            longitude={Number(el.longitude)} 
-                                            setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {
-                                            latitude: latitude,
-                                            longitude: longitude,
-                                        }, info: el, show: true}
-                                    })}></Mark>
-                                )
-                            })}
-
-
-                            {this.state.addMarker && this.addMarker()}
-
-                            {this.props.interactive && this.renderMarkerPopup()}
-                            {!this.props.interactive && this.renderPopup()}
-
-                        </ReactMapGL>
-                        {this.props.interactive &&
-                            <Box gap='10px' fill='horizontal' direction='row'>
-                                <Box width='50%' margin={{vertical: '10px'}}>
-                                    <Button onClick={() => {
-                                        if (this.state.addMarker === false) {
-                                            this.setState({addMarker: true, label: 'Подтвердить'});
-                                        } else {
-                                            if (this.confirmMarker()) {
-                                                this.setState({addMarker: false, label: 'Добавить точку', newMarker: true});
-                                                this.setState({popupInfo: null});
-                                            }
-                                        }
-                                    }} label={<Text color='brand'><strong>{this.state.label}</strong></Text>} />
-                                </Box>
-                                <Box width='50%' margin={{vertical: '10px'}}>
-                                    <Button onClick={() => this.setState({addMarker: false, label: 'Добавить точку', popupInfo: null, newMarker: true, markerName: ''})} 
-                                        disabled={!this.state.addMarker} 
-                                        label={<Text color='brand'><strong>Отменить добавление</strong></Text>}>
-                                    </Button>
-                                </Box>
-                            </Box>
-                        }
-                    </Tab>
-                    <Tab title='Список'>
-                        {!this.state.permissionGiven &&
-                            <Box align='center' fill='horizontal'>
-                                <Text>Вы не дали доступ к своей геопозиции</Text>
-                            </Box>
-                        }
-                        <Box height='5px'></Box>
-                        {this.props.interactive &&
-                            <Box gap='10px' direction='column' height='456px' fill='horizontal'>
-
-                                {this.state.markers.map(el => {
-                                    return(
-                                        <ListElement deleteMarker={() => this.deleteMarker(el.id)} 
-                                            name={el.name} 
-                                            latitude={el.latitude} 
-                                            longitude={el.longitude} 
-                                            key={el.latitude + el.longitude + '_list'} 
-                                        />
-                                    )
-                                })}
-                            </Box>
-                        }
-                        {!this.props.interactive &&
-                            <Box gap='10px' direction='column' height='400px' fill='horizontal'>
-                                {this.props.list}
-                            </Box>
-                        }
-                    </Tab>
+                    {mapTab}
+                    {listTab}
                 </Tabs>
-                
-
+                }
+                {!this.props.interactive && 
+                <Tabs fill>
+                    {listTab}
+                    {mapTab}
+                </Tabs>
+                }
             </Box>
         );
     }

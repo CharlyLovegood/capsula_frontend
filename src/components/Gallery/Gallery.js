@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Gallery.module.css';
 
-import { Box, Heading } from 'grommet';
+import { Box, Heading, Text  } from 'grommet';
 import SizeComponent from '../SizeComponent/SizeComponent';
 
 class Gallery extends Component {
@@ -30,7 +30,7 @@ class Gallery extends Component {
             <SizeComponent>
                 {size => (
                     <Box direction='column' align='center' className={styles.gallery_box}>
-                        <Heading className={styles.header}>{this.props.header}</Heading>
+                        {this.props.header && <Heading className={styles.header}>{this.props.header}</Heading>}
                         <Box 
                             width={this.calculateWidth(size, this.props.contentType)} 
                             flex 
@@ -47,7 +47,9 @@ class Gallery extends Component {
                                 return(this.props.object(authors, book, date, genre, id, image, reader, owner, status, this.props.type))
                             })}
                             {this.props.objectList.length === 0 &&
-                                <Box fill align='center' color='black'>{this.props.message}</Box>
+                            <Box fill='horizontal' justify='center'>
+                                <Text textAlign='center' alignSelf='center' margin='30px'>{this.props.message}</Text>
+                                </Box>
                             }
                         </Box>
                     </Box>
