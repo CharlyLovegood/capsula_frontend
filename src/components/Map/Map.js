@@ -90,9 +90,26 @@ class Map extends Component {
     }
 
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         if (this.props.width !== this.state.viewport.width) {
             this.setState({viewport: { ...this.state.viewport, width:this.props.width || 550}});
+        }
+        if (prevProps.markers !== this.props.markers)
+            {if (this.props.interactive) {
+                this.setState({markers: this.props.markers});
+            } else {
+                let map = [];
+                this.props.markers.forEach(el => {
+                    if (el.point.length) {
+                        el.point.forEach(point => {
+                            map.push({latitude: null, longitude: null, distance: null, ...point , ...el.owner, status: el.status, id: el.id});
+                        })
+                    } else {
+                        map.push({latitude: null, longitude: null, distance: null, ...el.point , ...el.owner, status: el.status, id: el.id});
+                    }
+                })
+                this.setState({markers: map});
+            }
         }
     }
     
@@ -101,10 +118,17 @@ class Map extends Component {
         if (this.props.interactive) {
             this.setState({markers: this.props.markers});
         } else {
-            const m = this.props.markers.map(el => {
-                return {latitude: null, longitude: null, distance: null, ...el.point , ...el.owner, status: el.status, id: el.id};
+            let map = [];
+            this.props.markers.forEach(el => {
+                if (el.point.length) {
+                    el.point.forEach(point => {
+                        map.push({latitude: null, longitude: null, distance: null, ...point , ...el.owner, status: el.status, id: el.id});
+                    })
+                } else {
+                    map.push({latitude: null, longitude: null, distance: null, ...el.point , ...el.owner, status: el.status, id: el.id});
+                }
             })
-            this.setState({markers: m});
+            this.setState({markers: map});
         }
 
         const options = {
@@ -208,7 +232,6 @@ class Map extends Component {
 
     renderPopup(){
         const {popupInfo} = this.state;
-        console.log(popupInfo)
         return this.state.popupInfo.show && (
             <Popup tipSize={5}
                 anchor='bottom-right'
@@ -228,7 +251,7 @@ class Map extends Component {
                     />
                     <Box pad='10px' direction='column'>
                         <Text>{popupInfo.info.django_user.username}</Text>
-                        <Text>{String(popupInfo.info.distance).slice(0,5)} км</Text>
+                        <Text>{String(popupInfo.info.distance || '??? ').slice(0,5)} км</Text>
 
                     </Box>
                 </Box>
@@ -254,7 +277,7 @@ class Map extends Component {
         <Tab title='Карта'>
             {!this.state.permissionGiven &&
                 <Box align='center' fill='horizontal' height='30px'>
-                    <Text>Вы не дали доступ к своей геопозиции</Text>
+                    <Text color='brand'>Вы не дали доступ к своей геопозиции</Text>
                 </Box>
             }
             <Box height='5px'></Box>
@@ -275,16 +298,17 @@ class Map extends Component {
                 </Box>
 
                 {this.state.markers.map(el => {
-                    return(
-                        <Mark el={el} name={el.name} key={el.latitude + el.longitude} 
-                                latitude={Number(el.latitude)} 
-                                longitude={Number(el.longitude)} 
-                                setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {
-                                latitude: latitude,
-                                longitude: longitude,
-                            }, info: el, show: true}
-                        })}></Mark>
-                    )
+                        return(
+                            <Mark el={el} name={el.name} key={el.latitude + el.longitude} 
+                                    latitude={Number(el.latitude)} 
+                                    longitude={Number(el.longitude)} 
+                                    setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                }, info: el, show: true}
+                            })}></Mark>
+                        )
+                    
                 })}
 
 
@@ -322,7 +346,7 @@ class Map extends Component {
             <Tab title='Список'>
                 {!this.state.permissionGiven &&
                     <Box align='center' fill='horizontal'>
-                        <Text>Вы не дали доступ к своей геопозиции</Text>
+                        <Text color='brand'>Вы не дали доступ к своей геопозиции</Text>
                     </Box>
                 }
                 <Box height='5px'></Box>

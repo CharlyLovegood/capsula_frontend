@@ -10,7 +10,6 @@ export const bookService = {
 
 
 function getBook(id, currentPosition) {
-    console.log(currentPosition);
     const url = currentPosition ? back_url.books.get_book(id)+`?longitude=${currentPosition.longitude}&latitude=${currentPosition.latitude}` : back_url.books.get_book(id);
 
     const requestOptions = {

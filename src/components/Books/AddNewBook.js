@@ -82,7 +82,6 @@ class AddNewBook extends Component {
     handleSubmit() {
         let book = {};
         const {bookName, genre_code, author} = this.state;
-        console.log(bookName, genre_code, author)
 
         if (bookName !== '' && genre_code !== '' && author !== '') {
             if (this.state.image === remote_url.images.add_new_book_default) {
@@ -115,7 +114,6 @@ class AddNewBook extends Component {
     handleSubmitISBN() {
         let book = {};
         const {api_bookName, genre_code, api_author} = this.state;
-        console.log(api_bookName, genre_code, api_author)
         if (api_bookName !== '' && genre_code !== 0 && api_author !== '') {
             if (this.state.api_image === remote_url.images.add_new_book_default) {
                 book = {
