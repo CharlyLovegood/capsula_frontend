@@ -68,8 +68,8 @@ class HomePage extends Component {
                             <Box className={styles.gradient} align='center'>
                                 <Gallery 
                                     object={(title, coverage, genre, author, id, idAbstract) => <BookItem info margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.slice(0,10)}
-                                    header={<Link to='/search/1'>Доступные книги</Link>}
+                                    objectList={this.props.library.search.slice(10,20)}
+                                    header={<Link to='/search/1'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                     contentType='books'
                                     key='HomePageGalleryNAuth'
                                 ></Gallery>

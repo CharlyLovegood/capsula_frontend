@@ -20,8 +20,8 @@ function Mark(props) {
                 offsetLeft={-4} 
                 offsetTop={-20}
             >
-                <Location color='#ff8d75' onClick={() => props.setPopUp(latitude, longitude)}></Location>
-                <Text color='#ff8d75'>{props.name}</Text>
+                <Location color='#2affb0' onClick={() => props.setPopUp(latitude, longitude)}></Location>
+                <Text color='#2affb0'>{props.name}</Text>
             </Marker>
         )
 }

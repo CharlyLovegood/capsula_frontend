@@ -41,8 +41,6 @@ class BookPage extends Component {
         };
 
         navigator.geolocation.getCurrentPosition(success, error, options);
-
-        // this.props.getBook(this.state.id, this.state.currentPosition);
     }
 
     componentWillUnmount() {

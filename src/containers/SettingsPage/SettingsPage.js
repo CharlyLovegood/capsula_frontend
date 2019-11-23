@@ -142,7 +142,7 @@ class SettingsPage extends Component {
                                 onChange={ event => this.handleChange(event) }
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <TextField
                                 id='domitary'
                                 name='domitary'
@@ -153,7 +153,7 @@ class SettingsPage extends Component {
                                 value={user.domitary}
                                 onChange={ event => this.handleChange(event) }
                             />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12}>
                             <TextField
                                 id='vkId'

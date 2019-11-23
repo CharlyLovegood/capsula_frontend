@@ -89,6 +89,7 @@ const theme = {
             light_contrast: '#f9f9f9',
             focus: '#a517b5',
             // 'accent-1': '#ff8d75'
+            placeholder: '#7a7171'
         },
         font: {
             family: 'Open Sans Condensed',
@@ -118,7 +119,11 @@ const theme = {
             'xlarge': '800px',
             'xxlarge': '1000px',
             'full': '100%'
+        },
+        input: {
+            weight: '200'
         }
+        
     },
     heading: {
         font: {

@@ -26,7 +26,7 @@ class AddNewBook extends Component {
             bookName: '', 
             author:'',
             genre: 'Жанр',
-            genre_code: 0,
+            genre_code: '',
             image: remote_url.images.add_new_book_default,
             ISBN: '',
             api_image: '',
@@ -82,7 +82,9 @@ class AddNewBook extends Component {
     handleSubmit() {
         let book = {};
         const {bookName, genre_code, author} = this.state;
-        if (bookName !== '' && genre_code !== 0 && author !== '') {
+        console.log(bookName, genre_code, author)
+
+        if (bookName !== '' && genre_code !== '' && author !== '') {
             if (this.state.image === remote_url.images.add_new_book_default) {
                 book = {
                     'title': this.state.bookName,
@@ -101,9 +103,9 @@ class AddNewBook extends Component {
             this.props.onClose();
         } else if (bookName !== '' && author !== '') {
             this.setState({message: 'Заполните жанр', alert: true});
-        } else if (genre_code !== 0 && author !== '') {
+        } else if (genre_code !== '' && author !== '') {
             this.setState({message: 'Заполните название', alert: true});
-        } else if (genre_code !== 0 && bookName !== '') {
+        } else if (genre_code !== '' && bookName !== '') {
             this.setState({message: 'Заполните автора', alert: true});
         } else {
             this.setState({message: 'Заполните недостающие поля', alert: true});
@@ -113,6 +115,7 @@ class AddNewBook extends Component {
     handleSubmitISBN() {
         let book = {};
         const {api_bookName, genre_code, api_author} = this.state;
+        console.log(api_bookName, genre_code, api_author)
         if (api_bookName !== '' && genre_code !== 0 && api_author !== '') {
             if (this.state.api_image === remote_url.images.add_new_book_default) {
                 book = {
