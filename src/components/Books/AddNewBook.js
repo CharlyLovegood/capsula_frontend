@@ -155,7 +155,7 @@ class AddNewBook extends Component {
     render() {
         const {alert, message} = this.state;
         return (
-            <Box pad='medium' gap='small' width='medium' align='center' fill pad='10px'>
+            <Box gap='small' width='medium' align='center' fill pad='10px'>
                 <Box align='center' className={styles.scroll_container} pad='10px'>
                     <Heading textAlign='center' level={3} margin='none'>
                         Добавить книгу

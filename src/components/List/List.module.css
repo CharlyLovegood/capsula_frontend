@@ -28,3 +28,21 @@
 .botton {
     margin-left: 14px;
 }
+
+
+
+
+.scroll_container {
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.scroll_page {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    height: 100%;
+}

@@ -299,7 +299,7 @@ class Map extends Component {
 
                 {this.state.markers.map(el => {
                         return(
-                            <Mark el={el} name={el.name} key={el.latitude + el.longitude} 
+                            <Mark el={el} name={el.name} key={el.id+el.latitude+el.longitude} 
                                     latitude={Number(el.latitude)} 
                                     longitude={Number(el.longitude)} 
                                     setPopUp={(latitude, longitude) => this.setState({popupInfo: { state: {

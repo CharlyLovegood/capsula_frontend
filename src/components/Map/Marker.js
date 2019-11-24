@@ -9,7 +9,7 @@ import { Text } from 'grommet';
 function Mark(props) {
         const [latitude, setLatitude] = React.useState(props.latitude);
         const [longitude, setLongitude] = React.useState(props.longitude);
-
+        console.log(props)
         return (
             <Marker draggable={false} onDragEnd={(event) => {
                 setLatitude(event.lngLat[1]);
