@@ -14,7 +14,6 @@ export const bookActions = {
 function getBook(bookId, currentPosition) {
     return dispatch => {
         dispatch(request({ bookId }));
-        console.log(currentPosition)
         bookService.getBook(bookId, currentPosition)
             .then(
                 book => { 
