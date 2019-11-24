@@ -13,7 +13,7 @@ function ListElement(props) {
     const defaultAvatar = remote_url.images.user_default;
 
     const [avatar, setAvatar] = React.useState(props.owner.avatar ? props.owner.avatar : defaultAvatar);
-
+    console.log(props)
 
     return (
         <Box direction='row' justify='between' align='center' fill='horizontal' pad={{horizontal: '20px', vertical: '5px'}}>
@@ -28,7 +28,7 @@ function ListElement(props) {
             <Box wrap direction='row' justify='between' align='center' fill>
                 <Box pad='10px' direction='column'> 
                     <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
-                    <p className={styles.text}>{props.near ? 'В твоей общаге' : ''}</p>
+                    <p className={styles.text}>{props.point.distance ? `${String(props.point.distance).slice(0,5)} км` : ''}</p>
                 </Box>
                 <Box className={styles.botton} width='160px'>
                     {props.status === bookStatuses.AVAILABLE ?
