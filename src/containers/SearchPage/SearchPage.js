@@ -44,6 +44,7 @@ class SearchPage extends Component {
         }
         if (Number(prevProps.match.params.page) !== Number(this.props.match.params.page)) {
             this.setState({page: Number(this.props.match.params.page)});
+            this.props.requestPage(this.props.match.params.page);
         }
     }
 
