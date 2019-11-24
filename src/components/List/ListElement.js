@@ -13,7 +13,6 @@ function ListElement(props) {
     const defaultAvatar = remote_url.images.user_default;
 
     const [avatar, setAvatar] = React.useState(props.owner.avatar ? props.owner.avatar : defaultAvatar);
-    console.log(props)
 
     return (
         <Box direction='row' justify='between' align='center' fill='horizontal' pad={{horizontal: '20px', vertical: '5px'}}>
