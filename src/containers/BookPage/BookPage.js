@@ -99,12 +99,15 @@ class BookPage extends Component {
                     
                     <Box pad='10px' direction='column' align='center' margin={{vertical:'50px'}} width='large'>
                         <Box direction='row' justify='center'>
-                            {addedToWishlist &&
+                            {addedToWishlist && book.book_items.length !== 0 &&
                                 <Button margin='15px 5px' primary label={<strong>Удалить из вишлиста</strong>} onClick={() => this.deleteFromWishlist(book.wishlist.id)}></Button>
                             }
-                            {!addedToWishlist &&
+                            {!addedToWishlist && book.book_items.length !== 0 &&
                                 <Button margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>} onClick={() => this.addToWishlist(book, book.id)}></Button>
                             }
+                            {/* {book.book_items.length === 0 &&
+                                <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
+                            } */}
                         </Box>
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>

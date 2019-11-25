@@ -112,7 +112,7 @@ class AppBar extends Component {
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
-                                    <Link to='/search'>
+                                    <Link to='/search/1'>
                                         <Button icon={<Search size='26px' color='brand'></Search>}></Button>
                                     </Link>
                                 </Box>

@@ -28,6 +28,9 @@ class ErrorPage extends Component {
                     <p>
                         Наш telegram чат: <a href='https://t.me/booookovsky'>t.me/booookovsky</a>
                     </p>
+                    <p>
+                        Наша группа ВК: <a href='https://vk.com/public189055518'>https://vk.com/public189055518</a>
+                    </p>
                 </Box>
             </Box>
         )

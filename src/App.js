@@ -131,6 +131,24 @@ const theme = {
             size: '26px',
             height: '20px',
         },
+    },
+    tab: {
+        border: {
+            active: {
+                color: '#5c0b65'
+            },
+            hover: {
+                color: '#5c0b65'
+            },
+            color: '#7a7171'
+        },
+        hover: {
+            color: '#5c0b65'
+        },
+        active: {
+            color: '#5c0b65'
+        },
+        color: '#7a7171'
     }
 };
 
