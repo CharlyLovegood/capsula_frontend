@@ -8,16 +8,6 @@ import SizeComponent from '../SizeComponent/SizeComponent';
 import { remote_url } from './../../helpers';
 
 function Book(props) {
-    // const gradientList = [
-    //     'linear-gradient(to top right, rgb(101, 115, 255), rgb(111, 114, 247), rgb(120, 114, 239), rgb(130, 113, 231), rgb(139, 112, 223), rgb(149, 111, 215), rgb(158, 111, 208), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(196, 108, 176), rgb(206, 107, 168));',
-    //     'linear-gradient(to right, #c04848, #480048);',
-    //     'linear-gradient(to right, #5f2c82, #49a09d)',
-    //     'linear-gradient(to right, #4776e6, #8e54e9)',
-    //     'linear-gradient(to right, #dd5e89, #f7bb97)'
-    // ]
-    // const max = 4;
-    // const min = 0;
-    // const rand = Math.floor(min + Math.random() * (max + 1 - min));
     const defaultCoverage = remote_url.images.default_book;
     const background = props.coverage ? props.coverage : defaultCoverage;
 
@@ -27,24 +17,33 @@ function Book(props) {
     }
     
     return (
-        <Link to={link}>
-            <SizeComponent>
-                {size => 
-                <Box key={props.id} className={styles.book} background={`url("${background}")`} 
-                    width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
-                    height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
-                    margin={props.margin}
-                    animation={props.animation}>
-                        { !props.coverage &&
-                            <Box pad='10px' align='center' alignContent='center'>
-                                <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
-                                <Text textAlign='center' color='white'>{props.author}</Text>
-                            </Box>
-                        }
-                </Box>
-                }
-            </SizeComponent>
-        </Link>
+        <SizeComponent>
+            {size => 
+            <Box align='center' justify='center' direction='column'>
+                <Link to={link}>
+                    <Box key={props.id} className={styles.book} 
+                        width={size >= 424 || props.big ? 'book-width' : 'book-small-width'}
+                        height={size >= 424 || props.big ? 'book-height' : 'book-small-height'}
+                        margin={props.margin}
+                        animation={props.animation}
+                        background={`url("${background}")`}>
+                            { !props.coverage &&
+                                <Box pad='10px' align='center' alignContent='center'>
+                                    <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
+                                    <Text textAlign='center' color='white'>{props.author}</Text>
+                                </Box>
+                            }
+                    </Box>
+                </Link>
+                    {props.info &&
+                        <Box textAlign='center' width={size >= 424 || props.big ? 'book-width' : 'book-small-width'} align='center' justify='center'>
+                            <Text textAlign='center' size='18px' color='black'>{props.title.length <= 19 ? props.title : props.title.slice(0,18)+'...'}</Text>
+                            <Text textAlign='center' size='15px' color='#756d6d'>{props.author}</Text>
+                        </Box >
+                    }
+            </Box>
+            }
+        </SizeComponent>
     )
 }
 

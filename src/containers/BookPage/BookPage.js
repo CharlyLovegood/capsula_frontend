@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import styles from './BookPage.module.css';
 import Book from '../../components/Books/Book';
 import List from '../../components/List/List';
-import { Box, Button } from 'grommet';
+import { Box, Button, Text } from 'grommet';
 
 import { connect } from 'react-redux';
 import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 
 import ErrorPage from './../../components/Error/ErrorPage';
+import Map from '../../components/Map/Map';
+import SizeComponent from '../../components/SizeComponent/SizeComponent';
 
 class BookPage extends Component {
     state = { id: this.props.match.params.id, 
@@ -15,11 +17,30 @@ class BookPage extends Component {
         description: '',
         addedToWishlist: undefined, 
         changed: false,
-        book: undefined
+        book: undefined, 
+        currentPosition: {}
     }
 
     componentDidMount() {
-        this.props.getBook(this.state.id);
+        
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        
+        const success = (pos) => {
+            var crd = pos.coords;
+            this.setState({currentPosition: { latitude: crd.latitude, longitude: crd.longitude }});
+            this.props.getBook(this.state.id, crd);
+        };
+          
+        const error = (err) => {
+            this.setState({permissionGiven: false});
+            this.props.getBook(this.state.id);
+        };
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
     }
 
     componentWillUnmount() {
@@ -37,7 +58,6 @@ class BookPage extends Component {
                 this.setState({description: ''});
             }
         });
-    
     }
 
     componentDidUpdate() {
@@ -72,17 +92,22 @@ class BookPage extends Component {
                 {this.state.book &&
                 <Box direction='column' align='center' fill>
                     <Box  background='brandGradient' className={styles.background} align='center'>
-                        <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                        <Box margin={{vertical:'130px'}}>
+                            <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                        </Box>
                     </Box>
                     
-                    <Box direction='column' align='center' margin={{vertical:'50px'}} width='large'>
+                    <Box pad='10px' direction='column' align='center' margin={{vertical:'50px'}} width='large'>
                         <Box direction='row' justify='center'>
-                            {addedToWishlist &&
+                            {addedToWishlist && book.book_items.length !== 0 &&
                                 <Button margin='15px 5px' primary label={<strong>Удалить из вишлиста</strong>} onClick={() => this.deleteFromWishlist(book.wishlist.id)}></Button>
                             }
-                            {!addedToWishlist &&
+                            {!addedToWishlist && book.book_items.length !== 0 &&
                                 <Button margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>} onClick={() => this.addToWishlist(book, book.id)}></Button>
                             }
+                            {/* {book.book_items.length === 0 &&
+                                <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
+                            } */}
                         </Box>
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>
@@ -90,7 +115,20 @@ class BookPage extends Component {
                             {this.state.description}
                         </p>
                         {book.book_items[0] &&
-                            <List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id}></List>
+                        <SizeComponent>
+                            {size =>
+                            <Box direction='column' align='center' fill='horizontal'>
+                                <Text color='black' size='22px'><strong>Доступные книги</strong></Text>
+                                <Map markers={book.book_items} 
+                                    key='bookpagemap' 
+                                    width={size > 600 ? '600' : size-20}  
+                                    interactive={false} 
+                                    list={<List swapRequest={this.props.swapRequest} objectList={book.book_items} bookId={book.book_items[0].id} />} 
+                                    swapRequest={this.props.swapRequest} 
+                                    bookId={book.book_items[0].id}></Map>
+                            </Box>
+                            }
+                        </SizeComponent>
                         }
                     </Box>
                 </Box>}

@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './List.module.css';
 import { Link } from 'react-router-dom';
 
-import { Box } from 'grommet';
+import { Box, Text } from 'grommet';
 import { Send } from 'grommet-icons';
 import PopUpButton from '../Button/PopUpButton';
 import SwapAgreement from '../Books/SwapAgreement';
-import {bookStatuses} from './../../helpers/constants';
+import { bookStatuses } from './../../helpers/constants';
 import { remote_url } from './../../helpers';
 
 function ListElement(props) {
@@ -14,9 +14,8 @@ function ListElement(props) {
 
     const [avatar, setAvatar] = React.useState(props.owner.avatar ? props.owner.avatar : defaultAvatar);
 
-
     return (
-        <Box direction='row' justify='between' align='center' fill pad='20px'>
+        <Box direction='row' justify='between' align='center' fill='horizontal' pad={{horizontal: '20px', vertical: '5px'}}>
             <Link to={`/user/${props.owner.id}`}>
                 <img
                     alt='Remy Sharp'
@@ -28,13 +27,13 @@ function ListElement(props) {
             <Box wrap direction='row' justify='between' align='center' fill>
                 <Box pad='10px' direction='column'> 
                     <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
-                    <p className={styles.text}>{props.near ? 'В твоей общаге' : ''}</p>
+                    <p className={styles.text}>{props.point.distance ? `${String(props.point.distance).slice(0,5)} км` : ''}</p>
                 </Box>
-                <Box width='180px'>
+                <Box className={styles.botton} width='160px'>
                     {props.status === bookStatuses.AVAILABLE ?
-                        <PopUpButton fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Send></Send>}></PopUpButton>
+                        <PopUpButton fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label={<Text color='brand'>Попросить</Text>} icon={<Send color='brand'/>}></PopUpButton>
                         :
-                        <PopUpButton title='Книга занята' disabled fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label='Попросить' icon={<Send></Send>}></PopUpButton>
+                        <PopUpButton title='Книга занята' disabled fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label={<Text color='brand'>Попросить</Text>} icon={<Send></Send>}></PopUpButton>
                     }
                 </Box>
             </Box>

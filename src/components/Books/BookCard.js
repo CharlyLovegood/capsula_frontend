@@ -47,15 +47,17 @@ function BookCard(props) {
                 direction='row' 
                 width={size >= 1000 ? '480px' : '100%'}
                 background='light_contrast' 
-                margin={{'vertical': '10px', 'horizontal':'10px'}}
+                margin='10px'
             >
                 <Book size='small' 
                     title={props.book.title} 
                     coverage={props.coverage} 
-                    id={props.book.id}>
+                    id={props.book.id} 
+                    author=''>
                 </Book>
-                <Box fill direction='row' wrap>
-                    <Box flex='grow' 
+
+                <Box margin='10px' direction='row' wrap>
+                    <Box 
                         direction='column' 
                         pad='10px'
                     >
@@ -91,12 +93,12 @@ function BookCard(props) {
                                 <p className={styles.text}>Состояние: {swapResults[props.history]}</p>
                             </Box>
                         }
-
                         <p className={styles.text}>Дата: {props.date}</p>
-                    </Box>
-                    <Box width='162px' align='center' justify='around'>
+                    <Box align='start'>
                         {ButtonBlock}
                     </Box>
+                    </Box>
+                    
                 </Box>
             </Box>
         }

@@ -12,9 +12,17 @@ import Book from '../../components/Books/Book';
 import Gallery from '../../components/Gallery/Gallery';
 
 import styles from './SearchPage.module.css'
+import { Link, NavLink } from 'react-router-dom';
 
 class SearchPage extends Component {
-    state = { value: '', suggestedList: [], genre: -1, page: 1, pageItems: [], max: 1000 };
+    state = { 
+        value: '', 
+        suggestedList: [], 
+        genre: -1, 
+        page: Number(this.props.match.params.page), 
+        pageItems: [], 
+        max: 1000 
+    };
 
     boxRef = createRef();
   
@@ -33,6 +41,10 @@ class SearchPage extends Component {
         if ( this.props.search !== prevProps.search && this.props.search.found === true) {
             this.setState({ suggestedList: this.props.search.search });
             this.setState({ max: Math.floor(this.props.search.search.length/30) + 1 });
+        }
+        if (Number(prevProps.match.params.page) !== Number(this.props.match.params.page)) {
+            this.setState({page: Number(this.props.match.params.page)});
+            this.props.requestPage(this.props.match.params.page);
         }
     }
 
@@ -97,7 +109,7 @@ class SearchPage extends Component {
 
         return(
         <Gallery 
-            object={(title, coverage, genre, author, id, idAbstract) => <Book handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 
+            object={(title, coverage, genre, author, id, idAbstract) => <Book info handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 
             objectList={res}
             contentType='books'
         ></Gallery>)
@@ -118,6 +130,40 @@ class SearchPage extends Component {
             window.scrollTo(0,0);
             this.props.requestPage(this.state.page - 1);
             this.setState({page: this.state.page - 1});
+        }
+    }
+
+    Pages() {
+        const {page, max} = this.state;
+        const el = (page) =>                     
+            (<NavLink className={styles.page} activeClassName={styles.activePage} to={`/search/${page}`}>
+                {page}
+            </NavLink>);
+
+        if (page === 1) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(page)}
+                    {el(page+1)}
+                    {el(page+2)}
+                </Box>
+            );
+        } else if (page === max) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(page-2)}
+                    {el(page-1)}
+                    {el(page)}
+                </Box>
+            );
+        } else {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(page-1)}
+                    {el(page)}
+                    {el(page+1)}
+                </Box>
+            );
         }
     }
   
@@ -165,9 +211,13 @@ class SearchPage extends Component {
 
                 {this.state.genre === -1 && this.state.value === '' &&
                     <Box margin='10px' gap='10px' direction='row'>
-                        <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
-                        {page}
-                        <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
+                        <Link to={`/search/${page > 1 ? page-1 : page}`}>
+                            <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
+                        </Link>
+                        {this.Pages()}
+                        <Link to={`/search/${page < this.state.max ? page+1 : page}`}>
+                            <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
+                        </Link>
                     </Box>
                 }
 

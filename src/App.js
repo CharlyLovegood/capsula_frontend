@@ -36,6 +36,7 @@ import { connect } from 'react-redux';
 import styles from './App.module.css';
 
 import { alertActions } from './store/actions';
+import { width } from '@material-ui/system';
 
 
 
@@ -86,6 +87,9 @@ const theme = {
             background: '#ffffff',
             contrast: '#000000',
             light_contrast: '#f9f9f9',
+            focus: '#a517b5',
+            // 'accent-1': '#ff8d75'
+            placeholder: '#7a7171'
         },
         font: {
             family: 'Open Sans Condensed',
@@ -107,15 +111,19 @@ const theme = {
             'xsmall': '96px',
             'book-height': '270px',
             'book-width': '180px',
-            'book-small-height': '200px',
-            'book-small-width': '120px',
+            'book-small-height': '210px',
+            'book-small-width': '140px',
             'small': '200px',
             'medium': '400px',
             'large': '600px',
             'xlarge': '800px',
             'xxlarge': '1000px',
             'full': '100%'
+        },
+        input: {
+            weight: '200'
         }
+        
     },
     heading: {
         font: {
@@ -123,6 +131,24 @@ const theme = {
             size: '26px',
             height: '20px',
         },
+    },
+    tab: {
+        border: {
+            active: {
+                color: '#5c0b65'
+            },
+            hover: {
+                color: '#5c0b65'
+            },
+            color: '#7a7171'
+        },
+        hover: {
+            color: '#5c0b65'
+        },
+        active: {
+            color: '#5c0b65'
+        },
+        color: '#7a7171'
     }
 };
 
@@ -169,7 +195,7 @@ class App extends Component {
                                 <PrivateRoute path='/user/:id/library' component={ LibraryPage } />
                                 <PrivateRoute path='/reader' component={ SwapPage } />
                                 <PrivateRoute path='/owner' component={ SwapPage } />
-                                <PrivateRoute path='/search' component={ SearchPage } />
+                                <PrivateRoute path='/search/:page' component={ SearchPage } />
                                 <PrivateRoute path='/history' component={ HistoryPage } />
                                 <PrivateRoute path='/settings' component={ SettingsPage } />
 

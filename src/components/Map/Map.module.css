@@ -1,0 +1,17 @@
+.leaflet {
+    height: 400px;
+    width: 800px;
+}
+
+
+.avatar {
+    height: 60px;
+    border-radius: 100%;
+    width: 60px;
+    margin: 5px;
+    object-fit: cover;
+}
+
+.botton {
+    margin-bottom: -10px;
+}

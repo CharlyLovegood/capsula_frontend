@@ -65,7 +65,7 @@ class AppBar extends Component {
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
-                                    <Button icon={<Search></Search>} onClick={() => this.setState({showSidebar: !this.state.showSidebar})}></Button>
+                                    <Button icon={<Search size='26px' color='brand'></Search>} onClick={() => this.setState({showSidebar: !this.state.showSidebar})}></Button>
                                 </Box>
                                 <Collapsible direction="horizontal" open={showSidebar}>
                                     <SearchBar close={()=> this.setState({showSidebar: !this.state.showSidebar})}></SearchBar>
@@ -112,8 +112,8 @@ class AppBar extends Component {
 
                             <Box align='center' flex='grow' height='auto' direction='row' justify='end'>
                                 <Box>
-                                    <Link to='/search'>
-                                        <Button icon={<Search></Search>}></Button>
+                                    <Link to='/search/1'>
+                                        <Button icon={<Search size='26px' color='brand'></Search>}></Button>
                                     </Link>
                                 </Box>
                                 <Button margin='-12px' icon={<Menu />} onClick={() => this.setState({showMenu: !this.state.showMenu})}></Button>

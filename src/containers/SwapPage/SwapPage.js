@@ -79,11 +79,11 @@ class SwapPage extends Component {
         const swapsList = this.state.swapsList;
 
         return (
-            <Box direction='column' align='center' fill pad='10px'>
+            <Box direction='column' align='center' fill>
                 <Box direction='column' width='xxlarge' align='center'>
 
                     {swapsList && this.props.match.path === '/reader' &&
-                        <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                        <Tabs activeIndex={this.state.index} onActive={onActive}>
                             <Tab title='Заявки' >
                                 <Gallery
                                     message='Здесь пусто, подайте заявку на книгу'
@@ -120,7 +120,7 @@ class SwapPage extends Component {
                         </Tabs>
                     }
                     {swapsList && this.props.match.path === '/owner' &&
-                        <Tabs activeIndex={this.state.index} onActive={onActive} margin='20px'>
+                        <Tabs activeIndex={this.state.index} onActive={onActive} >
                             <Tab title='Заявки' >
                                 <Gallery
                                     message='Вам пока не отправили заявку на книгу'

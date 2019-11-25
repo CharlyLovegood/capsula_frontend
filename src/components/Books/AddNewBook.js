@@ -26,7 +26,7 @@ class AddNewBook extends Component {
             bookName: '', 
             author:'',
             genre: 'Жанр',
-            genre_code: 0,
+            genre_code: '',
             image: remote_url.images.add_new_book_default,
             ISBN: '',
             api_image: '',
@@ -82,7 +82,8 @@ class AddNewBook extends Component {
     handleSubmit() {
         let book = {};
         const {bookName, genre_code, author} = this.state;
-        if (bookName !== '' && genre_code !== 0 && author !== '') {
+
+        if (bookName !== '' && genre_code !== '' && author !== '') {
             if (this.state.image === remote_url.images.add_new_book_default) {
                 book = {
                     'title': this.state.bookName,
@@ -101,9 +102,9 @@ class AddNewBook extends Component {
             this.props.onClose();
         } else if (bookName !== '' && author !== '') {
             this.setState({message: 'Заполните жанр', alert: true});
-        } else if (genre_code !== 0 && author !== '') {
+        } else if (genre_code !== '' && author !== '') {
             this.setState({message: 'Заполните название', alert: true});
-        } else if (genre_code !== 0 && bookName !== '') {
+        } else if (genre_code !== '' && bookName !== '') {
             this.setState({message: 'Заполните автора', alert: true});
         } else {
             this.setState({message: 'Заполните недостающие поля', alert: true});
@@ -154,8 +155,8 @@ class AddNewBook extends Component {
     render() {
         const {alert, message} = this.state;
         return (
-            <Box pad='medium' gap='small' width='medium' align='center' fill>
-                <Box align='center' className={styles.scroll_container}>
+            <Box gap='small' width='medium' align='center' fill pad='10px'>
+                <Box align='center' className={styles.scroll_container} pad='10px'>
                     <Heading textAlign='center' level={3} margin='none'>
                         Добавить книгу
                     </Heading>

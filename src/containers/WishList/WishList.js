@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Box, Text } from 'grommet';
+import { Box, Text, Button } from 'grommet';
 import SmartBook from '../../components/Books/WishBook';
 import Gallery from '../../components/Gallery/Gallery';
 import { wishlistActions } from '../../store/actions';
 import { connect } from 'react-redux';
 import Book from '../../components/Books/Book';
-import { StatusGood, StatusCritical } from 'grommet-icons';
+import { StatusGood, StatusCritical, Search } from 'grommet-icons';
+import {Link} from 'react-router-dom';
 
 
 class WishList extends Component {
@@ -52,19 +53,29 @@ class WishList extends Component {
                     </Box>
                 }
 
-                {}
-
                 {wishlist.wishlistRecieved && this.state.owner &&
                     <Box align='center' width='xxlarge'>
-                        {wishlist.wishlist.length === 0 &&
-                            <Text margin='30px'>Сюда можно складывать все то, что вам понравилось</Text>
-                        }
                         <Gallery 
                             object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteFromWishlist={this.props.deleteFromWishlist} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                             objectList={wishlist.wishlist}
                             //  header='Мои книги'
                             contentType='smart-books'
                         ></Gallery>
+
+                        {wishlist.wishlist.length === 0 &&
+                            <Box margin='20px'>Сюда можно складывать все то, что вам понравилось</Box>
+                        }
+                        
+                        <Box margin='20px'>
+                            <Link to='/search/1'>
+                                <Button  
+                                    label={<Text><strong>Найти книгу</strong></Text>} 
+                                    primary
+                                    icon={<Search />}
+                                    key='WishlistButton'>
+                                </Button>
+                            </Link>
+                        </Box>
                     </Box>
                 }
                 {wishlist.wishlistRecieved && !this.state.owner &&

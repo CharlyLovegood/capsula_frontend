@@ -9,10 +9,12 @@ export const bookService = {
 };
 
 
-function getBook(id) {
+function getBook(id, currentPosition) {
+    const url = currentPosition ? back_url.books.get_book(id)+`?longitude=${currentPosition.longitude}&latitude=${currentPosition.latitude}` : back_url.books.get_book(id);
+
     const requestOptions = {
         method: 'GET',
-        url: back_url.books.get_book(id),
+        url: url,
         headers: {'Authorization': 'Token ' + localStorage.token}
     };
     

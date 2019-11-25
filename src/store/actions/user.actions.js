@@ -54,7 +54,6 @@ function login(username, password) {
             );
     };
 
-    function forceLogout(error) { return { type: userConstants.LOGOUT_FAILURE, error } }
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }

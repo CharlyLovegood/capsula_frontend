@@ -19,12 +19,12 @@ export default class ImageUpload extends Component {
         let fileReader = new FileReader();
 
         return new Promise((resolve, reject) => {
-                fileReader.onload = e => {
-                        let dataURI = e.target.result;
-                        resolve(dataURI);
-                }
-                fileReader.onerror = () => reject('Ошибка чтения файла');
-                fileReader.readAsDataURL(file); 
+            fileReader.onload = e => {
+                    let dataURI = e.target.result;
+                    resolve(dataURI);
+            }
+            fileReader.onerror = () => reject('Ошибка чтения файла');
+            fileReader.readAsDataURL(file); 
         })
     }; 
 
@@ -34,7 +34,7 @@ export default class ImageUpload extends Component {
                 event.preventDefault();
                 let reader = new FileReader();
                 let file = event.target.files[0];
-                // reader.readAsDataURL(file);
+                reader.readAsDataURL(file); 
                 let extension = file.name.split('.').pop().toLowerCase();
                 if (extension === 'png' || extension === 'jpg' || extension === 'jpeg') {
                     this.readFile(file).then( function(result) {
@@ -42,6 +42,7 @@ export default class ImageUpload extends Component {
                     });
                 }
                 else {
+                    this.setState()
                     reject(file.name);
                 }
             } else {
@@ -57,18 +58,8 @@ export default class ImageUpload extends Component {
         });
     }
 
-    componentDidUpdate(prevProps) {
-        // if (this.state.image !== this.state.initialImg) {
-        //     this.setState({ image: this.state.initialImg });
-        // }
-        // if (this.state.image !== prevProps.img) {
-        //     this.setState({ image: this.props.img });
-        // }
-    }
-
 
     onError() {
-        console.log('error')
         if (this.state.image === this.state.initialImg) {
             this.setState({ image: remote_url.images.user_default });
             this.props.returnImage(remote_url.images.user_default);

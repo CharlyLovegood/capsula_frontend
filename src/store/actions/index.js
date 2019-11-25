@@ -5,3 +5,4 @@ export * from './library.actions';
 export * from './book.actions';
 export * from './swap.actions';
 export * from './wishlist.actions';
+export * from './map.actions';

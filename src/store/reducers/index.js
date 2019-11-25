@@ -9,6 +9,7 @@ import { library } from './library.reducer';
 import { book } from './book.reducer';
 import { swap } from './swap.reducer';
 import { wishlist } from './wishlist.reducer';
+import { map } from './map.reducer';
 
 
 const rootReducer = combineReducers({
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     library,
     book,
     swap,
-    wishlist
+    wishlist,
+    map
 });
 
 export default rootReducer;
