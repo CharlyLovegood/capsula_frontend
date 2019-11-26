@@ -17,7 +17,6 @@ import { Link, NavLink } from 'react-router-dom';
 
 
 
-
 class SearchPage extends Component {
     state = { 
         value: '', 

@@ -39,7 +39,7 @@ function search(query, page, genre) {
         searchService.search(query, page, genre)
             .then(
                 searchResult => { 
-                    console.log(searchResult)
+                    // console.log(searchResult);
                     dispatch(success(searchResult));
                 },
                 error => {
