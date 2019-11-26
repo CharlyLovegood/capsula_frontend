@@ -4,7 +4,8 @@ import { searchConstants } from '../constants';
 
 export const searchActions = {
     request,
-    requestPage
+    requestPage,
+    search
 };
 
 
@@ -30,6 +31,28 @@ function request(searchRequest) {
     function failure(error) { return { type: searchConstants.SEARCH_FAILURE, error } }
 }
 
+
+function search(query, page, genre) {
+    return dispatch => {
+        dispatch(request());
+
+        searchService.search(query, page, genre)
+            .then(
+                searchResult => { 
+                    console.log(searchResult)
+                    dispatch(success(searchResult));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request() { return { type: searchConstants.SEARCH_REQUEST } }
+    function success(searchResult) { return { type: searchConstants.SEARCH_SUCCESS, searchResult } }
+    function failure(error) { return { type: searchConstants.SEARCH_FAILURE, error } }
+}
 
 
 function requestPage(page) {

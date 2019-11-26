@@ -35,6 +35,7 @@ class HomePage extends Component {
     }
     
     render() {
+        console.log(this.props.library.search)
         return (
             <SizeComponent>
                 {size => 

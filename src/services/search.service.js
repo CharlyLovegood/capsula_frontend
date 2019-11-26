@@ -4,7 +4,8 @@ import { back_url } from './../helpers';
 
 export const searchService = {
     request,
-    requestPage
+    requestPage,
+    search
 };
 
 function request() {
@@ -30,6 +31,21 @@ function requestPage(page) {
             return bookList;
         }); 
 }
+
+function search(query, page, genre) {
+    const requestOptions = {
+        method: 'GET',
+        url: back_url.search.search(query, page, genre),
+    };
+
+    return axios(requestOptions)
+        .then(handleResponse)
+        .then(bookList => {
+            return bookList;
+        }); 
+}
+
+
 
 
 function handleResponse(response) {
