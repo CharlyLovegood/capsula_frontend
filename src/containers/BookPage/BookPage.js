@@ -93,7 +93,7 @@ class BookPage extends Component {
                 <Box direction='column' align='center' fill>
                     <Box  background='brandGradient' className={styles.background} align='center'>
                         <Box margin={{vertical:'130px'}}>
-                            <Book animation='slideUp' title={book.authors} author={book.title} big='true' coverage={book.image}></Book>
+                            <Book animation='slideUp' author={book.authors} title={book.title} big='true' coverage={book.image}></Book>
                         </Box>
                     </Box>
                     

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Text } from 'grommet';
+import { Box, Text, Button } from 'grommet';
 import Element from './Element';
 import Banner from './../../components/Banner/Banner';
 import { connect } from 'react-redux';
@@ -74,9 +74,11 @@ class HomePage extends Component {
                                     key='HomePageGalleryNAuth'
                                 ></Gallery>
                             </Box>
-                            <Link to='/login'>
-                                <Text color='#464141' size='16px'>Войди, чтобы увидеть больше...</Text>
-                            </Link>
+                            <Box margin='20px'>
+                                <Link to='/login'>
+                                    <Button label={<Text color='brand' size='16px'><strong>Войди, чтобы увидеть больше</strong></Text>}></Button>
+                                </Link>
+                            </Box>
                         </Box>
                     } 
                     {this.props.library.found && this.props.user.loggedIn &&
@@ -88,9 +90,11 @@ class HomePage extends Component {
                                 contentType='books'
                                 key='HomePageGalleryAuth'
                             ></Gallery>
-                            <Link to='/search/1'>
-                                <Text color='#464141' size='16px'>Увидеть больше...</Text>
-                            </Link>
+                            <Box margin='20px'>
+                                <Link to='/search/1'>
+                                    <Button label={<Text color='brand' size='16px'><strong>Увидеть больше</strong></Text>}></Button>
+                                </Link>
+                            </Box>
                         </Box>
                     } 
                 </Box>
