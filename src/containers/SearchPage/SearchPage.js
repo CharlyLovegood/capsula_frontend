@@ -24,7 +24,7 @@ class SearchPage extends Component {
         genre: -1, 
         page: Number(this.props.match.params.page), 
         pageItems: [], 
-        max: 4 
+        max: 1
     };
 
     boxRef = createRef();
@@ -37,12 +37,18 @@ class SearchPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log('1')
         let { value, genre, page } = this.state;
         if (prevState.page !== Number(this.props.match.params.page)) {
             if (genre === -1) genre = '';
 
             this.setState({page: Number(this.props.match.params.page)});
             this.props.request(value, Number(this.props.match.params.page), genre);
+        }
+
+        if (prevProps.search.pages !== this.props.search.pages) {
+            console.log('2')
+            this.setState({max: this.props.search.pages});
         }
     }
   
@@ -103,13 +109,33 @@ class SearchPage extends Component {
     }
 
     Pages() {
-        const {page, max} = this.state;
+        const { page, max } = this.state;
         const el = (page) =>                     
             (<NavLink className={styles.page} activeClassName={styles.activePage} to={`/search/${page}`}>
                 {page}
             </NavLink>);
-
-        if (page === 1) {
+        if (max === 1) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                </Box>
+            );
+        } else if (max === 2) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                    {el(2)}
+                </Box>
+            );
+        } else if (max === 3) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                    {el(2)}
+                    {el(3)}
+                </Box>
+            );
+        } else if (page === 1) {
             return (
                 <Box direction='row' gap='20px'>
                     {el(page)}
@@ -180,13 +206,17 @@ class SearchPage extends Component {
 
                 {this.state.genre === -1 && this.state.value === '' &&
                     <Box margin='10px' gap='10px' direction='row'>
-                        <Link to={`/search/${page > 1 ? page-1 : page}`}>
-                            <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
-                        </Link>
+                        {this.state.max !== 1 && 
+                            <Link to={`/search/${page > 1 ? page-1 : page}`}>
+                                <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
+                            </Link>
+                        }
                         {this.Pages()}
-                        <Link to={`/search/${page < this.state.max ? page+1 : page}`}>
-                            <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
-                        </Link>
+                        {this.state.max !== 1 && 
+                            <Link to={`/search/${page < this.state.max ? page+1 : page}`}>
+                                <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
+                            </Link>
+                        }
                     </Box>
                 }
 
