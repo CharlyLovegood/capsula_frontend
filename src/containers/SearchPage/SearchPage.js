@@ -37,7 +37,6 @@ class SearchPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('1')
         let { value, genre, page } = this.state;
         if (prevState.page !== Number(this.props.match.params.page)) {
             if (genre === -1) genre = '';
@@ -46,8 +45,7 @@ class SearchPage extends Component {
             this.props.request(value, Number(this.props.match.params.page), genre);
         }
 
-        if (prevProps.search.pages !== this.props.search.pages) {
-            console.log('2')
+        if (this.state.max !== this.props.search.pages) {
             this.setState({max: this.props.search.pages});
         }
     }
@@ -90,9 +88,9 @@ class SearchPage extends Component {
             window.scrollTo(0,0);
 
             if (genre === -1) genre = '';
-            this.props.request(value, page, genre);
+            this.props.request(value, page + 1, genre);
 
-            this.setState({page: this.state.page + 1});
+            this.setState({page: page + 1});
         }
     }
 
@@ -102,9 +100,9 @@ class SearchPage extends Component {
             window.scrollTo(0,0);
 
             if (genre === -1) genre = '';
-            this.props.request(value, page, genre);
+            this.props.request(value, page - 1, genre);
 
-            this.setState({page: this.state.page - 1});
+            this.setState({page: page - 1});
         }
     }
 

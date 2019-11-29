@@ -33,7 +33,13 @@ function ListElement(props) {
                     {props.status === bookStatuses.AVAILABLE ?
                         <PopUpButton fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label={<Text color='brand'>Попросить</Text>} icon={<Send color='brand'/>}></PopUpButton>
                         :
-                        <PopUpButton title='Книга занята' disabled fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label={<Text color='brand'>Попросить</Text>} icon={<Send></Send>}></PopUpButton>
+                        <PopUpButton title='Книга занята' 
+                            disabled 
+                            fill='horizontal' 
+                            innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} 
+                            label={<Text color='brand'>Попросить</Text>} 
+                            icon={<Send></Send>}>
+                        </PopUpButton>
                     }
                 </Box>
             </Box>

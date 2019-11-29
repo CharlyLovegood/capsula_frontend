@@ -10,12 +10,16 @@ import { bookActions, swapActions, wishlistActions } from '../../store/actions'
 import ErrorPage from './../../components/Error/ErrorPage';
 import Map from '../../components/Map/Map';
 import SizeComponent from '../../components/SizeComponent/SizeComponent';
+import PopUpButton from '../../components/Button/PopUpButton';
+import { Dislike } from 'grommet-icons';
+import ComplainDetails from '../../components/Books/ComplainDetails';
 
 class BookPage extends Component {
     state = { id: this.props.match.params.id, 
         items: [], 
         description: '',
         addedToWishlist: undefined, 
+        complaintSent: false,
         changed: false,
         book: undefined, 
         currentPosition: {}
@@ -83,9 +87,14 @@ class BookPage extends Component {
         this.setState({changed: true});
     }
 
+    complain(complaint) {
+        this.setState({complaintSent: true});
+        this.props.complain(complaint);
+    }
+
     render() {
         let {book} = this.state;
-        let {addedToWishlist} = this.state
+        let {addedToWishlist, complaintSent} = this.state
  
         return (
             <Box  direction='column' align='center' fill>
@@ -98,17 +107,41 @@ class BookPage extends Component {
                     </Box>
                     
                     <Box pad='10px' direction='column' align='center' margin={{vertical:'50px'}} width='large'>
-                        <Box direction='row' justify='center'>
-                            {addedToWishlist && book.book_items.length !== 0 &&
-                                <Button margin='15px 5px' primary label={<strong>Удалить из вишлиста</strong>} onClick={() => this.deleteFromWishlist(book.wishlist.id)}></Button>
-                            }
-                            {!addedToWishlist && book.book_items.length !== 0 &&
-                                <Button margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>} onClick={() => this.addToWishlist(book, book.id)}></Button>
-                            }
-                            {/* {book.book_items.length === 0 &&
-                                <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
-                            } */}
+                        <Box direction='row' wrap justify='center'> 
+                            <Box direction='row' justify='center'>
+                                {addedToWishlist && book.book_items.length !== 0 &&
+                                    <Button margin='15px 5px' primary label={<strong>Удалить из вишлиста</strong>} onClick={() => this.deleteFromWishlist(book.wishlist.id)}></Button>
+                                }
+                                {!addedToWishlist && book.book_items.length !== 0 &&
+                                    <Button margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>} onClick={() => this.addToWishlist(book, book.id)}></Button>
+                                }
+                                {/* {book.book_items.length === 0 &&
+                                    <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
+                                } */}
+                            </Box>
+                            <Box direction='row' justify='center'>
+                                {!complaintSent && book.book_items.length !== 0 &&
+                                    <PopUpButton title='Пожаловаться' 
+                                        fill='horizontal'
+                                        innerObject={onclose => <ComplainDetails type='book' complain={(complaint) => this.complain(complaint)} id={book.id} onClose={onclose}></ComplainDetails>} 
+                                        label={<Text color='brand'>Пожаловаться</Text>} 
+                                        icon={<Dislike color='brand'></Dislike>}>
+                                    </PopUpButton>
+                                }
+                                {complaintSent && book.book_items.length !== 0 &&
+                                    <PopUpButton title='Вы уже пожаловались' 
+                                        disabled
+                                        fill='horizontal' 
+                                        label={<Text color='brand'>Пожаловаться</Text>} 
+                                        icon={<Dislike color='brand'></Dislike>}>
+                                    </PopUpButton>
+                                }
+                                {/* {book.book_items.length === 0 &&
+                                    <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
+                                } */}
+                            </Box>
                         </Box>
+                        
                         <h3 className={styles.header}>{book.title}</h3>
                         <p className={styles.author}>{book.authors}</p>
                         <p className={styles.text}>
@@ -151,7 +184,8 @@ const actionCreators = {
     addBook: bookActions.addBook,
     deleteFromWishlist: wishlistActions.deleteFromWishlist,
     swapRequest: swapActions.swapRequest,
-    addToWishlist: wishlistActions.addToWishlist
+    addToWishlist: wishlistActions.addToWishlist,
+    complain: bookActions.complainBook
 };
 
 const connectedBookPage = connect(mapState, actionCreators)(BookPage);

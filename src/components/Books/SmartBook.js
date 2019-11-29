@@ -21,16 +21,18 @@ const SmartBook = (props) => {
         setPrevBookCoverage(props.coverage);
     }
 
+    console.log(props);
+
     return (
         <Box margin='10px' width='book-width' height='book-height' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
                 <Box background={`url(${bookCoverage})`} className={styles.book_card_front} onError={() => setBookCoverage(remote_url.images.default_book)}>
-                { bookCoverage === defaultCoverage &&
-                    <Box>
-                        <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
-                        <Text textAlign='center' color='white'>{props.author}</Text>
-                    </Box>
-                }
+                    { bookCoverage === defaultCoverage &&
+                        <Box>
+                            <Text textAlign='center' color='white'><strong>{props.title}</strong></Text>
+                            <Text textAlign='center' color='white'>{props.author}</Text>
+                        </Box>
+                    }
                 </Box>
                 <Box background='brand' pad={{horizontal: '5px', vertical: '20px'}} align='center' justify='end' className={styles.book_card_back}>
                     <img 

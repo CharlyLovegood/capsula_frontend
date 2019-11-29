@@ -7,7 +7,8 @@ export const bookActions = {
     getBook,
     deleteBookById,
     addBook,
-    editBook
+    editBook,
+    complainBook
 };
 
 
@@ -101,4 +102,25 @@ function editBook(book, bookId) {
     function request(book) { return { type: bookConstants.EDIT_BOOK_REQUEST, book } }
     function success(book, bookId) { return { type: bookConstants.EDIT_BOOK_SUCCESS, book, bookId } }
     function failure(error) { return { type: bookConstants.EDIT_BOOK_FAILURE, error } }
+}
+
+
+function complainBook(complaint) {
+    return dispatch => {
+        dispatch(request({ complaint }));
+        bookService.complain(complaint.id, complaint.content, complaint.comment)
+            .then(
+                response => { 
+                    dispatch(success(response));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(complaint) { return { type: bookConstants.COMPLAIN_BOOK_REQUEST, complaint } }
+    function success(response) { return { type: bookConstants.COMPLAIN_BOOK_SUCCESS, response } }
+    function failure(error) { return { type: bookConstants.COMPLAIN_BOOK_FAILURE, error } }
 }
