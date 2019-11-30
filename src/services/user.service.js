@@ -8,7 +8,8 @@ export const userService = {
     getById,
     editUser,
     oauth,
-    forceLogout
+    forceLogout,
+    complain
 };
 
 
@@ -76,6 +77,20 @@ function logout() {
             localStorage.removeItem('id');
             return user;
         }); 
+}
+
+function complain(user, content, comment) {
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify({ user, content, comment }),
+        headers: {'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.token}
+    };
+    return fetch(back_url.management.user_complain, requestOptions)
+        .then(handlePostResponse)
+        .then(response => {
+            return response;
+        });
 }
 
 

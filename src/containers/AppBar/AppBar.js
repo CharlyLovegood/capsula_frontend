@@ -73,7 +73,7 @@ class AppBar extends Component {
                             </Box>
 
                             <Box margin={{ vertical: 'xsmall' }}>
-                                <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.username}></UserAvatar>
+                                <UserAvatar logout={event => this.handleLogOut(event)} key={this.props.user.user.id} id={this.props.user.user.id} avatar={this.props.user.user.avatar} color='menuTextColor' name={this.props.user.user.firstName}></UserAvatar>
                             </Box>
                         </Box>
 
@@ -148,7 +148,7 @@ class AppBar extends Component {
                                             className={styles.small_avatar}
                                         />
                                     </Link>
-                                    {this.props.user.user.username}
+                                    {this.props.user.user.firstName}
                                 </Box>
                                 <PrivateLinkMobile color='menuTextColor' to={`/user/${this.props.user.user.id}/library`} label='Мои книги' key='Мои книги'/>
                                 <PrivateLinkMobile color='menuTextColor' to={`/user/${this.props.user.user.id}/wishlist`} label='Вишлист' key='Вишлист'/>

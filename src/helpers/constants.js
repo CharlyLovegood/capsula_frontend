@@ -18,6 +18,34 @@ export const swapResults = [
 ]
 
 
+export const userComplainReasons = {
+    'Не существует': 0,
+    'Оскорбительное поведение': 1,
+    'Другое':2
+}
+
+export const bookComplainReasons = {
+    'Книга не существует': 0,
+    'Оскорбительное содержание': 1,
+    'Книга отсутствует у владельца': 2,
+    'Неправильное описание': 3,
+    'Другое': 4
+}
+
+export const userComplainReasonsArray = [
+    'Не существует',
+    'Оскорбительное поведение',
+    'Другое'
+]
+
+export const bookComplainReasonsArray = [
+    'Книга не существует',
+    'Оскорбительное содержание',
+    'Книга отсутствует у владельца',
+    'Неправильное описание',
+    'Другое'
+]
+
 export const bookStatuses = {
     AVAILABLE: 0,
     READING: 1,

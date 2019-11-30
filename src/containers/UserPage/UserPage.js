@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box } from 'grommet';
+import { Box, Text } from 'grommet';
 import styles from './UserPage.module.css';
 import Book from '../../components/Books/Book'
 import Scroll from '../../components/Scroll/Scroll'
@@ -8,6 +8,11 @@ import { connect } from 'react-redux';
 import { userActions, libraryActions, wishlistActions } from '../../store/actions';
 import ErrorPage from './../../components/Error/ErrorPage';
 import { remote_url } from '../../helpers';
+import PopUpButton from '../../components/Button/PopUpButton';
+import { Dislike } from 'grommet-icons';
+import ComplainDetails from '../../components/Books/ComplainDetails';
+
+
 
 class UserPage extends Component {
     state = {
@@ -19,7 +24,8 @@ class UserPage extends Component {
             'id': this.props.match.params.id,
             'booksTaken': 0,
             'booksGiven': 0
-        }
+        },
+        complaintSent: false
     }
     
     setUser() {
@@ -65,8 +71,14 @@ class UserPage extends Component {
     }
 
 
+    complain(complaint) {
+        this.setState({complaintSent: true});
+        this.props.complain(complaint);
+    }
+
+
     render() {
-        let {user} = this.state;
+        let {user, complaintSent} = this.state;
         let library= [];
         // let {wishlist} = [];
 
@@ -92,9 +104,33 @@ class UserPage extends Component {
                                 />
                             </Box>
                         </Box>
-                        <h3 className={styles.header1}>{user.username}</h3>
-                        <p className={styles.header2}>{user.lastName} {user.firstName}</p>
-                        <Box margin='20px'  align='center'>
+                        <h3 className={styles.header1}>{user.lastName} {user.firstName}</h3>
+                        <p className={styles.header2}>{user.username}</p>
+
+                        <Box margin={{vertical: '20px'}} direction='row' justify='center'>
+                            {!complaintSent &&
+                                <PopUpButton title='Пожаловаться' 
+                                    fill='horizontal'
+                                    innerObject={onclose => <ComplainDetails type='user' complain={(complaint) => this.complain(complaint)} id={user.id} onClose={onclose}></ComplainDetails>} 
+                                    label={<Text color='brand'>Пожаловаться</Text>} 
+                                    icon={<Dislike color='brand'></Dislike>}>
+                                </PopUpButton>
+                            }
+                            {complaintSent &&
+                                <PopUpButton title='Вы уже пожаловались' 
+                                    disabled
+                                    fill='horizontal' 
+                                    label={<Text color='brand'>Пожаловаться</Text>} 
+                                    icon={<Dislike color='brand'></Dislike>}>
+                                </PopUpButton>
+                            }
+                            {/* {book.book_items.length === 0 &&
+                                <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
+                            } */}
+                        </Box>
+
+
+                        <Box margin='0px'  align='center'>
                             <p className={styles.text}>Книг было одолжено: {user.booksGiven}</p>
                             <p className={styles.text}>Книг было взято: {user.booksTaken}</p>
                         </Box>
@@ -137,7 +173,8 @@ const actionCreators = {
     logout: userActions.logout,
     getUser: userActions.getById,
     getBookList: libraryActions.getBookListById,
-    getWishlist: wishlistActions.getWishlist
+    getWishlist: wishlistActions.getWishlist,
+    complain: userActions.complainUser
 }
 
 const connectedUserPage = connect(mapState, actionCreators)(UserPage);

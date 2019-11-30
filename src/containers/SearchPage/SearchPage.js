@@ -14,6 +14,9 @@ import Gallery from '../../components/Gallery/Gallery';
 import styles from './SearchPage.module.css'
 import { Link, NavLink } from 'react-router-dom';
 
+
+
+
 class SearchPage extends Component {
     state = { 
         value: '', 
@@ -21,43 +24,39 @@ class SearchPage extends Component {
         genre: -1, 
         page: Number(this.props.match.params.page), 
         pageItems: [], 
-        max: 1000 
+        max: 1
     };
 
     boxRef = createRef();
   
 
     componentDidMount() {
-        this.props.request();
-        this.props.requestPage(this.state.page);
+        const { page } = this.state;
+        this.props.request('', page, '');
         this.forceUpdate();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        let { value, genre, page } = this.state;
+        if (prevState.page !== Number(this.props.match.params.page)) {
+            if (genre === -1) genre = '';
 
-    componentDidUpdate(prevProps) {
-        if ( this.props.search !== prevProps.search && this.props.search.page.found === true) {
-            this.setState({ pageItems: this.props.search.page.search });
-        }
-        if ( this.props.search !== prevProps.search && this.props.search.found === true) {
-            this.setState({ suggestedList: this.props.search.search });
-            this.setState({ max: Math.floor(this.props.search.search.length/30) + 1 });
-        }
-        if (Number(prevProps.match.params.page) !== Number(this.props.match.params.page)) {
             this.setState({page: Number(this.props.match.params.page)});
-            this.props.requestPage(this.props.match.params.page);
+            this.props.request(value, Number(this.props.match.params.page), genre);
+        }
+
+        if (this.state.max !== this.props.search.pages) {
+            this.setState({max: this.props.search.pages});
         }
     }
-
   
     onChange = event => this.setState({ value: event.target.value }, () => {
         const { value } = this.state;
-        if (!value.trim()) {
-            this.setState({ suggestedList: [] });
-        } else {
-            if (this.props.search.search) {
-                this.setState({ suggestedList: this.props.search.search });
-            }
+        let genre = '';
+        if (this.state.genre !== -1) {
+            genre = this.state.genre;
         }
+        this.props.request(value, 1, genre);
     });
 
 
@@ -65,82 +64,77 @@ class SearchPage extends Component {
 
 
     renderSearchResult = () => {
-        // const { value, suggestedList } = this.state;
-        // const res = suggestedList.filter((el) => {
-        //     if (this.state.genre !== ''){
-        //         return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
-        //     } else {
-        //         return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
-
-        //     }
-        // })
-        // .map((el) => (
-        //     <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
-        // ));
-
-
-        // if (res.length === 0 && value !== '') {
-        //     return [<SearchElement id={'no res'} key={'no res'} name={'Ничего не найдено :('}></SearchElement>]
-        // } else {
-        //     return res;
-        // }
-        const { value, suggestedList, pageItems, genre } = this.state;
-        let res = [];
-
-        if (value === '' && genre === -1) {
-            res = pageItems.filter((el) => {
-                if (this.state.genre !== -1){
-                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
-                } else {
-                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
-
-                }
-            })
-        } else {
-            res = suggestedList.filter((el) => {
-                if (this.state.genre !== -1){
-                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0 && el.book.genre === this.state.genre)
-                } else {
-                    return  (el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
-
-                }
-            });
-        }
-
+        let res = this.props.search.search;
+        
         return(
-        <Gallery 
-            object={(title, coverage, genre, author, id, idAbstract) => <Book info handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 
-            objectList={res}
-            contentType='books'
-        ></Gallery>)
+            <Gallery 
+                object={(title, coverage, genre, author, id, idAbstract) => <Book info handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 
+                objectList={res}
+                contentType='books'
+            ></Gallery>)
     };
 
-    
+    onGenreChange(genre) {
+        const { value } = this.state;
+        this.setState({genre: genre});
+        if (genre === -1) {
+            genre = '';
+        }
+        this.props.request(value, 1, genre);
+    }
 
     Next() {
-        if (this.state.page < this.state.max) {
+        let { value, genre, page, max } = this.state;
+        if (page < max) {
             window.scrollTo(0,0);
-            this.props.requestPage(this.state.page + 1);
-            this.setState({page: this.state.page + 1});
+
+            if (genre === -1) genre = '';
+            this.props.request(value, page + 1, genre);
+
+            this.setState({page: page + 1});
         }
     }
 
     Previous() {
+        let { value, genre, page } = this.state;
         if (this.state.page >= 2) {
             window.scrollTo(0,0);
-            this.props.requestPage(this.state.page - 1);
-            this.setState({page: this.state.page - 1});
+
+            if (genre === -1) genre = '';
+            this.props.request(value, page - 1, genre);
+
+            this.setState({page: page - 1});
         }
     }
 
     Pages() {
-        const {page, max} = this.state;
+        const { page, max } = this.state;
         const el = (page) =>                     
             (<NavLink className={styles.page} activeClassName={styles.activePage} to={`/search/${page}`}>
                 {page}
             </NavLink>);
-
-        if (page === 1) {
+        if (max === 1) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                </Box>
+            );
+        } else if (max === 2) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                    {el(2)}
+                </Box>
+            );
+        } else if (max === 3) {
+            return (
+                <Box direction='row' gap='20px'>
+                    {el(1)}
+                    {el(2)}
+                    {el(3)}
+                </Box>
+            );
+        } else if (page === 1) {
             return (
                 <Box direction='row' gap='20px'>
                     {el(page)}
@@ -200,7 +194,7 @@ class SearchPage extends Component {
                         />
                     </Box>
                     <Box width='400px' margin={{ horizontal: 'small', vertical: 'xsmall' }}>
-                        <Filter updateGenre={(genre) => this.setState({genre: genre})}></Filter>
+                        <Filter updateGenre={(genre) => this.onGenreChange(genre)}></Filter>
                     </Box>
                 </Box>
                 <Box justify='center' direction='row' wrap fill>
@@ -211,13 +205,17 @@ class SearchPage extends Component {
 
                 {this.state.genre === -1 && this.state.value === '' &&
                     <Box margin='10px' gap='10px' direction='row'>
-                        <Link to={`/search/${page > 1 ? page-1 : page}`}>
-                            <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
-                        </Link>
+                        {this.state.max !== 1 && 
+                            <Link to={`/search/${page > 1 ? page-1 : page}`}>
+                                <Previous className={page > 1 ? styles.active : styles.disabled} onClick={() => this.Previous()}></Previous>
+                            </Link>
+                        }
                         {this.Pages()}
-                        <Link to={`/search/${page < this.state.max ? page+1 : page}`}>
-                            <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
-                        </Link>
+                        {this.state.max !== 1 && 
+                            <Link to={`/search/${page < this.state.max ? page+1 : page}`}>
+                                <Next className={page < this.state.max ? styles.active : styles.disabled} onClick={() => this.Next()}></Next>
+                            </Link>
+                        }
                     </Box>
                 }
 
@@ -231,8 +229,7 @@ const mapState = state => ({
 })
 
 const actionCreators = {
-    request: searchActions.request,
-    requestPage: searchActions.requestPage
+    request: searchActions.search
 }
 
 const connectedSearchPage = connect(mapState, actionCreators)(SearchPage);

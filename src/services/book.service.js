@@ -5,7 +5,8 @@ export const bookService = {
     getBook,
     deleteBook,
     addBook,
-    editBook
+    editBook,
+    complain
 };
 
 
@@ -74,6 +75,24 @@ function addBook(book) {
                 return response.json();
             })
 }
+
+
+
+function complain(book, content, comment) {
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify({ book, content, comment }),
+        headers: {'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.token}
+    };
+
+    return fetch(back_url.management.book_complain, requestOptions)
+        .then(handlePostResponse)
+        .then(response => {
+            return response;
+        });
+}
+
 
 
 function handlePostResponse(response) {

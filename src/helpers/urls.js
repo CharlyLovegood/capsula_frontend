@@ -21,6 +21,9 @@ export const back_url = {
         get_all_books: `/library/books/`,
         get_all_books_page: (page) => `/library/books/?pages=${page}`
     },
+    search: {
+        search: (query, page, genre) => `/library/books/?q=${query}&page=${page}&genre=${genre}`
+    },
     swap: {
         get_swap_list: '/library/swaps/',
         change_status: (id) => `/library/swaps/${id}/`
@@ -28,6 +31,10 @@ export const back_url = {
     user: {
         change_user_data: '/user/me/',
         get_user_by_id: (id) => `/user/${id}/`
+    },
+    management: {
+        user_complain: '/management/complaint_user/',
+        book_complain: '/management/complaint_book/',
     },
     map: {
         get_list: '/map/',

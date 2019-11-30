@@ -36,40 +36,40 @@ import { connect } from 'react-redux';
 import styles from './App.module.css';
 
 import { alertActions } from './store/actions';
-import { width } from '@material-ui/system';
 
 
 
-// import firebase from 'firebase';
-// const config = {
-//     apiKey: "AIzaSyBibrWw6b833N4ar2-wY5wIT3TT1IR_pyg",
-//     authDomain: "saharok-221817.firebaseapp.com",
-//     databaseURL: "https://saharok-221817.firebaseio.com",
-//     projectId: "saharok-221817",
-//     storageBucket: "saharok-221817.appspot.com",
-//     messagingSenderId: "406120965570",
-//     appId: "1:406120965570:web:2a1b8bf720ebb0f046e25b"
-// };
+import firebase from 'firebase';
 
-// firebase.initializeApp(config);
+var firebaseConfig = {
+    apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
+    authDomain: "bookovsky-71d58.firebaseapp.com",
+    databaseURL: "https://bookovsky-71d58.firebaseio.com",
+    projectId: "bookovsky-71d58",
+    storageBucket: "bookovsky-71d58.appspot.com",
+    messagingSenderId: "139443943838",
+    appId: "1:139443943838:web:12bf89195711431daffe8f"
+  };
 
-// const initializePush = () => {
-//     const messaging = firebase.messaging();
-//     messaging
-//         .requestPermission()
-//         .then(() => {
-//             console.log('Permission is granted by user');
-//             return messaging.getToken();
-//         })
-//         .then(token => {
-//             console.log('FCM Token:', token);
-//         })
-//         .catch(error => {
-//             console.log('Error Occurred', error);
-//         });
-// }
+firebase.initializeApp(firebaseConfig);
 
-// initializePush();
+const initializePush = () => {
+    const messaging = firebase.messaging();
+    messaging
+        .requestPermission()
+        .then(() => {
+            console.log('Permission is granted by user');
+            return messaging.getToken();
+        })
+        .then(token => {
+            console.log('FCM Token:', token);
+        })
+        .catch(error => {
+            console.log('Error Occurred', error);
+        });
+}
+
+initializePush();
 
 
 

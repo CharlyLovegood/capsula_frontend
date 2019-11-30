@@ -19,19 +19,13 @@ class SearchBar extends Component {
     componentDidMount() {
         this.forceUpdate();
         if (!this.props.search.search) {
-            this.props.request();
+            this.props.request('', 1, '');
         }
     }
   
     onChange = event => this.setState({ value: event.target.value }, () => {
         const { value } = this.state;
-        if (!value.trim()) {
-            this.setState({ suggestedList: [] });
-        } else {
-            if (this.props.search.search) {
-                this.setState({ suggestedList: this.props.search.search });
-            }
-        }
+        this.props.request(value, 1, '');
     });
 
     onSelect = event => this.setState({ value: event.suggestion.value });
@@ -39,16 +33,16 @@ class SearchBar extends Component {
     renderSuggestions = () => {
         const { value, suggestedList } = this.state;
 
+        const res = (this.props.search.search || [])
+            .map((el) => ({
+                label: (
+                    <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
+                    ),
+                    value: ''
+                }
+                ));
 
-        const res = suggestedList.filter((el) => el.book.title.toLowerCase().indexOf(value.toLowerCase()) >= 0)
-        .map((el) => ({
-            label: (
-                <SearchElement id={el.book.id} key={el.book.id} name={el.book.title} image={el.image} author={el.book.authors}></SearchElement>
-            ),
-            value: ''
-            }
-        ));
-        if (res.length === 0 && value !== '') {
+        if (res && res.length === 0 && value !== '') {
             return [{                
             label: (
                 <Box
@@ -150,7 +144,7 @@ const mapState = state => ({
 })
 
 const actionCreators = {
-    request: searchActions.request
+    request: searchActions.search
 }
 
 export default connect(mapState, actionCreators)(SearchBar);

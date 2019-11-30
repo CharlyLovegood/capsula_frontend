@@ -9,7 +9,8 @@ export const userActions = {
     register,
     getById,
     editUser,
-    oauth
+    oauth,
+    complainUser
 };
 
 
@@ -119,7 +120,10 @@ function getById(id) {
                     dispatch(alertActions.success('UserPage Load successful'));
                 },
                 er => {
-                    const error = er.response.statusText;
+                    let error = '';
+                    if (er.response) {
+                        error = er.response.statusText
+                    }
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
@@ -152,4 +156,25 @@ function editUser(user) {
     function request(user) { return { type: userConstants.EDIT_REQUEST, user } }
     function success(user) { return { type: userConstants.EDIT_SUCCESS, user } }
     function failure(error) { return { type: userConstants.EDIT_FAILURE, error } }
+}
+
+
+function complainUser(complaint) {
+    return dispatch => {
+        dispatch(request({ complaint }));
+        userService.complain(complaint.id, complaint.content, complaint.comment)
+            .then(
+                response => { 
+                    dispatch(success(response));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            );
+    };
+
+    function request(complaint) { return { type: userConstants.COMPLAIN_USER_REQUEST, complaint } }
+    function success(response) { return { type: userConstants.COMPLAIN_USER_SUCCESS, response } }
+    function failure(error) { return { type: userConstants.COMPLAIN_USER_FAILURE, error } }
 }

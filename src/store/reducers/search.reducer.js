@@ -14,7 +14,8 @@ export function search(state = initialState, action) {
             return {
                 ...state,
                 found: true,
-                search: action.searchResult.data
+                search: action.searchResult.data.books,
+                pages: action.searchResult.data.pages
             };
         case searchConstants.SEARCH_FAILURE:
             return {};

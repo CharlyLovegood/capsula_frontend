@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom';
 
 class HomePage extends Component {
     componentDidMount() {
-        this.props.request();
+        this.props.request('',1 ,'');
     }
 
     calculateWidth(size) {
@@ -68,7 +68,7 @@ class HomePage extends Component {
                             <Box className={styles.gradient} align='center'>
                                 <Gallery 
                                     object={(title, coverage, genre, author, id, idAbstract) => <BookItem info margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                    objectList={this.props.library.search.slice(10,20)}
+                                    objectList={this.props.library.search.slice(0, 10)}
                                     header={<Link to='/search/1'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                     contentType='books'
                                     key='HomePageGalleryNAuth'
@@ -85,7 +85,7 @@ class HomePage extends Component {
                         <Box align='center'>
                             <Gallery 
                                 object={(title, coverage, genre, author, id, idAbstract) => <BookItem info margin='10px' author={author} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></BookItem>} 
-                                objectList={this.props.library.search.slice(10,20)}
+                                objectList={this.props.library.search.slice(0, 10)}
                                 header={<Link to='/search/1'><Text color='black' size='30px'>Доступные книги</Text></Link>}
                                 contentType='books'
                                 key='HomePageGalleryAuth'
@@ -110,7 +110,7 @@ const mapState = state => ({
 });
 
 const actionCreators = {
-    request: searchActions.request
+    request: searchActions.search
 };
 
 
