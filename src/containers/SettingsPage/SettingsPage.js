@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import { Button, Box, Text } from 'grommet';
+import { Button, Box, Text, CheckBox } from 'grommet';
 import styles from './SettingsPage.module.css';
 import { userActions, mapActions } from '../../store/actions';
 import { connect } from 'react-redux';
@@ -24,7 +24,8 @@ class SettingsPage extends Component {
                 lastname: this.props.user.lastName, 
                 vkId: this.props.user.vk !== 'null' ? this.props.user.vk : '',
                 domitary: this.props.user.location !== 'null' ? this.props.user.location : '',
-                avatar: this.props.user.avatar
+                avatar: this.props.user.avatar,
+                notification: this.props.user.notification || false
             },
             permission: true,
             message: '',
@@ -57,7 +58,8 @@ class SettingsPage extends Component {
                 'last_name': this.state.user.lastname, 
                 'vk': this.state.user.vkId,
                 'location': this.state.user.domitary,
-                'image': this.state.user.avatar
+                'image': this.state.user.avatar,
+                'notification': this.state.user.notification
             };
         }
         else {
@@ -65,7 +67,8 @@ class SettingsPage extends Component {
                 'first_name': this.state.user.firstname, 
                 'last_name': this.state.user.lastname, 
                 'vk': this.state.user.vkId,
-                'location': this.state.user.domitary
+                'location': this.state.user.domitary,
+                'notification': this.state.user.notification
             };
         }
         
@@ -154,6 +157,7 @@ class SettingsPage extends Component {
                                 onChange={ event => this.handleChange(event) }
                             />
                         </Grid> */}
+
                         <Grid item xs={12}>
                             <TextField
                                 id='vkId'
@@ -165,6 +169,16 @@ class SettingsPage extends Component {
                                 value={user.vkId}
                                 onChange={ event => this.handleChange(event) }
                             />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <CheckBox
+                                id='notification'
+                                checked={user.notification}
+                                label="Хочу получать уведомления по почте"
+                                onChange={event => this.setState({user: {...this.state.user, notification: event.target.checked}})}
+                            >
+                            </CheckBox>
                         </Grid>
 
                         <SizeComponent>

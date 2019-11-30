@@ -86,8 +86,6 @@ function complain(user, content, comment) {
         headers: {'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.token}
     };
-    console.log(back_url.management.user_complain)
-    
     return fetch(back_url.management.user_complain, requestOptions)
         .then(handlePostResponse)
         .then(response => {

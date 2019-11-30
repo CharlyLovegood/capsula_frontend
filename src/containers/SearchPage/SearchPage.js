@@ -65,6 +65,7 @@ class SearchPage extends Component {
 
     renderSearchResult = () => {
         let res = this.props.search.search;
+        
         return(
             <Gallery 
                 object={(title, coverage, genre, author, id, idAbstract) => <Book info handleDeleteBook={this.props.deleteBook} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={idAbstract} id={idAbstract}></Book>} 

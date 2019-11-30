@@ -120,7 +120,10 @@ function getById(id) {
                     dispatch(alertActions.success('UserPage Load successful'));
                 },
                 er => {
-                    const error = er.response.statusText;
+                    let error = '';
+                    if (er.response) {
+                        error = er.response.statusText
+                    }
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }
