@@ -39,37 +39,37 @@ import { alertActions } from './store/actions';
 
 
 
-import firebase from 'firebase';
+// import firebase from 'firebase';
 
-var firebaseConfig = {
-    apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
-    authDomain: "bookovsky-71d58.firebaseapp.com",
-    databaseURL: "https://bookovsky-71d58.firebaseio.com",
-    projectId: "bookovsky-71d58",
-    storageBucket: "bookovsky-71d58.appspot.com",
-    messagingSenderId: "139443943838",
-    appId: "1:139443943838:web:12bf89195711431daffe8f"
-  };
+// var firebaseConfig = {
+//     apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
+//     authDomain: "bookovsky-71d58.firebaseapp.com",
+//     databaseURL: "https://bookovsky-71d58.firebaseio.com",
+//     projectId: "bookovsky-71d58",
+//     storageBucket: "bookovsky-71d58.appspot.com",
+//     messagingSenderId: "139443943838",
+//     appId: "1:139443943838:web:12bf89195711431daffe8f"
+//   };
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
-const initializePush = () => {
-    const messaging = firebase.messaging();
-    messaging
-        .requestPermission()
-        .then(() => {
-            console.log('Permission is granted by user');
-            return messaging.getToken();
-        })
-        .then(token => {
-            console.log('FCM Token:', token);
-        })
-        .catch(error => {
-            console.log('Error Occurred', error);
-        });
-}
+// const initializePush = () => {
+//     const messaging = firebase.messaging();
+//     messaging
+//         .requestPermission()
+//         .then(() => {
+//             console.log('Permission is granted by user');
+//             return messaging.getToken();
+//         })
+//         .then(token => {
+//             console.log('FCM Token:', token);
+//         })
+//         .catch(error => {
+//             console.log('Error Occurred', error);
+//         });
+// }
 
-initializePush();
+// initializePush();
 
 
 

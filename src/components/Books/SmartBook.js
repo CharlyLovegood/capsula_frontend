@@ -21,8 +21,6 @@ const SmartBook = (props) => {
         setPrevBookCoverage(props.coverage);
     }
 
-    console.log(props);
-
     return (
         <Box margin='10px' width='book-width' height='book-height' className={styles.book_card}>
             <Box className={styles.book_card_inner}>
