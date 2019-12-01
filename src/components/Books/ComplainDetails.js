@@ -45,7 +45,7 @@ class ComplainDetails extends Component {
 
     render() {
         return (
-            <Box pad='medium' gap='small' width='medium' align='center' fill pad='10px'>
+            <Box gap='small' width='medium' align='center' fill pad='10px'>
                 <Box pad='10px' className={styles.scroll_container}>
                     <Box className={styles.scroll_page}>
                         <Heading level={3} margin='none'>

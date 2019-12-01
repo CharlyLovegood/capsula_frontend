@@ -37,7 +37,7 @@ class SearchPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        let { value, genre, page } = this.state;
+        let { value, genre } = this.state;
         if (prevState.page !== Number(this.props.match.params.page)) {
             if (genre === -1) genre = '';
 

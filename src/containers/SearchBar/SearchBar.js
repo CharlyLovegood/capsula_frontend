@@ -31,7 +31,7 @@ class SearchBar extends Component {
     onSelect = event => this.setState({ value: event.suggestion.value });
 
     renderSuggestions = () => {
-        const { value, suggestedList } = this.state;
+        const { value } = this.state;
 
         const res = (this.props.search.search || [])
             .map((el) => ({
