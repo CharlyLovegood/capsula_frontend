@@ -41,7 +41,7 @@ import { alertActions } from './store/actions';
 
 import firebase from 'firebase';
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
     authDomain: "bookovsky-71d58.firebaseapp.com",
     databaseURL: "https://bookovsky-71d58.firebaseio.com",
@@ -49,7 +49,7 @@ var firebaseConfig = {
     storageBucket: "bookovsky-71d58.appspot.com",
     messagingSenderId: "139443943838",
     appId: "1:139443943838:web:12bf89195711431daffe8f"
-  };
+};
 
 firebase.initializeApp(firebaseConfig);
 
@@ -72,7 +72,7 @@ const initializePush = () => {
 initializePush();
 
 
-
+// curl --header "Authorization: key=AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU" --header "Content-Type: application/json" -d '{"notification": {"title": "Firebase","body": "Grouncontrol from","click_action": "http://localhost:3000/","icon": "http://url-to-an-icon/icon.png"},"to": "f3juJbkckWvVzsMfxS9p1x:APA91bFYrEQyhfr8QbeHzEMO48e8-AYxzqE-97SA53zuAeDWg6JX5cDshYEyoPnER15DoUxITM5el6ePQ6Z4hYRFBpHg8KMj4m2y3Mawcmptxfy00S4VdiKSCmgsWiwngYOxiA7eIYL6"}' https://fcm.googleapis.com/fcm/send
 
 
 const theme = {

@@ -2,12 +2,20 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
 
-firebase.initializeApp({
-    messagingSenderId: '406120965570'
-});
+const firebaseConfig = {
+    apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
+    authDomain: "bookovsky-71d58.firebaseapp.com",
+    databaseURL: "https://bookovsky-71d58.firebaseio.com",
+    projectId: "bookovsky-71d58",
+    storageBucket: "bookovsky-71d58.appspot.com",
+    messagingSenderId: "139443943838",
+    appId: "1:139443943838:web:12bf89195711431daffe8f"
+};
 
+firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
+
 
 messaging.setBackgroundMessageHandler((payload) => {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
