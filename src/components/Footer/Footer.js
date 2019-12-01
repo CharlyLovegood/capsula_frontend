@@ -9,7 +9,7 @@ function Footer(props) {
             gap="small"
             pad="small"
             className={styles.container}
-            background="brandDark"
+            background="#3d1442"
             justify="center"
         >
             <Box direction="row" width="xxlarge" pad="10px">

@@ -49,13 +49,8 @@ class LibraryPage extends Component {
                                 objectList={library.userLibrary}
                                 // header='Мои книги'
                                 contentType='smart-books'
-                                key='LibraryGalleryOwner'
+                                message='Здесь не хватает твоих книг'
                             ></Gallery>
-                            {library.userLibrary.length === 0 &&
-                                <Box margin='20px'>
-                                    Здесь не хватает твоих книг
-                                </Box>
-                            }
                         </Box>
                     }
                     {!this.state.owner &&
@@ -66,12 +61,8 @@ class LibraryPage extends Component {
                                 // header='Книги'
                                 contentType='books'
                                 key='LibraryGalleryReader'
+                                message="Здесь пусто, владелец еще не добавил книги на свою полку"
                             ></Gallery>
-                            {library.userLibrary.length === 0 &&
-                                <Box>
-                                    Здесь пусто, владелец еще не добавил книги на свою полку
-                                </Box>
-                            }
                         </Box>
                     }
                     <Box margin='20px'>

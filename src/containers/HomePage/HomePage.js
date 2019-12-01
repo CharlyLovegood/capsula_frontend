@@ -46,23 +46,23 @@ class HomePage extends Component {
                         <Banner size='small' user={this.props.user}></Banner>
                     }
 
-                    <Box className={styles.text_box} width='large' align='center'>
-                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Bookovsky - сервис для обмена книгами</Text>
-                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Работает бесплатно и на доверии</Text>
-                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Найди новую книгу уже сегодня!</Text>
-                    </Box>
-
-                    <Box width={this.calculateWidth(size)} margin={{vertical: '40px'}} direction='row' wrap>
+                    <Box width={this.calculateWidth(size)} margin={{vertical: '70px'}} className={styles.text_box} direction='row' wrap>
                         {/* <Element key='1' source='4.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
                         <Element key='2' source='6.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
                         <Element key='3' source='7.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_send}></Box>} text='Отправляй заявки'></Element>
-                        <Element key='4' source='8.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element> */}
+                    <Element key='4' source='8.mp4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element> */}
                         <Element key='1' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_book_shelf}></Box>} text='Добавляй свои книги'></Element>
                         <Element key='2' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_search}></Box>} text='Находи интересные книги'></Element>
                         <Element key='3' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_send}></Box>} text='Отправляй заявки'></Element>
                         <Element key='4' width={this.calculateElementWidth(size)} icon={<Box width='100px' height='90px' className={styles.icon_reading_book}></Box>} text='Открывай новые сюжеты'></Element>
                     </Box>
                     
+                    {/* <Box className={styles.text_box} width='large' align='center'>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Bookovsky - сервис для обмена книгами</Text>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Работает бесплатно и на доверии</Text>
+                        <Text size='30px' color='black' textAlign='center' alignSelf='center'>Найди новую книгу уже сегодня!</Text>
+                    </Box> */}
+
                     {this.props.library.found && !this.props.user.loggedIn &&
                         <Box align='center'>
                             <Box className={styles.gradient} align='center'>

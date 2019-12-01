@@ -80,15 +80,10 @@ class UserPage extends Component {
     render() {
         let {user, complaintSent} = this.state;
         let library= [];
-        // let {wishlist} = [];
 
         if (this.props.library.userLibraryRecieved) {
             library = this.props.library.userLibrary;
         }
-
-        // if (this.props.wishlist.wishlistRecieved) {
-        //     wishlist = this.props.wishlist.wishlist;
-        // }
 
         return (
             <Box width='xxlarge' direction='column' align='center' fill className={styles.profile}>
@@ -108,7 +103,7 @@ class UserPage extends Component {
                         <p className={styles.header2}>{user.username}</p>
 
                         <Box margin={{vertical: '20px'}} direction='row' justify='center'>
-                            {!complaintSent &&
+                            {!complaintSent && user.id !== localStorage.id &&
                                 <PopUpButton title='Пожаловаться' 
                                     fill='horizontal'
                                     innerObject={onclose => <ComplainDetails type='user' complain={(complaint) => this.complain(complaint)} id={user.id} onClose={onclose}></ComplainDetails>} 
@@ -116,7 +111,7 @@ class UserPage extends Component {
                                     icon={<Dislike color='brand'></Dislike>}>
                                 </PopUpButton>
                             }
-                            {complaintSent &&
+                            {complaintSent && user.id !== localStorage.id &&
                                 <PopUpButton title='Вы уже пожаловались' 
                                     disabled
                                     fill='horizontal' 
@@ -124,9 +119,6 @@ class UserPage extends Component {
                                     icon={<Dislike color='brand'></Dislike>}>
                                 </PopUpButton>
                             }
-                            {/* {book.book_items.length === 0 &&
-                                <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
-                            } */}
                         </Box>
 
 
@@ -144,14 +136,6 @@ class UserPage extends Component {
                                 id={user.id}>
                             </Scroll>
                         }
-
-                        {/* {this.props.wishlist.wishlistRecieved && this.props.wishlist.wishlist.length !== 0 &&
-                            <Scroll object={(title, coverage, id) => <Book margin='4px' title={title} coverage={coverage} key={id} id={id}></Book>} 
-                                objectList={wishlist} 
-                                header='Мой вишлист'
-                                id={user.id}>
-                            </Scroll>
-                        } */}
                     </Box>
                 }
 

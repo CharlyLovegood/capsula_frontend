@@ -54,17 +54,15 @@ class WishList extends Component {
                 }
 
                 {wishlist.wishlistRecieved && this.state.owner &&
-                    <Box align='center' width='xxlarge'>
+                    <Box direction='column' align='center' width='xxlarge'>
                         <Gallery 
                             object={(title, coverage, genre, author, id, idAbstract) => <SmartBook handleDeleteFromWishlist={this.props.deleteFromWishlist} margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={id} idAbstract={idAbstract}></SmartBook>} 
                             objectList={wishlist.wishlist}
                             //  header='Мои книги'
                             contentType='smart-books'
+                            key="galleryWishListOwner"
+                            message='Сюда можно складывать все то, что вам понравилось'
                         ></Gallery>
-
-                        {wishlist.wishlist.length === 0 &&
-                            <Box margin='20px'>Сюда можно складывать все то, что вам понравилось</Box>
-                        }
                         
                         <Box margin='20px'>
                             <Link to='/search/1'>
@@ -80,26 +78,16 @@ class WishList extends Component {
                 }
                 {wishlist.wishlistRecieved && !this.state.owner &&
                     <Box align='center' width='xxlarge'>
-                        {wishlist.wishlist.length === 0 &&
-                            <Text margin='30px'>Пользователь еще не добавил книг в вишлист</Text>
-                        }
                         <Gallery 
                             object={(title, coverage, genre, author, id, idAbstract) => <Book margin='10px' author={author} genre={genre} title={title} coverage={coverage} key={id} id={idAbstract}></Book>} 
                             objectList={wishlist.wishlist}
                             // header='Книги'
                             contentType='books'
+                            key="galleryWishListNotOwner"
+                            message="Пользователь еще не добавил книг в вишлист"
                         ></Gallery>
                     </Box>
-
                 }
-                {/* <Box margin='20px'>
-                    <PopUpButton forceUpdate={() => this.getwishlist(this.props.user.id)} 
-                        innerObject={(onclose, forceUpdate) => <AddNewBook handleAddNewBook={(book) => this.props.addBook(book)} onClose={onclose} forceUpdate={forceUpdate}></AddNewBook>} 
-                        label='Добавить книгу' 
-                        primary
-                        icon={<Add></Add>}>
-                    </PopUpButton>
-                </Box> */}
             </Box>
         )
     }
