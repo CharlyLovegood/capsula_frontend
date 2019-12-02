@@ -5,7 +5,6 @@ let firstName = localStorage.getItem('firstName');
 let lastName = localStorage.getItem('lastName');
 let avatar = localStorage.getItem('avatar') === 'null' ? null : localStorage.getItem('avatar');
 let id = localStorage.getItem('id');
-let location = localStorage.getItem('location');
 let vk = localStorage.getItem('vk');
 
 
@@ -16,7 +15,6 @@ const initialState = username ? {
         firstName,
         lastName,
         avatar,
-        location,
         id,
         vk
     } 
@@ -27,7 +25,6 @@ const initialState = username ? {
         firstName: '',
         lastName: '',
         avatar: '',
-        location: '',
         id: '',
         vk: ''
     } 
@@ -49,7 +46,6 @@ export function authentication(state = initialState, action) {
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
                     avatar: action.user.avatar,
-                    location: action.user.location,
                     id: action.user.id,
                     vk: action.user.vk
                 } 
@@ -62,7 +58,6 @@ export function authentication(state = initialState, action) {
                     firstName: '',
                     lastName: '',
                     avatar: '',
-                    location: '',
                     id: '',
                     vk: ''
                 }});
@@ -79,7 +74,6 @@ export function authentication(state = initialState, action) {
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
                     avatar: action.user.avatar,
-                    location: action.user.location,
                     id: action.user.id,
                     vk: action.user.vk
                 } 
@@ -92,7 +86,6 @@ export function authentication(state = initialState, action) {
                     firstName: '',
                     lastName: '',
                     avatar: '',
-                    location: '',
                     id: '',
                     vk: ''
                 }});
@@ -104,7 +97,6 @@ export function authentication(state = initialState, action) {
                     firstName: '',
                     lastName: '',
                     avatar: '',
-                    location: '',
                     id: '',
                     vk: ''
                 }});
@@ -116,7 +108,6 @@ export function authentication(state = initialState, action) {
                     firstName: '',
                     lastName: '',
                     avatar: '',
-                    location: '',
                     id: '',
                     vk: ''
                 }});
@@ -129,7 +120,6 @@ export function authentication(state = initialState, action) {
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
                     avatar: action.user.image ? action.user.image : state.user.avatar,
-                    location: action.user.location,
                     vk: action.user.vk
                 }});
         default:

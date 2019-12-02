@@ -23,7 +23,6 @@ class SettingsPage extends Component {
                 firstname: this.props.user.firstName, 
                 lastname: this.props.user.lastName, 
                 vkId: this.props.user.vk !== 'null' ? this.props.user.vk : '',
-                domitary: this.props.user.location !== 'null' ? this.props.user.location : '',
                 avatar: this.props.user.avatar,
                 notification: this.props.user.notification || false
             },
@@ -57,7 +56,6 @@ class SettingsPage extends Component {
                 'first_name': this.state.user.firstname, 
                 'last_name': this.state.user.lastname, 
                 'vk': this.state.user.vkId,
-                'location': this.state.user.domitary,
                 'image': this.state.user.avatar,
                 'notification': this.state.user.notification
             };
@@ -67,7 +65,6 @@ class SettingsPage extends Component {
                 'first_name': this.state.user.firstname, 
                 'last_name': this.state.user.lastname, 
                 'vk': this.state.user.vkId,
-                'location': this.state.user.domitary,
                 'notification': this.state.user.notification
             };
         }

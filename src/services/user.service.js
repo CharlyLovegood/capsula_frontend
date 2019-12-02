@@ -28,7 +28,6 @@ function oauth() {
             localStorage.setItem('token', user.token);
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
-            localStorage.setItem('location', user.location);
             localStorage.setItem('vk', user.contact);
             return user;
         })
@@ -50,7 +49,6 @@ function login(username, password) {
             localStorage.setItem('token', user.token);
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
-            localStorage.setItem('location', user.location);
             localStorage.setItem('vk', user.contact);
             return user;
         });
@@ -72,7 +70,6 @@ function logout() {
             localStorage.removeItem('firstName');
             localStorage.removeItem('avatar');
             localStorage.removeItem('lastName');
-            localStorage.removeItem('location');
             localStorage.removeItem('vk');
             localStorage.removeItem('id');
             return user;
@@ -100,7 +97,6 @@ function forceLogout() {
     localStorage.removeItem('firstName');
     localStorage.removeItem('avatar');
     localStorage.removeItem('lastName');
-    localStorage.removeItem('location');
     localStorage.removeItem('vk');
     localStorage.removeItem('id');
 }
@@ -155,7 +151,6 @@ function editUser(user) {
                 localStorage.setItem('lastName', user.last_name);
                 localStorage.setItem('firstName', user.first_name);
                 localStorage.setItem('vk', user.vk);
-                localStorage.setItem('location', user.location);
                 return user;
             });
 }
