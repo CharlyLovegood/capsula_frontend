@@ -95,7 +95,7 @@ class SwapPage extends Component {
                                 >
                                 </Gallery>
                             </Tab>
-                            <Tab title='В процессе'>
+                            <Tab title='Ждут передачи'>
                                 <Gallery
                                     message='Нет активных передач'
                                     contentType='swaps'
@@ -132,7 +132,7 @@ class SwapPage extends Component {
                                 >
                                 </Gallery>
                             </Tab>
-                            <Tab title='В процессе'>
+                            <Tab title='Ждут передачи'>
                                 <Gallery
                                     message='Нет активных передач'
                                     contentType='swaps'
