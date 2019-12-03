@@ -29,6 +29,7 @@ function oauth() {
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
             localStorage.setItem('vk', user.contact);
+            localStorage.setItem('notification', user.notification);
             return user;
         })
 }
@@ -50,6 +51,7 @@ function login(username, password) {
             localStorage.setItem('id', user.id);
             localStorage.setItem('avatar', user.avatar);
             localStorage.setItem('vk', user.contact);
+            localStorage.setItem('notification', user.notification);
             return user;
         });
 }
@@ -72,6 +74,7 @@ function logout() {
             localStorage.removeItem('lastName');
             localStorage.removeItem('vk');
             localStorage.removeItem('id');
+            localStorage.removeItem('notification');
             return user;
         }); 
 }
@@ -99,6 +102,7 @@ function forceLogout() {
     localStorage.removeItem('lastName');
     localStorage.removeItem('vk');
     localStorage.removeItem('id');
+    localStorage.removeItem('notification');
 }
 
 
@@ -148,6 +152,7 @@ function editUser(user) {
         .then(
             response => {
                 if (user.image !== undefined) localStorage.setItem('avatar', user.image);
+                if (user.notification !== undefined) localStorage.setItem('notification', user.notification);
                 localStorage.setItem('lastName', user.last_name);
                 localStorage.setItem('firstName', user.first_name);
                 localStorage.setItem('vk', user.vk);

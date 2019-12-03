@@ -6,6 +6,7 @@ let lastName = localStorage.getItem('lastName');
 let avatar = localStorage.getItem('avatar') === 'null' ? null : localStorage.getItem('avatar');
 let id = localStorage.getItem('id');
 let vk = localStorage.getItem('vk');
+let notification = localStorage.getItem('notification');
 
 
 const initialState = username ? { 
@@ -16,7 +17,8 @@ const initialState = username ? {
         lastName,
         avatar,
         id,
-        vk
+        vk,
+        notification
     } 
 } : {
     loggedIn: false, 
@@ -26,7 +28,8 @@ const initialState = username ? {
         lastName: '',
         avatar: '',
         id: '',
-        vk: ''
+        vk: '',
+        notification: ''
     } 
 };
 
@@ -47,7 +50,8 @@ export function authentication(state = initialState, action) {
                     lastName: action.user.last_name,
                     avatar: action.user.avatar,
                     id: action.user.id,
-                    vk: action.user.vk
+                    vk: action.user.contact,
+                    notification: action.user.notification
                 } 
             };
         case userConstants.LOGIN_FAILURE:
@@ -59,7 +63,8 @@ export function authentication(state = initialState, action) {
                     lastName: '',
                     avatar: '',
                     id: '',
-                    vk: ''
+                    vk: '',
+                    notification: ''
                 }});
         case userConstants.OAUTH_REQUEST:
             return {
@@ -75,7 +80,8 @@ export function authentication(state = initialState, action) {
                     lastName: action.user.last_name,
                     avatar: action.user.avatar,
                     id: action.user.id,
-                    vk: action.user.vk
+                    vk: action.user.contact,
+                    notification: action.user.notification
                 } 
             };
         case userConstants.OAUTH_FAILURE:
@@ -87,7 +93,8 @@ export function authentication(state = initialState, action) {
                     lastName: '',
                     avatar: '',
                     id: '',
-                    vk: ''
+                    vk: '',
+                    notification: ''
                 }});
         case userConstants.LOGOUT_SUCCESS:
             return ({
@@ -98,7 +105,8 @@ export function authentication(state = initialState, action) {
                     lastName: '',
                     avatar: '',
                     id: '',
-                    vk: ''
+                    vk: '',
+                    notification: ''
                 }});
         case userConstants.LOGOUT_FAILURE:
             return ({
@@ -109,10 +117,10 @@ export function authentication(state = initialState, action) {
                     lastName: '',
                     avatar: '',
                     id: '',
-                    vk: ''
+                    vk: '',
+                    notification: ''
                 }});
         case userConstants.EDIT_SUCCESS:
-
             return ({
                 loggedIn: true, 
                 user: {
@@ -120,7 +128,8 @@ export function authentication(state = initialState, action) {
                     firstName: action.user.first_name,
                     lastName: action.user.last_name,
                     avatar: action.user.image ? action.user.image : state.user.avatar,
-                    vk: action.user.vk
+                    vk: action.user.vk,
+                    notification: action.user.notification ? action.user.notification : state.user.notification
                 }});
         default:
             return state;

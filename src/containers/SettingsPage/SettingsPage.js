@@ -18,13 +18,14 @@ import SizeComponent from '../../components/SizeComponent/SizeComponent';
 class SettingsPage extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.user);
         this.state = { 
             user: {
                 firstname: this.props.user.firstName, 
                 lastname: this.props.user.lastName, 
                 vkId: this.props.user.vk !== 'null' ? this.props.user.vk : '',
                 avatar: this.props.user.avatar,
-                notification: this.props.user.notification || false
+                notification: this.props.user.notification === 'true' || this.props.user.notification === true ? true : false
             },
             permission: true,
             message: '',
@@ -51,6 +52,7 @@ class SettingsPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let user;
+        console.log(this.state.user)
         if (this.state.user.avatar !== this.props.user.avatar) {
             user = {
                 'first_name': this.state.user.firstname, 
