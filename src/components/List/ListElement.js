@@ -9,6 +9,9 @@ import SwapAgreement from '../Books/SwapAgreement';
 import { bookStatuses } from './../../helpers/constants';
 import { remote_url } from './../../helpers';
 
+
+
+
 function ListElement(props) {
     const defaultAvatar = remote_url.images.user_default;
 
@@ -31,14 +34,19 @@ function ListElement(props) {
                 </Box>
                 <Box className={styles.botton} width='160px'>
                     {props.status === bookStatuses.AVAILABLE ?
-                        <PopUpButton fill='horizontal' innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} label={<Text color='brand'>Попросить</Text>} icon={<Send color='brand'/>}></PopUpButton>
+                        <PopUpButton fill='horizontal' 
+                            innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} 
+                            label={<Text color='brand'>Попросить</Text>} 
+                            icon={<Send color='brand'/>}
+                        >
+                        </PopUpButton>
                         :
                         <PopUpButton title='Книга занята' 
                             disabled 
                             fill='horizontal' 
                             innerObject={onclose => <SwapAgreement swapRequest={props.swapRequest} bookId={props.id} onClose={onclose}></SwapAgreement>} 
-                            label={<Text color='brand'>Попросить</Text>} 
-                            icon={<Send></Send>}>
+                            label={<Text color='brand'>Книга занята</Text>} 
+                        >
                         </PopUpButton>
                     }
                 </Box>
