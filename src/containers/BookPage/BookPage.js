@@ -115,9 +115,6 @@ class BookPage extends Component {
                                 {!addedToWishlist && book.book_items.length !== 0 &&
                                     <Button margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>} onClick={() => this.addToWishlist(book, book.id)}></Button>
                                 }
-                                {/* {book.book_items.length === 0 &&
-                                    <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
-                                } */}
                             </Box>
                             <Box direction='row' justify='center'>
                                 {!complaintSent && book.book_items.length !== 0 &&
@@ -136,9 +133,6 @@ class BookPage extends Component {
                                         icon={<Dislike color='brand'></Dislike>}>
                                     </PopUpButton>
                                 }
-                                {/* {book.book_items.length === 0 &&
-                                    <Button disabled title='У вас есть эта книга' margin='15px 5px' primary label={<strong>Добавить в вишлист</strong>}></Button>
-                                } */}
                             </Box>
                         </Box>
                         

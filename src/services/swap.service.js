@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import * as axios from 'axios';
 import { back_url } from './../helpers';
 
 export const swapService = {
@@ -40,7 +40,7 @@ function changeSwapStatus(id, status) {
 
 function swapRequest(id) {
     const book = {
-        "book_id": id
+        'book_id': id
     };
 
     const requestOptions = {

@@ -29,7 +29,7 @@ function ListElement(props) {
             </Link>
             <Box wrap direction='row' justify='between' align='center' fill>
                 <Box pad='10px' direction='column'> 
-                    <h3 className={styles.main_text}>{props.owner.django_user.username}</h3>
+                    <h3 className={styles.main_text}>{props.owner.first_name}</h3>
                     <p className={styles.text}>{props.point.distance ? `${String(props.point.distance).slice(0,5)} км` : ''}</p>
                 </Box>
                 <Box className={styles.botton} width='160px'>

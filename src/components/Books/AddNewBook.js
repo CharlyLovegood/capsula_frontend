@@ -5,9 +5,7 @@ import { Box,
     Button, 
     Heading, 
     Text, 
-    Select, 
-    // Tab, 
-    // Tabs 
+    Select
 } from 'grommet';
 import TextField from '@material-ui/core/TextField';
 import BookImage from './../ImageUpload/ImageUpload';
@@ -162,140 +160,69 @@ class AddNewBook extends Component {
                     </Heading>
 
                     {(alert) &&
-                        <Box justify='center' align='center' margin='10px' round='10px' direction='row' pad='10px' gap='10px' border={{ color: 'status-critical', size: 'xsmall' }}>
+                        <Box justify='center' 
+                            align='center' 
+                            margin='10px' 
+                            round='10px' 
+                            direction='row' 
+                            pad='10px' 
+                            gap='10px' 
+                            border={{ color: 'status-critical', size: 'xsmall' }}>
                             <StatusCritical color='status-critical'></StatusCritical>
                             {message}
                         </Box>
                     }
-
-                    {/* <Tabs> */}
-                        {/* <Tab title='Вручную'> */}
-                            <Box className={styles.scroll_page}>
-                                <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
-                                <Text>Обложка</Text>
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='bookname'
-                                    label='Название книги'
-                                    name='bookname'
-                                    autoComplete='bookname'
-                                    autoFocus
-                                    value={this.state.bookName}
-                                    onChange={ event => this.handleBookNameChange(event) }>
-                                </TextField>                
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='author'
-                                    label='Автор (Фамилия И.О.)'
-                                    name='author'
-                                    value={this.state.author}
-                                    onChange={ event => this.handleAuthorChange(event) }>
-                                </TextField>
-                                <Box fill='horizontal'>
-                                    <Select options={genresArray2} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
-                                </Box>
-                                <Box
-                                    as='footer'
-                                    gap='small'
-                                    direction='row'
-                                    align='center'
-                                    justify='end'
-                                    pad={{ top: 'medium', bottom: 'small' }}
-                                >
-                                    <Link to='#'>
-                                        <Button  primary label={
-                                            <Text color='white'>
-                                                <strong>Да</strong>
-                                            </Text>
-                                        } color='brand' onClick={event => this.handleSubmit(event)}/>
-                                    </Link>
-                                    <Button
-                                        label='Нет'
-                                        onClick={this.props.onClose}
-                                    />
-                                </Box>
-                            </Box>
-                        {/* </Tab>
-                        <Tab title='ISBN - код'>
-                            <Box className={styles.scroll_page}>
-
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='ISBN'
-                                    label='ISBN-код'
-                                    name='ISBN'
-                                    autoComplete='ISBN'
-                                    autoFocus
-                                    onChange={ event => this.SetISBN(event) }>
-                                </TextField>                
-
-                                <Text>Обложка</Text>
-
-                                <BookImage shape='square' img={this.state.api_image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
-
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='api_bookName'
-                                    label='Название книги'
-                                    InputLabelProps={{shrink: true}}
-                                    value={this.state.api_bookName}
-                                    name='api_bookName'
-                                    autoFocus
-                                    onChange={ event => this.handleChange(event) }>
-                                </TextField> 
-
-                                <TextField
-                                    variant='outlined'
-                                    margin='normal'
-                                    required
-                                    fullWidth
-                                    id='api_author'
-                                    InputLabelProps={{shrink: true}}
-                                    value={this.state.api_author}
-                                    label='Автор (Фамилия И.О.)'
-                                    name='api_author'
-                                    autoComplete='api_author'
-                                    onChange={ event => this.handleChange(event) }>
-                                </TextField>
-
-                                <Box fill='horizontal'>
-                                    <Select options={genresArray2} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
-                                </Box>
-                                <Box
-                                    as='footer'
-                                    gap='small'
-                                    direction='row'
-                                    align='center'
-                                    justify='end'
-                                    pad={{ top: 'medium', bottom: 'none' }}
-                                >
-                                    <Link to='#'>
-                                        <Button  primary label={
-                                            <Text color='white'>
-                                                <strong>Да</strong>
-                                            </Text>
-                                        } color='brand' onClick={event => this.handleSubmitISBN(event)}/>
-                                    </Link>
-                                    <Button
-                                        label='Нет'
-                                        onClick={this.props.onClose}
-                                    />
-                                </Box>
-                            </Box>
-                        </Tab>
-                    </Tabs> */}
+                    <Box className={styles.scroll_page}>
+                        <BookImage shape='square' img={this.state.image} returnImage={(image) => this.handleImageChange(image)}></BookImage>
+                        <Text>Обложка</Text>
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='bookname'
+                            label='Название книги'
+                            name='bookname'
+                            autoComplete='bookname'
+                            autoFocus
+                            value={this.state.bookName}
+                            onChange={ event => this.handleBookNameChange(event) }>
+                        </TextField>                
+                        <TextField
+                            variant='outlined'
+                            margin='normal'
+                            required
+                            fullWidth
+                            id='author'
+                            label='Автор (Фамилия И.О.)'
+                            name='author'
+                            value={this.state.author}
+                            onChange={ event => this.handleAuthorChange(event) }>
+                        </TextField>
+                        <Box fill='horizontal'>
+                            <Select options={genresArray2} value={this.state.genre} onChange={({ option }) => this.setValue(option)} />
+                        </Box>
+                        <Box
+                            as='footer'
+                            gap='small'
+                            direction='row'
+                            align='center'
+                            justify='end'
+                            pad={{ top: 'medium', bottom: 'small' }}
+                        >
+                            <Link to='#'>
+                                <Button  primary label={
+                                    <Text color='white'>
+                                        <strong>Да</strong>
+                                    </Text>
+                                } color='brand' onClick={event => this.handleSubmit(event)}/>
+                            </Link>
+                            <Button
+                                label='Нет'
+                                onClick={this.props.onClose}
+                            />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         );

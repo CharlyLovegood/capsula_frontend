@@ -7,7 +7,6 @@ export const swapStatuses = {
     CANCELED: 5
 }
 
-
 export const swapResults = [
     'Обрабатывается',
     'Заявка была принята',
@@ -16,7 +15,6 @@ export const swapResults = [
     'Книга возвращена',
     'Отмена запроса'
 ]
-
 
 export const userComplainReasons = {
     'Не существует': 0,
@@ -147,9 +145,3 @@ export const genresArray2 = [
     'Научная фантастика',
     'Повесть'
 ]
-
-
-
-export const Errors = {
-    404: 'https://cdn.dribbble.com/users/1322726/screenshots/5695684/dribbble-3.gif'
-}

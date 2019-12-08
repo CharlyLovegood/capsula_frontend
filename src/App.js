@@ -7,7 +7,6 @@ import { createMuiTheme } from '@material-ui/core';
 
 import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
-
 import { AppBar,
     SearchPage, 
     UserPage, 
@@ -39,39 +38,6 @@ import { alertActions } from './store/actions';
 
 
 
-// import firebase from 'firebase';
-
-// var firebaseConfig = {
-//     apiKey: "AIzaSyCZWHC_x84NCh6firSfXp5y7EfSF0mo5dU",
-//     authDomain: "bookovsky-71d58.firebaseapp.com",
-//     databaseURL: "https://bookovsky-71d58.firebaseio.com",
-//     projectId: "bookovsky-71d58",
-//     storageBucket: "bookovsky-71d58.appspot.com",
-//     messagingSenderId: "139443943838",
-//     appId: "1:139443943838:web:12bf89195711431daffe8f"
-//   };
-
-// firebase.initializeApp(firebaseConfig);
-
-// const initializePush = () => {
-//     const messaging = firebase.messaging();
-//     messaging
-//         .requestPermission()
-//         .then(() => {
-//             console.log('Permission is granted by user');
-//             return messaging.getToken();
-//         })
-//         .then(token => {
-//             console.log('FCM Token:', token);
-//         })
-//         .catch(error => {
-//             console.log('Error Occurred', error);
-//         });
-// }
-
-// initializePush();
-
-
 
 
 
@@ -88,7 +54,6 @@ const theme = {
             contrast: '#000000',
             light_contrast: '#f9f9f9',
             focus: '#a517b5',
-            // 'accent-1': '#ff8d75'
             placeholder: '#7a7171'
         },
         font: {
@@ -160,9 +125,9 @@ const themeUI = createMuiTheme({
         }
     },
     typography: {
-        "fontFamily": "\"Open Sans Condensed\", sans-serif",
-        "fontSize": 18,
-        "fontWeightLight": 300
+        'fontFamily': '\'Open Sans Condensed\', sans-serif',
+        'fontSize': 18,
+        'fontWeightLight': 300
        }
 })
 
@@ -204,7 +169,7 @@ class App extends Component {
                                 <AuthRoute exact path='/login' component={ LoginPage } />
                                 <Route exact path='/rules' component={ HelpPage } />
 
-                                <Redirect from="*" to="/" />
+                                <Redirect from='*' to='/' />
                             </Switch>
                         </Box>
                         <Footer></Footer>

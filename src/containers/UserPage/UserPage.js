@@ -29,6 +29,7 @@ class UserPage extends Component {
     }
     
     setUser() {
+        this.setState({complaintSent: this.props.user.user.complaint});
         return ({
             'lastName': this.props.user.user.last_name,
             'firstName': this.props.user.user.first_name,
@@ -36,7 +37,7 @@ class UserPage extends Component {
             'avatar': this.props.user.user.avatar ? this.props.user.user.avatar : remote_url.images.user_default,
             'id': this.props.match.params.id,
             'booksTaken': this.props.user.user.books_taken,
-            'booksGiven': this.props.user.user.books_given
+            'booksGiven': this.props.user.user.books_given,
         });
     }
 
@@ -103,7 +104,7 @@ class UserPage extends Component {
                         <p className={styles.header2}>{user.username}</p>
 
                         <Box margin={{vertical: '20px'}} direction='row' justify='center'>
-                            {!complaintSent && user.id !== localStorage.id &&
+                            {!complaintSent && user.id !== localStorage.id && 
                                 <PopUpButton title='Пожаловаться' 
                                     fill='horizontal'
                                     innerObject={onclose => <ComplainDetails type='user' complain={(complaint) => this.complain(complaint)} id={user.id} onClose={onclose}></ComplainDetails>} 
@@ -115,7 +116,7 @@ class UserPage extends Component {
                                 <PopUpButton title='Вы уже пожаловались' 
                                     disabled
                                     fill='horizontal' 
-                                    label={<Text color='brand'>Пожаловаться</Text>} 
+                                    label={<Text color='brand'>Вы уже пожаловались</Text>} 
                                     icon={<Dislike color='brand'></Dislike>}>
                                 </PopUpButton>
                             }

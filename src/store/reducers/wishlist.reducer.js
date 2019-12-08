@@ -32,10 +32,10 @@ export function wishlist(state = initialState, action) {
             const book = {
                 'available': '',
                 'book': {
-                    "authors": action.book.authors,
-                    "genre": action.book.genre,
+                    'authors': action.book.authors,
+                    'genre': action.book.genre,
                     'id': action.book.id,
-                    "title": action.book.title,
+                    'title': action.book.title,
                 },
                 'created_at': '',
                 'image': action.book.image,

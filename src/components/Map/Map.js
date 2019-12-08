@@ -250,7 +250,7 @@ class Map extends Component {
                         onError={()=>{this.setState({popupInfo: {info: {...popupInfo.info, avatar: remote_url.images.user_default}}})}}
                     />
                     <Box pad='10px' direction='column'>
-                        <Text>{popupInfo.info.django_user.username}</Text>
+                        <Text>{popupInfo.info.first_name}</Text>
                         <Text>{String(popupInfo.info.distance || '??? ').slice(0,5)} км</Text>
 
                     </Box>

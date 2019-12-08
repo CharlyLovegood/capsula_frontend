@@ -40,7 +40,7 @@ class SearchBar extends Component {
                     ),
                     value: ''
                 }
-                ));
+                )).slice(0, 7);
 
         if (res && res.length === 0 && value !== '') {
             return [{                
@@ -66,7 +66,7 @@ class SearchBar extends Component {
                                 this.props.close();
                             }}
                         >
-                                <Text>Подробнее..</Text>
+                                <Text>На страницу поиска</Text>
                         </Box>
                     </Link>
                 ),
@@ -84,7 +84,7 @@ class SearchBar extends Component {
                                 this.props.close();
                             }}
                         >
-                                <Text>Подробнее..</Text>
+                                <Text>На страницу поиска</Text>
                         </Box>
                     </Link>
                 ),
