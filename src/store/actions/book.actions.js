@@ -8,7 +8,8 @@ export const bookActions = {
     deleteBookById,
     addBook,
     editBook,
-    complainBook
+    complainBook,
+    clearBook
 };
 
 
@@ -123,4 +124,12 @@ function complainBook(complaint) {
     function request(complaint) { return { type: bookConstants.COMPLAIN_BOOK_REQUEST, complaint } }
     function success(response) { return { type: bookConstants.COMPLAIN_BOOK_SUCCESS, response } }
     function failure(error) { return { type: bookConstants.COMPLAIN_BOOK_FAILURE, error } }
+}
+
+function clearBook() {
+    return dispatch => {
+        dispatch(clear());
+    };
+
+    function clear() { return { type: bookConstants.BOOK_CLEAR } }
 }

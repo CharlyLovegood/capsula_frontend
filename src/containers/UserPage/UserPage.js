@@ -5,7 +5,7 @@ import Book from '../../components/Books/Book'
 import Scroll from '../../components/Scroll/Scroll'
 import { connect } from 'react-redux';
 
-import { userActions, libraryActions, wishlistActions } from '../../store/actions';
+import { userActions, libraryActions } from '../../store/actions';
 import ErrorPage from './../../components/Error/ErrorPage';
 import { remote_url } from '../../helpers';
 import PopUpButton from '../../components/Button/PopUpButton';
@@ -48,7 +48,10 @@ class UserPage extends Component {
             const user = this.setUser()
             this.setState({user: user})
         }
-        this.getWishlist();
+    }
+
+    componentWillUnmount() {
+        this.props.userpageClear();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -64,11 +67,6 @@ class UserPage extends Component {
                 this.setState({user: this.setUser()})
             }
         }
-    }
-
-
-    getWishlist() {
-        this.props.getWishlist(this.props.match.params.id);
     }
 
 
@@ -158,8 +156,8 @@ const actionCreators = {
     logout: userActions.logout,
     getUser: userActions.getById,
     getBookList: libraryActions.getBookListById,
-    getWishlist: wishlistActions.getWishlist,
-    complain: userActions.complainUser
+    complain: userActions.complainUser,
+    userpageClear: userActions.userpageClear
 }
 
 const connectedUserPage = connect(mapState, actionCreators)(UserPage);

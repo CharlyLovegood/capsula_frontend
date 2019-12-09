@@ -16,6 +16,8 @@ export function book(state=initialState, action) {
             }
         case bookConstants.GET_BOOK_FAILURE:
             return {}
+        case bookConstants.BOOK_CLEAR:
+            return {}
         default:
             return state;
     }

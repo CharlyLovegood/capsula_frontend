@@ -37,12 +37,13 @@ class Banner extends Component {
                     align='center' 
                     className={style.title_box}
                 >
-                    <Heading size='40px' 
+                    <Heading 
                         color='black' 
                         margin={{horizontal:'0px', vertical: '0px'}} 
                         textAlign='center' 
                         alignSelf='center'
                         level='1'
+                        size='large'
                     >
                         {this.state.headerShort}
                     </Heading>

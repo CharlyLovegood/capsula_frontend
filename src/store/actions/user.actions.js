@@ -10,7 +10,8 @@ export const userActions = {
     getById,
     editUser,
     oauth,
-    complainUser
+    complainUser,
+    userpageClear
 };
 
 
@@ -133,6 +134,14 @@ function getById(id) {
     function request(userId) { return { type: userConstants.USERPAGE_REQUEST, userId } }
     function success(user) { return { type: userConstants.USERPAGE_SUCCESS, user } }
     function failure(error) { return { type: userConstants.USERPAGE_FAILURE, error } }
+}
+
+function userpageClear() {
+    return dispatch => {
+        dispatch(clear());
+    };
+
+    function clear() { return { type: userConstants.USERPAGE_CLEAR } }
 }
 
 

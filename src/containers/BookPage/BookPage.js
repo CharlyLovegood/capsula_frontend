@@ -48,7 +48,8 @@ class BookPage extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({ addedToWishlist: undefined })
+        this.setState({ addedToWishlist: undefined });
+        this.props.clearBook();
     }
 
     fetchData(title) {
@@ -98,7 +99,7 @@ class BookPage extends Component {
  
         return (
             <Box  direction='column' align='center' fill>
-                {this.state.book &&
+                {this.state.book && !(this.props.alert.type === "alert-danger") &&
                 <Box direction='column' align='center' fill>
                     <Box  background='brandGradient' className={styles.background} align='center'>
                         <Box margin={{vertical:'130px'}}>
@@ -179,7 +180,8 @@ const actionCreators = {
     deleteFromWishlist: wishlistActions.deleteFromWishlist,
     swapRequest: swapActions.swapRequest,
     addToWishlist: wishlistActions.addToWishlist,
-    complain: bookActions.complainBook
+    complain: bookActions.complainBook,
+    clearBook: bookActions.clearBook
 };
 
 const connectedBookPage = connect(mapState, actionCreators)(BookPage);

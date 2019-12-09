@@ -13,9 +13,9 @@ a {
     text-decoration: none;
 }
 
-.app {
-    min-height: 100vh;
-}
+/* .app {
+    min-height: 80vh;
+} */
 
 body {
     margin: 0px;

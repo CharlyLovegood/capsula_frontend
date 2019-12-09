@@ -96,6 +96,20 @@ const theme = {
             size: '26px',
             height: '20px',
         },
+        level: {
+            1: {
+                medium: {
+                    size: '30px',
+                    height: '30px',
+                    maxWidth: '1200px'
+                },
+                large: {
+                    size: "40px",
+                    height: "40px",
+                    maxWidth: "1968px"
+                },
+            }
+        }
     },
     tab: {
         border: {
@@ -151,7 +165,7 @@ class App extends Component {
                     <ScrollToTop />
                     <ThemeProvider theme={themeUI}>
                         <AppBar></AppBar>
-                        <Box align='center' className={styles.app}>
+                        <Box align='center' className={styles.app} style={{minHeight: '100vh'}}>
                             <Switch>
                                 <Route exact path='/' component={ HomePage } />
                                 <PrivateRoute exact path='/user/:id' component={ UserPage }/>

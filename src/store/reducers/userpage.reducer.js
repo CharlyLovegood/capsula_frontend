@@ -19,6 +19,8 @@ export function userpage(state = initialState, action) {
                 userInfoRecieved: false,
                 error: action.error
             };
+        case userConstants.USERPAGE_CLEAR:
+            return {};
         default:
             return state;
     }

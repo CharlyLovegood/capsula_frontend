@@ -40,7 +40,7 @@ class LibraryPage extends Component {
 
         return (
             <Box direction='column' align='center' width='xxlarge'>
-            {library.userLibraryRecieved &&
+            {library.userLibraryRecieved && !(this.props.alert.type === "alert-danger") &&
                 <Box direction='column' align='center' width='xxlarge'>
                     {this.state.owner &&
                         <Box direction='column' align='center' width='xxlarge'>
